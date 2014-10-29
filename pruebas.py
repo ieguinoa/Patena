@@ -1,7 +1,6 @@
 import urllib2
 import StringIO
 import sys
-import os
 from Bio.Blast import NCBIWWW
 from Bio.Blast.Applications import NcbiblastpCommandline
 from Bio import SeqIO
@@ -11,6 +10,7 @@ from Bio.Blast import NCBIXML
 from array import array
 
 import random
+
 
 
 
@@ -35,9 +35,6 @@ rand=True
 change=True
 verbose=False
 blastWeb=False  #BLAST SEARCH LOCAL OR WEB
-targetScore=0.0
-output=True  ##print info to file
-outputPath = "Output/"
 
 #AA FREQUENCIES TO SELECT NEW RESIDUES FOR MUTATIONS (from http://web.expasy.org/protscale/pscale/A.A.Swiss-Prot.html) 
 weights= [("A",825), ("R",553),("N",406),("D",545),("C",137),("E",393),("Q",675),("G",707),("H",227),("I",596),("L",966),("K",548),("M",242),("F",386),("P",470),("S",656),("T",534),("W",108),("Y",292),("V",687) ]
@@ -104,7 +101,7 @@ def mutar(sequence, mutationFreq):
 ##**********************************************
 
 def getGlobalScore(mutationFreq):
-  globalScore=0.0
+  globalScore=0 
   for listIndex in range(len(mutationFreq)):
     globalScore=globalScore + mutationFreq[listIndex]
   return globalScore
@@ -128,7 +125,7 @@ def blastIt(sequence, mutationFreq, database):
 	  #input.write("kqltqdddtdeveiaidntafmdeffseie\n")
 	  input.write(sequence)
 	  input.close()
-	  commandLine=NcbiblastpCommandline(query="input", db=database, evalue=0.001, outfmt=5, out="output.xml")
+	  commandLine=NcbiblastpCommandline(query="input", db="uniprot_sprot.fasta", evalue=0.001, outfmt=5, out="output.xml")
 	  #print commandLine
 	  stdout, stderr = commandLine()
 	  result_handle = open("output.xml")
@@ -194,22 +191,9 @@ def blastIt(sequence, mutationFreq, database):
 					
 					
 					
-
-def iupred(sequence, mutationFreq):
-	runCommand="iupred/iupredExe iupred/input long"
-	input=open('iupred/input', 'w')
-	input.write("nombre" + endl)
-	input.write(sequence)
-	input.close()
-	os.system(runCommand)	
-	salida=open("salida", "r")
-	rstFile_iter = iter(salida)
-	for j in range(len(sequence)):
-		resultJ=float(rstFile_iter.next())
-		if resultJ > 0.5 :
-			mutationFreq[j]=0
-		else:
-			mutationFreq[j]=1				
+					
+					
+					
   
 
 
@@ -222,7 +206,7 @@ def iupred(sequence, mutationFreq):
 size=10
 composition="average"
 a=r=n=d=c=q=e=g=h=i=l=k=m=f=p=s=t=w=y=v=0
-database="uniprot_sprot.fasta"
+database="swissprot"
 
 
 
@@ -326,32 +310,29 @@ print "INITIAL SEQUENCE:" + sequence
 
 
 #CREATE ARRAY TO SAVE MUTATION FREQUENCE
-mutationFreq=[]
-for p in range(len(sequence)):
-  mutationFreq.append(0)
-  #mutationFreq[p]=0
+#mutationFreq=[]
 
 
-outputFile= outputPath + str(len(sequence)) 
+
+
 
 
 ################################
 #### ITERATE OVER SEQUENCE ####
 #############################
 
-iteration=1
-#for iteration in range(20):
-while True:
+
+for iteration in range(1):
 	#print endl
         print "*****************************"
-	print "ITERATION NUMBER: " + str(iteration)
+	print "ITERATION NUMBER: " + str(iteration+1)
 	print "*****************************"
 	#BEFORE EACH ITERATION STEP, CLEAN M	UTATION FREQUENCE
 	#THIS LIST SUMS UP THE PROBABILITY TO MUTATE EACH POSITION BASED ON ALL STEPS PERFORMED (SUMMING IT UP GIVES THE GLOBAL SCORE OF THE SEQUENCE)
-	#mutationFreq=[]
+	mutationFreq=[]
 	for p in range(len(sequence)):
-           #mutationFreq.append(0)
-	   mutationFreq[p]=0
+           mutationFreq.append(0)
+	
 	
 	
 	
@@ -361,7 +342,7 @@ while True:
 	print "*************************************"
 	print "STARTING BLAST SEARCH"
 #	print endl
- 	blastIt(sequence,mutationFreq,database)
+	blastIt(sequence,mutationFreq,database)
 
 	print endl
 	## NOW I HAVE mutationFreq ARRAY WITH 1s AND 0s
@@ -377,12 +358,9 @@ while True:
 
 	##SECOND STEP: ????????
 	#EXECUTE SECOND STEP AND INCREASE mutationFreq VALUES
-	iupred(sequence, mutationFreq)	
-	print endl
-	print "IUPred RESULTS:"
-	print sequence
-	print ''.join(map(str, mutationFreq))
-	print "*************************************"
+	
+
+
  
 	#AFTER ALL STEPS, MUTATE SEQUENCE
 	
@@ -397,16 +375,7 @@ while True:
 	  sequence=mutatedSequence
 	  print endl
 	  print "*******************************************"
-     
-     
-	print "Global score: " + str(getGlobalScore(mutationFreq))
-	print "Score function" +  str(getGlobalScore(mutationFreq)/len(sequence)) 
-        iteration=iteration+1
-	if ((getGlobalScore(mutationFreq)/len(sequence)) <= targetScore):
-	  break
 
-if output:
-  outFile=open(outputFile, "a")
-  outFile.write(str(iteration-1)+ endl)
-   
+
+
 

@@ -1,0 +1,121 @@
+La herramienta IUPred
+Otro de los aspectos a considerar acerca de la secuencia es el grado de estructuración o desorden que puede adoptar. Partiendo del concepto 
+La herramienta que utilizaremos es IUPred, disponible a través de un servidor web (http://iupred.enzim.hu/) o descargandola y ejecutandola localmente (http://iupred.enzim.hu/Downloads.php).   
+A partir de una secuencia, la herramienta devuelve una probabilidad de formación de interacciones favorables para cada posición en el contexto en el que se encuentra. Esta herramienta se basa en un modelo que estima la energia asociada a interacciones entre pares de la estructura nativa, planteando en base a la secuencia una ecuación cuadrática sobre la composición de aminoácidos. 
+Tal como se menciona en la información de la aplicación (ref. IUPred: web server for the prediction of intrinsically unstructured regions of proteins based on estimated energy content), los residuos con un valor asociados mayor a 0.5 pueden ser tomados como desordenados.
+Si bien el paradigma clásico, que asume la necesidad de adoptar una estructura tridimensional estable para que la proteína posea una función, ha sido desafiado por diversas proteinas intrinsicamente desordenadas que llevan a cabo funciones celulares básicas, evaluar la tendencia de la secuencia a formar una estructura nos da una pauta acerca de la posibilidad de tener una función asociada.
+Utilizando esta herramienta se identifican los residuos que favorecen la formación de una estructura estable y se los marca como targets para la siguiente ronda de mutaciones del algoritmo, llevando a la secuencia global hacia un perfil estructuralmente desordenado y con pocas posibilidades de desarrollar una función.
+
+
+El fundamento
+Utilizando bases de datos con estructuras conformacionales de proteínas globulares, es posible derivar campos de fuerzas empiricos(potenciales estadísticos) de las interacciones que ocurren en las conformaciones nativas. Estos modelos de campos de fuerzas han resultado muy útiles para evaluar la contribución de cada interacción entre pares a la energía total, lo que permitió aplicarlos para predecir la estabilidad de una estructura, evaluar la calidad de diferentes modelos estructurales, aplicar tecnicas de fold recognition o threading, etc (refs. 24-29). Sin embargo, obviamente, se requiere conocer una estructura a partir de la cual extraer los pares que interaccionan y poder así evaluar el aporte energético de éstos.
+Partiendo del concepto general que la conformación nativa esta determinada por la estructura primaria de la proteina, y que esta conformación se corresponde con el minimo global del espacio conformacional, es posible parametrizar un modelo que permita predecir este mínimo de energía sin asumir ninguna conformación estructural. 
+Esta aproximación es posible ya que la contribución energética de un residuo depende, no solo del tipo de AA, sino tambien de los potenciales parejas  de interacción en la secuencia. El aporte de un residuo será mas favorable si la secuencia en la que se encuentra contiene mas residuos que pueden formar interacciones favorables con este. 
+La forma de plantear este modelo es mediante una expresion cuadratica sobre la composición de aminoácidos de la secuencia.
+Esta expresión se ajusta a los datos de estructuras de proteínas a través del modelo que estima la energía a partir de las interacciones que ocurren en la estructura. Mediante un ajuste de mínimos cuadrados se puede parametrizar el modelo a partir de estructuras de proteínas globulares.
+
+Dado que las proteinas globulares forman un gran numero de interacciones entre los residuos (lo que les provee la energia estabilizante para superar la perdida de entropia), y las proteinas IU/desordenadas tienen secuencias especiales que no poseen esta capacidad de formación de interacciones, la estimación del potencial de interacción permite diferenciar entre regiones de proteinas ordenadas y desordenadas. Esto transforma el modelo de predicción en un eficiente método para diferencias secciones desordenadas de secciones con estrctura definida.
+
+Como se mencionó previamente, la parametrizacion de este modelo se realiza a partir de estructuras contenidas en una base de datos de proteinas globulares, por lo que son datos suficientes para realizar una buena parametrización, además de ser consistentes y curadas. Esto diferencia el método de otros, que se basan en adaptar un modelo a datos de estructuras correspondientes a proteinas intrinsicamente desordenadas, agrupados en bases de datos chicas, con datos obtenidos usando diversas técnicas y con distintos significados del término desordenado.
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Se armó una matriz que representa el potencial de interacción(estadísticamente calculado usando proteínas globulares de estructura conocida) entre 2 tipos de AA. 
+Aplicando este potencial a la composición de la secuencia que estamos analizando, podemos estimar el potencial del polipeptido para formar contactos estabilizantes. Se probó que esta estimación se puede realizar aplicando una expresión cuadrática sobre la composición de la secuencia. Es decir, por cada aminoacido se analiza la interacción con cada otro tipo de aminoácido (esto se basa en que la contribución a la energia estabilizante y por lo tanto al orden/desorden de la proteína no solo depende de la ). 
+
+
+De esta forma, los datos estadísticos sobre los que se hace el analisis pertenecen a BD de proteinas globulares. Esto lo diferencia de otros métodos que se basan en datos de proteinas IU cuyos datos anotados son pocos, muy heterogeneos en cuanto a las tecnicas utilizadas, y faltos de cosnsitencia, resultando datos falsos positivos y falsos negativos.
+
+
+
+
+
+
+
+
+PAPER DE LA APLICACIÓN
+It was shown
+that the sum of interaction energies can be estimated by a quadratic
+expression in the amino acid composition, which takes into account
+that the contribution of an amino acid to order/disorder depends not
+only on its own chemical type, but also on its potential interaction
+partners (ESTO SE DEMUESTRA EN EL PAPER GENERAL).
+
+The calculation involves a 20 × 20 energy predictor matrix, para-
+meterized by a statistical method to approach the expected pairwise
+energy of globular proteins of known structure. Comparing globular
+proteins and disordered ones, a clear separation of their energy con-
+tent is found (Dosztányi et al., 2005). As no training on disordered
+proteins is involved, this distinction underlines that the lack of a
+well-defined three-dimensional structure is an intrinsic property of
+certain evolved proteins
+
+This approach was turned into a position-
+specific method to predict protein disorder by considering only the
+local sequential environment of residues within 2–100 residues in
+either direction. The score is then smoothed over a window-size
+of 21.
+
+The web server takes a single amino acid sequence as an input and
+calculates the pairwise energy profile along the sequence. The energy
+values are then transformed into a probabilistic score ranging from
+0 (complete order) to 1 (complete disorder). Residues with a score
+above 0.5 can be regarded as disordered.
+
+
+
+PAPER GENERAL
+Our current formulation derives from the general view that the primary structure of a globular
+protein determines its native conformation, and
+therefore its energy, which corresponds to the
+global minimum in conformational space. In this work, we introduce a novel
+approach to predict this optimum energy inde-
+pendently of a presumed structure.
+
+
+Estimacion de la energia de interaccion:
+The total energy can be
+calculated by taking all contacts in the protein,
+and weighting them by the corresponding inter-
+action energy.
+
+We assume that if the sequence contains more
+amino acid residues that can form favorable
+contacts with the given residue, its expected energy
+contribution is more favorable.
+The simplest formula which describes this relationship is a quad-
+ratic expression in the amino acid composition
+
+
+P is the energy predictor matrix, which tells
+how the energy of amino acid i depends on the jth
+element of the amino acid composition vector. The
+parameters Pij , applicable for all proteins, are
+determined by least-squares fitting using globular
+proteins.
+
+
+
+
+
+
+
+
+
+
+Arman 2 "modelos":
+	-En uno se calcula la energia total como la suma del numero de interacciones de cada tipo en la conformación dada(pares ij), multiplicado por el valor de esa interaccion(sacado de una matriz de 20x20, que solo depende de los tipos i y j). Es decir, la contribución de cada residuo en este modelo solo depende del tipo.
+	-El otro no tiene en cuenta ninguna conformación dada, sino que se basa en estadísticas sacadas de una BD de proteinas globulares. Esta segunda aproximación se basa en que la contribución de la energia de cada residuo no depende solo del tipo de éste, sino tambien de los potenciales residuos en la secuencia que interaccionaran con el. De esta forma, si la secuencia contiene mas residuos que pueden formar interacciones positivas con el residuo ubicado en cierta posicion, entonces el aporte de este a la energia total será mas favorable. Esto se modeliza con una sumatoria que , para cada posible par de residuos, suma la frecuencia de uno * la frecuencia del otro * el valor de P. Donde P esta dado por una matriz que define como la energia del AA i depende de j. *****SI NO ENTENDI MAL, ESTE VALOR ES POSITIVO O NEGATIVO Y MAYOR O MENOR SEGUN SI LA INTERACCIÓN ES FAVORABLE O NO, Y QUE TAN (DES)FAVORABLE ES***
+los valores de la matriz P salen de .......
