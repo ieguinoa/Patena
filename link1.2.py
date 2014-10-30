@@ -185,7 +185,7 @@ def blastIt(sequence, mutationFreq, database):
 				mutationFreq[j]=1
 			else:
 				if hsp.match[j-start+1] <> "+" and hsp.match[j-start+1] <> " ":
-					mutationFreq[j]=1
+					mutationFreq[j] = 1
 				else:
 					mutationFreq[j]=0
 					
@@ -207,9 +207,9 @@ def iupred(sequence, mutationFreq):
 	for j in range(len(sequence)):
 		resultJ=float(rstFile_iter.next())
 		if resultJ > 0.5 :
-			mutationFreq[j]=0
+			mutationFreq[j] += 0
 		else:
-			mutationFreq[j]=1				
+			mutationFreq[j] += 1				
   
 
 
@@ -399,8 +399,8 @@ while True:
 	  print "*******************************************"
      
      
-	print "Global score: " + str(getGlobalScore(mutationFreq))
-	print "Score function" +  str(getGlobalScore(mutationFreq)/len(sequence)) 
+	print "Global score:   " + str(getGlobalScore(mutationFreq))
+	print "Score function: " +  str(getGlobalScore(mutationFreq)/len(sequence)) 
         iteration=iteration+1
 	if ((getGlobalScore(mutationFreq)/len(sequence)) <= targetScore):
 	  break
