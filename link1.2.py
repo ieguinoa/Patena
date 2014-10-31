@@ -94,10 +94,22 @@ def mutar(sequence, mutationFreq):
     ##CREATE MUTATED SEQUENCE WITH NEW RESIDUE    
     mutatedSequence = sequence[0:mutatePosition]
     mutatedSequence += seleccionado
-    mutatedSequence += sequence[mutatePosition+1:] 
-    return mutatedSequence
-
-
+    mutatedSequence += sequence[mutatePosition+1:]
+    
+    #create a list of scores with the mutated sequence
+    mutatedFreq=[]
+    for p in range(len(sequence)):
+  	mutatedFreq.append(0)
+    
+    moduloPrincipal(mutatedSequence, mutatedFreq, False)	 
+    if getGlobalScore(mutationFreq) > getGlobalScore(mutatedFreq):
+	print "El score mutado " + str(getGlobalScore(mutationFreq)) + " es mayor que "+ str(getGlobalScore(mutatedFreq))
+	print "ACEPTO LA MUTACION"
+	return mutatedSequence
+    else:
+	print "El score original " + str(getGlobalScore(mutatedFreq)) + " es mayor que "+ str(getGlobalScore(mutationFreq))
+        print "NIEGO LA MUTACION"
+        return sequence
 
 
 
@@ -185,7 +197,7 @@ def blastIt(sequence, mutationFreq, database):
 				mutationFreq[j]=1
 			else:
 				if hsp.match[j-start+1] <> "+" and hsp.match[j-start+1] <> " ":
-					mutationFreq[j]=1
+					mutationFreq[j] = 1
 				else:
 					mutationFreq[j]=0
 					
@@ -207,10 +219,34 @@ def iupred(sequence, mutationFreq):
 	for j in range(len(sequence)):
 		resultJ=float(rstFile_iter.next())
 		if resultJ > 0.5 :
-			mutationFreq[j]=0
+			mutationFreq[j] += 0
 		else:
-			mutationFreq[j]=1				
+			mutationFreq[j] += 1				
   
+
+
+
+
+
+
+
+def moduloPrincipal(sequence, mutationFreq, verbose):
+	#print "*************************************"
+        #print "STARTING BLAST SEARCH"
+        blastIt(sequence,mutationFreq,database)
+        #print endl
+        #print "BLAST RESULTS:"
+        #print sequence
+        #print ''.join(map(str, mutationFreq))
+        ##SECOND STEP: ????????
+        #EXECUTE SECOND STEP AND INCREASE mutationFreq VALUES
+        iupred(sequence, mutationFreq)
+        print endl
+        print "IUPred RESULTS:"
+        print sequence
+        print ''.join(map(str, mutationFreq))
+        print "*************************************"
+	
 
 
 #**************************
@@ -353,36 +389,41 @@ while True:
            #mutationFreq.append(0)
 	   mutationFreq[p]=0
 	
-	
+
+
+	moduloPrincipal(sequence,mutationFreq, True)	
 	
 	#########   FIRST STEP:  BLAST SEARCH  ######
 	
 	#print endl
-	print "*************************************"
-	print "STARTING BLAST SEARCH"
+#	print "*************************************"
+#	print "STARTING BLAST SEARCH"
 #	print endl
- 	blastIt(sequence,mutationFreq,database)
+# 	blastIt(sequence,mutationFreq,database)
 
-	print endl
+#	print endl
 	## NOW I HAVE mutationFreq ARRAY WITH 1s AND 0s
 	#
 #	print endl
-	print "BLAST RESULTS:"
-	print sequence
-	print ''.join(map(str, mutationFreq))
- #       print endl
+
+#	print "BLAST RESULTS:"
+#	print sequence
+ #	print ''.join(map(str, mutationFreq))
+ 
+
+#       print endl
 #        print "*************************************"
 
 
 
 	##SECOND STEP: ????????
 	#EXECUTE SECOND STEP AND INCREASE mutationFreq VALUES
-	iupred(sequence, mutationFreq)	
-	print endl
-	print "IUPred RESULTS:"
-	print sequence
-	print ''.join(map(str, mutationFreq))
-	print "*************************************"
+#	iupred(sequence, mutationFreq)	
+#	print endl
+#	print "IUPred RESULTS:"
+#	print sequence
+#	print ''.join(map(str, mutationFreq))
+#	print "*************************************"
  
 	#AFTER ALL STEPS, MUTATE SEQUENCE
 	
@@ -399,8 +440,8 @@ while True:
 	  print "*******************************************"
      
      
-	print "Global score: " + str(getGlobalScore(mutationFreq))
-	print "Score function" +  str(getGlobalScore(mutationFreq)/len(sequence)) 
+	print "Global score:   " + str(getGlobalScore(mutationFreq))
+	print "Score function: " +  str(getGlobalScore(mutationFreq)/len(sequence)) 
         iteration=iteration+1
 	if ((getGlobalScore(mutationFreq)/len(sequence)) <= targetScore):
 	  break
