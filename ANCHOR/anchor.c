@@ -224,20 +224,22 @@ int main(int argc, char **argv)
 
   
   
-  printf("# ANCHOR \n");
+  /*printf("# ANCHOR \n");
   printf("# Copyright (c)  ");
   printf("B. Meszaros, I. Simon and Z. Dosztanyi, 2009\n");
   printf("# PLoS Comput Biol 5(5): e1000376. doi:10.1371/journal.pcbi.1000376\n");
   printf("#\n");
-
+*/
   nrt=0;nrf=0;
   for(i=0;i<num_reg;i++) {
     if (regions[3][i]==0)   nrt++;
     else nrf++;    
   }
 
-  printf("# Predicted binding regions\n");
-  if(nrt==0) {printf("#   None.\n");}
+  /*printf("# Predicted binding regions\n");
+  if(nrt==0) {
+	printf("#   None.\n");
+	}
   else {
     printf("#\t%-15s\t%8s\t%8s\t%8s\n","No.","Start","End","Length");
   }
@@ -299,7 +301,21 @@ int main(int argc, char **argv)
            (E1->extglob[i]+E2->extglob[i]+E3->extglob[i])/3);
     }
   }
+*/
 
+FILE *f;
+char fn[]="outAnchor";
+  if ((f=fopen(fn,"w+"))==NULL) {
+    printf("Could not open %s\n",fn),exit(1);
+  }
+
+int x;
+  //for (i=0;i<SEQ->le;i++)
+    //  fprintf(f,"%f\n",SEQ->en[i]);
+
+ for (x=0;x<SEQ->len;x++) {
+      fprintf(f,"%f\n",p[x]);
+    }
 
 
 
