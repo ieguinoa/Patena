@@ -2,6 +2,7 @@ import urllib2
 import StringIO
 import sys
 import os
+import time
 from Bio.Blast import NCBIWWW
 from Bio.Blast.Applications import NcbiblastpCommandline
 from Bio import SeqIO
@@ -100,7 +101,8 @@ def mutar(sequence, mutationFreq):
 	mutatedSequence = sequence[0:mutatePosition]
 	mutatedSequence += seleccionado
 	mutatedSequence += sequence[mutatePosition+1:]
-	
+	print "Secuencia original:" + sequence
+	print "Secuencia mutada  :" + mutatedSequence
 	#CREATE A LIST OF SCORES FOR THE MUTATED SEQUENCE
 	mutatedFreq=[]
 	for p in range(len(sequence)):
@@ -109,6 +111,7 @@ def mutar(sequence, mutationFreq):
 	#ACCEPT OR DENY THE MUTATION BASED ON A NEW EVALUATION OF THE SCORE
 	sequenceEvaluation(mutatedSequence, mutationFreq, False)	 
 	#IF THE GLOBAL SCORE DECREASED
+	
 	if previousScore > getGlobalScore(mutationFreq):
 	    print "Previous score (" + str(previousScore) + ") > Mutation score (" + str(getGlobalScore(mutationFreq)) + ")" 
 	    print "...ACCEPT MUTATION"
@@ -465,7 +468,7 @@ for p in range(len(sequence)):
 
 outputFile= outputPath + str(len(sequence)) 
 
-
+t0 = time.time()
 ################################
 #### ITERATE OVER SEQUENCE ####
 #############################
@@ -513,6 +516,7 @@ while globalScore > 0:
 	#if ((getGlobalScore(mutationFreq)/len(sequence)) <= targetScore):
 	#  break
 
+print "Elapsed time:",time.time() - t0, "Seconds"
 if output:
   outFile=open(outputFile, "a")
   outFile.write(str(iteration-1)+ endl)
