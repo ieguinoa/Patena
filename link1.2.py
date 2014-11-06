@@ -125,6 +125,53 @@ def mutar(sequence, mutationFreq):
       return sequence
     return sequence
 
+
+
+###********************************************
+
+def elmSearch(sequence, mutationFreq,verbose):
+  #filename = "inputElms"
+
+  ######################################################################################
+  ##########################       SEARCH ELMS     #####################################
+  ######################################################################################
+
+
+  #create a dict with elm patterns
+  elm_pattern_dict = {}
+  with open("elm_patterns_20140701.txt", 'rU') as file_open :
+	  patterns = file_open.readlines()
+	  for line in patterns :
+		  line = line.split("\t")
+		  elm_id = line[0]
+		  elm_pattern = line[1].replace("\n","")
+		  elm_pattern_dict[elm_id] = elm_pattern
+
+  #print "SEARCHING ELMS IN %s\n ..." % filename
+
+  #output_file_name = "elms_search_in_%s.txt" % filename[:-4]
+  output_file_name="outputELM"
+  uniprot_list = []
+  sequence_dict = {}
+
+  #with open(filename, 'rU') as file_open :
+	  #my_seq = file_open.read()
+  
+  with open(output_file_name, 'a+') as file_write :
+	  for elm_id in elm_pattern_dict :
+		  where_to_start = []
+		  elm_pos_dict = {}
+		  pattern = re.compile('(?=%s)' % elm_pattern_dict[elm_id])
+		  for matched_string in pattern.finditer('%s' % sequence) :
+			  where_to_start.append(matched_string.start())
+		  pattern = re.compile(elm_pattern_dict[elm_id])
+		  for index in where_to_start :
+			  match = re.search(pattern, '%s' % sequence[index:])
+			  if match != None :
+				  file_write.write("%s\t%s\n" % (index+1, index+len(match.group())))
+                                         
+
+
 ##**********************************************
 
 ##getGlobalScore=List sum
