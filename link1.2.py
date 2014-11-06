@@ -34,6 +34,7 @@ rand=True
 change=True
 verbose=False
 blastWeb=False  #BLAST SEARCH LOCAL OR WEB
+blastIt=True
 targetScore=0.0
 output=True  ##print info to file
 outputPath = "Output/"
@@ -115,7 +116,7 @@ def mutar(sequence, mutationFreq):
 	    return mutatedSequence
 	else:
 	    #print "El score original " + str(getGlobalScore(mutatedFreq)) + " es mayor que "+ str(getGlobalScore(mutationFreq))
-	    print " Mutation score (" + str(getGlobalScore(mutationFreq)) + ") > Previous score (" + str(previousScore) + ")" 
+	    print " Mutation score (" + str(getGlobalScore(mutationFreq)) + ") >= Previous score (" + str(previousScore) + ")" 
 	    print "...DENY MUTATION"
 	    #return sequence
       return sequence
@@ -217,7 +218,7 @@ def blastIt(sequence, mutationFreq, database, verbose):
 					mutationFreq[j]=0
 					
 	if verbose:	    
-	    print endl
+	    #print endl
 	    print "BLAST RESULTS:"
 	    print sequence
 	    print ''.join(map(str, mutationFreq))				
@@ -245,7 +246,7 @@ def iupred(sequence, mutationFreq, verbose):
 		  resultX=float(iterOutputIUPred.next())
 		  if resultX < 0.5 :
 			  iupredFreq[x] = 1
-	  print endl
+	  #print endl
 	  print "IUPred RESULTS:"
 	  print sequence
 	  print ''.join(map(str, iupredFreq))	  			  			
@@ -263,38 +264,37 @@ def iupred(sequence, mutationFreq, verbose):
 
 
 def anchor(sequence, mutationFreq, verbose):
-	#runCommand="ANCHOR/anchorExe ANCHOR/input"
-	#input=open('ANCHOR/input', 'w')
-	#input.write("Name" + endl)
-	#input.write(sequence)
-	#input.close()
-	#os.system(runCommand)	
-	#outputAnchor=open("outAnchor", "r")
-	
-	##PRINT THE RESULTS OF ANCHOR
-	#if verbose:
-	  #anchorFreq=[]
-	  #iterOutputAnchor=iter(outputAnchor)
-	  #for p in range(len(sequence)):
-	      #anchorFreq.append(0)
-	  #for x in range(len(sequence)):
-		  #resultX=float(iterOutputAnchor.next())
-		  #if resultX < 0.5 :
-			  #anchorFreq[x] = 1
-	  #print endl
-	  #print "ANCHOR RESULTS:"
-	  #print sequence
-	  #print ''.join(map(str, iupredFreq))	  			  			
+	runCommand="ANCHOR/anchorExe ANCHOR/input"
+	input=open('ANCHOR/input', 'w')
+	input.write("Name" + endl)
+	input.write(sequence)
+	input.close()
+	os.system(runCommand)	
+	outputAnchor=open("outAnchor", "r")
+	#print "aca evaluo anchor"
+	#PRINT THE RESULTS OF ANCHOR
+	if verbose:
+	  anchorFreq=[]
+	  iterOutputAnchor=iter(outputAnchor)
+	  for p in range(len(sequence)):
+	      anchorFreq.append(0)
+	  for x in range(len(sequence)):
+		  resultX=float(iterOutputAnchor.next())
+		  if resultX < 0.5 :
+			  anchorFreq[x] = 1
+	  print "ANCHOR RESULTS:"
+	  print sequence
+	  print ''.join(map(str, anchorFreq))	  			  			
 			
-	#outputAnchor.seek(0)
-	#rstFile_iter = iter(outputIUPred)
+	outputAnchor.seek(0)
+	rstFile_iter = iter(outputAnchor)
 
-	#for j in range(len(sequence)):
-		#resultJ=float(rstFile_iter.next())
-		#if resultJ > 0.5 :
-			#mutationFreq[j] += 0
-		#else:
-			#mutationFreq[j] += 1				
+	for j in range(len(sequence)):
+		resultJ=float(rstFile_iter.next())
+		if resultJ > 0.5 :
+			mutationFreq[j] += 0
+		else:
+			mutationFreq[j] += 1				
   
 
 
@@ -310,19 +310,22 @@ def sequenceEvaluation(sequence, mutationFreq, verbose):
 	
 	##FIRST STEP: BLAST SEARCH
 	if verbose:
-	  print "*************************************"
-	  print "STARTING BLAST SEARCH"
-        blastIt(sequence,mutationFreq,database, verbose)
+	   print endl
+	   print "*************************************"
+	   print "STARTING BLAST SEARCH"
+	blastIt(sequence,mutationFreq,database, verbose)
         
 	    
         ##SECOND STEP: IUPred evaluation
 	if verbose:
+	  print endl
 	  print "*************************************"
 	  print "STARTING IUPred"
 	iupred(sequence, mutationFreq, verbose)
         
         ##THIRD STEP: ANCHOR evaluation
 	if verbose:
+	  print endl
 	  print "*************************************"
 	  print "STARTING ANCHOR"
 	anchor(sequence, mutationFreq, verbose)
