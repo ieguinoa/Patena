@@ -77,7 +77,7 @@ def mutar(sequence, mutationFreq):
     if previousScore > 0:
       iter=0
       for x in range(len(mutationFreq)):
-	weighted.append((x, mutationFreq[x]))
+	weighted.append((x, mutationFreq[x]+1))
       while 10000 > iter: 
 	iter+=1
 	print "Score before:    " + str(previousScore)
@@ -283,7 +283,7 @@ def anchor(sequence, mutationFreq, verbose):
 	      anchorFreq.append(0)
 	  for x in range(len(sequence)):
 		  resultX=float(iterOutputAnchor.next())
-		  if resultX < 0.5 :
+		  if resultX >  0.5 :
 			  anchorFreq[x] = 1
 	  print "ANCHOR RESULTS:"
 	  print sequence
@@ -515,10 +515,10 @@ while globalScore > 0:
         iteration=iteration+1
 	#if ((getGlobalScore(mutationFreq)/len(sequence)) <= targetScore):
 	#  break
-
-print "Elapsed time:",time.time() - t0, "Seconds"
+elapsedTime=time.time() - t0
+print "Elapsed time:",elapsedTime, "Seconds"
 if output:
   outFile=open(outputFile, "a")
-  outFile.write(str(iteration-1)+ endl)
+  outFile.write(str(iteration-1)+ tab + str(elapsedTime) + endl)
    
 
