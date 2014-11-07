@@ -2,6 +2,7 @@ import urllib2
 import StringIO
 import sys
 import os
+import re
 import time
 from Bio.Blast import NCBIWWW
 from Bio.Blast.Applications import NcbiblastpCommandline
@@ -129,15 +130,16 @@ def mutar(sequence, mutationFreq):
 
 ###********************************************
 
-def elmSearch(sequence, mutationFreq,verbose):
-  #filename = "inputElms"
 
   ######################################################################################
   ##########################       SEARCH ELMS     #####################################
   ######################################################################################
 
 
-  #create a dict with elm patterns
+
+
+def makeElmSearch(sequence):
+  ##MAKE THE SEARCH AND SAVE RESULTS IN outputELM
   elm_pattern_dict = {}
   with open("elm_patterns_20140701.txt", 'rU') as file_open :
 	  patterns = file_open.readlines()
@@ -157,7 +159,7 @@ def elmSearch(sequence, mutationFreq,verbose):
   #with open(filename, 'rU') as file_open :
 	  #my_seq = file_open.read()
   
-  with open(output_file_name, 'a+') as file_write :
+  with open(output_file_name, 'w') as file_write :
 	  for elm_id in elm_pattern_dict :
 		  where_to_start = []
 		  elm_pos_dict = {}
@@ -169,6 +171,28 @@ def elmSearch(sequence, mutationFreq,verbose):
 			  match = re.search(pattern, '%s' % sequence[index:])
 			  if match != None :
 				  file_write.write("%s\t%s\n" % (index+1, index+len(match.group())))
+
+
+
+##*************************************
+
+
+def elmSearch(sequence, mutationFreq,verbose):
+  #filename = "inputElms"
+  makeElmSearch(sequence)
+  
+  inputFile="outputELM"
+  with open(inputFile, "r") as input_file:
+    lines=input_file.readlines()
+  for line in lines:
+    line=line.split("\t")
+    pattern_start=int(line[0])
+    pattern_end=int(line[1])
+    for x in range(pattern_start-1,pattern_end):
+      print x
+
+
+  
                                          
 
 
@@ -363,7 +387,7 @@ def sequenceEvaluation(sequence, mutationFreq, verbose):
 	   print endl
 	   print "*************************************"
 	   print "STARTING BLAST SEARCH"
-	blastIt(sequence,mutationFreq,database, verbose)
+	#blastIt(sequence,mutationFreq,database, verbose)
         
 	    
         ##SECOND STEP: IUPred evaluation
@@ -371,14 +395,14 @@ def sequenceEvaluation(sequence, mutationFreq, verbose):
 	  print endl
 	  print "*************************************"
 	  print "STARTING IUPred"
-	iupred(sequence, mutationFreq, verbose)
+	#iupred(sequence, mutationFreq, verbose)
         
         ##THIRD STEP: ANCHOR evaluation
 	if verbose:
 	  print endl
 	  print "*************************************"
 	  print "STARTING ANCHOR"
-	anchor(sequence, mutationFreq, verbose)
+	#anchor(sequence, mutationFreq, verbose)
 	
 	
         ##PRINT SCORE
@@ -390,7 +414,7 @@ def sequenceEvaluation(sequence, mutationFreq, verbose):
 	  print ''.join(map(str, mutationFreq))
 	  print "*************************************"
 	
-
+        elmSearch(sequence,mutationFreq, verbose)
 
 
 
