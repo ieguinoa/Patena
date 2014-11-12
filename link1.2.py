@@ -124,6 +124,8 @@ def mutar(sequence, mutationFreq):
 	    print "...DENY MUTATION"
 	    #return sequence
       return sequence
+    else:
+      print "SCORE = 0 ******** QUIT MUTATION STEP"
     return sequence
 
 
@@ -178,9 +180,12 @@ def makeElmSearch(sequence):
 
 
 def elmSearch(sequence, mutationFreq,verbose):
-  #filename = "inputElms"
-  makeElmSearch(sequence)
+  makeElmSearch(sequence)	
   
+  #FIRST SAVE HITS IN A LIST 
+  elmSearchFreq=[]
+  for p in range(len(sequence)):
+	      elmSearchFreq.append(0)
   inputFile="outputELM"
   with open(inputFile, "r") as input_file:
     lines=input_file.readlines()
@@ -189,9 +194,18 @@ def elmSearch(sequence, mutationFreq,verbose):
     pattern_start=int(line[0])
     pattern_end=int(line[1])
     for x in range(pattern_start-1,pattern_end):
-      print x
+      elmSearchFreq[x]+=1
 
-
+  if verbose:
+    #print endl
+    print "ELM Search RESULTS:"
+    print sequence
+    print ''.join(map(str, elmSearchFreq))	  
+  
+  ##ADD hits to global score
+  for i in range(len(sequence)):
+    mutationFreq[i]+=elmSearchFreq[i]
+  
   
                                          
 
@@ -395,14 +409,14 @@ def sequenceEvaluation(sequence, mutationFreq, verbose):
 	  print endl
 	  print "*************************************"
 	  print "STARTING IUPred"
-	#iupred(sequence, mutationFreq, verbose)
+	iupred(sequence, mutationFreq, verbose)
         
         ##THIRD STEP: ANCHOR evaluation
 	if verbose:
 	  print endl
 	  print "*************************************"
 	  print "STARTING ANCHOR"
-	#anchor(sequence, mutationFreq, verbose)
+	anchor(sequence, mutationFreq, verbose)
 	
 	
         ##PRINT SCORE
