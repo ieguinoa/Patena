@@ -30,6 +30,7 @@ weighted_choice = lambda s : random.choice(sum(([v]*wt for v,wt in s),[]))
 
 endl = "\n"
 tab = "\t"
+indent=""
 cutoff=0.01
 match=False
 rand=True
@@ -40,12 +41,21 @@ blastIt=True
 targetScore=0.0
 output=True  ##print info to file
 outputPath = "Output/"
+mutationsIter=0
+scoresFile="scores"   #save Scores Vs iteration number 
+mutAttemptsFile="mutationsAttempt"  # save number of mutation attempts  Vs iteration number
 
 #AA FREQUENCIES TO SELECT NEW RESIDUES FOR MUTATIONS (from http://web.expasy.org/protscale/pscale/A.A.Swiss-Prot.html) 
 weights= [("A",825), ("R",553),("N",406),("D",545),("C",137),("E",393),("Q",675),("G",707),("H",227),("I",596),("L",966),("K",548),("M",242),("F",386),("P",470),("S",656),("T",534),("W",108),("Y",292),("V",687) ]
 
 
-
+#CLEAR ALL OUTPUT FILES
+outputFile=outputPath + scoresFile
+outFile=open(outputFile, "w")
+outFile.close()
+outputFile=outputPath + mutAttemptsFile
+outFile=open(outputFile, "w")
+outFile.close()
 #***********************************************************************
 
 
@@ -71,19 +81,22 @@ def printHelp():
 ## PROBABILITY OF MUTATION BASED ON WEIGHTS ARRAY
 ## RETURNS MUTATED SEQUENCE
 def mutar(sequence, mutationFreq):
-    
+    global indent, mutationsIter
     #weighted is a pairlist  (position,weight)
     weighted=[]
     previousScore=getGlobalScore(mutationFreq)
     if previousScore > 0:
-      iter=0
+      mutationsIter=0
       for x in range(len(mutationFreq)):
 	weighted.append((x, mutationFreq[x]+1))
-      while 10000 > iter: 
-	iter+=1
-	print "Score before:    " + str(previousScore)
+      while 10000 > mutationsIter: 
+	mutationsIter+=1
 	#SELECT A POSITION 
+	print endl
+	print "*************************************"
 	print "MUTATION ATTEMPT"
+	print "*************************************"
+	print "Score before:    " + str(previousScore)
 	print "Choose a position based on weights"
 	mutatePosition= weighted_choice(weighted)  
 	print "Position chosen: " + str(mutatePosition)
@@ -110,9 +123,11 @@ def mutar(sequence, mutationFreq):
 	    #mutatedFreq.append(0)
 	    mutationFreq[p]=0
 	#ACCEPT OR DENY THE MUTATION BASED ON A NEW EVALUATION OF THE SCORE
-	sequenceEvaluation(mutatedSequence, mutationFreq, False)	 
+	indent=tab + tab
+	sequenceEvaluation(mutatedSequence, mutationFreq, True)	 
 	#IF THE GLOBAL SCORE DECREASED
-	
+	print "*************************************"
+	print "MUTATION RESULTS"
 	if previousScore > getGlobalScore(mutationFreq):
 	    print "Previous score (" + str(previousScore) + ") > Mutation score (" + str(getGlobalScore(mutationFreq)) + ")" 
 	    print "...ACCEPT MUTATION"
@@ -123,6 +138,7 @@ def mutar(sequence, mutationFreq):
 	    print " Mutation score (" + str(getGlobalScore(mutationFreq)) + ") >= Previous score (" + str(previousScore) + ")" 
 	    print "...DENY MUTATION"
 	    #return sequence
+	print "*************************************"
       return sequence
     else:
       print "SCORE = 0 ******** QUIT MUTATION STEP"
@@ -198,9 +214,9 @@ def elmSearch(sequence, mutationFreq,verbose):
 
   if verbose:
     #print endl
-    print "ELM Search RESULTS:"
-    print sequence
-    print ''.join(map(str, elmSearchFreq))	  
+    print indent + "ELM Search RESULTS:"
+    print indent + sequence
+    print indent + ''.join(map(str, elmSearchFreq))	  
   
   ##ADD hits to global score
   for i in range(len(sequence)):
@@ -229,13 +245,13 @@ def blastIt(sequence, mutationFreq, database, verbose):
         
         if blastWeb:       # WEB BLAST SEARCH
 	  if verbose:
-	    print "WEB BLAST SEARCH IN PROGRESS..." 
+	    print indent + "WEB BLAST SEARCH IN PROGRESS..." 
 	  result = NCBIWWW.qblast("blastp", database , sequence)
 	  records = NCBIXML.parse(result)
 	  first = records.next()
 	else:     # LOCAL BLAST SEARCH
 	  if verbose:
-	    print "LOCAL BLAST SEARCH IN PROGRESS..."
+	    print indent + "LOCAL BLAST SEARCH IN PROGRESS..."
 	  input=open('input', 'w')
 	  #input.write("kqltqdddtdeveiaidntafmdeffseie\n")
 	  input.write(sequence)
@@ -257,13 +273,13 @@ def blastIt(sequence, mutationFreq, database, verbose):
 	  
 	  #print alignment stats 
 	  if verbose:
-	    print "Cutoff:" + str(cutoff)
+	    print indent +"Cutoff:" + str(cutoff)
 	  for hsp in firstAlign.hsps:
 	    if hsp.expect < cutoff:
 	      match=True   #we have a match
 	      if verbose:
-		print "****Alignment****"  
-		print "sequence:", firstAlign.title
+		print indent + "****Alignment****"  
+		print indent + "sequence:", firstAlign.title
 	      
 	      #length of the alignment (could be shorter than full sequence)
 	      length=firstAlign.length
@@ -276,20 +292,20 @@ def blastIt(sequence, mutationFreq, database, verbose):
 	      
 	      #length = (end-start) ???
 	      if verbose:
-		print "E-Value:     " + str(hsp.expect)
-		print "Query:       " + hsp.query 
-		print "Match:       " + hsp.match
-		print "Subject:     " + hsp.sbjct 
-		print "Query Length:", len(sequence)
-		print "Query Start: ", hsp.query_start
-		print "Query end:   ", hsp.query_end
+		print indent + "E-Value:     " + str(hsp.expect)
+		print indent + "Query:       " + hsp.query 
+		print indent + "Match:       " + hsp.match
+		print indent + "Subject:     " + hsp.sbjct 
+		print indent + "Query Length:", len(sequence)
+		print indent + "Query Start: ", hsp.query_start
+		print indent + "Query end:   ", hsp.query_end
 	    else:
 	      if verbose:
-		print "No hits found"
+		print indent + "No hits found"
 	      match=False
 	else:
 	  if verbose:
-	    print "No hits found"
+	    print indent + "No hits found"
 	  match=False
 
 	    
@@ -307,9 +323,9 @@ def blastIt(sequence, mutationFreq, database, verbose):
 					
 	if verbose:	    
 	    #print endl
-	    print "BLAST RESULTS:"
-	    print sequence
-	    print ''.join(map(str, mutationFreq))				
+	    print indent + "BLAST RESULTS:"
+	    print indent + sequence
+	    print indent + ''.join(map(str, mutationFreq))				
 					
 					
 					
@@ -335,9 +351,9 @@ def iupred(sequence, mutationFreq, verbose):
 		  if resultX < 0.5 :
 			  iupredFreq[x] = 1
 	  #print endl
-	  print "IUPred RESULTS:"
-	  print sequence
-	  print ''.join(map(str, iupredFreq))	  			  			
+	  print indent + "IUPred RESULTS:"
+	  print indent + sequence
+	  print indent + ''.join(map(str, iupredFreq))	  			  			
 			
 	outputIUPred.seek(0)
 	rstFile_iter = iter(outputIUPred)
@@ -370,9 +386,9 @@ def anchor(sequence, mutationFreq, verbose):
 		  resultX=float(iterOutputAnchor.next())
 		  if resultX >  0.5 :
 			  anchorFreq[x] = 1
-	  print "ANCHOR RESULTS:"
-	  print sequence
-	  print ''.join(map(str, anchorFreq))	  			  			
+	  print indent + "ANCHOR RESULTS:"
+	  print indent + sequence
+	  print indent + ''.join(map(str, anchorFreq))	  			  			
 			
 	outputAnchor.seek(0)
 	rstFile_iter = iter(outputAnchor)
@@ -380,9 +396,9 @@ def anchor(sequence, mutationFreq, verbose):
 	for j in range(len(sequence)):
 		resultJ=float(rstFile_iter.next())
 		if resultJ > 0.5 :
-			mutationFreq[j] += 0
+			mutationFreq[j] += 1
 		else:
-			mutationFreq[j] += 1				
+			mutationFreq[j] += 0				
   
 
 
@@ -395,40 +411,45 @@ def anchor(sequence, mutationFreq, verbose):
 
 
 def sequenceEvaluation(sequence, mutationFreq, verbose):
+	#global indent
 	
 	##FIRST STEP: BLAST SEARCH
 	if verbose:
 	   print endl
-	   print "*************************************"
-	   print "STARTING BLAST SEARCH"
-	#blastIt(sequence,mutationFreq,database, verbose)
+	   print indent + "*************************************"
+	   print indent + "STARTING BLAST SEARCH"
+	blastIt(sequence,mutationFreq,database, verbose)
         
 	    
         ##SECOND STEP: IUPred evaluation
 	if verbose:
 	  print endl
-	  print "*************************************"
-	  print "STARTING IUPred"
+	  print indent + "*************************************"
+	  print indent + "STARTING IUPred"
 	iupred(sequence, mutationFreq, verbose)
         
         ##THIRD STEP: ANCHOR evaluation
 	if verbose:
 	  print endl
-	  print "*************************************"
-	  print "STARTING ANCHOR"
+	  print indent + "*************************************"
+	  print indent + "STARTING ANCHOR"
 	anchor(sequence, mutationFreq, verbose)
 	
+	if verbose:
+	  print endl
+	  print indent + "*************************************"
+	  print indent + "STARTING ELM Search"
+        elmSearch(sequence,mutationFreq, verbose)
 	
         ##PRINT SCORE
         if verbose:
-	  print "*************************************"
+	  print indent + "*************************************"
 	  print endl
-	  print "FINAL RESULTS:"
-	  print sequence
-	  print ''.join(map(str, mutationFreq))
-	  print "*************************************"
+	  print indent + "FINAL RESULTS:"
+	  print indent + sequence
+	  print indent + ''.join(map(str, mutationFreq))
+	  print indent + "*************************************"
 	
-        elmSearch(sequence,mutationFreq, verbose)
 
 
 
@@ -551,7 +572,6 @@ for p in range(len(sequence)):
   #mutationFreq[p]=0
 
 
-outputFile= outputPath + str(len(sequence)) 
 
 t0 = time.time()
 ################################
@@ -572,7 +592,7 @@ while globalScore > 0:
            #mutationFreq.append(0)
 	   mutationFreq[p]=0
 	
-	
+	indent=""
 	sequenceEvaluation(sequence,mutationFreq, True)	
 	
 
@@ -583,11 +603,15 @@ while globalScore > 0:
 	###ONLY MUTATE IF SCORE GREATER THAN 0  (AT LEAST 1 POSITION HAS A MUTATION FREQUENCY GREATER THAN 0 )
 	print endl
 	print "*************************************"
+	print "*************************************"
 	print "MUTATION STEP"
+	print "*************************************"
+	print "*************************************"
 	print "Sequence before: " + sequence 
 	mutatedSequence=mutar(sequence, mutationFreq)
 	print "Sequence after mutation:    " + mutatedSequence
 	sequence=mutatedSequence
+	print "Number of times before mutation accept:" + str(mutationsIter)
 	print endl
 	print "*******************************************"
       
@@ -595,14 +619,27 @@ while globalScore > 0:
         #else:     ##GLOBAL SCORE IS 0 - REACHED END OF LOOP
 	#    break
 	globalScore= getGlobalScore(mutationFreq)
-	print "Global score:   " + str(globalScore)
+	print "End of iteration: " + str(iteration)
+	print "Global score :    " + str(globalScore)
+	print endl
 	#print "Score function: " +  str(getGlobalScore(mutationFreq)/len(sequence)) 
-        iteration=iteration+1
 	#if ((getGlobalScore(mutationFreq)/len(sequence)) <= targetScore):
 	#  break
+	#Write score Vs iteration 
+	outputFile=outputPath + scoresFile
+	outFile=open(outputFile, "a")
+	outFile.write(str(iteration)+ tab + str(globalScore) + endl)
+	#Write mutations attempts
+	outFile.close()
+	outputFile=outputPath + mutAttemptsFile
+	outFile=open(outputFile, "a")
+	outFile.write(str(iteration)+ tab + str(mutationsIter) + endl)
+        outFile.close()
+        iteration=iteration+1
 elapsedTime=time.time() - t0
 print "Elapsed time:",elapsedTime, "Seconds"
 if output:
+  outputFile= outputPath + str(len(sequence)) 
   outFile=open(outputFile, "a")
   outFile.write(str(iteration-1)+ tab + str(elapsedTime) + endl)
    

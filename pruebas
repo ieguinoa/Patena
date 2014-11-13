@@ -1,0 +1,18 @@
+import os
+
+
+
+
+##GLOBALS
+endl = "\n"
+tab = "\t"
+
+
+exe="./link1.2.py"
+
+
+
+
+for x in range(0,30):
+  runCommand= exe + " --length " + str(largo)
+    os.system()
