@@ -11,7 +11,7 @@ from Bio import Seq
 from Bio.Blast import NCBIXML
 #from Bio import SearchIO
 from array import array
-
+import math
 import random
 
 
@@ -32,6 +32,7 @@ endl = "\n"
 tab = "\t"
 indent=""
 cutoff=0.01
+beta=0.3
 match=False
 rand=True
 change=True
@@ -42,6 +43,7 @@ targetScore=0.0
 output=True  ##print info to file
 outputPath = "Output/"
 mutationsIter=0
+temperature=100
 scoresFile="scores"   #save Scores Vs iteration number 
 mutAttemptsFile="mutationsAttempt"  # save number of mutation attempts  Vs iteration number
 
@@ -134,10 +136,27 @@ def mutar(sequence, mutationFreq):
 	    #mutationFreq=
 	    return mutatedSequence
 	else:
-	    #print "El score original " + str(getGlobalScore(mutatedFreq)) + " es mayor que "+ str(getGlobalScore(mutationFreq))
-	    print " Mutation score (" + str(getGlobalScore(mutationFreq)) + ") >= Previous score (" + str(previousScore) + ")" 
-	    print "...DENY MUTATION"
-	    #return sequence
+	    #DECISION BASED ON MONTE CARLO
+	    diff=previousScore-getGlobalScore(mutationFreq)
+	    print "LA DIFERENCIA ENTRE VALORES DE SCORE ES" + str(diff)
+	    exponent=diff/beta
+	    MCvalue=math.exp(exponent)
+	    print "EL EXPONENTE ES  :" + str(exponent)
+	    print "EL VALOR DE MC ES:" + str(MCvalue)
+	    
+	    #GENERATE RANDOM NUMBER BETWEEN 0 AND 1
+	    randy=random.random()
+	    print "EL VALOR RANDOM ELEGIDO ES:" + str(randy)
+	    print "MONTE CARLO DECISION:"
+	    if MCvalue > randy:
+	      #ACCEPT MUTATION
+	      print "...ACCEPT MUTATION"
+	      return mutatedSequence
+	    else:	    
+	      #print "El score original " + str(getGlobalScore(mutatedFreq)) + " es mayor que "+ str(getGlobalScore(mutationFreq))
+	      print " Mutation score (" + str(getGlobalScore(mutationFreq)) + ") >= Previous score (" + str(previousScore) + ")" 
+	      print "...DENY MUTATION"
+	      #return sequence
 	print "*************************************"
       return sequence
     else:
