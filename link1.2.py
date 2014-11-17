@@ -13,7 +13,7 @@ from Bio.Blast import NCBIXML
 from array import array
 import math
 import random
-
+import subprocess
 
 #****************************************
 # CHOSE AN ITEM OF A PAIRLIST (ID, WEIGHT) , BASED ON WEIGHTS
@@ -245,6 +245,49 @@ def elmSearch(sequence, mutationFreq,verbose):
                                          
 
 
+##*************************************
+
+
+
+def prositeSearch(sequence, mutationFreq,verbose):
+  
+  
+  #NEW LIST TO SAVE HITS 
+  prositeSearchFreq=[]
+  for p in range(len(sequence)):
+	      prositeSearchFreq.append(0)
+	      
+  #SEARCH PROSITE USING PS_SCAN
+  input=open("sequence", "w")
+  input.write(">gi" + endl)
+  input.write(sequence)
+  input.close()
+  proc = subprocess.Popen(['perl', 'ps_scan/ps_scan.pl','-o', 'pff', 'sequence'],stdout=subprocess.PIPE)
+  while True:
+    line = proc.stdout.readline()
+    if line != '':
+      pattern_start=int(line.split()[1])  
+      pattern_end=int(line.split()[2])
+      for x in range(pattern_start-1,pattern_end):
+	prositeSearchFreq[x]+=1
+    else:
+      break	      
+
+
+  if verbose:
+    #print endl
+    print indent + "Prosite Search RESULTS:"
+    print indent + sequence
+    print indent + ''.join(map(str, prositeSearchFreq))	  
+  
+  ##ADD hits to global score
+  for i in range(len(sequence)):
+    mutationFreq[i]+=prositeSearchFreq[i]
+  
+  
+                                         
+
+
 ##**********************************************
 
 ##getGlobalScore=List sum
@@ -272,7 +315,6 @@ def blastIt(sequence, mutationFreq, database, verbose):
 	  if verbose:
 	    print indent + "LOCAL BLAST SEARCH IN PROGRESS..."
 	  input=open('input', 'w')
-	  #input.write("kqltqdddtdeveiaidntafmdeffseie\n")
 	  input.write(sequence)
 	  input.close()
 	  commandLine=NcbiblastpCommandline(query="input", db=database, evalue=0.001, outfmt=5, out="output.xml")
@@ -437,7 +479,7 @@ def sequenceEvaluation(sequence, mutationFreq, verbose):
 	   print endl
 	   print indent + "*************************************"
 	   print indent + "STARTING BLAST SEARCH"
-	blastIt(sequence,mutationFreq,database, verbose)
+	#blastIt(sequence,mutationFreq,database, verbose)
         
 	    
         ##SECOND STEP: IUPred evaluation
@@ -460,6 +502,12 @@ def sequenceEvaluation(sequence, mutationFreq, verbose):
 	  print indent + "STARTING ELM Search"
         elmSearch(sequence,mutationFreq, verbose)
 	
+	if verbose:
+	  print endl
+	  print indent + "*************************************"
+	  print indent + "STARTING Prosite Search"
+        prositeSearch(sequence,mutationFreq, verbose)
+        
         ##PRINT SCORE
         if verbose:
 	  print indent + "*************************************"

@@ -1,0 +1,17 @@
+#import os 
+
+#os.system("perl ps_scan/ps_scan.pl -o pff sequence > salidita")
+
+import subprocess
+import os
+
+#os.chdir('ps_scan')
+fileD=open("resultados", "w")
+p = subprocess.Popen(['perl', 'ps_scan.pl','-o', 'pff', 'sequence'], cwd="ps_scan", stdout=subprocess.PIPE)
+while True:
+  line = proc.stdout.readline()
+  if line != '':
+    #the real code does filtering here
+    print "test:", line.rstrip()
+  else:
+    break
