@@ -262,7 +262,7 @@ def prositeSearch(sequence, mutationFreq,verbose):
   input.write(">gi" + endl)
   input.write(sequence)
   input.close()
-  proc = subprocess.Popen(['perl', 'ps_scan/ps_scan.pl','-o', 'pff', 'sequence'],stdout=subprocess.PIPE)
+  proc = subprocess.Popen(['perl', 'ps_scan/ps_scan.pl','-r','-o', 'pff', 'sequence'],stdout=subprocess.PIPE)
   while True:
     line = proc.stdout.readline()
     if line != '':
@@ -551,6 +551,8 @@ else:
       exit()
     elif (arg=='--length') and (index < len(sys.argv)):
       size = int(sys.argv[index+1])
+    elif (arg=='--beta') and (index < len(sys.argv)):
+      beta = float(sys.argv[index+1])  
     elif (arg=='--seq') and (index < len(sys.argv)):
       sequence = sys.argv[index+1]
       rand=False
