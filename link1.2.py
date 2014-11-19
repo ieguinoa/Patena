@@ -41,23 +41,15 @@ blastWeb=False  #BLAST SEARCH LOCAL OR WEB
 blastIt=True
 targetScore=0.0
 output=True  ##print info to file
-outputPath = "Output/"
 mutationsIter=0
-temperature=100
-scoresFile="scores"   #save Scores Vs iteration number 
-mutAttemptsFile="mutationsAttempt"  # save number of mutation attempts  Vs iteration number
+
+
 
 #AA FREQUENCIES TO SELECT NEW RESIDUES FOR MUTATIONS (from http://web.expasy.org/protscale/pscale/A.A.Swiss-Prot.html) 
 weights= [("A",825), ("R",553),("N",406),("D",545),("C",137),("E",393),("Q",675),("G",707),("H",227),("I",596),("L",966),("K",548),("M",242),("F",386),("P",470),("S",656),("T",534),("W",108),("Y",292),("V",687) ]
 
 
-#CLEAR ALL OUTPUT FILES
-outputFile=outputPath + scoresFile
-outFile=open(outputFile, "w")
-outFile.close()
-outputFile=outputPath + mutAttemptsFile
-outFile=open(outputFile, "w")
-outFile.close()
+
 #***********************************************************************
 
 
@@ -609,6 +601,23 @@ else:
 	    
 
 
+
+#OUTPUT
+outputPath = "Output/"
+scoresFile="scores" + str(size)   #save Scores Vs iteration number 
+mutAttemptsFile="mutationsAttempt" + str(size)  # save number of mutation attempts  Vs iteration number
+timesFile='times' + str(size)   #save times Vs iteration number
+totalTimesFile='totalTimes'  #save total time elapsed Vs sequence length
+
+
+if output:
+  totalTimesOutputFile=open( outputPath + totalTimesFile , "a")
+  timesOutputFile=open( outputPath + timesFile , "a")
+  scoresOutputFile=open( outputPath + scoresFile , "a")
+  mutationsFile=open( outputPath + mutAttemptsFile , "a")
+  
+
+
 # FORMAT TO REQUEST RANDOM SEQUENCE:   
 #http://web.expasy.org/cgibin/randseq/randseq.pl?size=100&comp=user_specified&A=10&R=10&N=10&D=10&C=10&Q=10&E=10&G=10&H=0&I=0&L=0&K=0&M=0&F=0&P=0&S=0&T=0&W=0&Y=10&V=0&output=fasta   
 
@@ -642,7 +651,8 @@ for p in range(len(sequence)):
 
 
 
-t0 = time.time()
+time0 = time.time()   #start time
+timePrev=time0          #Previous iteration start time
 ################################
 #### ITERATE OVER SEQUENCE ####
 #############################
@@ -691,25 +701,29 @@ while globalScore > 0:
 	print "End of iteration: " + str(iteration)
 	print "Global score :    " + str(globalScore)
 	print endl
-	#print "Score function: " +  str(getGlobalScore(mutationFreq)/len(sequence)) 
-	#if ((getGlobalScore(mutationFreq)/len(sequence)) <= targetScore):
-	#  break
-	#Write score Vs iteration 
-	outputFile=outputPath + scoresFile
-	outFile=open(outputFile, "a")
-	outFile.write(str(iteration)+ tab + str(globalScore) + endl)
-	#Write mutations attempts
-	outFile.close()
-	outputFile=outputPath + mutAttemptsFile
-	outFile=open(outputFile, "a")
-	outFile.write(str(iteration)+ tab + str(mutationsIter) + endl)
-        outFile.close()
+	if output:
+	  # MUTATION ATTEMPTS Vs. ITERATION NUMBER
+	  mutationsFile.write(str(iteration)+ tab + str(mutationsIter) + endl)
+	  
+	  #SCORES Vs. ITERATION NUMBER
+	  scoresOutputFile.write(str(iteration)+ tab + str(globalScore) + endl)
+	  
+	  #ITERATION ELAPSED TIME
+	  timeX=time.time()-timePrev   #ITERATION TIME
+	  timesOutputFile.write(str(iteration)+ tab + str(timeX) + endl)
+	  
+	  
         iteration=iteration+1
-elapsedTime=time.time() - t0
-print "Elapsed time:",elapsedTime, "Seconds"
-if output:
-  outputFile= outputPath + str(len(sequence)) 
-  outFile=open(outputFile, "a")
-  outFile.write(str(iteration-1)+ tab + str(elapsedTime) + endl)
+
+if output:        
+  totalElapsedTime=time.time() - time0   ##
+  print "Elapsed time:",totalElapsedTime, "Seconds"
+  totalTimesOutputFile.write(str(iteration-1)+ tab + str(totalElapsedTime) + endl)
+  
+  ##CLOSE ALL OUTPUT FILES
+  totalTimesOutputFile.close()
+  timesOutputFile.close()
+  scoresOutputFile.close()
+  mutationsFile.close()
    
 
