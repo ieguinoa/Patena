@@ -479,18 +479,23 @@ def printHelp():
 #**************************** Main Program *****************************
 #***********************************************************************
 
-top = input_amber_path + defaultTopFile
-rst = input_amber_path + defaultRstFile
-mdin = input_amber_path + defaultMdinFile
-
-sequence="MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHG"
+#top = input_amber_path + defaultTopFile
+#rst = input_amber_path + defaultRstFile
+#mdin = input_amber_path + defaultMdinFile
 
 
-for i in range(10,40,1):
-  for j in range(0,5):
-    runLinkeadoSeq(sequence[:i])
 
-#if len(sys.argv) < 2:
+#for i in range(10,40,1):
+  #for j in range(0,5):
+    #runLinkeadoSeq(sequence[:i])
+
+
+
+
+
+
+
+ #len(sys.argv) < 2:
   #print "\n Using all the default input files:"
   #print tab + top
   #print tab + rst
@@ -498,23 +503,40 @@ for i in range(10,40,1):
   #print "\n If you want a specific input file, see the help running:"
   #print tab + "python amber.py -h"
 #else:
+
+
+
+
+
+
+beta=False
+score=False
+mutAttempt=False
+time=False
   
-  #for i in range(1,len(sys.argv)):
-    #arg = sys.argv[i]
+for i in range(1,len(sys.argv)):
+  arg = sys.argv[i]
+  if (arg=='--beta' or arg== '-b'):
+    #TEST BETA vs ITERATIONS-TIME
+    beta=True
+  elif (arg=='--score' or arg== '-s'):
+    #TEST score vs iteration number
+    score=True
+  elif (arg=='--mutations' or arg== '-m'):
+    #TEST mutation attempts  Vs. iteration number
+    mutAttempt=True
+  elif (arg=='--time' or arg== '-t'):
+    #TEST total time vs sequence length
+    time=True
     
-    #if (arg=='-P' or arg== '-p') and (i < len(sys.argv)):
-      #top = sys.argv[i+1]
-    #elif (arg=='-C' or arg== '-c') and (i < len(sys.argv)):
-      #rst = sys.argv[i+1]
-    #elif (arg=='-I' or arg== '-i') and (i < len(sys.argv)):
-      #rst = sys.argv[i+1]
-    #elif (arg=='-H' or arg== '-h' or arg== '-help' or arg== '--help'):
-      #printHelp()
-      #exit()
-  #print "\n Using the input files:"
-  #print tab + top
-  #print tab + rst
-  #print tab + mdin
+
+sequence="MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHG"
+
+
+
+
+if 
+
 
 
 
