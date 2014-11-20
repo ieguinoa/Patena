@@ -513,6 +513,21 @@ beta=False
 score=False
 mutAttempt=False
 time=False
+
+
+
+
+#CLEAR ALL OUTPUT FILES
+
+#outputFile=outputPath + scoresFile
+#outFile=open(outputFile, "w")
+#outFile.close()
+#outputFile=outputPath + mutAttemptsFile
+#outFile=open(outputFile, "w")
+#outFile.close()
+
+
+
   
 for i in range(1,len(sys.argv)):
   arg = sys.argv[i]
