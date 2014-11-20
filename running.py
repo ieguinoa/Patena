@@ -137,7 +137,8 @@ sequence="MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHG"
 if score or mutAttempt:
   runCommand = "python link1.2.py --beta 2.0 --length " + str(length)
   for x in range(0,10):  #hago 10 pruebas identicas
-    os.system(runCommand)
+    	print runCommand
+	os.system(runCommand)
 
 
 if time:

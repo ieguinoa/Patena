@@ -1,0 +1,7412 @@
+Generating random sequence...
+*******************************
+INITIAL SEQUENCE:MVDLKIIQLATRVGNRAPEKESSDTHGYFL
+*****************************
+ITERATION NUMBER: 1
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MVDLKIIQLATRVGNRAPEKESSDTHGYFL
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MVDLKIIQLATRVGNRAPEKESSDTHGYFL
+111111111111110000100000000011
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MVDLKIIQLATRVGNRAPEKESSDTHGYFL
+111111110000000000000000001111
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MVDLKIIQLATRVGNRAPEKESSDTHGYFL
+002222101111111000000111222211
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MVDLKIIQLATRVGNRAPEKESSDTHGYFL
+000000000000000000011111111100
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MVDLKIIQLATRVGNRAPEKESSDTHGYFL
+111111111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MVDLKIIQLATRVGNRAPEKESSDTHGYFL
+335555433333332111222333445544
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MVDLKIIQLATRVGNRAPEKESSDTHGYFL
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    97.0
+Choose a position based on weights
+Position chosen: 10
+Residue to mutate: T
+Selected residue : M
+Secuencia original:MVDLKIIQLATRVGNRAPEKESSDTHGYFL
+Secuencia mutada  :MVDLKIIQLAMRVGNRAPEKESSDTHGYFL
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDTHGYFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDTHGYFL
+		111111111111110001111000000011
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDTHGYFL
+		000001100000000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDTHGYFL
+		002222101111111000000111222211
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDTHGYFL
+		000000000000000000011111111100
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDTHGYFL
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDTHGYFL
+		224445423333332112233333444444
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (97.0) > Mutation score (92.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MVDLKIIQLAMRVGNRAPEKESSDTHGYFL
+Number of times before mutation accept:1
+
+
+*******************************************
+End of iteration: 1
+Global score :    92.0
+
+
+*****************************
+ITERATION NUMBER: 2
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDTHGYFL
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDTHGYFL
+111111111111110001111000000011
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDTHGYFL
+000001100000000000000000000011
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDTHGYFL
+002222101111111000000111222211
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDTHGYFL
+000000000000000000011111111100
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDTHGYFL
+111111111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDTHGYFL
+224445423333332112233333444444
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MVDLKIIQLAMRVGNRAPEKESSDTHGYFL
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    92.0
+Choose a position based on weights
+Position chosen: 24
+Residue to mutate: T
+Selected residue : N
+Secuencia original:MVDLKIIQLAMRVGNRAPEKESSDTHGYFL
+Secuencia mutada  :MVDLKIIQLAMRVGNRAPEKESSDNHGYFL
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDNHGYFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDNHGYFL
+		111111111111110000111000000011
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDNHGYFL
+		011111100000000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDNHGYFL
+		002222101111111000001111211111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDNHGYFL
+		000000000000000000011111111100
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDNHGYFL
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDNHGYFL
+		235555423333332111234333433344
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-1.0
+EL EXPONENTE ES  :-0.5
+EL VALOR DE MC ES:0.606530659713
+EL VALOR RANDOM ELEGIDO ES:0.0476115365546
+MONTE CARLO DECISION:
+...ACCEPT MUTATION
+Sequence after mutation:    MVDLKIIQLAMRVGNRAPEKESSDNHGYFL
+Number of times before mutation accept:1
+
+
+*******************************************
+End of iteration: 2
+Global score :    93.0
+
+
+*****************************
+ITERATION NUMBER: 3
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDNHGYFL
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDNHGYFL
+111111111111110000111000000011
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDNHGYFL
+011111100000000000000000000011
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDNHGYFL
+002222101111111000001111211111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDNHGYFL
+000000000000000000011111111100
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDNHGYFL
+111111111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDNHGYFL
+235555423333332111234333433344
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MVDLKIIQLAMRVGNRAPEKESSDNHGYFL
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    93.0
+Choose a position based on weights
+Position chosen: 13
+Residue to mutate: G
+Selected residue : Q
+Secuencia original:MVDLKIIQLAMRVGNRAPEKESSDNHGYFL
+Secuencia mutada  :MVDLKIIQLAMRVQNRAPEKESSDNHGYFL
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVDLKIIQLAMRVQNRAPEKESSDNHGYFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVDLKIIQLAMRVQNRAPEKESSDNHGYFL
+		111111111111110000100000000011
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVDLKIIQLAMRVQNRAPEKESSDNHGYFL
+		111111110000000000000000000111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVDLKIIQLAMRVQNRAPEKESSDNHGYFL
+		003333211111110000001111211111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVDLKIIQLAMRVQNRAPEKESSDNHGYFL
+		000000000000000000011111111100
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVDLKIIQLAMRVQNRAPEKESSDNHGYFL
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVDLKIIQLAMRVQNRAPEKESSDNHGYFL
+		336666543333331111223333433444
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-6.0
+EL EXPONENTE ES  :-3.0
+EL VALOR DE MC ES:0.0497870683679
+EL VALOR RANDOM ELEGIDO ES:0.810572547693
+MONTE CARLO DECISION:
+ Mutation score (99.0) >= Previous score (93.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    93.0
+Choose a position based on weights
+Position chosen: 27
+Residue to mutate: Y
+Selected residue : L
+Secuencia original:MVDLKIIQLAMRVGNRAPEKESSDNHGYFL
+Secuencia mutada  :MVDLKIIQLAMRVGNRAPEKESSDNHGLFL
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDNHGLFL
+		111111111111110000100000000001
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDNHGLFL
+		011111100000000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDNHGLFL
+		002222101111111000001111211111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDNHGLFL
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVDLKIIQLAMRVGNRAPEKESSDNHGLFL
+		235555423333332111212222322234
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (93.0) > Mutation score (81.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MVDLKIIQLAMRVGNRAPEKESSDNHGLFL
+Number of times before mutation accept:2
+
+
+*******************************************
+End of iteration: 3
+Global score :    81.0
+
+
+*****************************
+ITERATION NUMBER: 4
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDNHGLFL
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDNHGLFL
+111111111111110000100000000001
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDNHGLFL
+011111100000000000000000000011
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDNHGLFL
+002222101111111000001111211111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDNHGLFL
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDNHGLFL
+111111111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MVDLKIIQLAMRVGNRAPEKESSDNHGLFL
+235555423333332111212222322234
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MVDLKIIQLAMRVGNRAPEKESSDNHGLFL
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    81.0
+Choose a position based on weights
+Position chosen: 11
+Residue to mutate: R
+Selected residue : T
+Secuencia original:MVDLKIIQLAMRVGNRAPEKESSDNHGLFL
+Secuencia mutada  :MVDLKIIQLAMTVGNRAPEKESSDNHGLFL
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVDLKIIQLAMTVGNRAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVDLKIIQLAMTVGNRAPEKESSDNHGLFL
+		111111111111110000100000000001
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVDLKIIQLAMTVGNRAPEKESSDNHGLFL
+		011111100000000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVDLKIIQLAMTVGNRAPEKESSDNHGLFL
+		002222101111110000001111211111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVDLKIIQLAMTVGNRAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVDLKIIQLAMTVGNRAPEKESSDNHGLFL
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVDLKIIQLAMTVGNRAPEKESSDNHGLFL
+		235555423333331111212222322234
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (81.0) > Mutation score (80.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MVDLKIIQLAMTVGNRAPEKESSDNHGLFL
+Number of times before mutation accept:1
+
+
+*******************************************
+End of iteration: 4
+Global score :    80.0
+
+
+*****************************
+ITERATION NUMBER: 5
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MVDLKIIQLAMTVGNRAPEKESSDNHGLFL
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MVDLKIIQLAMTVGNRAPEKESSDNHGLFL
+111111111111110000100000000001
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MVDLKIIQLAMTVGNRAPEKESSDNHGLFL
+011111100000000000000000000011
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MVDLKIIQLAMTVGNRAPEKESSDNHGLFL
+002222101111110000001111211111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MVDLKIIQLAMTVGNRAPEKESSDNHGLFL
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MVDLKIIQLAMTVGNRAPEKESSDNHGLFL
+111111111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MVDLKIIQLAMTVGNRAPEKESSDNHGLFL
+235555423333331111212222322234
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MVDLKIIQLAMTVGNRAPEKESSDNHGLFL
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    80.0
+Choose a position based on weights
+Position chosen: 1
+Residue to mutate: V
+Selected residue : S
+Secuencia original:MVDLKIIQLAMTVGNRAPEKESSDNHGLFL
+Secuencia mutada  :MSDLKIIQLAMTVGNRAPEKESSDNHGLFL
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MSDLKIIQLAMTVGNRAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MSDLKIIQLAMTVGNRAPEKESSDNHGLFL
+		111111111111110000100000000001
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MSDLKIIQLAMTVGNRAPEKESSDNHGLFL
+		111111111100000000000000001111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MSDLKIIQLAMTVGNRAPEKESSDNHGLFL
+		135554201111110000001111211111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MSDLKIIQLAMTVGNRAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MSDLKIIQLAMTVGNRAPEKESSDNHGLFL
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MSDLKIIQLAMTVGNRAPEKESSDNHGLFL
+		468887534433331111212222323334
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-22.0
+EL EXPONENTE ES  :-11.0
+EL VALOR DE MC ES:1.67017007902e-05
+EL VALOR RANDOM ELEGIDO ES:0.761217001029
+MONTE CARLO DECISION:
+ Mutation score (102.0) >= Previous score (80.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    80.0
+Choose a position based on weights
+Position chosen: 15
+Residue to mutate: R
+Selected residue : G
+Secuencia original:MVDLKIIQLAMTVGNRAPEKESSDNHGLFL
+Secuencia mutada  :MVDLKIIQLAMTVGNGAPEKESSDNHGLFL
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVDLKIIQLAMTVGNGAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVDLKIIQLAMTVGNGAPEKESSDNHGLFL
+		111111111111110000100000000001
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVDLKIIQLAMTVGNGAPEKESSDNHGLFL
+		000111100000000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVDLKIIQLAMTVGNGAPEKESSDNHGLFL
+		002222101111110000001111211111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVDLKIIQLAMTVGNGAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVDLKIIQLAMTVGNGAPEKESSDNHGLFL
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVDLKIIQLAMTVGNGAPEKESSDNHGLFL
+		224555423333331111212222322234
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (80.0) > Mutation score (78.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MVDLKIIQLAMTVGNGAPEKESSDNHGLFL
+Number of times before mutation accept:2
+
+
+*******************************************
+End of iteration: 5
+Global score :    78.0
+
+
+*****************************
+ITERATION NUMBER: 6
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MVDLKIIQLAMTVGNGAPEKESSDNHGLFL
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MVDLKIIQLAMTVGNGAPEKESSDNHGLFL
+111111111111110000100000000001
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MVDLKIIQLAMTVGNGAPEKESSDNHGLFL
+000111100000000000000000000011
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MVDLKIIQLAMTVGNGAPEKESSDNHGLFL
+002222101111110000001111211111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MVDLKIIQLAMTVGNGAPEKESSDNHGLFL
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MVDLKIIQLAMTVGNGAPEKESSDNHGLFL
+111111111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MVDLKIIQLAMTVGNGAPEKESSDNHGLFL
+224555423333331111212222322234
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MVDLKIIQLAMTVGNGAPEKESSDNHGLFL
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    78.0
+Choose a position based on weights
+Position chosen: 28
+Residue to mutate: F
+Selected residue : I
+Secuencia original:MVDLKIIQLAMTVGNGAPEKESSDNHGLFL
+Secuencia mutada  :MVDLKIIQLAMTVGNGAPEKESSDNHGLIL
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVDLKIIQLAMTVGNGAPEKESSDNHGLIL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVDLKIIQLAMTVGNGAPEKESSDNHGLIL
+		111111111111110000100000000001
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVDLKIIQLAMTVGNGAPEKESSDNHGLIL
+		111111100000000000000000000001
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVDLKIIQLAMTVGNGAPEKESSDNHGLIL
+		002222101111110000001112322221
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVDLKIIQLAMTVGNGAPEKESSDNHGLIL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVDLKIIQLAMTVGNGAPEKESSDNHGLIL
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVDLKIIQLAMTVGNGAPEKESSDNHGLIL
+		335555423333331111212223433334
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-8.0
+EL EXPONENTE ES  :-4.0
+EL VALOR DE MC ES:0.0183156388887
+EL VALOR RANDOM ELEGIDO ES:0.5350783533
+MONTE CARLO DECISION:
+ Mutation score (86.0) >= Previous score (78.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    78.0
+Choose a position based on weights
+Position chosen: 11
+Residue to mutate: T
+Selected residue : R
+Secuencia original:MVDLKIIQLAMTVGNGAPEKESSDNHGLFL
+Secuencia mutada  :MVDLKIIQLAMRVGNGAPEKESSDNHGLFL
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVDLKIIQLAMRVGNGAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVDLKIIQLAMRVGNGAPEKESSDNHGLFL
+		111111111111110000100000000001
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVDLKIIQLAMRVGNGAPEKESSDNHGLFL
+		000111000000000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVDLKIIQLAMRVGNGAPEKESSDNHGLFL
+		002222101111111000001111211111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVDLKIIQLAMRVGNGAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVDLKIIQLAMRVGNGAPEKESSDNHGLFL
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVDLKIIQLAMRVGNGAPEKESSDNHGLFL
+		224555323333332111212222322234
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES0.0
+EL EXPONENTE ES  :0.0
+EL VALOR DE MC ES:1.0
+EL VALOR RANDOM ELEGIDO ES:0.916997897982
+MONTE CARLO DECISION:
+...ACCEPT MUTATION
+Sequence after mutation:    MVDLKIIQLAMRVGNGAPEKESSDNHGLFL
+Number of times before mutation accept:2
+
+
+*******************************************
+End of iteration: 6
+Global score :    78.0
+
+
+*****************************
+ITERATION NUMBER: 7
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MVDLKIIQLAMRVGNGAPEKESSDNHGLFL
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MVDLKIIQLAMRVGNGAPEKESSDNHGLFL
+111111111111110000100000000001
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MVDLKIIQLAMRVGNGAPEKESSDNHGLFL
+000111000000000000000000000011
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MVDLKIIQLAMRVGNGAPEKESSDNHGLFL
+002222101111111000001111211111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MVDLKIIQLAMRVGNGAPEKESSDNHGLFL
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MVDLKIIQLAMRVGNGAPEKESSDNHGLFL
+111111111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MVDLKIIQLAMRVGNGAPEKESSDNHGLFL
+224555323333332111212222322234
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MVDLKIIQLAMRVGNGAPEKESSDNHGLFL
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    78.0
+Choose a position based on weights
+Position chosen: 5
+Residue to mutate: I
+Selected residue : L
+Secuencia original:MVDLKIIQLAMRVGNGAPEKESSDNHGLFL
+Secuencia mutada  :MVDLKLIQLAMRVGNGAPEKESSDNHGLFL
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVDLKLIQLAMRVGNGAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVDLKLIQLAMRVGNGAPEKESSDNHGLFL
+		111111111111110000100000000001
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVDLKLIQLAMRVGNGAPEKESSDNHGLFL
+		111111110000000000000000000111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVDLKLIQLAMRVGNGAPEKESSDNHGLFL
+		002222101111111000001111211111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVDLKLIQLAMRVGNGAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVDLKLIQLAMRVGNGAPEKESSDNHGLFL
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVDLKLIQLAMRVGNGAPEKESSDNHGLFL
+		335555433333332111212222322334
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-6.0
+EL EXPONENTE ES  :-3.0
+EL VALOR DE MC ES:0.0497870683679
+EL VALOR RANDOM ELEGIDO ES:0.0132509878103
+MONTE CARLO DECISION:
+...ACCEPT MUTATION
+Sequence after mutation:    MVDLKLIQLAMRVGNGAPEKESSDNHGLFL
+Number of times before mutation accept:1
+
+
+*******************************************
+End of iteration: 7
+Global score :    84.0
+
+
+*****************************
+ITERATION NUMBER: 8
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MVDLKLIQLAMRVGNGAPEKESSDNHGLFL
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MVDLKLIQLAMRVGNGAPEKESSDNHGLFL
+111111111111110000100000000001
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MVDLKLIQLAMRVGNGAPEKESSDNHGLFL
+111111110000000000000000000111
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MVDLKLIQLAMRVGNGAPEKESSDNHGLFL
+002222101111111000001111211111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MVDLKLIQLAMRVGNGAPEKESSDNHGLFL
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MVDLKLIQLAMRVGNGAPEKESSDNHGLFL
+111111111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MVDLKLIQLAMRVGNGAPEKESSDNHGLFL
+335555433333332111212222322334
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MVDLKLIQLAMRVGNGAPEKESSDNHGLFL
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    84.0
+Choose a position based on weights
+Position chosen: 2
+Residue to mutate: D
+Selected residue : M
+Secuencia original:MVDLKLIQLAMRVGNGAPEKESSDNHGLFL
+Secuencia mutada  :MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+		111111111111110000110000000001
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+		111111100000000000000000000001
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+		000000001111111000001111211111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+		333333323333332111222222322224
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (84.0) > Mutation score (73.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+Number of times before mutation accept:1
+
+
+*******************************************
+End of iteration: 8
+Global score :    73.0
+
+
+*****************************
+ITERATION NUMBER: 9
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+111111111111110000110000000001
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+111111100000000000000000000001
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+000000001111111000001111211111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+111111111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+333333323333332111222222322224
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    73.0
+Choose a position based on weights
+Position chosen: 0
+Residue to mutate: M
+Selected residue : A
+Secuencia original:MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+Secuencia mutada  :AVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		AVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		AVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+		111111111111110000100000000001
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		AVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+		111111100000000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		AVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+		111100001111111000001111211111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		AVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		AVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		AVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+		444433323333332111212222322234
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-4.0
+EL EXPONENTE ES  :-2.0
+EL VALOR DE MC ES:0.135335283237
+EL VALOR RANDOM ELEGIDO ES:0.833339002756
+MONTE CARLO DECISION:
+ Mutation score (77.0) >= Previous score (73.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    73.0
+Choose a position based on weights
+Position chosen: 21
+Residue to mutate: S
+Selected residue : A
+Secuencia original:MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+Secuencia mutada  :MVMLKLIQLAMRVGNGAPEKEASDNHGLFL
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVMLKLIQLAMRVGNGAPEKEASDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVMLKLIQLAMRVGNGAPEKEASDNHGLFL
+		111111111111111111111110011011
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVMLKLIQLAMRVGNGAPEKEASDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVMLKLIQLAMRVGNGAPEKEASDNHGLFL
+		000000001111111000001111211111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVMLKLIQLAMRVGNGAPEKEASDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVMLKLIQLAMRVGNGAPEKEASDNHGLFL
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVMLKLIQLAMRVGNGAPEKEASDNHGLFL
+		222222223333333222223332333233
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-2.0
+EL EXPONENTE ES  :-1.0
+EL VALOR DE MC ES:0.367879441171
+EL VALOR RANDOM ELEGIDO ES:0.912817686264
+MONTE CARLO DECISION:
+ Mutation score (75.0) >= Previous score (73.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    73.0
+Choose a position based on weights
+Position chosen: 29
+Residue to mutate: L
+Selected residue : F
+Secuencia original:MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+Secuencia mutada  :MVMLKLIQLAMRVGNGAPEKESSDNHGLFF
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNHGLFF
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNHGLFF
+		111111111111110111111110001011
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNHGLFF
+		111111000000000000000000000001
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNHGLFF
+		000000001111111000001111211111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNHGLFF
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNHGLFF
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNHGLFF
+		333333223333332222223332323234
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-7.0
+EL EXPONENTE ES  :-3.5
+EL VALOR DE MC ES:0.0301973834223
+EL VALOR RANDOM ELEGIDO ES:0.998119432345
+MONTE CARLO DECISION:
+ Mutation score (80.0) >= Previous score (73.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    73.0
+Choose a position based on weights
+Position chosen: 25
+Residue to mutate: H
+Selected residue : F
+Secuencia original:MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+Secuencia mutada  :MVMLKLIQLAMRVGNGAPEKESSDNFGLFL
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNFGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNFGLFL
+		111111111111111111111111111111
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNFGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNFGLFL
+		000000001111111000001234543331
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNFGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNFGLFL
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVMLKLIQLAMRVGNGAPEKESSDNFGLFL
+		222222223333333222223456765553
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-23.0
+EL EXPONENTE ES  :-11.5
+EL VALOR DE MC ES:1.01300935986e-05
+EL VALOR RANDOM ELEGIDO ES:0.067360165256
+MONTE CARLO DECISION:
+ Mutation score (96.0) >= Previous score (73.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    73.0
+Choose a position based on weights
+Position chosen: 13
+Residue to mutate: G
+Selected residue : P
+Secuencia original:MVMLKLIQLAMRVGNGAPEKESSDNHGLFL
+Secuencia mutada  :MVMLKLIQLAMRVPNGAPEKESSDNHGLFL
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSDNHGLFL
+		111111111111110000100000000001
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSDNHGLFL
+		111111110000000000000000000111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSDNHGLFL
+		000000000000000000001111211111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSDNHGLFL
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSDNHGLFL
+		333333332222221111212222322334
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (73.0) > Mutation score (68.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MVMLKLIQLAMRVPNGAPEKESSDNHGLFL
+Number of times before mutation accept:5
+
+
+*******************************************
+End of iteration: 9
+Global score :    68.0
+
+
+*****************************
+ITERATION NUMBER: 10
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSDNHGLFL
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSDNHGLFL
+111111111111110000100000000001
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSDNHGLFL
+111111110000000000000000000111
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSDNHGLFL
+000000000000000000001111211111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSDNHGLFL
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSDNHGLFL
+111111111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSDNHGLFL
+333333332222221111212222322334
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MVMLKLIQLAMRVPNGAPEKESSDNHGLFL
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    68.0
+Choose a position based on weights
+Position chosen: 4
+Residue to mutate: K
+Selected residue : T
+Secuencia original:MVMLKLIQLAMRVPNGAPEKESSDNHGLFL
+Secuencia mutada  :MVMLTLIQLAMRVPNGAPEKESSDNHGLFL
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVMLTLIQLAMRVPNGAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVMLTLIQLAMRVPNGAPEKESSDNHGLFL
+		111111111111100000100000000001
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVMLTLIQLAMRVPNGAPEKESSDNHGLFL
+		111111110000000000000000000111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVMLTLIQLAMRVPNGAPEKESSDNHGLFL
+		000011111000000000001111211111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVMLTLIQLAMRVPNGAPEKESSDNHGLFL
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVMLTLIQLAMRVPNGAPEKESSDNHGLFL
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVMLTLIQLAMRVPNGAPEKESSDNHGLFL
+		333344443222211111212222322334
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-4.0
+EL EXPONENTE ES  :-2.0
+EL VALOR DE MC ES:0.135335283237
+EL VALOR RANDOM ELEGIDO ES:0.248975232268
+MONTE CARLO DECISION:
+ Mutation score (72.0) >= Previous score (68.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    68.0
+Choose a position based on weights
+Position chosen: 29
+Residue to mutate: L
+Selected residue : L
+Selected residue : V
+Secuencia original:MVMLKLIQLAMRVPNGAPEKESSDNHGLFL
+Secuencia mutada  :MVMLKLIQLAMRVPNGAPEKESSDNHGLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSDNHGLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSDNHGLFV
+		111111111111100000100000000001
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSDNHGLFV
+		111111111000000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSDNHGLFV
+		000000000000000000001111211111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSDNHGLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSDNHGLFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSDNHGLFV
+		333333333222211111212222322234
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (68.0) > Mutation score (67.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MVMLKLIQLAMRVPNGAPEKESSDNHGLFV
+Number of times before mutation accept:2
+
+
+*******************************************
+End of iteration: 10
+Global score :    67.0
+
+
+*****************************
+ITERATION NUMBER: 11
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSDNHGLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSDNHGLFV
+111111111111100000100000000001
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSDNHGLFV
+111111111000000000000000000011
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSDNHGLFV
+000000000000000000001111211111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSDNHGLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSDNHGLFV
+111111111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSDNHGLFV
+333333333222211111212222322234
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MVMLKLIQLAMRVPNGAPEKESSDNHGLFV
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    67.0
+Choose a position based on weights
+Position chosen: 23
+Residue to mutate: D
+Selected residue : S
+Secuencia original:MVMLKLIQLAMRVPNGAPEKESSDNHGLFV
+Secuencia mutada  :MVMLKLIQLAMRVPNGAPEKESSSNHGLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHGLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHGLFV
+		111111111111110000100000000001
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHGLFV
+		111111110000000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHGLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHGLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHGLFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHGLFV
+		333333332222221111211111222234
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (67.0) > Mutation score (62.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MVMLKLIQLAMRVPNGAPEKESSSNHGLFV
+Number of times before mutation accept:1
+
+
+*******************************************
+End of iteration: 11
+Global score :    62.0
+
+
+*****************************
+ITERATION NUMBER: 12
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSSNHGLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSSNHGLFV
+111111111111110000100000000001
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSSNHGLFV
+111111110000000000000000000011
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSSNHGLFV
+000000000000000000000000111111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSSNHGLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSSNHGLFV
+111111111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSSNHGLFV
+333333332222221111211111222234
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MVMLKLIQLAMRVPNGAPEKESSSNHGLFV
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    62.0
+Choose a position based on weights
+Position chosen: 26
+Residue to mutate: G
+Selected residue : P
+Secuencia original:MVMLKLIQLAMRVPNGAPEKESSSNHGLFV
+Secuencia mutada  :MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+		111111111111100000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+		111111111000000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+		333333333222211111111111222233
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (62.0) > Mutation score (60.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+Number of times before mutation accept:1
+
+
+*******************************************
+End of iteration: 12
+Global score :    60.0
+
+
+*****************************
+ITERATION NUMBER: 13
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+111111111111100000000000000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+111111111000000000000000000011
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+000000000000000000000000111111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+111111111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+333333333222211111111111222233
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    60.0
+Choose a position based on weights
+Position chosen: 17
+Residue to mutate: P
+Selected residue : A
+Secuencia original:MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+Secuencia mutada  :MVMLKLIQLAMRVPNGAAEKESSSNHPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVMLKLIQLAMRVPNGAAEKESSSNHPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVMLKLIQLAMRVPNGAAEKESSSNHPLFV
+		111111111111111000110000001000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVMLKLIQLAMRVPNGAAEKESSSNHPLFV
+		111111100000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVMLKLIQLAMRVPNGAAEKESSSNHPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVMLKLIQLAMRVPNGAAEKESSSNHPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVMLKLIQLAMRVPNGAAEKESSSNHPLFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVMLKLIQLAMRVPNGAAEKESSSNHPLFV
+		333333322222222111221111223222
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-1.0
+EL EXPONENTE ES  :-0.5
+EL VALOR DE MC ES:0.606530659713
+EL VALOR RANDOM ELEGIDO ES:0.660587864508
+MONTE CARLO DECISION:
+ Mutation score (61.0) >= Previous score (60.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    60.0
+Choose a position based on weights
+Position chosen: 22
+Residue to mutate: S
+Selected residue : H
+Secuencia original:MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+Secuencia mutada  :MVMLKLIQLAMRVPNGAPEKESHSNHPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESHSNHPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESHSNHPLFV
+		111111111111100000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESHSNHPLFV
+		111111111100000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESHSNHPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESHSNHPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESHSNHPLFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESHSNHPLFV
+		333333333322211111111111222233
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-1.0
+EL EXPONENTE ES  :-0.5
+EL VALOR DE MC ES:0.606530659713
+EL VALOR RANDOM ELEGIDO ES:0.948575018803
+MONTE CARLO DECISION:
+ Mutation score (61.0) >= Previous score (60.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    60.0
+Choose a position based on weights
+Position chosen: 20
+Residue to mutate: E
+Selected residue : T
+Secuencia original:MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+Secuencia mutada  :MVMLKLIQLAMRVPNGAPEKTSSSNHPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVMLKLIQLAMRVPNGAPEKTSSSNHPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVMLKLIQLAMRVPNGAPEKTSSSNHPLFV
+		111111111111110000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVMLKLIQLAMRVPNGAPEKTSSSNHPLFV
+		111111111000000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVMLKLIQLAMRVPNGAPEKTSSSNHPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVMLKLIQLAMRVPNGAPEKTSSSNHPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVMLKLIQLAMRVPNGAPEKTSSSNHPLFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVMLKLIQLAMRVPNGAPEKTSSSNHPLFV
+		333333333222221111111111222233
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-1.0
+EL EXPONENTE ES  :-0.5
+EL VALOR DE MC ES:0.606530659713
+EL VALOR RANDOM ELEGIDO ES:0.887989476944
+MONTE CARLO DECISION:
+ Mutation score (61.0) >= Previous score (60.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    60.0
+Choose a position based on weights
+Position chosen: 19
+Residue to mutate: K
+Selected residue : V
+Secuencia original:MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+Secuencia mutada  :MVMLKLIQLAMRVPNGAPEVESSSNHPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVMLKLIQLAMRVPNGAPEVESSSNHPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVMLKLIQLAMRVPNGAPEVESSSNHPLFV
+		111111111111111111111110111111
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVMLKLIQLAMRVPNGAPEVESSSNHPLFV
+		111100000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVMLKLIQLAMRVPNGAPEVESSSNHPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVMLKLIQLAMRVPNGAPEVESSSNHPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVMLKLIQLAMRVPNGAPEVESSSNHPLFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVMLKLIQLAMRVPNGAPEVESSSNHPLFV
+		333322222222222222222221333333
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-9.0
+EL EXPONENTE ES  :-4.5
+EL VALOR DE MC ES:0.0111089965382
+EL VALOR RANDOM ELEGIDO ES:0.579966611433
+MONTE CARLO DECISION:
+ Mutation score (69.0) >= Previous score (60.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    60.0
+Choose a position based on weights
+Position chosen: 27
+Residue to mutate: L
+Selected residue : S
+Secuencia original:MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+Secuencia mutada  :MVMLKLIQLAMRVPNGAPEKESSSNHPSFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHPSFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHPSFV
+		111111111111000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHPSFV
+		111111111110000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHPSFV
+		000000000000000000001111222211
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHPSFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHPSFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MVMLKLIQLAMRVPNGAPEKESSSNHPSFV
+		333333333332111111112222333322
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-7.0
+EL EXPONENTE ES  :-3.5
+EL VALOR DE MC ES:0.0301973834223
+EL VALOR RANDOM ELEGIDO ES:0.391675580675
+MONTE CARLO DECISION:
+ Mutation score (67.0) >= Previous score (60.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    60.0
+Choose a position based on weights
+Position chosen: 1
+Residue to mutate: V
+Selected residue : G
+Secuencia original:MVMLKLIQLAMRVPNGAPEKESSSNHPLFV
+Secuencia mutada  :MGMLKLIQLAMRVPNGAPEKESSSNHPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGMLKLIQLAMRVPNGAPEKESSSNHPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGMLKLIQLAMRVPNGAPEKESSSNHPLFV
+		111111111110000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGMLKLIQLAMRVPNGAPEKESSSNHPLFV
+		111111111110000000000000001111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGMLKLIQLAMRVPNGAPEKESSSNHPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGMLKLIQLAMRVPNGAPEKESSSNHPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGMLKLIQLAMRVPNGAPEKESSSNHPLFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGMLKLIQLAMRVPNGAPEKESSSNHPLFV
+		333333333331111111111111223333
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-2.0
+EL EXPONENTE ES  :-1.0
+EL VALOR DE MC ES:0.367879441171
+EL VALOR RANDOM ELEGIDO ES:0.200788689306
+MONTE CARLO DECISION:
+...ACCEPT MUTATION
+Sequence after mutation:    MGMLKLIQLAMRVPNGAPEKESSSNHPLFV
+Number of times before mutation accept:6
+
+
+*******************************************
+End of iteration: 13
+Global score :    62.0
+
+
+*****************************
+ITERATION NUMBER: 14
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MGMLKLIQLAMRVPNGAPEKESSSNHPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MGMLKLIQLAMRVPNGAPEKESSSNHPLFV
+111111111110000000000000000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MGMLKLIQLAMRVPNGAPEKESSSNHPLFV
+111111111110000000000000001111
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MGMLKLIQLAMRVPNGAPEKESSSNHPLFV
+000000000000000000000000111111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MGMLKLIQLAMRVPNGAPEKESSSNHPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MGMLKLIQLAMRVPNGAPEKESSSNHPLFV
+111111111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MGMLKLIQLAMRVPNGAPEKESSSNHPLFV
+333333333331111111111111223333
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MGMLKLIQLAMRVPNGAPEKESSSNHPLFV
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    62.0
+Choose a position based on weights
+Position chosen: 3
+Residue to mutate: L
+Selected residue : N
+Secuencia original:MGMLKLIQLAMRVPNGAPEKESSSNHPLFV
+Secuencia mutada  :MGMNKLIQLAMRVPNGAPEKESSSNHPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGMNKLIQLAMRVPNGAPEKESSSNHPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGMNKLIQLAMRVPNGAPEKESSSNHPLFV
+		111111100000000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGMNKLIQLAMRVPNGAPEKESSSNHPLFV
+		111111111111100000000000111111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGMNKLIQLAMRVPNGAPEKESSSNHPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGMNKLIQLAMRVPNGAPEKESSSNHPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGMNKLIQLAMRVPNGAPEKESSSNHPLFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGMNKLIQLAMRVPNGAPEKESSSNHPLFV
+		333333322222211111111111333333
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES0.0
+EL EXPONENTE ES  :0.0
+EL VALOR DE MC ES:1.0
+EL VALOR RANDOM ELEGIDO ES:0.1702830511
+MONTE CARLO DECISION:
+...ACCEPT MUTATION
+Sequence after mutation:    MGMNKLIQLAMRVPNGAPEKESSSNHPLFV
+Number of times before mutation accept:1
+
+
+*******************************************
+End of iteration: 14
+Global score :    62.0
+
+
+*****************************
+ITERATION NUMBER: 15
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MGMNKLIQLAMRVPNGAPEKESSSNHPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MGMNKLIQLAMRVPNGAPEKESSSNHPLFV
+111111100000000000000000000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MGMNKLIQLAMRVPNGAPEKESSSNHPLFV
+111111111111100000000000111111
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MGMNKLIQLAMRVPNGAPEKESSSNHPLFV
+000000000000000000000000111111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MGMNKLIQLAMRVPNGAPEKESSSNHPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MGMNKLIQLAMRVPNGAPEKESSSNHPLFV
+111111111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MGMNKLIQLAMRVPNGAPEKESSSNHPLFV
+333333322222211111111111333333
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MGMNKLIQLAMRVPNGAPEKESSSNHPLFV
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    62.0
+Choose a position based on weights
+Position chosen: 2
+Residue to mutate: M
+Selected residue : I
+Secuencia original:MGMNKLIQLAMRVPNGAPEKESSSNHPLFV
+Secuencia mutada  :MGINKLIQLAMRVPNGAPEKESSSNHPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKLIQLAMRVPNGAPEKESSSNHPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKLIQLAMRVPNGAPEKESSSNHPLFV
+		111111111100000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKLIQLAMRVPNGAPEKESSSNHPLFV
+		111111111111000000000000011111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKLIQLAMRVPNGAPEKESSSNHPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKLIQLAMRVPNGAPEKESSSNHPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKLIQLAMRVPNGAPEKESSSNHPLFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKLIQLAMRVPNGAPEKESSSNHPLFV
+		333333333322111111111111233333
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-1.0
+EL EXPONENTE ES  :-0.5
+EL VALOR DE MC ES:0.606530659713
+EL VALOR RANDOM ELEGIDO ES:0.0583973194815
+MONTE CARLO DECISION:
+...ACCEPT MUTATION
+Sequence after mutation:    MGINKLIQLAMRVPNGAPEKESSSNHPLFV
+Number of times before mutation accept:1
+
+
+*******************************************
+End of iteration: 15
+Global score :    63.0
+
+
+*****************************
+ITERATION NUMBER: 16
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MGINKLIQLAMRVPNGAPEKESSSNHPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MGINKLIQLAMRVPNGAPEKESSSNHPLFV
+111111111100000000000000000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MGINKLIQLAMRVPNGAPEKESSSNHPLFV
+111111111111000000000000011111
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MGINKLIQLAMRVPNGAPEKESSSNHPLFV
+000000000000000000000000111111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MGINKLIQLAMRVPNGAPEKESSSNHPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MGINKLIQLAMRVPNGAPEKESSSNHPLFV
+111111111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MGINKLIQLAMRVPNGAPEKESSSNHPLFV
+333333333322111111111111233333
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MGINKLIQLAMRVPNGAPEKESSSNHPLFV
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    63.0
+Choose a position based on weights
+Position chosen: 3
+Residue to mutate: N
+Selected residue : Y
+Secuencia original:MGINKLIQLAMRVPNGAPEKESSSNHPLFV
+Secuencia mutada  :MGIYKLIQLAMRVPNGAPEKESSSNHPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGIYKLIQLAMRVPNGAPEKESSSNHPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGIYKLIQLAMRVPNGAPEKESSSNHPLFV
+		111111111111110000100000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGIYKLIQLAMRVPNGAPEKESSSNHPLFV
+		111111111000000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGIYKLIQLAMRVPNGAPEKESSSNHPLFV
+		000111100000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGIYKLIQLAMRVPNGAPEKESSSNHPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGIYKLIQLAMRVPNGAPEKESSSNHPLFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGIYKLIQLAMRVPNGAPEKESSSNHPLFV
+		333444433222221111211111222233
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-3.0
+EL EXPONENTE ES  :-1.5
+EL VALOR DE MC ES:0.223130160148
+EL VALOR RANDOM ELEGIDO ES:0.854048842336
+MONTE CARLO DECISION:
+ Mutation score (66.0) >= Previous score (63.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    63.0
+Choose a position based on weights
+Position chosen: 25
+Residue to mutate: H
+Selected residue : P
+Secuencia original:MGINKLIQLAMRVPNGAPEKESSSNHPLFV
+Secuencia mutada  :MGINKLIQLAMRVPNGAPEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKLIQLAMRVPNGAPEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKLIQLAMRVPNGAPEKESSSNPPLFV
+		111111111000000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKLIQLAMRVPNGAPEKESSSNPPLFV
+		111111111111000000000000001111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKLIQLAMRVPNGAPEKESSSNPPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKLIQLAMRVPNGAPEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKLIQLAMRVPNGAPEKESSSNPPLFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKLIQLAMRVPNGAPEKESSSNPPLFV
+		333333333222111111111111223333
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (63.0) > Mutation score (61.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MGINKLIQLAMRVPNGAPEKESSSNPPLFV
+Number of times before mutation accept:2
+
+
+*******************************************
+End of iteration: 16
+Global score :    61.0
+
+
+*****************************
+ITERATION NUMBER: 17
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MGINKLIQLAMRVPNGAPEKESSSNPPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MGINKLIQLAMRVPNGAPEKESSSNPPLFV
+111111111000000000000000000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MGINKLIQLAMRVPNGAPEKESSSNPPLFV
+111111111111000000000000001111
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MGINKLIQLAMRVPNGAPEKESSSNPPLFV
+000000000000000000000000111111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MGINKLIQLAMRVPNGAPEKESSSNPPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MGINKLIQLAMRVPNGAPEKESSSNPPLFV
+111111111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MGINKLIQLAMRVPNGAPEKESSSNPPLFV
+333333333222111111111111223333
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MGINKLIQLAMRVPNGAPEKESSSNPPLFV
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    61.0
+Choose a position based on weights
+Position chosen: 13
+Residue to mutate: P
+Selected residue : S
+Secuencia original:MGINKLIQLAMRVPNGAPEKESSSNPPLFV
+Secuencia mutada  :MGINKLIQLAMRVSNGAPEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKLIQLAMRVSNGAPEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKLIQLAMRVSNGAPEKESSSNPPLFV
+		111111111110000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKLIQLAMRVSNGAPEKESSSNPPLFV
+		111111111111000000000000000111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKLIQLAMRVSNGAPEKESSSNPPLFV
+		000000001133333210000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKLIQLAMRVSNGAPEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKLIQLAMRVSNGAPEKESSSNPPLFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKLIQLAMRVSNGAPEKESSSNPPLFV
+		333333334465444321111111222333
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-21.0
+EL EXPONENTE ES  :-10.5
+EL VALOR DE MC ES:2.75364493497e-05
+EL VALOR RANDOM ELEGIDO ES:0.219289673623
+MONTE CARLO DECISION:
+ Mutation score (82.0) >= Previous score (61.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    61.0
+Choose a position based on weights
+Position chosen: 14
+Residue to mutate: N
+Selected residue : I
+Secuencia original:MGINKLIQLAMRVPNGAPEKESSSNPPLFV
+Secuencia mutada  :MGINKLIQLAMRVPIGAPEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKLIQLAMRVPIGAPEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKLIQLAMRVPIGAPEKESSSNPPLFV
+		111111111111111000110000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKLIQLAMRVPIGAPEKESSSNPPLFV
+		011111111000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKLIQLAMRVPIGAPEKESSSNPPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKLIQLAMRVPIGAPEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKLIQLAMRVPIGAPEKESSSNPPLFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKLIQLAMRVPIGAPEKESSSNPPLFV
+		233333333222222111221111222222
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES0.0
+EL EXPONENTE ES  :0.0
+EL VALOR DE MC ES:1.0
+EL VALOR RANDOM ELEGIDO ES:0.401370590142
+MONTE CARLO DECISION:
+...ACCEPT MUTATION
+Sequence after mutation:    MGINKLIQLAMRVPIGAPEKESSSNPPLFV
+Number of times before mutation accept:2
+
+
+*******************************************
+End of iteration: 17
+Global score :    61.0
+
+
+*****************************
+ITERATION NUMBER: 18
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MGINKLIQLAMRVPIGAPEKESSSNPPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MGINKLIQLAMRVPIGAPEKESSSNPPLFV
+111111111111111000110000000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MGINKLIQLAMRVPIGAPEKESSSNPPLFV
+011111111000000000000000000000
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MGINKLIQLAMRVPIGAPEKESSSNPPLFV
+000000000000000000000000111111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MGINKLIQLAMRVPIGAPEKESSSNPPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MGINKLIQLAMRVPIGAPEKESSSNPPLFV
+111111111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MGINKLIQLAMRVPIGAPEKESSSNPPLFV
+233333333222222111221111222222
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MGINKLIQLAMRVPIGAPEKESSSNPPLFV
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    61.0
+Choose a position based on weights
+Position chosen: 4
+Residue to mutate: K
+Selected residue : Q
+Secuencia original:MGINKLIQLAMRVPIGAPEKESSSNPPLFV
+Secuencia mutada  :MGINQLIQLAMRVPIGAPEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINQLIQLAMRVPIGAPEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINQLIQLAMRVPIGAPEKESSSNPPLFV
+		111111111111100000100000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINQLIQLAMRVPIGAPEKESSSNPPLFV
+		001111111000000000000000000001
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINQLIQLAMRVPIGAPEKESSSNPPLFV
+		000011111111111111100000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINQLIQLAMRVPIGAPEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINQLIQLAMRVPIGAPEKESSSNPPLFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINQLIQLAMRVPIGAPEKESSSNPPLFV
+		223344444333322222311111222223
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-12.0
+EL EXPONENTE ES  :-6.0
+EL VALOR DE MC ES:0.00247875217667
+EL VALOR RANDOM ELEGIDO ES:0.549661424848
+MONTE CARLO DECISION:
+ Mutation score (73.0) >= Previous score (61.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    61.0
+Choose a position based on weights
+Position chosen: 7
+Residue to mutate: Q
+Selected residue : V
+Secuencia original:MGINKLIQLAMRVPIGAPEKESSSNPPLFV
+Secuencia mutada  :MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+		111111111111111111111110100000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+		222222222222222222222221322222
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (61.0) > Mutation score (60.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+Number of times before mutation accept:2
+
+
+*******************************************
+End of iteration: 18
+Global score :    60.0
+
+
+*****************************
+ITERATION NUMBER: 19
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+111111111111111111111110100000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+000000000000000000000000111111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+111111111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+222222222222222222222221322222
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    60.0
+Choose a position based on weights
+Position chosen: 3
+Residue to mutate: N
+Selected residue : E
+Secuencia original:MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+Secuencia mutada  :MGIEKLIVLAMRVPIGAPEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGIEKLIVLAMRVPIGAPEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGIEKLIVLAMRVPIGAPEKESSSNPPLFV
+		111111111111111111111110100000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGIEKLIVLAMRVPIGAPEKESSSNPPLFV
+		000001100000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGIEKLIVLAMRVPIGAPEKESSSNPPLFV
+		000111111111111111100000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGIEKLIVLAMRVPIGAPEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGIEKLIVLAMRVPIGAPEKESSSNPPLFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGIEKLIVLAMRVPIGAPEKESSSNPPLFV
+		222334433333333333322221322222
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-18.0
+EL EXPONENTE ES  :-9.0
+EL VALOR DE MC ES:0.000123409804087
+EL VALOR RANDOM ELEGIDO ES:0.314145528224
+MONTE CARLO DECISION:
+ Mutation score (78.0) >= Previous score (60.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    60.0
+Choose a position based on weights
+Position chosen: 28
+Residue to mutate: F
+Selected residue : N
+Secuencia original:MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+Secuencia mutada  :MGINKLIVLAMRVPIGAPEKESSSNPPLNV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKLIVLAMRVPIGAPEKESSSNPPLNV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKLIVLAMRVPIGAPEKESSSNPPLNV
+		111111111111111110000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKLIVLAMRVPIGAPEKESSSNPPLNV
+		111111111110000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKLIVLAMRVPIGAPEKESSSNPPLNV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKLIVLAMRVPIGAPEKESSSNPPLNV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKLIVLAMRVPIGAPEKESSSNPPLNV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKLIVLAMRVPIGAPEKESSSNPPLNV
+		333333333332222221111111222222
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-4.0
+EL EXPONENTE ES  :-2.0
+EL VALOR DE MC ES:0.135335283237
+EL VALOR RANDOM ELEGIDO ES:0.828811697134
+MONTE CARLO DECISION:
+ Mutation score (64.0) >= Previous score (60.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    60.0
+Choose a position based on weights
+Position chosen: 5
+Residue to mutate: L
+Selected residue : P
+Secuencia original:MGINKLIVLAMRVPIGAPEKESSSNPPLFV
+Secuencia mutada  :MGINKPIVLAMRVPIGAPEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAMRVPIGAPEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAMRVPIGAPEKESSSNPPLFV
+		111111111111100011110000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAMRVPIGAPEKESSSNPPLFV
+		000000001000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAMRVPIGAPEKESSSNPPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAMRVPIGAPEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAMRVPIGAPEKESSSNPPLFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAMRVPIGAPEKESSSNPPLFV
+		222221223222211122221111222222
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (60.0) > Mutation score (53.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MGINKPIVLAMRVPIGAPEKESSSNPPLFV
+Number of times before mutation accept:3
+
+
+*******************************************
+End of iteration: 19
+Global score :    53.0
+
+
+*****************************
+ITERATION NUMBER: 20
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MGINKPIVLAMRVPIGAPEKESSSNPPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MGINKPIVLAMRVPIGAPEKESSSNPPLFV
+111111111111100011110000000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MGINKPIVLAMRVPIGAPEKESSSNPPLFV
+000000001000000000000000000000
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MGINKPIVLAMRVPIGAPEKESSSNPPLFV
+000000000000000000000000111111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MGINKPIVLAMRVPIGAPEKESSSNPPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MGINKPIVLAMRVPIGAPEKESSSNPPLFV
+111110111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MGINKPIVLAMRVPIGAPEKESSSNPPLFV
+222221223222211122221111222222
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MGINKPIVLAMRVPIGAPEKESSSNPPLFV
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 14
+Residue to mutate: I
+Selected residue : L
+Secuencia original:MGINKPIVLAMRVPIGAPEKESSSNPPLFV
+Secuencia mutada  :MGINKPIVLAMRVPLGAPEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAMRVPLGAPEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAMRVPLGAPEKESSSNPPLFV
+		111111111111100011100000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAMRVPLGAPEKESSSNPPLFV
+		000000111100000000000000000001
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAMRVPLGAPEKESSSNPPLFV
+		000000000000001111000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAMRVPLGAPEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAMRVPLGAPEKESSSNPPLFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAMRVPLGAPEKESSSNPPLFV
+		222221333322212233211111222223
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-7.0
+EL EXPONENTE ES  :-3.5
+EL VALOR DE MC ES:0.0301973834223
+EL VALOR RANDOM ELEGIDO ES:0.813059921603
+MONTE CARLO DECISION:
+ Mutation score (60.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 17
+Residue to mutate: P
+Selected residue : N
+Secuencia original:MGINKPIVLAMRVPIGAPEKESSSNPPLFV
+Secuencia mutada  :MGINKPIVLAMRVPIGANEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPLFV
+		111111111111110011110000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPLFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPLFV
+		222221222222221122221111222222
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES0.0
+EL EXPONENTE ES  :0.0
+EL VALOR DE MC ES:1.0
+EL VALOR RANDOM ELEGIDO ES:0.333400480186
+MONTE CARLO DECISION:
+...ACCEPT MUTATION
+Sequence after mutation:    MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Number of times before mutation accept:2
+
+
+*******************************************
+End of iteration: 20
+Global score :    53.0
+
+
+*****************************
+ITERATION NUMBER: 21
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MGINKPIVLAMRVPIGANEKESSSNPPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MGINKPIVLAMRVPIGANEKESSSNPPLFV
+111111111111110011110000000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MGINKPIVLAMRVPIGANEKESSSNPPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MGINKPIVLAMRVPIGANEKESSSNPPLFV
+000000000000000000000000111111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MGINKPIVLAMRVPIGANEKESSSNPPLFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MGINKPIVLAMRVPIGANEKESSSNPPLFV
+111110111111111111111111111111
+*************************************
+
+
+FINAL RESULTS:
+MGINKPIVLAMRVPIGANEKESSSNPPLFV
+222221222222221122221111222222
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MGINKPIVLAMRVPIGANEKESSSNPPLFV
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 18
+Residue to mutate: E
+Selected residue : I
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGINKPIVLAMRVPIGANIKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAMRVPIGANIKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAMRVPIGANIKESSSNPPLFV
+		111111111111111111111111111110
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAMRVPIGANIKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAMRVPIGANIKESSSNPPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAMRVPIGANIKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAMRVPIGANIKESSSNPPLFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAMRVPIGANIKESSSNPPLFV
+		222221222222222222222222333332
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-11.0
+EL EXPONENTE ES  :-5.5
+EL VALOR DE MC ES:0.00408677143846
+EL VALOR RANDOM ELEGIDO ES:0.786698873305
+MONTE CARLO DECISION:
+ Mutation score (64.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 7
+Residue to mutate: V
+Selected residue : A
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGINKPIALAMRVPIGANEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIALAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIALAMRVPIGANEKESSSNPPLFV
+		111111111111100011100000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIALAMRVPIGANEKESSSNPPLFV
+		000000001000000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIALAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIALAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIALAMRVPIGANEKESSSNPPLFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIALAMRVPIGANEKESSSNPPLFV
+		222221223222211122211111222233
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-1.0
+EL EXPONENTE ES  :-0.5
+EL VALOR DE MC ES:0.606530659713
+EL VALOR RANDOM ELEGIDO ES:0.772715181917
+MONTE CARLO DECISION:
+ Mutation score (54.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 18
+Residue to mutate: E
+Selected residue : R
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGINKPIVLAMRVPIGANRKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAMRVPIGANRKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAMRVPIGANRKESSSNPPLFV
+		111111111111111011111010000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAMRVPIGANRKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAMRVPIGANRKESSSNPPLFV
+		000000000000000001221111211111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAMRVPIGANRKESSSNPPLFV
+		000000000000000000111100000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAMRVPIGANRKESSSNPPLFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAMRVPIGANRKESSSNPPLFV
+		222221222222222123554332322222
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-17.0
+EL EXPONENTE ES  :-8.5
+EL VALOR DE MC ES:0.000203468369011
+EL VALOR RANDOM ELEGIDO ES:0.497531866675
+MONTE CARLO DECISION:
+ Mutation score (70.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 14
+Residue to mutate: I
+Selected residue : E
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGINKPIVLAMRVPEGANEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAMRVPEGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAMRVPEGANEKESSSNPPLFV
+		111111111000000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAMRVPEGANEKESSSNPPLFV
+		111111111111000000000000001111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAMRVPEGANEKESSSNPPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAMRVPEGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAMRVPEGANEKESSSNPPLFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAMRVPEGANEKESSSNPPLFV
+		333332333222111111111111223333
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-7.0
+EL EXPONENTE ES  :-3.5
+EL VALOR DE MC ES:0.0301973834223
+EL VALOR RANDOM ELEGIDO ES:0.944583899226
+MONTE CARLO DECISION:
+ Mutation score (60.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 10
+Residue to mutate: M
+Selected residue : R
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGINKPIVLARRVPIGANEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLARRVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLARRVPIGANEKESSSNPPLFV
+		111111111111100011100000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLARRVPIGANEKESSSNPPLFV
+		000011111100000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLARRVPIGANEKESSSNPPLFV
+		000000000144411110000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLARRVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLARRVPIGANEKESSSNPPLFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLARRVPIGANEKESSSNPPLFV
+		222232333466622232211111222233
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-23.0
+EL EXPONENTE ES  :-11.5
+EL VALOR DE MC ES:1.01300935986e-05
+EL VALOR RANDOM ELEGIDO ES:0.451945025294
+MONTE CARLO DECISION:
+ Mutation score (76.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 24
+Residue to mutate: N
+Selected residue : V
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGINKPIVLAMRVPIGANEKESSSVPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSVPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSVPPLFV
+		111111111111111111111111111111
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSVPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSVPPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSVPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSVPPLFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSVPPLFV
+		222221222222222222222222333333
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-12.0
+EL EXPONENTE ES  :-6.0
+EL VALOR DE MC ES:0.00247875217667
+EL VALOR RANDOM ELEGIDO ES:0.571425858102
+MONTE CARLO DECISION:
+ Mutation score (65.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 23
+Residue to mutate: S
+Selected residue : I
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGINKPIVLAMRVPIGANEKESSINPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAMRVPIGANEKESSINPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAMRVPIGANEKESSINPPLFV
+		111111111111111111111111111111
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAMRVPIGANEKESSINPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAMRVPIGANEKESSINPPLFV
+		000000000000000000022222331111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAMRVPIGANEKESSINPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAMRVPIGANEKESSINPPLFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAMRVPIGANEKESSINPPLFV
+		222221222222222222244444553333
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-26.0
+EL EXPONENTE ES  :-13.0
+EL VALOR DE MC ES:2.26032940698e-06
+EL VALOR RANDOM ELEGIDO ES:0.0489239081063
+MONTE CARLO DECISION:
+ Mutation score (79.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 2
+Residue to mutate: I
+Selected residue : K
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGKNKPIVLAMRVPIGANEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGKNKPIVLAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGKNKPIVLAMRVPIGANEKESSSNPPLFV
+		111111111100000000100000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGKNKPIVLAMRVPIGANEKESSSNPPLFV
+		000011111111100000000000000111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGKNKPIVLAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGKNKPIVLAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGKNKPIVLAMRVPIGANEKESSSNPPLFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGKNKPIVLAMRVPIGANEKESSSNPPLFV
+		222232333322211111211111222333
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-5.0
+EL EXPONENTE ES  :-2.5
+EL VALOR DE MC ES:0.0820849986239
+EL VALOR RANDOM ELEGIDO ES:0.763011888636
+MONTE CARLO DECISION:
+ Mutation score (58.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 27
+Residue to mutate: L
+Selected residue : Y
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGINKPIVLAMRVPIGANEKESSSNPPYFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPYFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPYFV
+		111111111111111011111110100000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPYFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPYFV
+		000000000000000000000222333321
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPYFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPYFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPYFV
+		222221222222222122222443544432
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-20.0
+EL EXPONENTE ES  :-10.0
+EL VALOR DE MC ES:4.53999297625e-05
+EL VALOR RANDOM ELEGIDO ES:0.301273188701
+MONTE CARLO DECISION:
+ Mutation score (73.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 7
+Residue to mutate: V
+Selected residue : L
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGINKPILLAMRVPIGANEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPILLAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPILLAMRVPIGANEKESSSNPPLFV
+		111111111111111011111010000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPILLAMRVPIGANEKESSSNPPLFV
+		000000111100000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPILLAMRVPIGANEKESSSNPPLFV
+		000011111000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPILLAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPILLAMRVPIGANEKESSSNPPLFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPILLAMRVPIGANEKESSSNPPLFV
+		222232444322222122222121222222
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-12.0
+EL EXPONENTE ES  :-6.0
+EL VALOR DE MC ES:0.00247875217667
+EL VALOR RANDOM ELEGIDO ES:0.917759073327
+MONTE CARLO DECISION:
+ Mutation score (65.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 16
+Residue to mutate: A
+Selected residue : R
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGINKPIVLAMRVPIGRNEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAMRVPIGRNEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAMRVPIGRNEKESSSNPPLFV
+		111111111111100011100000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAMRVPIGRNEKESSSNPPLFV
+		000111111110000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAMRVPIGRNEKESSSNPPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAMRVPIGRNEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAMRVPIGRNEKESSSNPPLFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAMRVPIGRNEKESSSNPPLFV
+		222332333332211122211111222233
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-8.0
+EL EXPONENTE ES  :-4.0
+EL VALOR DE MC ES:0.0183156388887
+EL VALOR RANDOM ELEGIDO ES:0.715747928706
+MONTE CARLO DECISION:
+ Mutation score (61.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 3
+Residue to mutate: N
+Selected residue : S
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGISKPIVLAMRVPIGANEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGISKPIVLAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGISKPIVLAMRVPIGANEKESSSNPPLFV
+		111111111111111011111010000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGISKPIVLAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGISKPIVLAMRVPIGANEKESSSNPPLFV
+		111111000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGISKPIVLAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGISKPIVLAMRVPIGANEKESSSNPPLFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGISKPIVLAMRVPIGANEKESSSNPPLFV
+		333333222222222122222121222222
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-10.0
+EL EXPONENTE ES  :-5.0
+EL VALOR DE MC ES:0.00673794699909
+EL VALOR RANDOM ELEGIDO ES:0.274140356047
+MONTE CARLO DECISION:
+ Mutation score (63.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 19
+Residue to mutate: K
+Selected residue : N
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGINKPIVLAMRVPIGANENESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAMRVPIGANENESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAMRVPIGANENESSSNPPLFV
+		111111111111110011110000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAMRVPIGANENESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAMRVPIGANENESSSNPPLFV
+		000000000000000000111111111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAMRVPIGANENESSSNPPLFV
+		000000000000000111122110000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAMRVPIGANENESSSNPPLFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAMRVPIGANENESSSNPPLFV
+		222221222222221233454332222222
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-16.0
+EL EXPONENTE ES  :-8.0
+EL VALOR DE MC ES:0.000335462627903
+EL VALOR RANDOM ELEGIDO ES:0.869973969639
+MONTE CARLO DECISION:
+ Mutation score (69.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 17
+Residue to mutate: N
+Selected residue : L
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGINKPIVLAMRVPIGALEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAMRVPIGALEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAMRVPIGALEKESSSNPPLFV
+		111111111111111111111111111100
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAMRVPIGALEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAMRVPIGALEKESSSNPPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAMRVPIGALEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAMRVPIGALEKESSSNPPLFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAMRVPIGALEKESSSNPPLFV
+		222221222222222222222222333322
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-10.0
+EL EXPONENTE ES  :-5.0
+EL VALOR DE MC ES:0.00673794699909
+EL VALOR RANDOM ELEGIDO ES:0.562909831638
+MONTE CARLO DECISION:
+ Mutation score (63.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 24
+Residue to mutate: N
+Selected residue : I
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGINKPIVLAMRVPIGANEKESSSIPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSIPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSIPPLFV
+		111111111111111111111111111111
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSIPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSIPPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSIPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSIPPLFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSIPPLFV
+		222221222222222222222222333333
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-12.0
+EL EXPONENTE ES  :-6.0
+EL VALOR DE MC ES:0.00247875217667
+EL VALOR RANDOM ELEGIDO ES:0.503265059453
+MONTE CARLO DECISION:
+ Mutation score (65.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 11
+Residue to mutate: R
+Selected residue : G
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGINKPIVLAMGVPIGANEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAMGVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAMGVPIGANEKESSSNPPLFV
+		111111111111111011111000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAMGVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAMGVPIGANEKESSSNPPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAMGVPIGANEKESSSNPPLFV
+		000000000001111110000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAMGVPIGANEKESSSNPPLFV
+		111111111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAMGVPIGANEKESSSNPPLFV
+		222222222223333232222111222222
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-9.0
+EL EXPONENTE ES  :-4.5
+EL VALOR DE MC ES:0.0111089965382
+EL VALOR RANDOM ELEGIDO ES:0.848813850547
+MONTE CARLO DECISION:
+ Mutation score (62.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 2
+Residue to mutate: I
+Selected residue : G
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGGNKPIVLAMRVPIGANEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGGNKPIVLAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGGNKPIVLAMRVPIGANEKESSSNPPLFV
+		111111111100000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGGNKPIVLAMRVPIGANEKESSSNPPLFV
+		000001111111100000000000000111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGGNKPIVLAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGGNKPIVLAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGGNKPIVLAMRVPIGANEKESSSNPPLFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGGNKPIVLAMRVPIGANEKESSSNPPLFV
+		222222333322211111111111222333
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-3.0
+EL EXPONENTE ES  :-1.5
+EL VALOR DE MC ES:0.223130160148
+EL VALOR RANDOM ELEGIDO ES:0.774456315669
+MONTE CARLO DECISION:
+ Mutation score (56.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 16
+Residue to mutate: A
+Selected residue : Q
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGINKPIVLAMRVPIGQNEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAMRVPIGQNEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAMRVPIGQNEKESSSNPPLFV
+		111111111111100000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAMRVPIGQNEKESSSNPPLFV
+		000111111110000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAMRVPIGQNEKESSSNPPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAMRVPIGQNEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAMRVPIGQNEKESSSNPPLFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAMRVPIGQNEKESSSNPPLFV
+		222332333332211111111111222233
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-5.0
+EL EXPONENTE ES  :-2.5
+EL VALOR DE MC ES:0.0820849986239
+EL VALOR RANDOM ELEGIDO ES:0.303707501569
+MONTE CARLO DECISION:
+ Mutation score (58.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 3
+Residue to mutate: N
+Selected residue : N
+Selected residue : G
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGIGKPIVLAMRVPIGANEKESSSNPPLFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGIGKPIVLAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGIGKPIVLAMRVPIGANEKESSSNPPLFV
+		111111111111111011111010000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGIGKPIVLAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGIGKPIVLAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGIGKPIVLAMRVPIGANEKESSSNPPLFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGIGKPIVLAMRVPIGANEKESSSNPPLFV
+		111110111111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGIGKPIVLAMRVPIGANEKESSSNPPLFV
+		222221222222222122222121222222
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-3.0
+EL EXPONENTE ES  :-1.5
+EL VALOR DE MC ES:0.223130160148
+EL VALOR RANDOM ELEGIDO ES:0.367397954879
+MONTE CARLO DECISION:
+ Mutation score (56.0) >= Previous score (53.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    53.0
+Choose a position based on weights
+Position chosen: 27
+Residue to mutate: L
+Selected residue : V
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPLFV
+Secuencia mutada  :MGINKPIVLAMRVPIGANEKESSSNPPVFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPVFV
+		111111111111110011100000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPVFV
+		000000011000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPVFV
+		111110111111111111111111100111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSNPPVFV
+		222221233222221122211111211222
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (53.0) > Mutation score (52.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MGINKPIVLAMRVPIGANEKESSSNPPVFV
+Number of times before mutation accept:20
+
+
+*******************************************
+End of iteration: 21
+Global score :    52.0
+
+
+*****************************
+ITERATION NUMBER: 22
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MGINKPIVLAMRVPIGANEKESSSNPPVFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MGINKPIVLAMRVPIGANEKESSSNPPVFV
+111111111111110011100000000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MGINKPIVLAMRVPIGANEKESSSNPPVFV
+000000011000000000000000000000
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MGINKPIVLAMRVPIGANEKESSSNPPVFV
+000000000000000000000000111111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MGINKPIVLAMRVPIGANEKESSSNPPVFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MGINKPIVLAMRVPIGANEKESSSNPPVFV
+111110111111111111111111100111
+*************************************
+
+
+FINAL RESULTS:
+MGINKPIVLAMRVPIGANEKESSSNPPVFV
+222221233222221122211111211222
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MGINKPIVLAMRVPIGANEKESSSNPPVFV
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    52.0
+Choose a position based on weights
+Position chosen: 0
+Residue to mutate: M
+Selected residue : Q
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPVFV
+Secuencia mutada  :QGINKPIVLAMRVPIGANEKESSSNPPVFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		QGINKPIVLAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		QGINKPIVLAMRVPIGANEKESSSNPPVFV
+		111111111111100011100000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		QGINKPIVLAMRVPIGANEKESSSNPPVFV
+		000000111111000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		QGINKPIVLAMRVPIGANEKESSSNPPVFV
+		110000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		QGINKPIVLAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		QGINKPIVLAMRVPIGANEKESSSNPPVFV
+		111110111111111111111111100111
+		*************************************
+
+
+		FINAL RESULTS:
+		QGINKPIVLAMRVPIGANEKESSSNPPVFV
+		332221333333211122211111211222
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-5.0
+EL EXPONENTE ES  :-2.5
+EL VALOR DE MC ES:0.0820849986239
+EL VALOR RANDOM ELEGIDO ES:0.322238045232
+MONTE CARLO DECISION:
+ Mutation score (57.0) >= Previous score (52.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    52.0
+Choose a position based on weights
+Position chosen: 12
+Residue to mutate: V
+Selected residue : K
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPVFV
+Secuencia mutada  :MGINKPIVLAMRKPIGANEKESSSNPPVFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAMRKPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAMRKPIGANEKESSSNPPVFV
+		111111111110000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAMRKPIGANEKESSSNPPVFV
+		111111111111000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAMRKPIGANEKESSSNPPVFV
+		000000000011100000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAMRKPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAMRKPIGANEKESSSNPPVFV
+		111110111111111111111111100111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAMRKPIGANEKESSSNPPVFV
+		333332333343211111111111211233
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-9.0
+EL EXPONENTE ES  :-4.5
+EL VALOR DE MC ES:0.0111089965382
+EL VALOR RANDOM ELEGIDO ES:0.163550460119
+MONTE CARLO DECISION:
+ Mutation score (61.0) >= Previous score (52.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    52.0
+Choose a position based on weights
+Position chosen: 24
+Residue to mutate: N
+Selected residue : N
+Selected residue : V
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPVFV
+Secuencia mutada  :MGINKPIVLAMRVPIGANEKESSSVPPVFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSVPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSVPPVFV
+		111111111111111111111111111111
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSVPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSVPPVFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSVPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSVPPVFV
+		111110111111111111111111100111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAMRVPIGANEKESSSVPPVFV
+		222221222222222222222222322333
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-11.0
+EL EXPONENTE ES  :-5.5
+EL VALOR DE MC ES:0.00408677143846
+EL VALOR RANDOM ELEGIDO ES:0.925096840574
+MONTE CARLO DECISION:
+ Mutation score (63.0) >= Previous score (52.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    52.0
+Choose a position based on weights
+Position chosen: 12
+Residue to mutate: V
+Selected residue : I
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPVFV
+Secuencia mutada  :MGINKPIVLAMRIPIGANEKESSSNPPVFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAMRIPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAMRIPIGANEKESSSNPPVFV
+		111111111111111111111010000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAMRIPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAMRIPIGANEKESSSNPPVFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAMRIPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAMRIPIGANEKESSSNPPVFV
+		111110111111111111111111100111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAMRIPIGANEKESSSNPPVFV
+		222221222222222222222121211222
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-3.0
+EL EXPONENTE ES  :-1.5
+EL VALOR DE MC ES:0.223130160148
+EL VALOR RANDOM ELEGIDO ES:0.260549275659
+MONTE CARLO DECISION:
+ Mutation score (55.0) >= Previous score (52.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    52.0
+Choose a position based on weights
+Position chosen: 9
+Residue to mutate: A
+Selected residue : G
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPVFV
+Secuencia mutada  :MGINKPIVLGMRVPIGANEKESSSNPPVFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLGMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLGMRVPIGANEKESSSNPPVFV
+		111111111111100011100000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLGMRVPIGANEKESSSNPPVFV
+		000000111100000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLGMRVPIGANEKESSSNPPVFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLGMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLGMRVPIGANEKESSSNPPVFV
+		111110111111111111111111100111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLGMRVPIGANEKESSSNPPVFV
+		222221333322211122211111211222
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-1.0
+EL EXPONENTE ES  :-0.5
+EL VALOR DE MC ES:0.606530659713
+EL VALOR RANDOM ELEGIDO ES:0.689264286794
+MONTE CARLO DECISION:
+ Mutation score (53.0) >= Previous score (52.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    52.0
+Choose a position based on weights
+Position chosen: 10
+Residue to mutate: M
+Selected residue : K
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPVFV
+Secuencia mutada  :MGINKPIVLAKRVPIGANEKESSSNPPVFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIVLAKRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIVLAKRVPIGANEKESSSNPPVFV
+		111111111111100011100000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIVLAKRVPIGANEKESSSNPPVFV
+		000011111100000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIVLAKRVPIGANEKESSSNPPVFV
+		000000000022200000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIVLAKRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIVLAKRVPIGANEKESSSNPPVFV
+		111110111111111111111111100111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIVLAKRVPIGANEKESSSNPPVFV
+		222232333344411122211111211222
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-9.0
+EL EXPONENTE ES  :-4.5
+EL VALOR DE MC ES:0.0111089965382
+EL VALOR RANDOM ELEGIDO ES:0.88604892888
+MONTE CARLO DECISION:
+ Mutation score (61.0) >= Previous score (52.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    52.0
+Choose a position based on weights
+Position chosen: 7
+Residue to mutate: V
+Selected residue : P
+Secuencia original:MGINKPIVLAMRVPIGANEKESSSNPPVFV
+Secuencia mutada  :MGINKPIPLAMRVPIGANEKESSSNPPVFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGINKPIPLAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGINKPIPLAMRVPIGANEKESSSNPPVFV
+		111111111110000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGINKPIPLAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGINKPIPLAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGINKPIPLAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGINKPIPLAMRVPIGANEKESSSNPPVFV
+		111110001111111111111111100111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGINKPIPLAMRVPIGANEKESSSNPPVFV
+		222221112221111111111111211233
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (52.0) > Mutation score (44.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MGINKPIPLAMRVPIGANEKESSSNPPVFV
+Number of times before mutation accept:7
+
+
+*******************************************
+End of iteration: 22
+Global score :    44.0
+
+
+*****************************
+ITERATION NUMBER: 23
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MGINKPIPLAMRVPIGANEKESSSNPPVFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MGINKPIPLAMRVPIGANEKESSSNPPVFV
+111111111110000000000000000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MGINKPIPLAMRVPIGANEKESSSNPPVFV
+000000000000000000000000000011
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MGINKPIPLAMRVPIGANEKESSSNPPVFV
+000000000000000000000000111111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MGINKPIPLAMRVPIGANEKESSSNPPVFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MGINKPIPLAMRVPIGANEKESSSNPPVFV
+111110001111111111111111100111
+*************************************
+
+
+FINAL RESULTS:
+MGINKPIPLAMRVPIGANEKESSSNPPVFV
+222221112221111111111111211233
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MGINKPIPLAMRVPIGANEKESSSNPPVFV
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    44.0
+Choose a position based on weights
+Position chosen: 2
+Residue to mutate: I
+Selected residue : S
+Secuencia original:MGINKPIPLAMRVPIGANEKESSSNPPVFV
+Secuencia mutada  :MGSNKPIPLAMRVPIGANEKESSSNPPVFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGSNKPIPLAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGSNKPIPLAMRVPIGANEKESSSNPPVFV
+		000101000000000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGSNKPIPLAMRVPIGANEKESSSNPPVFV
+		000000111111111100000000011111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGSNKPIPLAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGSNKPIPLAMRVPIGANEKESSSNPPVFV
+		001110000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGSNKPIPLAMRVPIGANEKESSSNPPVFV
+		111110001111111111111111100111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGSNKPIPLAMRVPIGANEKESSSNPPVFV
+		112321112222222211111111222333
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-7.0
+EL EXPONENTE ES  :-3.5
+EL VALOR DE MC ES:0.0301973834223
+EL VALOR RANDOM ELEGIDO ES:0.75153834188
+MONTE CARLO DECISION:
+ Mutation score (51.0) >= Previous score (44.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    44.0
+Choose a position based on weights
+Position chosen: 2
+Residue to mutate: I
+Selected residue : F
+Secuencia original:MGINKPIPLAMRVPIGANEKESSSNPPVFV
+Secuencia mutada  :MGFNKPIPLAMRVPIGANEKESSSNPPVFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGFNKPIPLAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGFNKPIPLAMRVPIGANEKESSSNPPVFV
+		111111111111100000100000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGFNKPIPLAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000001
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGFNKPIPLAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGFNKPIPLAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGFNKPIPLAMRVPIGANEKESSSNPPVFV
+		111110001111111111111111100111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGFNKPIPLAMRVPIGANEKESSSNPPVFV
+		222221112222211111211111211223
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-2.0
+EL EXPONENTE ES  :-1.0
+EL VALOR DE MC ES:0.367879441171
+EL VALOR RANDOM ELEGIDO ES:0.236972530069
+MONTE CARLO DECISION:
+...ACCEPT MUTATION
+Sequence after mutation:    MGFNKPIPLAMRVPIGANEKESSSNPPVFV
+Number of times before mutation accept:2
+
+
+*******************************************
+End of iteration: 23
+Global score :    46.0
+
+
+*****************************
+ITERATION NUMBER: 24
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MGFNKPIPLAMRVPIGANEKESSSNPPVFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MGFNKPIPLAMRVPIGANEKESSSNPPVFV
+111111111111100000100000000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MGFNKPIPLAMRVPIGANEKESSSNPPVFV
+000000000000000000000000000001
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MGFNKPIPLAMRVPIGANEKESSSNPPVFV
+000000000000000000000000111111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MGFNKPIPLAMRVPIGANEKESSSNPPVFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MGFNKPIPLAMRVPIGANEKESSSNPPVFV
+111110001111111111111111100111
+*************************************
+
+
+FINAL RESULTS:
+MGFNKPIPLAMRVPIGANEKESSSNPPVFV
+222221112222211111211111211223
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MGFNKPIPLAMRVPIGANEKESSSNPPVFV
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    46.0
+Choose a position based on weights
+Position chosen: 21
+Residue to mutate: S
+Selected residue : I
+Secuencia original:MGFNKPIPLAMRVPIGANEKESSSNPPVFV
+Secuencia mutada  :MGFNKPIPLAMRVPIGANEKEISSNPPVFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGFNKPIPLAMRVPIGANEKEISSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGFNKPIPLAMRVPIGANEKEISSNPPVFV
+		111111111111111111111111101011
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGFNKPIPLAMRVPIGANEKEISSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGFNKPIPLAMRVPIGANEKEISSNPPVFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGFNKPIPLAMRVPIGANEKEISSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGFNKPIPLAMRVPIGANEKEISSNPPVFV
+		111110001111111111111111100111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGFNKPIPLAMRVPIGANEKEISSNPPVFV
+		222221112222222222222222312233
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-13.0
+EL EXPONENTE ES  :-6.5
+EL VALOR DE MC ES:0.00150343919298
+EL VALOR RANDOM ELEGIDO ES:0.936440308844
+MONTE CARLO DECISION:
+ Mutation score (59.0) >= Previous score (46.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    46.0
+Choose a position based on weights
+Position chosen: 8
+Residue to mutate: L
+Selected residue : L
+Selected residue : V
+Secuencia original:MGFNKPIPLAMRVPIGANEKESSSNPPVFV
+Secuencia mutada  :MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+		111111111110000000100000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000001
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+		111110101111111111111111100111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+		222221212221111111211111211223
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (46.0) > Mutation score (45.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+Number of times before mutation accept:2
+
+
+*******************************************
+End of iteration: 24
+Global score :    45.0
+
+
+*****************************
+ITERATION NUMBER: 25
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+111111111110000000100000000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+000000000000000000000000000001
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+000000000000000000000000111111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+111110101111111111111111100111
+*************************************
+
+
+FINAL RESULTS:
+MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+222221212221111111211111211223
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    45.0
+Choose a position based on weights
+Position chosen: 25
+Residue to mutate: P
+Selected residue : I
+Secuencia original:MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+Secuencia mutada  :MGFNKPIPVAMRVPIGANEKESSSNIPVFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNIPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNIPVFV
+		111111111111101111111111111111
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNIPVFV
+		000000000000000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNIPVFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNIPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNIPVFV
+		111110101111111111111111111111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNIPVFV
+		222221212222212222222222333344
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-20.0
+EL EXPONENTE ES  :-10.0
+EL VALOR DE MC ES:4.53999297625e-05
+EL VALOR RANDOM ELEGIDO ES:0.139829927201
+MONTE CARLO DECISION:
+ Mutation score (65.0) >= Previous score (45.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    45.0
+Choose a position based on weights
+Position chosen: 28
+Residue to mutate: F
+Selected residue : A
+Secuencia original:MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+Secuencia mutada  :MGFNKPIPVAMRVPIGANEKESSSNPPVAV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNPPVAV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNPPVAV
+		111111111000000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNPPVAV
+		111111111111100000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNPPVAV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNPPVAV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNPPVAV
+		111110101111111111111111100111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSNPPVAV
+		333332323222211111111111211222
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-9.0
+EL EXPONENTE ES  :-4.5
+EL VALOR DE MC ES:0.0111089965382
+EL VALOR RANDOM ELEGIDO ES:0.660055556867
+MONTE CARLO DECISION:
+ Mutation score (54.0) >= Previous score (45.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    45.0
+Choose a position based on weights
+Position chosen: 24
+Residue to mutate: N
+Selected residue : F
+Secuencia original:MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+Secuencia mutada  :MGFNKPIPVAMRVPIGANEKESSSFPPVFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSFPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSFPPVFV
+		111111111111111111111111111111
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSFPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSFPPVFV
+		000000000000000000001357988821
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSFPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSFPPVFV
+		111110101111111111111111100111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGFNKPIPVAMRVPIGANEKESSSFPPVFV
+		22222121222222222222357911991043
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-63.0
+EL EXPONENTE ES  :-31.5
+EL VALOR DE MC ES:2.08796791165e-14
+EL VALOR RANDOM ELEGIDO ES:0.040993065233
+MONTE CARLO DECISION:
+ Mutation score (108.0) >= Previous score (45.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    45.0
+Choose a position based on weights
+Position chosen: 0
+Residue to mutate: M
+Selected residue : N
+Secuencia original:MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+Secuencia mutada  :NGFNKPIPVAMRVPIGANEKESSSNPPVFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		NGFNKPIPVAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		NGFNKPIPVAMRVPIGANEKESSSNPPVFV
+		111111110000000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		NGFNKPIPVAMRVPIGANEKESSSNPPVFV
+		000000111111100000000000000111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		NGFNKPIPVAMRVPIGANEKESSSNPPVFV
+		110000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		NGFNKPIPVAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		NGFNKPIPVAMRVPIGANEKESSSNPPVFV
+		011110101111111111111111100111
+		*************************************
+
+
+		FINAL RESULTS:
+		NGFNKPIPVAMRVPIGANEKESSSNPPVFV
+		232221322222211111111111211333
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-6.0
+EL EXPONENTE ES  :-3.0
+EL VALOR DE MC ES:0.0497870683679
+EL VALOR RANDOM ELEGIDO ES:0.195961656438
+MONTE CARLO DECISION:
+ Mutation score (51.0) >= Previous score (45.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    45.0
+Choose a position based on weights
+Position chosen: 8
+Residue to mutate: V
+Selected residue : E
+Secuencia original:MGFNKPIPVAMRVPIGANEKESSSNPPVFV
+Secuencia mutada  :MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+		010111100000000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+		111110000000000000000000001111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+		111110011111111111111111100111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+		232331111111111111111111212333
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-1.0
+EL EXPONENTE ES  :-0.5
+EL VALOR DE MC ES:0.606530659713
+EL VALOR RANDOM ELEGIDO ES:0.295248898183
+MONTE CARLO DECISION:
+...ACCEPT MUTATION
+Sequence after mutation:    MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+Number of times before mutation accept:5
+
+
+*******************************************
+End of iteration: 25
+Global score :    46.0
+
+
+*****************************
+ITERATION NUMBER: 26
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+No hits found
+BLAST RESULTS:
+MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+010111100000000000000000000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+111110000000000000000000001111
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+000000000000000000000000111111
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+000000000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+TANGO RESULTS:
+MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+111110011111111111111111100111
+*************************************
+
+
+FINAL RESULTS:
+MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+232331111111111111111111212333
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    46.0
+Choose a position based on weights
+Position chosen: 22
+Residue to mutate: S
+Selected residue : V
+Secuencia original:MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+Secuencia mutada  :MGFNKPIPEAMRVPIGANEKESVSNPPVFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGFNKPIPEAMRVPIGANEKESVSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGFNKPIPEAMRVPIGANEKESVSNPPVFV
+		111111110000000000011010000001
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGFNKPIPEAMRVPIGANEKESVSNPPVFV
+		000000000000000000000000000011
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGFNKPIPEAMRVPIGANEKESVSNPPVFV
+		000000000000000000011111221111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGFNKPIPEAMRVPIGANEKESVSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGFNKPIPEAMRVPIGANEKESVSNPPVFV
+		111110011111111111111111100111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGFNKPIPEAMRVPIGANEKESVSNPPVFV
+		222221121111111111133232321234
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-7.0
+EL EXPONENTE ES  :-3.5
+EL VALOR DE MC ES:0.0301973834223
+EL VALOR RANDOM ELEGIDO ES:0.275130470886
+MONTE CARLO DECISION:
+ Mutation score (53.0) >= Previous score (46.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    46.0
+Choose a position based on weights
+Position chosen: 29
+Residue to mutate: V
+Selected residue : G
+Secuencia original:MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+Secuencia mutada  :MGFNKPIPEAMRVPIGANEKESSSNPPVFG
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MGFNKPIPEAMRVPIGANEKESSSNPPVFG
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MGFNKPIPEAMRVPIGANEKESSSNPPVFG
+		000100000000000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MGFNKPIPEAMRVPIGANEKESSSNPPVFG
+		111111111111111110000000001111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MGFNKPIPEAMRVPIGANEKESSSNPPVFG
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MGFNKPIPEAMRVPIGANEKESSSNPPVFG
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MGFNKPIPEAMRVPIGANEKESSSNPPVFG
+		111110011111111111111111100111
+		*************************************
+
+
+		FINAL RESULTS:
+		MGFNKPIPEAMRVPIGANEKESSSNPPVFG
+		222321122222222221111111101222
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-2.0
+EL EXPONENTE ES  :-1.0
+EL VALOR DE MC ES:0.367879441171
+EL VALOR RANDOM ELEGIDO ES:0.594124583755
+MONTE CARLO DECISION:
+ Mutation score (48.0) >= Previous score (46.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    46.0
+Choose a position based on weights
+Position chosen: 1
+Residue to mutate: G
+Selected residue : I
+Secuencia original:MGFNKPIPEAMRVPIGANEKESSSNPPVFV
+Secuencia mutada  :MIFNKPIPEAMRVPIGANEKESSSNPPVFV
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		No hits found
+		BLAST RESULTS:
+		MIFNKPIPEAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MIFNKPIPEAMRVPIGANEKESSSNPPVFV
+		111111111110000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MIFNKPIPEAMRVPIGANEKESSSNPPVFV
+		111110000000000000000000000001
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MIFNKPIPEAMRVPIGANEKESSSNPPVFV
+		111000000000000000000000111111
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MIFNKPIPEAMRVPIGANEKESSSNPPVFV
+		000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+		TANGO RESULTS:
+		MIFNKPIPEAMRVPIGANEKESSSNPPVFV
+		111110011111111111111111100111
+		************************

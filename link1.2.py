@@ -421,42 +421,69 @@ def iupred(sequence, mutationFreq, verbose):
 
 
 def anchor(sequence, mutationFreq, verbose):
-	runCommand="ANCHOR/anchorExe ANCHOR/input"
-	input=open('ANCHOR/input', 'w')
-	input.write("Name" + endl)
-	input.write(sequence)
-	input.close()
-	os.system(runCommand)	
-	outputAnchor=open("outAnchor", "r")
-	#print "aca evaluo anchor"
-	#PRINT THE RESULTS OF ANCHOR
-	if verbose:
-	  anchorFreq=[]
-	  iterOutputAnchor=iter(outputAnchor)
-	  for p in range(len(sequence)):
-	      anchorFreq.append(0)
-	  for x in range(len(sequence)):
-		  resultX=float(iterOutputAnchor.next())
-		  if resultX >  0.5 :
-			  anchorFreq[x] = 1
-	  print indent + "ANCHOR RESULTS:"
-	  print indent + sequence
-	  print indent + ''.join(map(str, anchorFreq))	  			  			
-			
-	outputAnchor.seek(0)
-	rstFile_iter = iter(outputAnchor)
+  runCommand="ANCHOR/anchorExe ANCHOR/input"
+  input=open('ANCHOR/input', 'w')
+  input.write("Name" + endl)
+  input.write(sequence)
+  input.close()
+  os.system(runCommand)	
+  outputAnchor=open("outAnchor", "r")
+  #print "aca evaluo anchor"
+  #PRINT THE RESULTS OF ANCHOR
+  if verbose:
+    anchorFreq=[]
+    iterOutputAnchor=iter(outputAnchor)
+    for p in range(len(sequence)):
+	anchorFreq.append(0)
+    for x in range(len(sequence)):
+	    resultX=float(iterOutputAnchor.next())
+	    if resultX >  0.5 :
+		    anchorFreq[x] = 1
+    print indent + "ANCHOR RESULTS:"
+    print indent + sequence
+    print indent + ''.join(map(str, anchorFreq))	  			  			
+		  
+  outputAnchor.seek(0)
+  rstFile_iter = iter(outputAnchor)
 
-	for j in range(len(sequence)):
-		resultJ=float(rstFile_iter.next())
-		if resultJ > 0.5 :
-			mutationFreq[j] += 1
-		else:
-			mutationFreq[j] += 0				
+  for j in range(len(sequence)):
+	  resultJ=float(rstFile_iter.next())
+	  if resultJ > 0.5 :
+		  mutationFreq[j] += 1
+	  else:
+		  mutationFreq[j] += 0				
+
+
+
+def tangoSearch(sequence, mutationFreq,verbose):
+  runCommand='tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="' + sequence + '" > outTango '
   
-
-
-
-
+  os.system(runCommand)
+  outputTango=open('tangoResults.txt','r')
+  
+  tangoFreq=[]
+  for p in range(len(sequence)):
+    tangoFreq.append(0)
+  
+  position=0
+  for line in outputTango.readlines()[1:len(sequence)+1]:
+    #print line.split()[1] 
+    beta=float(line.split()[2])
+    turn=float(line.split()[3])
+    helix=float(line.split()[4])
+    aggregation=float(line.split()[5])
+    if beta > 0 or turn > 0 or helix > 0 or aggregation > 0:
+      tangoFreq[position]=1
+    position+=1
+  #print str(beta) + tab + str(turn) + tab + str(helix) + tab + str(aggregation) 
+  print indent + "TANGO RESULTS:"
+  print indent + sequence
+  print indent + ''.join(map(str, tangoFreq))	  
+    
+    
+  for x in range(0,len(sequence)):
+    if tangoFreq[x] > 0:
+      mutationFreq[x] += 1
 
 
 
@@ -499,6 +526,12 @@ def sequenceEvaluation(sequence, mutationFreq, verbose):
 	  print indent + "*************************************"
 	  print indent + "STARTING Prosite Search"
         prositeSearch(sequence,mutationFreq, verbose)
+        
+        if verbose:
+	  print endl
+	  print indent + "*************************************"
+	  print indent + "STARTING TANGO Search"
+        tangoSearch(sequence,mutationFreq, verbose)
         
         ##PRINT SCORE
         if verbose:
