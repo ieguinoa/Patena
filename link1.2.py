@@ -471,7 +471,7 @@ def sequenceEvaluation(sequence, mutationFreq, verbose):
 	   print endl
 	   print indent + "*************************************"
 	   print indent + "STARTING BLAST SEARCH"
-	#blastIt(sequence,mutationFreq,database, verbose)
+	blastIt(sequence,mutationFreq,database, verbose)
         
 	    
         ##SECOND STEP: IUPred evaluation
@@ -718,7 +718,7 @@ while globalScore > 0:
 if output:        
   totalElapsedTime=time.time() - time0   ##
   print "Elapsed time:",totalElapsedTime, "Seconds"
-  totalTimesOutputFile.write(str(iteration-1)+ tab + str(totalElapsedTime) + endl)
+  totalTimesOutputFile.write(str(size) + tab + str(iteration-1)+ tab + str(totalElapsedTime) +  endl)
   
   ##CLOSE ALL OUTPUT FILES
   totalTimesOutputFile.close()
