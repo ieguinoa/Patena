@@ -18,66 +18,54 @@ plot.rcParams.update(params)
 
 file=sys.argv[1]  #REcibo el nombre del archivo por parametro 
 
-machePath = "Output/"
-#sanderPath = "Output_Sander/"
+outputPath = "Output/"
 
-#dirs = [x for x in os.listdir(machePath) if os.path.isdir(sanderPath+x) and os.path.isdir(sanderPath+x)]
-#dirs=[machePath]
-#print dirs
+
+
+cant[]   #cantidad de valores
+valores[]    #acumula los valores 
+
+#lleno las listas con 0
+for x in range(0,300):
+  valores.append(0)
+  cant.append(0)
+  
+  
+  
+  
 fig = plt.figure()
-#length = []  ##file name = length of sequence      
-#iterations = []
-#for f in sorted(os.listdir(machePath)):
-  #if f.endswith(".out") and f.startswith("time"):
-    #print str(int(f))
-    #inputFile = open(machePath + f)
-    #matches=0.0  #number of matches (more than 1 iterations)
-    #for l in inputFile:
-      ##if int(l.split()[0]) > 1:
-      #matches=matches+ int(l.split()[0])
-      ##length.append(int(f))
-      ##iterations.append(int(l.split()[0]))  ##append iterations in a list
-    #length.append(int(f))   ## X index = length of sequence
-    #iterations.append(matches/5)
-    #inputFile.close()
-
-value=[]  ##ACA GUARDO LOS VALORES QUE GRAFICO Vs ITERACION (PUEDEN SER SCORE, INTENTOS DE MUTACIONES, ETC)
-iterations = []
-inputFile = open(machePath + file)
-#matches=0.0  #number of matches (more than 1 iterations)
+#
+inputFile = open(outputPath + file)
 for l in inputFile:
-  iterations.append(int(l.split()[0]))  ##append iterations in a list
-  value.append(float(l.split()[1]))  ##agrego el valor a graficar vs iteraciones
-#length.append(int(f))   ## X index = length of sequence
-#iterations.append(matches/5)
+  iteracion=int(l.split()[0])
+  valorAsociado=int(l.split()[1])
+  if valorAsociado > 0:   #NO TENGO EN CUENTA EL ULTIMO  SCORE
+    cant[iteracion]++
+    valores[iteracion]+=valorAsociado
+  
+
 inputFile.close()
 
 
-#print length
-#print iterations
+iterations = []
+value=[]  ##ACA GUARDO LOS VALORES QUE GRAFICO Vs ITERACION (PUEDEN SER SCORE, INTENTOS DE MUTACIONES, ETC)
+
+for x in range(0,300):
+  if valores[x] > 0:
+      value.append(valores[x] / cant[x])
+      iterations.append(x)
+  
+  
+
 np_time = np.array(iterations)
 np_step = np.array(value)
-p1 = plt.plot(np_time, np_step, lw=2, label="hemoglobin")
+p1 = plt.plot(np_time, np_step, lw=2, label=file)
 
-#for f in os.listdir(sanderPath+d):
-  #if f.endswith(".out") and f.startswith("time"):
-    #print f
-    #inputFile = open(sanderPath + d + "/" + f)
-    #steps = []      
-    #time = []
-    
-    #for l in inputFile:
-      #stp = int(l.split()[0])
-      #steps.append(stp)
-      #time.append(float(l.split()[1]))		#Time is in S and is an average
-    #inputFile.close()
-    
-    #np_time = np.array(time)
-    #np_step = np.array(steps)
-    #p1 = plt.plot(np_step, np_time, lw=2, label="snd_"+f)
+
+
 
 legend=plt.legend(bbox_to_anchor=(0.38, 0.52), loc=4, borderaxespad=0.,
 		    fancybox=True,shadow=True,title='Method')
 plt.grid()
 plt.show()
-fig.savefig(machePath + "out.png", dpi = 100)
+fig.savefig(outputPath + "out.png", dpi = 100)
