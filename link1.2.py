@@ -472,11 +472,8 @@ def tangoSearch(sequence, mutationFreq,verbose):
     turn=float(line.split()[3])
     helix=float(line.split()[4])
     aggregation=float(line.split()[5])
-<<<<<<< HEAD
-=======
     tangoCutff=1
     if beta > tangoCutff or turn > tangoCutff or helix > tangoCutff or aggregation > tangoCutff:
->>>>>>> 7d28c500c120b8ec3f32c94e9b195976f20b82a8
       tangoFreq[position]=1
     position+=1
   #print str(beta) + tab + str(turn) + tab + str(helix) + tab + str(aggregation) 
