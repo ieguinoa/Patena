@@ -457,7 +457,7 @@ def anchor(sequence, mutationFreq, verbose):
 
 def tangoSearch(sequence, mutationFreq,verbose):
   runCommand='tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="' + sequence + '" > outTango '
-  
+  print runCommand 
   os.system(runCommand)
   outputTango=open('tangoResults.txt','r')
   
