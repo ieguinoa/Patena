@@ -82,8 +82,8 @@ def mutar(sequence, mutationFreq):
     if previousScore > 0:
       mutationsIter=0
       for x in range(len(mutationFreq)):
-	weighted.append((x, mutationFreq[x]+1))
-      while 10000 > mutationsIter: 
+	weighted.append((x, mutationFreq[x]+1))    #the weight is score+1 - this gives a slight chance to all the position to suffer mutation
+      while 10000 > mutationsIter:    ##JUST A SYMBOLIC MAX. AMOUNT OF MUTATIONS ATTEMPTS
 	mutationsIter+=1
 	#SELECT A POSITION 
 	print endl
@@ -92,7 +92,7 @@ def mutar(sequence, mutationFreq):
 	print "*************************************"
 	print "Score before:    " + str(previousScore)
 	print "Choose a position based on weights"
-	mutatePosition= weighted_choice(weighted)  
+	mutatePosition= weighted_choice(weighted) 
 	print "Position chosen: " + str(mutatePosition)
 	
 	#SELECT THE NEW AA FOR THAT POSITION (BASED ON LIST OF FREQUENCIES)
@@ -109,15 +109,17 @@ def mutar(sequence, mutationFreq):
 	mutatedSequence = sequence[0:mutatePosition]
 	mutatedSequence += seleccionado
 	mutatedSequence += sequence[mutatePosition+1:]
-	print "Secuencia original:" + sequence
-	print "Secuencia mutada  :" + mutatedSequence
-	#CREATE A LIST OF SCORES FOR THE MUTATED SEQUENCE
+	print "Original sequence:" + sequence
+	print "Mutated sequence  :" + mutatedSequence
+
+	#CREATE A -NEW- LIST OF SCORES FOR THE MUTATED SEQUENCE
 	mutatedFreq=[]
 	for p in range(len(sequence)):
-	    #mutatedFreq.append(0)
 	    mutationFreq[p]=0
+	
+	
 	#ACCEPT OR DENY THE MUTATION BASED ON A NEW EVALUATION OF THE SCORE
-	indent=tab + tab
+	indent=tab + tab  #output related
 	sequenceEvaluation(mutatedSequence, mutationFreq, True)	 
 	#IF THE GLOBAL SCORE DECREASED
 	print "*************************************"
@@ -125,7 +127,6 @@ def mutar(sequence, mutationFreq):
 	if previousScore > getGlobalScore(mutationFreq):
 	    print "Previous score (" + str(previousScore) + ") > Mutation score (" + str(getGlobalScore(mutationFreq)) + ")" 
 	    print "...ACCEPT MUTATION"
-	    #mutationFreq=
 	    return mutatedSequence
 	else:
 	    #DECISION BASED ON MONTE CARLO
@@ -695,6 +696,7 @@ iteration=1
 #for iteration in range(20):
 while globalScore > 0:
 	#print endl
+	timePrev=time.time()
         print "*****************************"
 	print "ITERATION NUMBER: " + str(iteration)
 	print "*****************************"
@@ -737,23 +739,24 @@ while globalScore > 0:
 	print endl
 	if output:
 	  # MUTATION ATTEMPTS Vs. ITERATION NUMBER
-	  mutationsFile.write(str(iteration)+ tab + str(mutationsIter) + endl)
+	  mutationsFile.write(str(iteration)+ tab + str(mutationsIter) + tab +str(beta) + endl)
 	  
 	  #SCORES Vs. ITERATION NUMBER
-	  scoresOutputFile.write(str(iteration)+ tab + str(globalScore) + endl)
+	  scoresOutputFile.write(str(iteration)+ tab + str(globalScore) + tab + str(beta) + endl)
 	  
 	  #ITERATION ELAPSED TIME
 	  timeX=time.time()-timePrev   #ITERATION TIME
-	  timesOutputFile.write(str(iteration)+ tab + str(timeX) + endl)
+	  timesOutputFile.write(str(iteration)+ tab + str(timeX) + tab + str(beta) + endl)
 	  
-	  
+	   	  
         iteration=iteration+1
 
 if output:        
   totalElapsedTime=time.time() - time0   ##
   print "Elapsed time:",totalElapsedTime, "Seconds"
-  totalTimesOutputFile.write(str(size) + tab + str(iteration-1)+ tab + str(totalElapsedTime) +  endl)
+  totalTimesOutputFile.write(str(size) + tab + str(iteration-1)+ tab + str(totalElapsedTime) + tab + str(beta) +  endl)
   
+
   ##CLOSE ALL OUTPUT FILES
   totalTimesOutputFile.close()
   timesOutputFile.close()
