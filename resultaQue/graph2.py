@@ -152,7 +152,7 @@ if scores:
 if mutAttempts:
   fig = plt.figure()
   for files in os.listdir(inputPath): 
-    if files.startswith("mutAttempts"): 
+    if files.startswith("mutationsAttempt"): 
 	cant=[]   #cantidad de valores
 	valores=[]    #acumula los valores 
 	#lleno las listas con 0
