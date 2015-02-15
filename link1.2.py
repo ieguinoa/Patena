@@ -422,7 +422,7 @@ def iupred(sequence, mutationFreq, verbose):
 
 
 def anchor(sequence, mutationFreq, verbose):
-  runCommand="ANCHOR/anchorExe ANCHOR/input"
+  runCommand="ANCHOR/anchor ANCHOR/input"
   input=open('ANCHOR/input', 'w')
   input.write("Name" + endl)
   input.write(sequence)
@@ -446,7 +446,7 @@ def anchor(sequence, mutationFreq, verbose):
 		  
   outputAnchor.seek(0)
   rstFile_iter = iter(outputAnchor)
-
+  #ADD 1 TO POSITIONS IN mutationFreq  IF THE RESULT IS GREATER THAN 0.5 (PREDICTING A DISORDERED BINDING REGION)
   for j in range(len(sequence)):
 	  resultJ=float(rstFile_iter.next())
 	  if resultJ > 0.5 :

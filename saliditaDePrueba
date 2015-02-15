@@ -1,0 +1,2762 @@
+INITIAL SEQUENCE:MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+*****************************
+ITERATION NUMBER: 1
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+Cutoff:0.01
+****Alignment****
+sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+E-Value:     2.11079e-15
+Query:       MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+Match:       MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+Query Length: 32
+Query Start:  1
+Query end:    32
+BLAST RESULTS:
+MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+11111111111111111111111111111111
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+11111111111111111111111111111111
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+00000000000000000000000000000000
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+22222221222220000000000122222000
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+00011110000000000011111100000000
+
+
+*************************************
+STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MVLSPADKTNVKAAWGKVGAHAGEYGAEALER" > outTango 
+TANGO RESULTS:
+MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+00111000001110000000011110011100
+*************************************
+
+
+FINAL RESULTS:
+MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+44566553445552222233344554455322
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    123.0
+Choose a position based on weights
+Position chosen: 24
+Residue to mutate: Y
+Selected residue : V
+Secuencia original:MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+Secuencia mutada  :MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     2.93268e-14
+		Query:       MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+		Match:       MVLSPADKTNVKAAWGKVGAHAGE GAEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+		11111111111111111111111101111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+		00111111111100010111111110010000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+		11100000000001111000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+		22222221222220000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+		00011110000000000011111100000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MVLSPADKTNVKAAWGKVGAHAGEVGAEALER" > outTango 
+		TANGO RESULTS:
+		MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+		44666553445542232233344532243211
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (123.0) > Mutation score (112.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+Number of times before mutation accept:1
+
+
+*******************************************
+End of iteration: 1
+Global score :    112.0
+
+
+*****************************
+ITERATION NUMBER: 2
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+Cutoff:0.01
+****Alignment****
+sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+E-Value:     2.93268e-14
+Query:       MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+Match:       MVLSPADKTNVKAAWGKVGAHAGE GAEALER
+Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+Query Length: 32
+Query Start:  1
+Query end:    32
+BLAST RESULTS:
+MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+11111111111111111111111101111111
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+00111111111100010111111110010000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+11100000000001111000000000000000
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+22222221222220000000000111111000
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+00011110000000000011111100000000
+
+
+*************************************
+STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MVLSPADKTNVKAAWGKVGAHAGEVGAEALER" > outTango 
+TANGO RESULTS:
+MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+00111000001110000000011110011100
+*************************************
+
+
+FINAL RESULTS:
+MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+44666553445542232233344532243211
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    112.0
+Choose a position based on weights
+Position chosen: 1
+Residue to mutate: V
+Selected residue : E
+Secuencia original:MVLSPADKTNVKAAWGKVGAHAGEVGAEALER
+Secuencia mutada  :MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     2.6242e-13
+		Query:       MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+		Match:       M LSPADKTNVKAAWGKVGAHAGE GAEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+		10111111111111111111111101111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+		00000000000000000011100000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+		00000000001111111111100000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+		33322221222220000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+		00011110000000000011111100000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNVKAAWGKVGAHAGEVGAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+		43555442335552222244433422233211
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (112.0) > Mutation score (101.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+Number of times before mutation accept:1
+
+
+*******************************************
+End of iteration: 2
+Global score :    101.0
+
+
+*****************************
+ITERATION NUMBER: 3
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+Cutoff:0.01
+****Alignment****
+sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+E-Value:     2.6242e-13
+Query:       MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+Match:       M LSPADKTNVKAAWGKVGAHAGE GAEALER
+Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+Query Length: 32
+Query Start:  1
+Query end:    32
+BLAST RESULTS:
+MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+10111111111111111111111101111111
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+00000000000000000011100000000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+00000000001111111111100000000000
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+33322221222220000000000111111000
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+00011110000000000011111100000000
+
+
+*************************************
+STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNVKAAWGKVGAHAGEVGAEALER" > outTango 
+TANGO RESULTS:
+MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+00111000001110000000011110011100
+*************************************
+
+
+FINAL RESULTS:
+MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+43555442335552222244433422233211
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    101.0
+Choose a position based on weights
+Position chosen: 6
+Residue to mutate: D
+Selected residue : I
+Secuencia original:MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+Secuencia mutada  :MELSPAIKTNVKAAWGKVGAHAGEVGAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     4.87281e-12
+		Query:       MELSPAIKTNVKAAWGKVGAHAGEVGAEALER
+		Match:       M LSPA KTNVKAAWGKVGAHAGE GAEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPAIKTNVKAAWGKVGAHAGEVGAEALER
+		10111101111111111111111101111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPAIKTNVKAAWGKVGAHAGEVGAEALER
+		11111111111111111111111110110000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPAIKTNVKAAWGKVGAHAGEVGAEALER
+		00000000000001100000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPAIKTNVKAAWGKVGAHAGEVGAEALER
+		33322210111110000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPAIKTNVKAAWGKVGAHAGEVGAEALER
+		00000000000000000011111100000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPAIKTNVKAAWGKVGAHAGEVGAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPAIKTNVKAAWGKVGAHAGEVGAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPAIKTNVKAAWGKVGAHAGEVGAEALER
+		54655422334443322233344532343211
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-3.0
+EL EXPONENTE ES  :-30.0
+EL VALOR DE MC ES:9.35762296884e-14
+EL VALOR RANDOM ELEGIDO ES:0.936390335928
+MONTE CARLO DECISION:
+ Mutation score (104.0) >= Previous score (101.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    101.0
+Choose a position based on weights
+Position chosen: 16
+Residue to mutate: K
+Selected residue : P
+Secuencia original:MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+Secuencia mutada  :MELSPADKTNVKAAWGPVGAHAGEVGAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     2.55328e-12
+		Query:       MELSPADKTNVKAAWGPVGAHAGEVGAEALER
+		Match:       M LSPADKTNVKAAWG VGAHAGE GAEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPADKTNVKAAWGPVGAHAGEVGAEALER
+		10111111111111110111111101111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPADKTNVKAAWGPVGAHAGEVGAEALER
+		00000000000000000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPADKTNVKAAWGPVGAHAGEVGAEALER
+		00000000011111111111111111111111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPADKTNVKAAWGPVGAHAGEVGAEALER
+		33322221222220000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPADKTNVKAAWGPVGAHAGEVGAEALER
+		00011110000000000011111100000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNVKAAWGPVGAHAGEVGAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPADKTNVKAAWGPVGAHAGEVGAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPADKTNVKAAWGPVGAHAGEVGAEALER
+		43555442345552221233344533344322
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-8.0
+EL EXPONENTE ES  :-80.0
+EL VALOR DE MC ES:1.80485138785e-35
+EL VALOR RANDOM ELEGIDO ES:0.283202669937
+MONTE CARLO DECISION:
+ Mutation score (109.0) >= Previous score (101.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    101.0
+Choose a position based on weights
+Position chosen: 21
+Residue to mutate: A
+Selected residue : V
+Secuencia original:MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+Secuencia mutada  :MELSPADKTNVKAAWGKVGAHVGEVGAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     1.03645e-12
+		Query:       MELSPADKTNVKAAWGKVGAHVGEVGAEALER
+		Match:       M LSPADKTNVKAAWGKVGAH GE GAEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPADKTNVKAAWGKVGAHVGEVGAEALER
+		10111111111111111111101101111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPADKTNVKAAWGKVGAHVGEVGAEALER
+		00000010101000010111111110110001
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPADKTNVKAAWGKVGAHVGEVGAEALER
+		00000000000011111111100000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPADKTNVKAAWGKVGAHVGEVGAEALER
+		33322221222220000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPADKTNVKAAWGKVGAHVGEVGAEALER
+		00011110000000000011111100000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNVKAAWGKVGAHVGEVGAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPADKTNVKAAWGKVGAHVGEVGAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPADKTNVKAAWGKVGAHVGEVGAEALER
+		43555452435452232344434532343212
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-9.0
+EL EXPONENTE ES  :-90.0
+EL VALOR DE MC ES:8.19401262399e-40
+EL VALOR RANDOM ELEGIDO ES:0.537439881063
+MONTE CARLO DECISION:
+ Mutation score (110.0) >= Previous score (101.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    101.0
+Choose a position based on weights
+Position chosen: 25
+Residue to mutate: G
+Selected residue : D
+Secuencia original:MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+Secuencia mutada  :MELSPADKTNVKAAWGKVGAHAGEVDAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     2.8249e-12
+		Query:       MELSPADKTNVKAAWGKVGAHAGEVDAEALER
+		Match:       M LSPADKTNVKAAWGKVGAHAGE  AEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPADKTNVKAAWGKVGAHAGEVDAEALER
+		10111111111111111111111100111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPADKTNVKAAWGKVGAHAGEVDAEALER
+		00000000000000000011100000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPADKTNVKAAWGKVGAHAGEVDAEALER
+		00000000001111111111110000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPADKTNVKAAWGKVGAHAGEVDAEALER
+		33322221222220000000000112222000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPADKTNVKAAWGKVGAHAGEVDAEALER
+		00011110000000000011111100000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNVKAAWGKVGAHAGEVDAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPADKTNVKAAWGKVGAHAGEVDAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPADKTNVKAAWGKVGAHAGEVDAEALER
+		43555442335552222244443422344211
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-4.0
+EL EXPONENTE ES  :-40.0
+EL VALOR DE MC ES:4.24835425529e-18
+EL VALOR RANDOM ELEGIDO ES:0.225784465657
+MONTE CARLO DECISION:
+ Mutation score (105.0) >= Previous score (101.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    101.0
+Choose a position based on weights
+Position chosen: 11
+Residue to mutate: K
+Selected residue : R
+Secuencia original:MELSPADKTNVKAAWGKVGAHAGEVGAEALER
+Secuencia mutada  :MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     5.30017e-13
+		Query:       MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+		Match:       M LSPADKTNV+AAWGKVGAHAGE GAEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+		10111111111011111111111101111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+		00000000000000000011101000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+		00000000000111111111110000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+		33322221222220000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+		00011110000000000011111100000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNVRAAWGKVGAHAGEVGAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+		43555442334452222244444422233211
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES0.0
+EL EXPONENTE ES  :0.0
+EL VALOR DE MC ES:1.0
+EL VALOR RANDOM ELEGIDO ES:0.787263920751
+MONTE CARLO DECISION:
+...ACCEPT MUTATION
+Sequence after mutation:    MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+Number of times before mutation accept:5
+
+
+*******************************************
+End of iteration: 3
+Global score :    101.0
+
+
+*****************************
+ITERATION NUMBER: 4
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+Cutoff:0.01
+****Alignment****
+sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+E-Value:     5.30017e-13
+Query:       MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+Match:       M LSPADKTNV+AAWGKVGAHAGE GAEALER
+Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+Query Length: 32
+Query Start:  1
+Query end:    32
+BLAST RESULTS:
+MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+10111111111011111111111101111111
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+00000000000000000011101000000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+00000000000111111111110000000000
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+33322221222220000000000111111000
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+00011110000000000011111100000000
+
+
+*************************************
+STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNVRAAWGKVGAHAGEVGAEALER" > outTango 
+TANGO RESULTS:
+MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+00111000001110000000011110011100
+*************************************
+
+
+FINAL RESULTS:
+MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+43555442334452222244444422233211
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    101.0
+Choose a position based on weights
+Position chosen: 5
+Residue to mutate: A
+Selected residue : C
+Secuencia original:MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+Secuencia mutada  :MELSPCDKTNVRAAWGKVGAHAGEVGAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     1.37684e-12
+		Query:       MELSPCDKTNVRAAWGKVGAHAGEVGAEALER
+		Match:       M LSP DKTNV+AAWGKVGAHAGE GAEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPCDKTNVRAAWGKVGAHAGEVGAEALER
+		10111011111011111111111101111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPCDKTNVRAAWGKVGAHAGEVGAEALER
+		00011111111110010111111110000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPCDKTNVRAAWGKVGAHAGEVGAEALER
+		11111100001111111100000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPCDKTNVRAAWGKVGAHAGEVGAEALER
+		33322221222220000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPCDKTNVRAAWGKVGAHAGEVGAEALER
+		00011110000000000011111100000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPCDKTNVRAAWGKVGAHAGEVGAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPCDKTNVRAAWGKVGAHAGEVGAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPCDKTNVRAAWGKVGAHAGEVGAEALER
+		54677553446562232333344532233211
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-17.0
+EL EXPONENTE ES  :-170.0
+EL VALOR DE MC ES:1.47889750564e-74
+EL VALOR RANDOM ELEGIDO ES:0.359001038303
+MONTE CARLO DECISION:
+ Mutation score (118.0) >= Previous score (101.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    101.0
+Choose a position based on weights
+Position chosen: 18
+Residue to mutate: G
+Selected residue : N
+Secuencia original:MELSPADKTNVRAAWGKVGAHAGEVGAEALER
+Secuencia mutada  :MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     3.94242e-12
+		Query:       MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+		Match:       M LSPADKTNV+AAWGKV AHAGE GAEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+		10111111111011111101111101111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+		00000000000000000011100000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+		00000000001111111111110000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+		33322221222220000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+		00011110000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNVRAAWGKVNAHAGEVGAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+		43555442335452222223332322233211
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (101.0) > Mutation score (94.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+Number of times before mutation accept:2
+
+
+*******************************************
+End of iteration: 4
+Global score :    94.0
+
+
+*****************************
+ITERATION NUMBER: 5
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+Cutoff:0.01
+****Alignment****
+sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+E-Value:     3.94242e-12
+Query:       MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+Match:       M LSPADKTNV+AAWGKV AHAGE GAEALER
+Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+Query Length: 32
+Query Start:  1
+Query end:    32
+BLAST RESULTS:
+MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+10111111111011111101111101111111
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+00000000000000000011100000000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+00000000001111111111110000000000
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+33322221222220000000000111111000
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+00011110000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNVRAAWGKVNAHAGEVGAEALER" > outTango 
+TANGO RESULTS:
+MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+00111000001110000000011110011100
+*************************************
+
+
+FINAL RESULTS:
+MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+43555442335452222223332322233211
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    94.0
+Choose a position based on weights
+Position chosen: 19
+Residue to mutate: A
+Selected residue : C
+Secuencia original:MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+Secuencia mutada  :MELSPADKTNVRAAWGKVNCHAGEVGAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     1.00612e-11
+		Query:       MELSPADKTNVRAAWGKVNCHAGEVGAEALER
+		Match:       M LSPADKTNV+AAWGKV  HAGE GAEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPADKTNVRAAWGKVNCHAGEVGAEALER
+		10111111111011111100111101111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPADKTNVRAAWGKVNCHAGEVGAEALER
+		00000010101000010111111110000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPADKTNVRAAWGKVNCHAGEVGAEALER
+		00000000000011111111111110000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPADKTNVRAAWGKVNCHAGEVGAEALER
+		33322221222220000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPADKTNVRAAWGKVNCHAGEVGAEALER
+		00011110000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNVRAAWGKVNCHAGEVGAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPADKTNVRAAWGKVNCHAGEVGAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPADKTNVRAAWGKVNCHAGEVGAEALER
+		43555452435352232322344542233211
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-9.0
+EL EXPONENTE ES  :-90.0
+EL VALOR DE MC ES:8.19401262399e-40
+EL VALOR RANDOM ELEGIDO ES:0.770662927687
+MONTE CARLO DECISION:
+ Mutation score (103.0) >= Previous score (94.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    94.0
+Choose a position based on weights
+Position chosen: 7
+Residue to mutate: K
+Selected residue : A
+Secuencia original:MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+Secuencia mutada  :MELSPADATNVRAAWGKVNAHAGEVGAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     2.79946e-11
+		Query:       MELSPADATNVRAAWGKVNAHAGEVGAEALER
+		Match:       M LSPAD TNV+AAWGKV AHAGE GAEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPADATNVRAAWGKVNAHAGEVGAEALER
+		10111110111011111101111101111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPADATNVRAAWGKVNAHAGEVGAEALER
+		00011011100000010011101000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPADATNVRAAWGKVNAHAGEVGAEALER
+		00000000000011111110000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPADATNVRAAWGKVNAHAGEVGAEALER
+		34444443222220000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPADATNVRAAWGKVNAHAGEVGAEALER
+		00011110000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADATNVRAAWGKVNAHAGEVGAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPADATNVRAAWGKVNAHAGEVGAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPADATNVRAAWGKVNAHAGEVGAEALER
+		44688674434352232222223322233211
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-13.0
+EL EXPONENTE ES  :-130.0
+EL VALOR DE MC ES:3.4811068399e-57
+EL VALOR RANDOM ELEGIDO ES:0.387049294939
+MONTE CARLO DECISION:
+ Mutation score (107.0) >= Previous score (94.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    94.0
+Choose a position based on weights
+Position chosen: 2
+Residue to mutate: L
+Selected residue : D
+Secuencia original:MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+Secuencia mutada  :MEDSPADKTNVRAAWGKVNAHAGEVGAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     4.34704e-11
+		Query:       MEDSPADKTNVRAAWGKVNAHAGEVGAEALER
+		Match:       M  SPADKTNV+AAWGKV AHAGE GAEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MEDSPADKTNVRAAWGKVNAHAGEVGAEALER
+		10011111111011111101111101111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MEDSPADKTNVRAAWGKVNAHAGEVGAEALER
+		00000000000000000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MEDSPADKTNVRAAWGKVNAHAGEVGAEALER
+		00000000011111111111111111111111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MEDSPADKTNVRAAWGKVNAHAGEVGAEALER
+		33322221222220000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MEDSPADKTNVRAAWGKVNAHAGEVGAEALER
+		00011110000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MEDSPADKTNVRAAWGKVNAHAGEVGAEALER" > outTango 
+		TANGO RESULTS:
+		MEDSPADKTNVRAAWGKVNAHAGEVGAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MEDSPADKTNVRAAWGKVNAHAGEVGAEALER
+		43455442345452222212233433344322
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-7.0
+EL EXPONENTE ES  :-70.0
+EL VALOR DE MC ES:3.97544973591e-31
+EL VALOR RANDOM ELEGIDO ES:0.372613853403
+MONTE CARLO DECISION:
+ Mutation score (101.0) >= Previous score (94.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    94.0
+Choose a position based on weights
+Position chosen: 0
+Residue to mutate: M
+Selected residue : Y
+Secuencia original:MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+Secuencia mutada  :YELSPADKTNVRAAWGKVNAHAGEVGAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|162842 sp|P01935|HBA3_PANTR Hemoglobin subunit alpha-3 OS=Pan troglodytes PE=1 SV=1
+		E-Value:     1.84361e-11
+		Query:       LSPADKTNVRAAWGKVNAHAGEVGAEALER
+		Match:       LSPADKTNV+AAWGKV AHAG+ GAEALER
+		Subject:     LSPADKTNVKAAWGKVGAHAGZYGAEALER
+		Query Length: 32
+		Query Start:  3
+		Query end:    32
+		BLAST RESULTS:
+		YELSPADKTNVRAAWGKVNAHAGEVGAEALER
+		11111111111011111101111001111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		YELSPADKTNVRAAWGKVNAHAGEVGAEALER
+		00111111111000000011111110000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		YELSPADKTNVRAAWGKVNAHAGEVGAEALER
+		00000000000001100000000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		YELSPADKTNVRAAWGKVNAHAGEVGAEALER
+		44333221222220000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		YELSPADKTNVRAAWGKVNAHAGEVGAEALER
+		00011110000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="YELSPADKTNVRAAWGKVNAHAGEVGAEALER" > outTango 
+		TANGO RESULTS:
+		YELSPADKTNVRAAWGKVNAHAGEVGAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		YELSPADKTNVRAAWGKVNAHAGEVGAEALER
+		55677553445342211112233332233211
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-7.0
+EL EXPONENTE ES  :-70.0
+EL VALOR DE MC ES:3.97544973591e-31
+EL VALOR RANDOM ELEGIDO ES:0.0778315949615
+MONTE CARLO DECISION:
+ Mutation score (101.0) >= Previous score (94.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    94.0
+Choose a position based on weights
+Position chosen: 6
+Residue to mutate: D
+Selected residue : E
+Secuencia original:MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+Secuencia mutada  :MELSPAEKTNVRAAWGKVNAHAGEVGAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     1.41581e-11
+		Query:       MELSPAEKTNVRAAWGKVNAHAGEVGAEALER
+		Match:       M LSPA+KTNV+AAWGKV AHAGE GAEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPAEKTNVRAAWGKVNAHAGEVGAEALER
+		10111101111011111101111101111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPAEKTNVRAAWGKVNAHAGEVGAEALER
+		00000000000000000011100000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPAEKTNVRAAWGKVNAHAGEVGAEALER
+		00000000001111111111110000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPAEKTNVRAAWGKVNAHAGEVGAEALER
+		44433331222220000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPAEKTNVRAAWGKVNAHAGEVGAEALER
+		00011110000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPAEKTNVRAAWGKVNAHAGEVGAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPAEKTNVRAAWGKVNAHAGEVGAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPAEKTNVRAAWGKVNAHAGEVGAEALER
+		54666542335452222223332322233211
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-6.0
+EL EXPONENTE ES  :-60.0
+EL VALOR DE MC ES:8.7565107627e-27
+EL VALOR RANDOM ELEGIDO ES:0.116621207756
+MONTE CARLO DECISION:
+ Mutation score (100.0) >= Previous score (94.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    94.0
+Choose a position based on weights
+Position chosen: 25
+Residue to mutate: G
+Selected residue : R
+Secuencia original:MELSPADKTNVRAAWGKVNAHAGEVGAEALER
+Secuencia mutada  :MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     4.13517e-11
+		Query:       MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+		Match:       M LSPADKTNV+AAWGKV AHAGE  AEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+		10111111111011111101111100111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+		00000000000000000011101110000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+		00000000001111111111000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+		33322221222220000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+		00011110000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNVRAAWGKVNAHAGEVRAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+		43555442335452222223223431233211
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES0.0
+EL EXPONENTE ES  :0.0
+EL VALOR DE MC ES:1.0
+EL VALOR RANDOM ELEGIDO ES:0.680296579377
+MONTE CARLO DECISION:
+...ACCEPT MUTATION
+Sequence after mutation:    MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+Number of times before mutation accept:6
+
+
+*******************************************
+End of iteration: 5
+Global score :    94.0
+
+
+*****************************
+ITERATION NUMBER: 6
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+Cutoff:0.01
+****Alignment****
+sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+E-Value:     4.13517e-11
+Query:       MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+Match:       M LSPADKTNV+AAWGKV AHAGE  AEALER
+Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+Query Length: 32
+Query Start:  1
+Query end:    32
+BLAST RESULTS:
+MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+10111111111011111101111100111111
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+00000000000000000011101110000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+00000000001111111111000000000000
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+33322221222220000000000111111000
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+00011110000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNVRAAWGKVNAHAGEVRAEALER" > outTango 
+TANGO RESULTS:
+MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+00111000001110000000011110011100
+*************************************
+
+
+FINAL RESULTS:
+MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+43555442335452222223223431233211
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    94.0
+Choose a position based on weights
+Position chosen: 11
+Residue to mutate: R
+Selected residue : V
+Secuencia original:MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+Secuencia mutada  :MELSPADKTNVVAAWGKVNAHAGEVRAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     2.50723e-10
+		Query:       MELSPADKTNVVAAWGKVNAHAGEVRAEALER
+		Match:       M LSPADKTNV AAWGKV AHAGE  AEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPADKTNVVAAWGKVNAHAGEVRAEALER
+		10111111111011111101111100111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPADKTNVVAAWGKVNAHAGEVRAEALER
+		00011111111000010111111110000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPADKTNVVAAWGKVNAHAGEVRAEALER
+		00000000011111111110000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPADKTNVVAAWGKVNAHAGEVRAEALER
+		33322221111110000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPADKTNVVAAWGKVNAHAGEVRAEALER
+		00011110000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNVVAAWGKVNAHAGEVRAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPADKTNVVAAWGKVNAHAGEVRAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPADKTNVVAAWGKVNAHAGEVRAEALER
+		43566553345342232322233431233211
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-6.0
+EL EXPONENTE ES  :-60.0
+EL VALOR DE MC ES:8.7565107627e-27
+EL VALOR RANDOM ELEGIDO ES:0.872662663933
+MONTE CARLO DECISION:
+ Mutation score (100.0) >= Previous score (94.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    94.0
+Choose a position based on weights
+Position chosen: 10
+Residue to mutate: V
+Selected residue : A
+Secuencia original:MELSPADKTNVRAAWGKVNAHAGEVRAEALER
+Secuencia mutada  :MELSPADKTNARAAWGKVNAHAGEVRAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     1.93692e-10
+		Query:       MELSPADKTNARAAWGKVNAHAGEVRAEALER
+		Match:       M LSPADKTN +AAWGKV AHAGE  AEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPADKTNARAAWGKVNAHAGEVRAEALER
+		10111111110011111101111100111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPADKTNARAAWGKVNAHAGEVRAEALER
+		00000000000000000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPADKTNARAAWGKVNAHAGEVRAEALER
+		00000000001111111111111000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPADKTNARAAWGKVNAHAGEVRAEALER
+		33322221222220000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPADKTNARAAWGKVNAHAGEVRAEALER
+		00011110000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNARAAWGKVNAHAGEVRAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPADKTNARAAWGKVNAHAGEVRAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPADKTNARAAWGKVNAHAGEVRAEALER
+		43555442334452222212233321233211
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (94.0) > Mutation score (90.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MELSPADKTNARAAWGKVNAHAGEVRAEALER
+Number of times before mutation accept:2
+
+
+*******************************************
+End of iteration: 6
+Global score :    90.0
+
+
+*****************************
+ITERATION NUMBER: 7
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+Cutoff:0.01
+****Alignment****
+sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+E-Value:     1.93692e-10
+Query:       MELSPADKTNARAAWGKVNAHAGEVRAEALER
+Match:       M LSPADKTN +AAWGKV AHAGE  AEALER
+Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+Query Length: 32
+Query Start:  1
+Query end:    32
+BLAST RESULTS:
+MELSPADKTNARAAWGKVNAHAGEVRAEALER
+10111111110011111101111100111111
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MELSPADKTNARAAWGKVNAHAGEVRAEALER
+00000000000000000000000000000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MELSPADKTNARAAWGKVNAHAGEVRAEALER
+00000000001111111111111000000000
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MELSPADKTNARAAWGKVNAHAGEVRAEALER
+33322221222220000000000111111000
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MELSPADKTNARAAWGKVNAHAGEVRAEALER
+00011110000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNARAAWGKVNAHAGEVRAEALER" > outTango 
+TANGO RESULTS:
+MELSPADKTNARAAWGKVNAHAGEVRAEALER
+00111000001110000000011110011100
+*************************************
+
+
+FINAL RESULTS:
+MELSPADKTNARAAWGKVNAHAGEVRAEALER
+43555442334452222212233321233211
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MELSPADKTNARAAWGKVNAHAGEVRAEALER
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    90.0
+Choose a position based on weights
+Position chosen: 10
+Residue to mutate: A
+Selected residue : A
+Selected residue : I
+Secuencia original:MELSPADKTNARAAWGKVNAHAGEVRAEALER
+Secuencia mutada  :MELSPADKTNIRAAWGKVNAHAGEVRAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     3.69072e-10
+		Query:       MELSPADKTNIRAAWGKVNAHAGEVRAEALER
+		Match:       M LSPADKTN++AAWGKV AHAGE  AEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPADKTNIRAAWGKVNAHAGEVRAEALER
+		10111111110011111101111100111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPADKTNIRAAWGKVNAHAGEVRAEALER
+		00011011100000010011111110000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPADKTNIRAAWGKVNAHAGEVRAEALER
+		00000000000011111110000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPADKTNIRAAWGKVNAHAGEVRAEALER
+		33322221222220000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPADKTNIRAAWGKVNAHAGEVRAEALER
+		00011110000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNIRAAWGKVNAHAGEVRAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPADKTNIRAAWGKVNAHAGEVRAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPADKTNIRAAWGKVNAHAGEVRAEALER
+		43566453433352232222233431233211
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-7.0
+EL EXPONENTE ES  :-70.0
+EL VALOR DE MC ES:3.97544973591e-31
+EL VALOR RANDOM ELEGIDO ES:0.379159809811
+MONTE CARLO DECISION:
+ Mutation score (97.0) >= Previous score (90.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    90.0
+Choose a position based on weights
+Position chosen: 20
+Residue to mutate: H
+Selected residue : T
+Secuencia original:MELSPADKTNARAAWGKVNAHAGEVRAEALER
+Secuencia mutada  :MELSPADKTNARAAWGKVNATAGEVRAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     2.2276e-09
+		Query:       MELSPADKTNARAAWGKVNATAGEVRAEALER
+		Match:       M LSPADKTN +AAWGKV A AGE  AEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPADKTNARAAWGKVNATAGEVRAEALER
+		10111111110011111101011100111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPADKTNARAAWGKVNATAGEVRAEALER
+		00000000000000000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPADKTNARAAWGKVNATAGEVRAEALER
+		00000000000111111111110000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPADKTNARAAWGKVNATAGEVRAEALER
+		33322221222220000233444432211000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPADKTNARAAWGKVNATAGEVRAEALER
+		00011110000000000011221100000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNARAAWGKVNATAGEVRAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPADKTNARAAWGKVNATAGEVRAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPADKTNARAAWGKVNATAGEVRAEALER
+		43555442333452222456797742333211
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-32.0
+EL EXPONENTE ES  :-320.0
+EL VALOR DE MC ES:1.06112315375e-139
+EL VALOR RANDOM ELEGIDO ES:0.84806825338
+MONTE CARLO DECISION:
+ Mutation score (122.0) >= Previous score (90.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    90.0
+Choose a position based on weights
+Position chosen: 2
+Residue to mutate: L
+Selected residue : T
+Secuencia original:MELSPADKTNARAAWGKVNAHAGEVRAEALER
+Secuencia mutada  :METSPADKTNARAAWGKVNAHAGEVRAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     9.53811e-10
+		Query:       METSPADKTNARAAWGKVNAHAGEVRAEALER
+		Match:       M  SPADKTN +AAWGKV AHAGE  AEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		METSPADKTNARAAWGKVNAHAGEVRAEALER
+		10011111110011111101111100111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		METSPADKTNARAAWGKVNAHAGEVRAEALER
+		00000000000000000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		METSPADKTNARAAWGKVNAHAGEVRAEALER
+		00000000011111111111111111111111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		METSPADKTNARAAWGKVNAHAGEVRAEALER
+		33322221222220000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		METSPADKTNARAAWGKVNAHAGEVRAEALER
+		00011110000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="METSPADKTNARAAWGKVNAHAGEVRAEALER" > outTango 
+		TANGO RESULTS:
+		METSPADKTNARAAWGKVNAHAGEVRAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		METSPADKTNARAAWGKVNAHAGEVRAEALER
+		43455442344452222212233432344322
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-9.0
+EL EXPONENTE ES  :-90.0
+EL VALOR DE MC ES:8.19401262399e-40
+EL VALOR RANDOM ELEGIDO ES:0.785976499466
+MONTE CARLO DECISION:
+ Mutation score (99.0) >= Previous score (90.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    90.0
+Choose a position based on weights
+Position chosen: 12
+Residue to mutate: A
+Selected residue : N
+Secuencia original:MELSPADKTNARAAWGKVNAHAGEVRAEALER
+Secuencia mutada  :MELSPADKTNARNAWGKVNAHAGEVRAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     9.35158e-10
+		Query:       MELSPADKTNARNAWGKVNAHAGEVRAEALER
+		Match:       M LSPADKTN + AWGKV AHAGE  AEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPADKTNARNAWGKVNAHAGEVRAEALER
+		10111111110001111101111100111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPADKTNARNAWGKVNAHAGEVRAEALER
+		00000000000000000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPADKTNARNAWGKVNAHAGEVRAEALER
+		11100000000011111111111111111111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPADKTNARNAWGKVNAHAGEVRAEALER
+		33322210000000000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPADKTNARNAWGKVNAHAGEVRAEALER
+		00011110000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNARNAWGKVNAHAGEVRAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPADKTNARNAWGKVNAHAGEVRAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPADKTNARNAWGKVNAHAGEVRAEALER
+		54655431111122222212233432344322
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (90.0) > Mutation score (87.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MELSPADKTNARNAWGKVNAHAGEVRAEALER
+Number of times before mutation accept:4
+
+
+*******************************************
+End of iteration: 7
+Global score :    87.0
+
+
+*****************************
+ITERATION NUMBER: 8
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+Cutoff:0.01
+****Alignment****
+sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+E-Value:     9.35158e-10
+Query:       MELSPADKTNARNAWGKVNAHAGEVRAEALER
+Match:       M LSPADKTN + AWGKV AHAGE  AEALER
+Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+Query Length: 32
+Query Start:  1
+Query end:    32
+BLAST RESULTS:
+MELSPADKTNARNAWGKVNAHAGEVRAEALER
+10111111110001111101111100111111
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MELSPADKTNARNAWGKVNAHAGEVRAEALER
+00000000000000000000000000000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MELSPADKTNARNAWGKVNAHAGEVRAEALER
+11100000000011111111111111111111
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MELSPADKTNARNAWGKVNAHAGEVRAEALER
+33322210000000000000000111111000
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MELSPADKTNARNAWGKVNAHAGEVRAEALER
+00011110000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNARNAWGKVNAHAGEVRAEALER" > outTango 
+TANGO RESULTS:
+MELSPADKTNARNAWGKVNAHAGEVRAEALER
+00111000001110000000011110011100
+*************************************
+
+
+FINAL RESULTS:
+MELSPADKTNARNAWGKVNAHAGEVRAEALER
+54655431111122222212233432344322
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MELSPADKTNARNAWGKVNAHAGEVRAEALER
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    87.0
+Choose a position based on weights
+Position chosen: 17
+Residue to mutate: V
+Selected residue : Q
+Secuencia original:MELSPADKTNARNAWGKVNAHAGEVRAEALER
+Secuencia mutada  :MELSPADKTNARNAWGKQNAHAGEVRAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     4.80086e-09
+		Query:       MELSPADKTNARNAWGKQNAHAGEVRAEALER
+		Match:       M LSPADKTN + AWGK  AHAGE  AEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPADKTNARNAWGKQNAHAGEVRAEALER
+		10111111110001111001111100111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPADKTNARNAWGKQNAHAGEVRAEALER
+		00000000000000000000000000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPADKTNARNAWGKQNAHAGEVRAEALER
+		11111111111111111111111111111111
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPADKTNARNAWGKQNAHAGEVRAEALER
+		33322210000000000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPADKTNARNAWGKQNAHAGEVRAEALER
+		00011110000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNARNAWGKQNAHAGEVRAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPADKTNARNAWGKQNAHAGEVRAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPADKTNARNAWGKQNAHAGEVRAEALER
+		54666542222222222112233432344322
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-8.0
+EL EXPONENTE ES  :-80.0
+EL VALOR DE MC ES:1.80485138785e-35
+EL VALOR RANDOM ELEGIDO ES:0.528603940661
+MONTE CARLO DECISION:
+ Mutation score (95.0) >= Previous score (87.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    87.0
+Choose a position based on weights
+Position chosen: 11
+Residue to mutate: R
+Selected residue : Y
+Secuencia original:MELSPADKTNARNAWGKVNAHAGEVRAEALER
+Secuencia mutada  :MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     5.61918e-09
+		Query:       MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+		Match:       M LSPADKTN   AWGKV AHAGE  AEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+		10111111110001111101111100111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+		00011111100000010111110110000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+		00000000000111111100000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+		33322210000000000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+		00011110000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNAYNAWGKVNAHAGEVRAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+		43566542211222232312232431233211
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (87.0) > Mutation score (85.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+Number of times before mutation accept:2
+
+
+*******************************************
+End of iteration: 8
+Global score :    85.0
+
+
+*****************************
+ITERATION NUMBER: 9
+*****************************
+
+
+*************************************
+STARTING BLAST SEARCH
+LOCAL BLAST SEARCH IN PROGRESS...
+Cutoff:0.01
+****Alignment****
+sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+E-Value:     5.61918e-09
+Query:       MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+Match:       M LSPADKTN   AWGKV AHAGE  AEALER
+Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+Query Length: 32
+Query Start:  1
+Query end:    32
+BLAST RESULTS:
+MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+10111111110001111101111100111111
+
+
+*************************************
+STARTING IUPred
+IUPred RESULTS:
+MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+00011111100000010111110110000000
+
+
+*************************************
+STARTING ANCHOR
+ANCHOR RESULTS:
+MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+00000000000111111100000000000000
+
+
+*************************************
+STARTING ELM Search
+ELM Search RESULTS:
+MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+33322210000000000000000111111000
+
+
+*************************************
+STARTING Prosite Search
+Prosite Search RESULTS:
+MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+00011110000000000000000000000000
+
+
+*************************************
+STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNAYNAWGKVNAHAGEVRAEALER" > outTango 
+TANGO RESULTS:
+MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+00111000001110000000011110011100
+*************************************
+
+
+FINAL RESULTS:
+MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+43566542211222232312232431233211
+*************************************
+
+
+*************************************
+*************************************
+MUTATION STEP
+*************************************
+*************************************
+Sequence before: MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    85.0
+Choose a position based on weights
+Position chosen: 25
+Residue to mutate: R
+Selected residue : T
+Secuencia original:MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+Secuencia mutada  :MELSPADKTNAYNAWGKVNAHAGEVTAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     5.19395e-09
+		Query:       MELSPADKTNAYNAWGKVNAHAGEVTAEALER
+		Match:       M LSPADKTN   AWGKV AHAGE  AEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELSPADKTNAYNAWGKVNAHAGEVTAEALER
+		10111111110001111101111100111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELSPADKTNAYNAWGKVNAHAGEVTAEALER
+		00011111101000000011110000000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELSPADKTNAYNAWGKVNAHAGEVTAEALER
+		00000000000111111110000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELSPADKTNAYNAWGKVNAHAGEVTAEALER
+		33322210000000000000001223333000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELSPADKTNAYNAWGKVNAHAGEVTAEALER
+		00011110000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELSPADKTNAYNAWGKVNAHAGEVTAEALER" > outTango 
+		TANGO RESULTS:
+		MELSPADKTNAYNAWGKVNAHAGEVTAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELSPADKTNAYNAWGKVNAHAGEVTAEALER
+		43566542212222222222233433455211
+		*************************************
+*************************************
+MUTATION RESULTS
+LA DIFERENCIA ENTRE VALORES DE SCORE ES-9.0
+EL EXPONENTE ES  :-90.0
+EL VALOR DE MC ES:8.19401262399e-40
+EL VALOR RANDOM ELEGIDO ES:0.966586483251
+MONTE CARLO DECISION:
+ Mutation score (94.0) >= Previous score (85.0)
+...DENY MUTATION
+*************************************
+
+
+*************************************
+MUTATION ATTEMPT
+*************************************
+Score before:    85.0
+Choose a position based on weights
+Position chosen: 3
+Residue to mutate: S
+Selected residue : Q
+Secuencia original:MELSPADKTNAYNAWGKVNAHAGEVRAEALER
+Secuencia mutada  :MELQPADKTNAYNAWGKVNAHAGEVRAEALER
+
+
+		*************************************
+		STARTING BLAST SEARCH
+		LOCAL BLAST SEARCH IN PROGRESS...
+		Cutoff:0.01
+		****Alignment****
+		sequence: gnl|BL_ORD_ID|163058 sp|P69907|HBA_PANTR Hemoglobin subunit alpha OS=Pan troglodytes GN=HBA1 PE=1 SV=2
+		E-Value:     1.75803e-08
+		Query:       MELQPADKTNAYNAWGKVNAHAGEVRAEALER
+		Match:       M L PADKTN   AWGKV AHAGE  AEALER
+		Subject:     MVLSPADKTNVKAAWGKVGAHAGEYGAEALER
+		Query Length: 32
+		Query Start:  1
+		Query end:    32
+		BLAST RESULTS:
+		MELQPADKTNAYNAWGKVNAHAGEVRAEALER
+		10101111110001111101111100111111
+
+
+		*************************************
+		STARTING IUPred
+		IUPred RESULTS:
+		MELQPADKTNAYNAWGKVNAHAGEVRAEALER
+		00000010000000000011110110000000
+
+
+		*************************************
+		STARTING ANCHOR
+		ANCHOR RESULTS:
+		MELQPADKTNAYNAWGKVNAHAGEVRAEALER
+		00000000001111111110000000000000
+
+
+		*************************************
+		STARTING ELM Search
+		ELM Search RESULTS:
+		MELQPADKTNAYNAWGKVNAHAGEVRAEALER
+		11100000000000000000000111111000
+
+
+		*************************************
+		STARTING Prosite Search
+		Prosite Search RESULTS:
+		MELQPADKTNAYNAWGKVNAHAGEVRAEALER
+		00000000000000000000000000000000
+
+
+		*************************************
+		STARTING TANGO Search
+tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="MELQPADKTNAYNAWGKVNAHAGEVRAEALER" > outTango 
+		TANGO RESULTS:
+		MELQPADKTNAYNAWGKVNAHAGEVRAEALER
+		00111000001110000000011110011100
+		*************************************
+
+
+		FINAL RESULTS:
+		MELQPADKTNAYNAWGKVNAHAGEVRAEALER
+		21312121112222222222232431233211
+		*************************************
+*************************************
+MUTATION RESULTS
+Previous score (85.0) > Mutation score (62.0)
+...ACCEPT MUTATION
+Sequence after mutation:    MELQPADKTNAYNAWGKVNAHAGEVRAEALER
+Number of times before mutation accept:2
+
+
+*******************************************
+End of iteration: 9
+Global score :    62.0
+
+
+*****************************
+ITERATION 

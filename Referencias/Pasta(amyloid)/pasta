@@ -1,0 +1,65 @@
+PRIMERO HAGO UNA DESCRIPCION DE LO QUE SON LAS FIBRAS AMILOIDES Y POR QUE LAS QUEREMOS SACAR (ESTO ES GENERAL PARA TODOS LOS METODOS)
+
+fibras amiloides: convierte a la forma soluble de la proteina en agregados fibrilares altamente organizados.
+
+En nuestro caso, la formacion de amiloides fibrilares entre los linkers ¨arrastraria¨ a los dominios que unen y podria interferir en la funcionalidad de estos. La funcionalidad de cualquier dominio proteico se podria ver limitada si esta se encuentra formando algun tipo de agregado.
+
+Amyloid formation is not restricted, however, to those
+polypeptide chains that have recognised links to protein
+deposition diseases. Several other proteins that have no such
+link have been found to form fibrillar aggregates in vitro with
+morphological, structural, and tinctorial properties that
+allow them to be classified as amyloid-like fibrils [4,5]. This
+finding has led to the idea that the ability to form the amyloid
+structure is an inherent property of polypeptide chains,
+encoded in main backbone chain interactions.
+
+Esto ultimo es importante porque al ser una caracteristica comun es bastante probable que ocurra este tipo de agregacion. Ademas, no podriamos simplemente descartar las proteinas que se sabe tienen tendencia a formar fibras amiloides, al ser una propiedad intrinseca de las secuencias polipeptidicas es necesario analizar todas las secuencias.
+
+
+Los metodos que utilizaremos para intentar eliminar la tendencia a formacion de fibras amiloides son: busqueda de determinantes secuenciales, PASTA, TANGO.
+
+
+**************************
+
+
+Pasta asume que el mecanismo (las interacciones) que llevan a la formacion de beta-sheets en proteinas globulares es el mismo que el que lleva a la formacion de beta-sheets en estructuras cross-beta(estructura asociada a fibras amiloides).
+En primer lugar, Pasta deriva una funcion energetica a partir de un conjunto de datos de estructuras globulares (potenciales estadisticos). Para derivar la funcion, lo que hace es ver cual es la probabilidad de encontrar cierto par de residuos dentro de una hoja beta, enfrentados en hebras vecinas. Esto resulta en una matriz con un valor asociado para cada par de residuos posibles.
+El metodo asume que la forma soluble es nativamente desestructurada, por lo que hay que tener cuidado cuando se lo usa para predecir proteinas que nativamente adquieren una estructura globular.
+Ademas, se asume que las moleculas involucradas en la formacion de pares de interaccion adoptaran la forma en la que el emparejamiento tenga la menor energia.
+el valor de este potencial estadistico para cada clase(paralela,antiparalela, etc) se calcula segun la relacion entre la frecuencia observada y la frecuencia esperada:
+la frecuencia observada es el numero de pares ab que estan en esa clase / el total de pares ab encontrados.
+La frecuencia esperada se aproxima como: el numero de pares ab (para cualquiera ab) que esta en una clase dada / el numero de pares ab (para cualquier ab) que hay.
+
+Se extraen valores de potencial segun esten interaccionando en sentido paralelo o antiparalelo.
+
+Durante el analisis se usan estos conjuntos para asignar un score a cada emparejamiento especifico entre subsecuencias de la misma longitud (PERTENECIENTES A MOLECULAS DISTINTAS CON LA MISMA SECUENCIA). Durante la evaluacion se prueban todos los emparejamientos posibles (todas las subsecuencias posibles, pero siempre las subsecuencias de ambas moleculas son de la misma longitud).
+Para cada posible subsecuencia se analiza tanto la posibilidad de que esten emparejados paralelamente o de forma antiparalela (tienen distinta tendencia por lo que el score final es distinto)
+
+Entonces: dada una longitud L , un par de indices i,j (correspondientes al inicio de la subsequencia de interaccion en las moleculas 1 y 2), se puede deducir un score para el emparejamiento beta paralelo y otro para el antiparalelo. Estos scores se calculan como la suma de todos los potenciales estadisticos asociados a los residuos que se estan emparejando en la conformacion, mas un valor de diferencia en la entropia que corresponde a la perdida de entropia por el emparejamiento de estos L residuos. Esta diferencia se calcula como L*deltaS, donde deltaS es la perdida de entropia promedio por residuo.
+
+
+Estos scores energeticos permiten saber cual de todos los emparejamientos posibles tendra una menor energia, y por lo tanto(segun lo asumido previamente) sera el que adoptaran las secuencias EN CASO QUE HAYA UNA AGREGACION FORMANDO FIBRAS AMILOIDES.
+
+
+
+Para conocer mejor cual es la dependencia que tiene la secuencia con la tendencia a formar agregados, es posible calcular un valor de propensity(tendencia) a formar un agregado amiloide que tiene cada residuo de la secuencia. Para esto se usa una aproximacion de mecanica estadistica, que relaciona el peso de la enegia asociada a todos los emparejamientos en lss que participa cierto residuo(usando una distribucion de boltzman) con respecto al peso total de todos los emparejamientos posibles de una conformacion de agregado amiloide. 
+ESTE VALOR DA LA TENDENCIA QUE TIENE CADA RESIDUO A FORMAR PARTE DEL EMPAREJAMIENTO EN CASO QUE LA SECUENCIA ADQUIERA UNA CONFORMACION DE AMILOIDE, NO RELACIONA EL VALOR ESTADISTICO DE LA ENERGIA CONFORMACIONAL CON RESPECTO A CUALQUIER OTRA CONFORMACION (ESTRUCTURA GLOBULAR, ALFA-HELICE, ETC)
+
+El valor de propensity es util para saber, en caso de formar agregados amiloides, cuales serian los segmentos que formaran las uniones.
+El valor de la tendencia por residuo es un valor relativo de la tendencia que tiene cada residuo a formar conformaciones amiloides estables, con respecto a la tendencia que tienen los demas residuos. La suma total de los valores de toda la secuencia da 1?? de esta forma, el valor de la tendencia serviria para saber, en caso de formar una fibra amiloide, cuales son los residuos involucrados.
+
+
+Lo que nosotros queremos conocer son los residuos que podrian formar conformaciones de fibra amiloide(interacciones beta) con una energia potencial(score) suficientemente chico, es decir, conformaciones suficientemente estables como para que esta estructura se adopte realmente en un % considerable.
+Para lograr esto debemos obviamente definir un valor de cutoff ya que el termino "suficientemente chica" es algo relativo. De esta forma, todos los residuos que tengan un valor de perfil energetico (masomenos este valor es la suma de score de todas las conformaciones en las que esta involucrado el residuo) menor que el valor de cut-off, seran considerados como los posibles estabilizadores de la estructura y por lo tanto se marcan como targets para la mutacion en nuestro algoritmo.
+El valor de cutoff se debera elegir de forma tal que se balancee la sensibilidad y la especificidad en la deteccion.
+
+
+In this version of the server we included methods for secondary structure and intrinsic disorder, which provide additional reinforcement to the fibril assignment. Briefly, a new machine learning algorithm was constructed to detect secondary structure while our previously developed disorder predictor was also included.
+
+
+Basicamente, lo que dicen es que para formar las fibras amiloides, la secuencia tiene que tener tendencia a interaccionar estando en una estructura beta. Si analizamos cuales son los pares de residuos que mas interaccionan(estadisticamente) entre diferentes hebras dentro de una hoja plegada beta, entonces podemos predecir la tendencia que tendra una secuencia, analizando solamente su composicion.
+
+
+
+Otra caracteristica del servidor PASTA 2.0 es que implementa un mecanismo basado en redes neuronales(ESpritz: accurate and fast prediction of protein disorder) para predecir la tendencia a formar estructuras secundarias o a permanecer en una conformacion desordenada. 

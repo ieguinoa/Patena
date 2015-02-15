@@ -1,0 +1,71 @@
+ANCHOR, a method for the prediction of disordered binding regions.
+
+
+En el paso anterior se evaluó la tendencia que tiene la secuencia en la que estamos trabajando a formar una estructura definida por si misma. Esto permite descartar con alta probabilidad, que la secuencia llegue a formar una estructura globular por si misma(y cualquier función que requiera de una estructura asociada). De esta forma, tenemos cierto grado de certeza que la secuencia tendrá una estructura intrínsecamente desordenada, lo que aportará la flexibilidad necesaria que estamos buscando.
+Se debe tener en cuenta que las proteínas que adoptan una estructura desordenada pueden cumplir una gran variedad de funciones que complementan al repertorio funcional exhibido por las proteinas globulares. Una gran cantidad de proteínas desordenadas funciona uniendose específicamente a otras moléculas, a través de segmentos de interacción con propiedades estructurales particulares que los diferencian de los sitios de unión propios de las proteinas globulares. 
+Estos segmentos se caracterizan por encontrarse, estando aisladas, formando un ensamble de estructuras desordenadas altamente flexibles. Luego de ligarse a moléculas específicas, estas regiones adoptan una conformación estructural bien definida caracterizada por una elementos estables de estructura secundaria y terciaria.
+La presencia de este tipo de segmentos en nuestra secuencia podría significar que la misma adquiera una estructura tridimensional definida, al menos en algun segmento, y por lo tanto se pierda la flexibilidad deseada para una secuencia linker. De la misma forma, la unión a otras posibles moléculas del entorno implica una función que no se desea para el linker que estamos diseñando el cual, idealmente, debería ser inerte en cualquier contexto.
+A continuación se aplicará, entonces, una herramienta que permite detectar aminoacidos con tendencia a formar este tipo de regiones de unión desordenadas, lo que permite marcarlos como posibles objetivos de la mutación y eliminar la función no deseada.
+
+La herramienta a utilizar será Anchor. Esta herramienta reutiliza el modelo definido para implementar la herramienta IUPred, de manera que se tenga en cuenta no solo la energia de interacción de a pares en el estado libre, sino también como ésta es afectada en un estado de unión con otra molécula. Para esto se plantea, en primer lugar, un conjunto de propiedades que debe cumplir el segmento a identificar:
+  -El primer criterio es que el residuo debe pertenecer a una región larga desordenada.
+  -El segundo criterio consiste en evaluar el estado aislado(sin unirse a ninguna molécula), asegurandose que el residuo no es capaz de formar uniones suficientemente favorables con sus vecinos cercanos como para plegarse por si mismo.
+  -El tercer criterio tiene en cuenta la capacidad del residuo para interaccionar con proteinas globulares durante la unión a éstas. El objetivo es evaluar que haya una ganancia neta de energía proveniente de esta interacción.
+
+El modelo planteado es una combinación lineal derivada directamente de estos tres criterior, reutilizando los conceptos y parámetros definidos para la herramienta IUPred.
+La ecuación asociada tendrá entonces 3 componentes que se combinan linealmente:
+
+-El primer componente resulta de promediar los valores obtenidos directamente de IUPred en una ventana de tamaño w1 alrededor de cada residuo. Esto evalúa la tendencia al desorden que tiene el entorno de cada residuo.
+***************ecuacion (2)********
+
+-El segundo componente evalua la ganancia de energia que tendrá el residuo al formar interacciones de a pares con los vecinos contenidos dentro de una ventana de tamaño w2. La ecuación asociada es idéntica a la obtenida para IUPred.
+*************ecuacion (3)**********
+
+-El tercer componente evalua la ganancia de energia que tendrá el residuo al formar interacciones de a pares con los una proteína globular, comparado con la formación de contactos unicamente entre los vecinos(ec. 3). Para hacer esta evaluación se reutiliza el modelo de IUPred, pero ahora la composición del contexto con el cual se dan las interacciones estará dado por la composición de una proteina globular hipotética. Para esto se utiliza la frecuencia de AAs estándar en estas proteínas.
+********ecuacion (4) ****  incluir tambien  la ecuacion sin numero que esta antes de la 5
+
+La ecuación resultante que combina los 3 criterios queda:
+  *****ecuacion (5)*****
+  
+  
+De estos 3 aportes ya tenemos casi todos los parámetros, queda determinar:
+  -cual es la proporcion de cada uno al aporte total (es una combinación lineal?) , 
+  -en el aporte 1, que tan grande es el neighborhood que se tiene en cuenta para hacer el promedio (w1)
+  -en el aporte 2, habria que definir que tan grande es el neighborhood que se tiene en cuenta para evaluar cada AA (w2).
+
+Para determinar los valores optimos de estos parámetros se utilizaron dos conjuntos de datos: un conjunto negativo compuesto por cadenas de proteínas globulares y un conjunto de resultados positivos, compuesto por complejos cortos desordenados. Este último conjunto de datos compuesto por proteinas desordenadas que se unen a proteinas ordenadas formando complejos representa una seria limitación ya que la cantidad de elementos que se conocen es muy limitada. Dada esta condición, se considera que una ventaja de este método el reducido número de parámetros(5 en total) que se deben evaluar en base a este conjunto de datos.
+Cabe destacar que no es posible entrenar el predictor utilizando un conjunto de proteinas desordenadas que se sepa que no forman uniones con proteinas globulares, principalmente porque no existe método preciso para comprobar que no
+
+
+
+Dado que el resultado de Anchor es una combinación de varios aportes, principalmente la tendencia al desorden y la sensibilidad al estar en un entorno estructurado, el resultado obtenido es relativamente independiente del score obtenido unicamente con IUPred. 
+   
+
+
+   
+   
+   
+   
+
+
+
+
+
+Our prediction is based on three properties: (para cada aminoacido calculo el aporte de las 3 propiedades)
+1. The first criterion ensures that a given residue belongs to a long disordered region, and filters out globular domains.
+***el aporte de este criterio se calcula como un promedio de la tendencia al desorden que tienen los vecinos. Simplemente suma el valor que da IUPred y lo promedia***
+
+2. The second criterion corresponds to the isolated state and it ensures that a residue is not able to form enough favorable contacts with its own local sequential neighbors to fold, otherwise it would be prone to adopt a well defined structure on its own.
+***ESTE APORTE CORRESPONDE SIMPLEMENTE AL VALOR RESULTANTE DE IUPred .....dice que cambia el tamaño del neighborhood, lo deja como variable durante el entrenamiento del predictor??
+
+3. The third criterion tests the feasibility that a given residue can form enough favorable interactions with globular proteins upon binding. This basically ensures that there is an energy gain by interacting with globular regions.
+****Primero calculo el valor de energia si el residuo estuviera en el contexto de una proteina globular(se calcula igual que en 1 pero ahora las frecuencias de AAs del contexto tienen el valor de la composición "estandar" de proteinas globulares).
+El aporte resultante es:  el valor calculado en (1) menos el valor calculado con el contexto de una proteina globular.
+Es decir, el aporte de este criterio es la diferencia de energia de interaccion del residuo si éste está en un contexto aislado(con sus vecinos desordenados) o en un contexto de proteina globular.  Si el primero es mayor que el segundo entonces 
+
+
+ 
+Conjuntos de datos usados:
+ -short disordered complexes: de los complejos que hay en la PDB, escanearon las cadenas que lo conforman contra Disprot (BD de prot. desordenadas). Se aceptaba el complejo si estaba formado por: una cadena de entre 10 y 30 residuos que estaba tambien en Disprot, y al menos una cadena con la cual interactuaba de mas de 40 residuos de longitud.
+
+  -long disordered complexes: igual que los short, pero la longitud de la cadena desordenada es de 30 minimo, y la cadena con la que interactuaba debia tener 70 residuos minimo

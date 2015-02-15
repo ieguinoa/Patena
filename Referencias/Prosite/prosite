@@ -1,0 +1,48 @@
+Como ya se ha mencionado, uno de los objetivos de la herramienta desarrollada es eliminar cualquier posible funcionalidad asociada a la secuencia resultante. Para esto se realiza una búsqueda exhaustiva de motivos secuenciales que puedan relacionar la composicion secuencial con alguna función biológica.
+Como parte de esta búsqueda, en este paso se utilizará un recurso que agrupa una gran cantidad de motivos secuenciales de diversas características.
+El recurso a utilizar es PROSITE (http://prosite.expasy.org/), que reúne documentación de dominios, familias y sitios funcionales de proteínas.
+PROSITE es un recurso que permite anotar e identificar regiones conservadas en secuencias de proteínas.
+De forma resumida, se puede definir como una colección anotada de motivos biológicamente significativos, dedicada a la identificación de familias y dominios de proteínas.
+Este tipo de bases de datos contiene información derivada de alineamiento de multiples secuencias homólogas. Los motivos resultantes se describen usando dos métodos distintos, cada uno con sus ventajas y desventajas que definen la utilidad que tendrán:
+	-La primera forma de describir los motivos es a través de patrones (expresiones regulares) en los cuales se tiene en cuenta solo la información de los residuos mas significativos, descartando el resto. La búsqueda de un patron en una secuencia da un resultado cualitativo: hay una coincidencia o no la hay. Si hay una sustitución en alguna de las posiciones de la secuencia el patrón no coincide, independientemente del tipo de sustitución que ocurrió.
+	-Otra forma de describir los motivos es mediante perfiles (o matrices de pesos). Estos pesos proveen valores numericos para cada posible coincidencia o sustitución cuando se busca el motivo en una secuencia. De esta forma, al utilizarlos en la búsqueda de un motivo, funcionan como descriptores cualitativos que consideran la similitud global en toda la longitud secuencial de un dominio o proteína. Un motivo puede ser encontrado en una secuencia que posee una sustitución en una posición conservada si el resto de la secuencia tiene un nivel de similitud suficientemente alto.
+Estas propiedades dan una mayor sensibilidad a los perfiles con respecto a los patrones, permitiendo encontrar dominios o familias con alta divergencia que solo tienen unas pocas posiciones muy conservadas.
+
+
+Se pueden realizar búsqueda asociadas con motivos secuenciales a través de la herramienta ScanProsite(http://prosite.expasy.org/scanprosite/), la cual permite escanear secuencias para buscar ocurrencias de los motivos, buscar motivos en una base de datos entera de secuencias, o buscar motivos propios del usuario en una secuencia.
+Esta misma herramienta se encuentra disponible para descargar, junto con la base de datos completa de motivos secuenciales, lo que permite realizar la búsqueda de forma local.
+El objetivo de nuestra herramienta es poder encontrar cualquier ocurrencia de motivos en la secuencia sobre la que estamos trabajando. Para esto es posible escanearla utilizando patrones y/o perfiles, y variar también los limites usados en la detección de los perfiles. En nuestro caso solo utilizaremos patrones para realizar la búsqueda por considerar que la sensibilidad provista por estos es suficiente para los fines buscados.
+
+
+
+
+
+
+
+
+The PROSITE database uses two kinds of motif descriptors, each having its own strengths and weaknesses defining its area of optimum application.
+	-The first motif descriptors used by PROSITE are patterns or regular expressions in which all but the most significant residue information is discarded. Patterns are qualitative descriptors: either they match or they do not. If there is a mismatch at one of the positions the pattern will not match, even if the mismatch is a conservative, biologically feasible substitution. Therefore good patterns are usually located in short well-conserved regions, such as enzyme catalytic sites, prosthetic group attachment sites (haem, pyridoxal phosphate, biotin, etc.), metal ion binding amino acids, cysteines involved in disulfide bonds and regions involved in binding a molecule. Even though the ideal scope of a regular expression is limited to these particular biological regions, patterns are still very popular as they are easy to formulate and to use.
+	-The second motif descriptors used by PROSITE, the generalized profiles (or weight matrices), are quantitative motif descriptors that consider the overall similarity on the entire length of domains or proteins and not just the most conserved parts of them. They provide numerical weights for each possible match or mismatch between a sequence residue and a profile position. A mismatch at a highly conserved position can thus be accepted provided that the rest of the sequence displays a sufficiently high level of similarity. This gives profiles an enhanced sensitivity when compared with patterns, and makes them able to detect highly divergent domains or families with only few very well-conserved sequence positions.
+
+
+
+
+
+
+
+
+
+
+It is an annotated collection of biologically meaningful motif descriptors dedicated to the identification of protein families and domains
+ 
+Motif descriptor databases contain information derived from alignments of multiple homologous sequences, giving them the notable advantage of identifying distant relationships between sequences that would have passed unnoticed, based solely on pairwise sequence alignment.
+PROSITE is one of these motif descriptor databases. 
+
+PROSITE is a resource for the identification and annotation of conserved regions in protein sequences. These regions are identified using two types of signatures: 
+	-generalized profiles (weight matrices) that describe protein families and modular protein domains 
+	-patterns (regular expressions) that describe short sequence motifs often corresponding to functionally or structurally important residues (1).
+
+
+
+
+

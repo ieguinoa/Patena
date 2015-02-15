@@ -1,0 +1,39 @@
+ANCHOR:
+-ya hay un Makefile hecho que compila y deja un ejecutable de nombre anchor en ANCHOR/ (ya esta agregado al .gitignore)
+-necesita exportar una variable con el path  ANCHOR_PATH=/home/tati/tesisBiotec/codigoBiotec/ANCHOR
+
+
+PROSITE
+-linkeado llama a un script perl que esta ubicado en $LINKEADO/ps_scan/ps_scan.pl
+supuestamente este script llama a otros programas (pfscan, pfsearch, etc) que ya vienen compilados y se pueden bajar los binarios (ver ps_scan/README)
+en principio, la ubicacion de estos archivos tendria que estar incluida en el PATH ( export PATH=$PATH:/home/tati/ps_scan)
+-necesita ademas un archivo con la base de datos de prosite: el script va a ir a buscar el archivo prosite.dat (en el directorio $PROSITE ??)
+
+
+BLAST
+-el blast necesita una variable con el path a la DB
+export BLASTDB="$HOME/ncbi-blast-2.2.29+-src/db"
+
+
+IUPRED
+-linkeado llama a iupred/iupredExe, pero se necesita una variable global que indique el path???  export IUPred_PATH=/home/tati/tesisBiotec/iupred/
+
+
+ELM
+-la busqueda en si la hago dentro de una funcion definida en linkeado, asi que para modificar el nombre de la salida es muy facil
+-usa un archivo con los motivos que actualmente se llama "elm_patterns_20140701.txt"
+
+
+
+
+LO QUE FALTA:
+
+-documentar todo en un README
+
+-implementar que todas las salidas y entradas de los programas que se llaman tengan en el nombre del archivo un id de la corrida a la que corresponden.
+Para las entradas es simple porque el que crea el archivo de entrada es linkeado: deberia implementar de alguna forma una fuente de id (puedo tener un archivo que guarde un valor entero , leo de ahi y le voy sumando de a 1). Las salidas deberian ser:  nombrePrograma + id + .input
+Para las salidas tendria que modificar los distintos programas para que incluyan el id en el salida. El formato de salida deberia ser nombrePrograma + id + .out
+
+-Herramientas que faltan:  ***************??????????
+
+
