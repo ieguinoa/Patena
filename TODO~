@@ -31,7 +31,6 @@ LO QUE FALTA:
 
 
 -dividir el repo en 2:  una parte que tenga solo el codigo (bleach)  y una parte que tenga referencias, texto, etc, etc
-
 -documentar todo en un README
 
 -implementar que todas las salidas y entradas de los programas que se llaman tengan en el nombre del archivo un id de la corrida a la que corresponden.

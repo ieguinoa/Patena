@@ -214,7 +214,7 @@ def elmSearch(sequence, mutationFreq,verbose):
   elmSearchFreq=[]
   for p in range(len(sequence)):
 	      elmSearchFreq.append(0)
-  inputFile="outputELM"
+  inputFile="outputELM"    #THE OUTPUT OF THE SEARCH CONTAINS THE LIST OF ELMs FOUND, NOW I HAVE TO PROCESS IT
   with open(inputFile, "r") as input_file:
     lines=input_file.readlines()
   for line in lines:
