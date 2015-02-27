@@ -27,6 +27,10 @@ ELM
 
 
 
+
+
+
+
 LO QUE FALTA:
 
 
@@ -34,8 +38,11 @@ LO QUE FALTA:
 
 -documentar todo en un README
 
+-traducir todo lo que falta a ingles
+
 -implementar que todas las salidas y entradas de los programas que se llaman tengan en el nombre del archivo un id de la corrida a la que corresponden.
 Para las entradas es simple porque el que crea el archivo de entrada es linkeado: creo una carpeta input+id y guardo el input (siempre es la secuencia nomas??)
+
 -Las salidas se guardarian en el directorio out+id , y dentro de esta cada una con el nombre del programa. Para esto, cada programa debe poder recibir el directorio en el cual escribir la salida.
 	BLAST: listo! linea 313
 	ANCHOR: editar ANCHOR/anchor.c
@@ -48,29 +55,53 @@ Para las entradas es simple porque el que crea el archivo de entrada es linkeado
 
 *******AGREGAR AL .gitignore LAS CARPETAS input.* Y output.*
 
+
 -HERRAMIENTAS QUE FALTAN:
 
 	-PASTA: Aggregation and secondary structure
 	http://www.ncbi.nlm.nih.gov/pubmed/24848016   (SUPUESTAMENTE LO TENGO QUE PEDIR ACA:http://protein.bio.unipd.it/download/)
-	Me tiro esto:  Status: accepted
-	Your details are being manually processed. An email with a randomly generated link will be sent to the email ignacio.eguinoa@gmail.com once our staff process the information
+	ya tengo el binario (para x86_64)  (supuestamente tengo que tener R instalado)
+	Usage: ./PastaPairs.pl [potential_file] [fasta_dir] [top_pairs] [graphics:1/0] [all/self/fasta_header] [energy cut-off]\n";
+	Ejemplo:   perl ./PastaPairs.pl pot_pasta.dat exampledir/ 10 0 self -5.5
+	solo deberia cambiar exampledir (poner el directorio donde esta el archivo de la secuencia FASTA) y self(no se cual de las 3 opciones va)
 
 
 	-LIMBO:Targeting by chaperones 
 	http://www.switchlab.org/bioinformatics/limbo
-	 ****NO ENCONTRE LINK PARA BAJARLO EN EL SITIO!!!! ESCRIBIRLES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!	
+	***PARA EJECUTAR     python score.py mergedmatrix.mat "inputfile(FASTA)"  "OUTPUTFILE"
+	YA ESTA LA FUNCION PARA LLAMAR A LIMBO "LISTA" ---*** FALTA LLAMARLA DESDE SequenceEvaluation
+	DESPUES BORRAR DEL SCRIPT DE LIMBO TODO LO QUE IMPRIME EN LA CONSOLA
+
+
+
+	-Helices transmembrana  YA TENGO EL BINARIO!!!
+	http://www.cbs.dtu.dk/services/TMHMM/
+	LO MEJOR ES REDIRIGIR LA SALIDA POR PANTALLA:   YA MODIFIQUE EL SCRIPT PARA QUE IMPRIMA SOLO:
+		inside	     1     4
+		TMhelix	     5    27
+		outside	    28    91
+		TMhelix	    92   114
+		inside	   115   150
+	ANALIZO TODAS LAS LINEAS Y VEO CUANDO DICE TMhelix (puede haber otra opcion transmembrana??)
+	SI ESTO FUNCIONA BIEN MODIFICAR DESPUES EL SCRIPT PARA QUE NO GENERE NINGUN OTRO OUTPUT AL PEDO:
+		EN EL ARCHIVO ../bin/tmhmm   hay una variable $wd que se define como TMHMM_$$  AHI CREA UN DIRECTORIO CON EL ID DEL PROCESO
+
+
+
 
 	-Amyloid  
 	http://www.ncbi.nlm.nih.gov/pubmed/20154676
 
+
 	-Amyloid
 	http://www.ncbi.nlm.nih.gov/pubmed/14691246
 
+
 	-Carga neta dada por el usuario
+
 
 	-Silente en UV (no tyr, trp, phe)
 
-	-Helices transmembrana  YA TENGO EL BINARIO!!!
-	http://www.cbs.dtu.dk/services/TMHMM/
+	
 
 

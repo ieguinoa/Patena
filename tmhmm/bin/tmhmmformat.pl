@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl -w
+#!/usr/bin/perl -w
 
 # This is version 2.0c of tmhmmformat.pl
 
@@ -176,19 +176,21 @@ sub print_stuff {
     }
     else {
 	print "<hr>\n<pre>\n" if ($opt_html);
-	print "# $id Length: $len\n";
-	print "# $id Number of predicted TMHs:  $ntmh\n";
+	#print "# $id Length: $len\n";
+	#print "# $id Number of predicted TMHs:  $ntmh\n";
 	if ($plpread) {
-	    print "# $id Exp number of AAs in TMHs: $aaexp\n";
-	    print "# $id Exp number, first $opt_Nterm AAs:  $Mstart\n";
-	    print "# $id Total prob of N-in:        $istart\n";
+	    #print "# $id Exp number of AAs in TMHs: $aaexp\n";
+	    #print "# $id Exp number, first $opt_Nterm AAs:  $Mstart\n";
+	    #print "# $id Total prob of N-in:        $istart\n";
 	    if ( $Mstart>$opt_signal ) {
-		print "# $id POSSIBLE N-term signal sequence\n";
+		#print "# $id POSSIBLE N-term signal sequence\n";
 	    }
 	}
 	for $p (@pred) {
 	    ( $type, $b, $e ) = split(/\s+/,$p);
-	    printf "$id\t$version\t$gffwords{$type}\t%6d%6d\n",$b,$e;
+	    #printf "$id\t$version\t$gffwords{$type}\t%6d%6d\n",$b,$e;
+            printf "$gffwords{$type}\t%6d%6d\n",$b,$e;
+
 	}
 	print "</pre><P>\n" if ($opt_html);
 
