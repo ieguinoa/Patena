@@ -33,17 +33,29 @@ ELM
 
 LO QUE FALTA:
 
+-MODIFICAR EL CODIGO DE ANCHOR Y IUPRED PARA QUE RECIBAN POR PARAMETRO EL NOMBRE DEL OUTPUT
 
--dividir el repo en 2:  una parte que tenga solo el codigo (bleach)  y una parte que tenga referencias, texto, etc, etc
+-dividir el repo en 2:  una parte que tenga solo el codigo (bleach)  y una parte que tenga las herramientas usadas, referencias, texto, etc.
+
+-cambiar todas las variables  mutationFreq, etc para que se llamen positionScores o sequenceScore o puntualScore 
 
 -documentar todo en un README
 
 -traducir todo lo que falta a ingles
 
+
+-agregar enter hits en todos los pasos de la evaluacion cuando se usa el metodo stepped
+
+-en las busqueda de patrones (ej. ELM, prosite?) mostrar mas detalladamente los datos de patrones encontrados
+
+-MEJORAR EL FORMATO DEL OUTPUT EN GENERAL- BUSCAR EN INTERNET COMO FORMATEARLO
+
+-implementar una opcion que NO imprima nada por salida
+
 -implementar que todas las salidas y entradas de los programas que se llaman tengan en el nombre del archivo un id de la corrida a la que corresponden.
 Para las entradas es simple porque el que crea el archivo de entrada es linkeado: creo una carpeta input+id y guardo el input (siempre es la secuencia nomas??)
 
--Las salidas se guardarian en el directorio out+id , y dentro de esta cada una con el nombre del programa. Para esto, cada programa debe poder recibir el directorio en el cual escribir la salida.
+-Las salidas se guardarian en el directorio output+outTool+id , y dentro de esta cada una con el nombre del programa. Para esto, cada programa debe poder recibir el directorio en el cual escribir la salida.
 	BLAST: listo! linea 313
 	ANCHOR: editar ANCHOR/anchor.c
 	TANGO: listo!  linea 460
