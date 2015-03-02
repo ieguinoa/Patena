@@ -11,3 +11,12 @@ REQUIREMENTS: python, perl, BLAST(in path?)(or run web BLAST which considerably 
 
 
 NOT TESTED ON WINDOWS!
+
+
+usage:   python bleach.py  [options]
+
+WHERE options:
+	
+	--seq [sequence]	Define initial sequence
+	--verbose		Write detailed output
+	--

@@ -16,17 +16,8 @@ export BLASTDB="$HOME/ncbi-blast-2.2.29+-src/db"
 
 
 IUPRED
--linkeado llama a iupred/iupredExe
+-linkeado llama a iupred/iupred
 -Se necesita una variable global que indique el path -  export IUPred_PATH=/home/tati/tesisBiotec/iupred/
-
-
-ELM
--la busqueda en si la hago dentro de una funcion definida en linkeado, asi que para modificar el nombre de la salida es muy facil
--usa un archivo con los motivos que actualmente se llama "elm_patterns_20140701.txt"
-
-
-
-
 
 
 
@@ -40,18 +31,7 @@ LO QUE FALTA:
 
 
 
--Las salidas se guardarian en el directorio output+outTool+id , y dentro de esta cada una con el nombre del programa. Para esto, cada programa debe poder recibir el directorio en el cual escribir la salida.
-	BLAST: listo! linea 313
-	ANCHOR: editar ANCHOR/anchor.c
-	TANGO: listo!  linea 460
-	IUpred: editar IUPRED/iupred.c
-	ELM search: listo! lineas 185 y 217
-	prosite: listo! no hace falta porque lee desde la salida std del proceso
-
-
 -dividir el repo en 2:  una parte que tenga solo el codigo (bleach)  y una parte que tenga las herramientas usadas, referencias, texto, etc.
-
--cambiar todas las variables  mutationFreq, etc para que se llamen positionScores o sequenceScore o puntualScore 
 
 -pasar todas las herramientas a la carpeta tool
 
@@ -59,20 +39,18 @@ LO QUE FALTA:
 
 -traducir todo lo que falta a ingles
 
+-Probar que ande bien la funcion --uvsilent   : Silente en UV (no tyr, trp, phe)
 
 -implementar una opcion que NO imprima nada por salida(usando verbose, que ya esta, preguntar antes de imprimir cualquier cosa!!)
 
 
 
--
 
-*******AGREGAR AL .gitignore LAS CARPETAS input.* Y output.*
+****************************************************
 
-
--HERRAMIENTAS QUE FALTAN:
+HERRAMIENTAS QUE FALTAN:
 
 	-PASTA: Aggregation and secondary structure
-	http://www.ncbi.nlm.nih.gov/pubmed/24848016   (SUPUESTAMENTE LO TENGO QUE PEDIR ACA:http://protein.bio.unipd.it/download/)
 	ya tengo el binario (para x86_64)  (supuestamente tengo que tener R instalado)
 	Usage: ./PastaPairs.pl [potential_file] [fasta_dir] [top_pairs] [graphics:1/0] [all/self/fasta_header] [energy cut-off]\n";
 	Ejemplo:   perl ./PastaPairs.pl pot_pasta.dat exampledir/ 10 0 self -5.5
@@ -84,12 +62,20 @@ LO QUE FALTA:
 	http://www.ncbi.nlm.nih.gov/pubmed/20154676
 
 
-
 	-Carga neta dada por el usuario
 
 
-	-Silente en UV (no tyr, trp, phe)
 
+
+
+
+*****************************************************************
+
+
+Pruebas a realizar:
+
+	
+Probar como cambia el numero de iteraciones necesarios
 	
 
 
