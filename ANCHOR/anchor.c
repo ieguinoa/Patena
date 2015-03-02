@@ -16,7 +16,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <math.h>
-
+#include <errno.h>
 
 #define max_line_len 1000
 #define AA "GAVLIFPSTCMWYNQDEKRH"
@@ -118,10 +118,10 @@ int main(int argc, char **argv)
   int *reg_filt;
   char *path;
   int verb=0;
-  char sp_name[1000];
+  //char sp_name[1000];
   int nrt,nrf;
 
-  if (argc<2) {Usage(argv[0]);}
+  if (argc<3) {Usage(argv[0]);}
   path=NULL;  
 
   if (argc>=2) {
@@ -133,9 +133,10 @@ int main(int argc, char **argv)
         path=calloc(strlen(argv[i]),sizeof(char));
         sprintf(path,"%s",argv[i]);
       }
-      else sprintf(sp_name,"%s",argv[i]);             
+      //else sprintf(sp_name,"%s",argv[i]);             
     }
   }
+  char *sp_name=argv[1];
   if (path==NULL) {
     if ((path=getenv("ANCHOR_PATH"))==NULL) {
       path=calloc(200,sizeof(char));
@@ -304,9 +305,12 @@ int main(int argc, char **argv)
 */
 
 FILE *f;
-char fn[]="outAnchor";
+//char fn[]="Output/sacaloAcaAncho";
+char *fn=argv[2];
   if ((f=fopen(fn,"w+"))==NULL) {
-    printf("Could not open %s\n",fn),exit(1);
+	//printf("something went wrong %s \n", strerror(errno));
+	//perror("algo paso");    
+	printf("Could not open %s\n",fn),exit(1);
   }
 
 int x;

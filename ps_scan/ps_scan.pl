@@ -1396,12 +1396,12 @@ sub dispHits {# display hits (for 1 sequence, 1 motif)
             $sq =~ /(.{1,60})/g if @$visible_hits;
     }
     else {# default output format
-        # fasta like header
+        # fasta like header                                    #****************ACA ESTA   EL FORMATO ESTANDAR (-o scan)********************
         if ( $opt_pfsearch ) {
             print ">$seqid : $de : $psac\n";
         }
         else {
-            print ">$seqid : $psac $psid $psde\n";
+            #print ">$seqid : $psac $psid $psde\n";                   #**********esto no deberia imprimirlo mas, lo imprimo para cada hit abajo***
         }
         # hits
         for my $hit ( @$visible_hits ) {
@@ -1410,7 +1410,9 @@ sub dispHits {# display hits (for 1 sequence, 1 motif)
             my $print_level = defined( $levelt ) ? " L=$levelt" :
                 defined( $leveln ) ? " L=$leveln" : "";
             my $fromto = "$from - $to";
-            print " " x ( 13-length $fromto ), $fromto;
+            #print " " x ( 13-length $fromto ), $fromto;
+	    print "$fromto $psac $psid $psde";						#**************ACA IMPRIMO COMO YO QUIERO**********
+	    #print "" $psde; 
             if ( $subseq ) {# pfscan output
                 $subseq =~ s/\n?$/\n/;# add \n to scanPattern output
                 $subseq =~ s/^(?<!\A)(.*)/ $1/mg;

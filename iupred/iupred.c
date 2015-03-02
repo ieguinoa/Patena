@@ -57,7 +57,7 @@ void            *my_malloc(size_t size);
 void 		IUPred(SEQ_STR *SEQ, P_STR *P);
 void 		getRegions(SEQ_STR *SEQ );
 void 		Get_Seq(char *fn, SEQ_STR *SEQ);
-void            Save_Results(SEQ_STR *SEQ);
+void            Save_Results(SEQ_STR *SEQ, char *fn);
 
 int LC, UC, WS;
 double Min_Ene;
@@ -76,8 +76,8 @@ int main(int argc, char **argv)
   
   
   
-  if (argc!=3) {
-    printf(" Usage: %s seqfile type \n",argv[0]);
+  if (argc!=4) {
+    printf(" Usage: %s seqfile type outputFile \n",argv[0]);
     printf("      where type stands for one of the options of \n");
     printf("      \"long\", \"short\" or \"glob\"\n");
     exit(1);
@@ -146,7 +146,7 @@ int main(int argc, char **argv)
     //printf("# %s\n",SEQ->name);
     for (i=0;i<SEQ->le;i++) 
       //printf("%5d %c %10.4f\n",i+1,SEQ->seq[i],SEQ->en[i]);
-    Save_Results(SEQ);
+    Save_Results(SEQ, argv[3]);
    }
   if (type==1) {
     LC=1;
@@ -299,7 +299,7 @@ void IUPred(SEQ_STR *SEQ, P_STR *P)
 }
 
 
-void Save_Results(SEQ_STR *SEQ)
+void Save_Results(SEQ_STR *SEQ, char *fn)
 {
   char line[ML];
   char c=0;
@@ -309,7 +309,7 @@ void Save_Results(SEQ_STR *SEQ)
   //if ((fn==NULL)||(strlen(fn)==0)) {
   //  printf("No sequence filename\n"),exit(1);
   //}
-  char fn[]="salida";
+  //char fn[]="salida";
   if ((f=fopen(fn,"w+"))==NULL) {
     printf("Could not open %s\n",fn),exit(1);
   }

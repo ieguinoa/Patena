@@ -1,17 +1,14 @@
 *.out
-*.input
 *.o
 
 #ejecutable de anchor
 ANCHOR/anchor
 
-#input de anchor (todos los inputs los cambie a .input para poder agregarle el id de la corrida )
-ANCHOR/input
-
 #ejecutable de iupred
-iupred/iupredExe
+iupred/iupred
 
-#salidas de todos (todos los outputs los cambie a .out para poder agregarles el id de la corrida)
-outAnchor
-outTango
-outputELM
+#salidas y entradas de todos
+Output/*
+Input/*
+
+TMHMM_*

@@ -140,7 +140,7 @@ def score(fastafile,matrixscores,peptide_length):
 			# get every possible heptapeptide for each sequence by sliding a hepta window over it
 			# ===================================================================================
 
-			print 'Scoring sequence ',name
+			#print 'Scoring sequence ',name
 
 			for i in range(len(sequence)-peptide_length+1):
 				heptaseq = sequence[i:i+peptide_length]
@@ -372,7 +372,7 @@ def writescorefile(fastafile,allseqs,maxseqs,averageseqs,multisite,allboltz):
 	# write the predicted binders to a file
 	# =====================================
 
-	print 'writing binders.txt'
+	#print 'writing binders.txt'
 	results = open(bindersresultsfile,'w')
 	for hit in allseqs:
 		if hit[2] >= threshold:
@@ -402,10 +402,10 @@ def writescorefile(fastafile,allseqs,maxseqs,averageseqs,multisite,allboltz):
 #				results.write(hit[0]+'\t'+prob[0]+'\t'+prob[1]+'\t'+str(prob[2])+'\n')
 #		results.close()
 
-	print 'Maximum scores per protein written to \'maxscores.txt\'.'
-	print 'All heptapeptide scores written to \'allscores.txt\'.'
-	print 'All predicted binders (above threshold) written to \'binders.txt\'.'
-	print 'Multisite information written to \'multisite.txt\'.'
+	#print 'Maximum scores per protein written to \'maxscores.txt\'.'
+	#print 'All heptapeptide scores written to \'allscores.txt\'.'
+	#print 'All predicted binders (above threshold) written to \'binders.txt\'.'
+	#print 'Multisite information written to \'multisite.txt\'.'
 
 	# write the score of the all heptawindows per protein sequence tabulated to a file
 	# ================================================================================

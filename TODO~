@@ -4,7 +4,7 @@ ANCHOR:
 
 
 PROSITE
--linkeado llama a un script perl que esta ubicado en $LINKEADO/ps_scan/ps_scan.pl
+-tengo que exportar una variable $PROSITE que indique la carpeta donde esta prosite.dat
 supuestamente este script llama a otros programas (pfscan, pfsearch, etc) que ya vienen compilados y se pueden bajar los binarios (ver ps_scan/README)
 en principio, la ubicacion de estos archivos tendria que estar incluida en el PATH ( export PATH=$PATH:/home/tati/ps_scan)
 -necesita ademas un archivo con la base de datos de prosite: el script va a ir a buscar el archivo prosite.dat (en el directorio $PROSITE ??)
@@ -33,27 +33,12 @@ ELM
 
 LO QUE FALTA:
 
--MODIFICAR EL CODIGO DE ANCHOR Y IUPRED PARA QUE RECIBAN POR PARAMETRO EL NOMBRE DEL OUTPUT
-
--dividir el repo en 2:  una parte que tenga solo el codigo (bleach)  y una parte que tenga las herramientas usadas, referencias, texto, etc.
-
--cambiar todas las variables  mutationFreq, etc para que se llamen sequenceScore o puntualScore o positionScores
-
--documentar todo en un README
-
--traducir todo lo que falta a ingles
+-modificar  install.sh  para que se exporten todas las variables :
+			 ANCHOR_PATH=/home/tati/tesisBiotec/codigoBiotec/ANCHOR
+			 BLASTDB="$HOME/ncbi-blast-2.2.29+-src/db"
+			IUPred_PATH=/home/tati/tesisBiotec/iupred/
 
 
--agregar enter hits en todos los pasos de la evaluacion cuando se usa el metodo stepped
-
--en las busqueda de patrones (ej. ELM, prosite?) mostrar mas detalladamente los datos de patrones encontrados
-
--MEJORAR EL FORMATO DEL OUTPUT EN GENERAL- BUSCAR EN INTERNET COMO FORMATEARLO
-
--implementar una opcion que NO imprima nada por salida
-
--implementar que todas las salidas y entradas de los programas que se llaman tengan en el nombre del archivo un id de la corrida a la que corresponden.
-Para las entradas es simple porque el que crea el archivo de entrada es linkeado: creo una carpeta input+id y guardo el input (siempre es la secuencia nomas??)
 
 -Las salidas se guardarian en el directorio output+outTool+id , y dentro de esta cada una con el nombre del programa. Para esto, cada programa debe poder recibir el directorio en el cual escribir la salida.
 	BLAST: listo! linea 313
@@ -64,6 +49,22 @@ Para las entradas es simple porque el que crea el archivo de entrada es linkeado
 	prosite: listo! no hace falta porque lee desde la salida std del proceso
 
 
+-dividir el repo en 2:  una parte que tenga solo el codigo (bleach)  y una parte que tenga las herramientas usadas, referencias, texto, etc.
+
+-cambiar todas las variables  mutationFreq, etc para que se llamen positionScores o sequenceScore o puntualScore 
+
+-pasar todas las herramientas a la carpeta tool
+
+-documentar todo en un README
+
+-traducir todo lo que falta a ingles
+
+
+-implementar una opcion que NO imprima nada por salida(usando verbose, que ya esta, preguntar antes de imprimir cualquier cosa!!)
+
+
+
+-
 
 *******AGREGAR AL .gitignore LAS CARPETAS input.* Y output.*
 
@@ -78,35 +79,10 @@ Para las entradas es simple porque el que crea el archivo de entrada es linkeado
 	solo deberia cambiar exampledir (poner el directorio donde esta el archivo de la secuencia FASTA) y self(no se cual de las 3 opciones va)
 
 
-	-LIMBO:Targeting by chaperones 
-	http://www.switchlab.org/bioinformatics/limbo
-	***PARA EJECUTAR     python score.py mergedmatrix.mat "inputfile(FASTA)"  "OUTPUTFILE"
-	YA ESTA LA FUNCION PARA LLAMAR A LIMBO "LISTA" ---*** FALTA LLAMARLA DESDE SequenceEvaluation
-	DESPUES BORRAR DEL SCRIPT DE LIMBO TODO LO QUE IMPRIME EN LA CONSOLA
 
-
-
-	-Helices transmembrana  YA TENGO EL BINARIO!!!
-	http://www.cbs.dtu.dk/services/TMHMM/
-	LO MEJOR ES REDIRIGIR LA SALIDA POR PANTALLA:   YA MODIFIQUE EL SCRIPT PARA QUE IMPRIMA SOLO:
-		inside	     1     4
-		TMhelix	     5    27
-		outside	    28    91
-		TMhelix	    92   114
-		inside	   115   150
-	ANALIZO TODAS LAS LINEAS Y VEO CUANDO DICE TMhelix (puede haber otra opcion transmembrana??)
-	SI ESTO FUNCIONA BIEN MODIFICAR DESPUES EL SCRIPT PARA QUE NO GENERE NINGUN OTRO OUTPUT AL PEDO:
-		EN EL ARCHIVO ../bin/tmhmm   hay una variable $wd que se define como TMHMM_$$  AHI CREA UN DIRECTORIO CON EL ID DEL PROCESO
-
-
-
-
-	-Amyloid  
+	-Amyloid  *****WALTZ ****  PEDIR EL CODIGO 
 	http://www.ncbi.nlm.nih.gov/pubmed/20154676
 
-
-	-Amyloid
-	http://www.ncbi.nlm.nih.gov/pubmed/14691246
 
 
 	-Carga neta dada por el usuario
