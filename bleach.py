@@ -18,6 +18,8 @@ import subprocess
 
 
 
+def getScriptPath():
+    return os.path.dirname(os.path.realpath(sys.argv[0]))
 
 #****************************************
 # CHOSE AN ITEM OF A PAIRLIST (ID, WEIGHT) , BASED ON WEIGHTS
@@ -49,9 +51,10 @@ targetScore=0.0
 output=True  ##print info to file
 mutAttempts=0
 stepByStep=False
-toolsPath=""   #SET THE PATH TO THE TOOL SET 
-inputsPath="Input/"+ str(exeId) + "/" #SET PATH TO SAVE INPUTS FILES
-outputsPath="Output/" + str(exeId) + "/"
+basePath=getScriptPath()
+toolsPath=basePath + "/"   #SET THE PATH TO THE TOOL SET 
+inputsPath=basePath + "/Input/"+ str(exeId) + "/" #SET PATH TO SAVE INPUTS FILES
+outputsPath=basePath + "/Output/" + str(exeId) + "/"
 try:
     os.makedirs("Input")
 except OSError as exc: 
@@ -512,13 +515,14 @@ def amyloidPatternSearch(sequence, positionScores,verbose):
 
 
 def tangoSearch(sequence, positionScores,verbose):
-  outputTango= outputsPath+"outputTango"
-  
-  runCommand=toolsPath + 'tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="' + sequence + '" > ' + outputTango
-  print runCommand 
+  outputTango= outputsPath+"tangoResults.txt"
+  #COULD NOT CHANGE THE OUTPUT PATH OF TANGO SO I HAVE TO CHANGE DIR MOMENTLY TO GET THE OUTPUT 
+  os.chdir(outputsPath) 
+  runCommand=toolsPath + 'tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="' + sequence + '" > /dev/null'
+  #print runCommand 
   os.system(runCommand)
   outputTango=open(outputTango,'r')
-  
+  os.chdir(basePath)
   tangoScores=[]
   for p in range(len(sequence)):
     tangoScores.append(0)
@@ -643,7 +647,7 @@ def sequenceEvaluation(sequence, positionScores, verbose):
 	   print endl
 	   print indent + "*************************************"
 	   #print indent + "STARTING BLAST SEARCH"
-	blastIt(sequence,positionScores,database, verbose)
+	#blastIt(sequence,positionScores,database, verbose)
         if stepByStep:
 	  raw_input(indent + "Hit enter to continue with next evaluation")
 	    
@@ -1120,8 +1124,9 @@ while globalScore > 0 and iteration <= maxIterations:
 	print indent + "Global score: " + str(mutatedScore)
 	print ""
       if previousScore >= getGlobalScore(positionScores):
-	  print indent + "Previous score (" + str(previousScore) + ") >= Mutated score (" + str(mutatedScore) + ")" 
-	  print indent + "...ACCEPT MUTATION"
+	  if verbose:
+	  	print indent + "Previous score (" + str(previousScore) + ") >= Mutated score (" + str(mutatedScore) + ")" 
+	  	print indent + "...ACCEPT MUTATION"
 	  if stepByStep:
 	    raw_input("")
 	  break
@@ -1129,35 +1134,42 @@ while globalScore > 0 and iteration <= maxIterations:
 	  #return mutatedSequence
       else:
 	  #DECISION BASED ON MONTE CARLO
-	  print indent + "Previous score (" + str(previousScore) + ") < Mutated score (" + str(mutatedScore) + ")" 
+	  if verbose:	
+		print indent + "Previous score (" + str(previousScore) + ") < Mutated score (" + str(mutatedScore) + ")" 
 	  diff=previousScore-getGlobalScore(mutatedScores)
-	  print indent + "SCORE DIFFERENCE:" + str(diff)
+	  if verbose:
+	  	print indent + "SCORE DIFFERENCE:" + str(diff)
 	  exponent=diff/beta
 	  MCvalue=math.exp(exponent)
-	  #print "  :" + str(exponent)
-	  print indent + "MC VALUE:" + str(MCvalue)     #e^(dif/beta)
+	  if verbose:
+	  	#print "  :" + str(exponent)
+	  	print indent + "MC VALUE:" + str(MCvalue)     #e^(dif/beta)
 	  
 	  #GENERATE RANDOM NUMBER BETWEEN 0 AND 1
 	  randy=random.random()
+	  if verbose:
 	  print indent + "RANDOM VALUE [0,1]:" + str(randy)
 	  #print indent + "MONTE CARLO DECISION:"
 	  if MCvalue > randy:
 	    #ACCEPT MUTATION
-	    print indent + "...ACCEPT MUTATION"
+	    if verbose:
+	    	print indent + "...ACCEPT MUTATION"
 	    if stepByStep:
 	      raw_input("")
 	      #raw_input(indent + "Hit enter to continue with next iteration")
 	    #return mutatedSequence
 	    break
 	  else:	    
-	    #print "El score original " + str(getGlobalScore(mutatedScores)) + " es mayor que "+ str(getGlobalScore(positionScores))
-	    print indent + " Mutation score (" + str(mutatedScore) + ") >= Previous score (" + str(previousScore) + ")" 
-	    print indent + "...DENY MUTATION"
+	    if verbose:
+	    	#print "El score original " + str(getGlobalScore(mutatedScores)) + " es mayor que "+ str(getGlobalScore(positionScores))
+	    	print indent + " Mutation score (" + str(mutatedScore) + ") >= Previous score (" + str(previousScore) + ")" 
+	    	print indent + "...DENY MUTATION"
 	    if stepByStep:
 	      raw_input(indent + "Hit enter to continue with next attempt")
 	    #return sequence
 	    #break
-      print "*************************************"
+      if verbose:
+      	print "*************************************"
     #return sequence
   #else:
   #return sequence
