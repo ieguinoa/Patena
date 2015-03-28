@@ -5,7 +5,7 @@ Patena
 
 Insallation guide:
 
-clone this repo: git clone ...
+clone this repo: git clone 
 source install.sh
 DONE!
 
