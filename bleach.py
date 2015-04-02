@@ -1148,7 +1148,7 @@ while globalScore > 0 and iteration <= maxIterations:
 	  #GENERATE RANDOM NUMBER BETWEEN 0 AND 1
 	  randy=random.random()
 	  if verbose:
-	  print indent + "RANDOM VALUE [0,1]:" + str(randy)
+	  	print indent + "RANDOM VALUE [0,1]:" + str(randy)
 	  #print indent + "MONTE CARLO DECISION:"
 	  if MCvalue > randy:
 	    #ACCEPT MUTATION
