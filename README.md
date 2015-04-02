@@ -9,7 +9,7 @@ clone this repo: git clone
 source install.sh
 DONE!
 
-REQUIREMENTS: python, perl, biopythin, BLAST(in path?)(or run web BLAST which considerably increases running time) 
+REQUIREMENTS: python, perl, biopython, BLAST(in path?)(or run web BLAST which considerably increases running time) 
 
 
 NOT TESTED ON WINDOWS!
