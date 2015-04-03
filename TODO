@@ -43,6 +43,11 @@ LO QUE FALTA:
 
 -Probar que ande bien la funcion --uvsilent   : Silente en UV (no tyr, trp, phe)
 
+-Probar que ande bien --netCharge 
+
+-Incluir ph por parametro??? algunas herramientas lo tienen en cuenta y se puede tener en cuenta para saber cual es la carga neta de cada AA
+(actualmente asumo ph=7)
+
 -buscar si es posible imprimir el output por paginas tipo multitail o algo asi. probar guardando en un archivo y mostrando
 
 
@@ -56,9 +61,6 @@ HERRAMIENTAS QUE FALTAN:
 	Ejemplo:   perl ./PastaPairs.pl pot_pasta.dat exampledir/ 10 0 self -5.5
 	solo deberia cambiar exampledir (poner el directorio donde esta el archivo de la secuencia FASTA) y self(no se cual de las 3 opciones va)
 
-
-	
-	-Carga neta dada por el usuario
 
 
 

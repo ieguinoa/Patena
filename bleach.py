@@ -44,6 +44,7 @@ beta=0.1
 match=False
 rand=True
 change=True
+evaluateNetCharge=False
 verbose=False
 blastWeb=False  #BLAST SEARCH LOCAL OR WEB
 blastIt=True
@@ -264,6 +265,79 @@ def prositeSearch(sequence, positionScores,verbose):
                                          
 
 
+##*************************************
+
+
+
+  ######################################################################################
+  ##########################       CHARGE SEARCH      #####################################
+  ######################################################################################
+
+
+
+def chargedSearch(sequence, positionScores,verbose):
+   
+  chargeScores=[]
+  
+  #FIRST EVALUATE THE NET CHARGE OF SEQUENCE
+  netCharge=0
+  for p in range(len(sequence)):
+      	if (sequence[p]=='K') or (sequence[p]=='R') or (sequence[p]=='H'):
+	  #IF POSITIVELY CHARGED
+	  netCharge+=1
+	else:
+	  if (sequence[p]=='E') or (sequence[p]=='D'): 
+	    #IF NEGATIVELY CHARGED 
+	    netCharge-=1
+
+
+  #SET SCORE VALUES BASED ON NET-CHARGE IMPULSE
+  if netCharge > targetNetCharge:
+    #AIMING FOR A MORE NEGATIVE NET CHARGE
+    for p in range(len(sequence)):
+	if (sequence[p]=='K') or (sequence[p]=='R') or (sequence[p]=='H'):
+	  #POSITIVELY CHARGED AA
+	  chargeScores.append(2)
+	else:
+	  if (sequence[p]=='E') or (sequence[p]=='D'): 
+	    #IF NEGATIVELY CHARGED 
+	    chargeScores.append(0)
+	  else:
+	    #NEUTRAL AA
+	    chargeScores.append(1)
+	    
+  else:
+    if netCharge < targetNetCharge:
+      #AIMING FOR A MORE POSITIVE NET CHARGE
+      for p in range(len(sequence)):
+		if (sequence[p]=='K') or (sequence[p]=='R') or (sequence[p]=='H'):
+		  chargeScores.append(0)
+		else:
+		  if (sequence[p]=='E') or (sequence[p]=='D'): 
+		    #IF NEGATIVELY CHARGED 
+		    chargeScores.append(2)
+		  else:
+		    #NEUTRAL AA
+		    chargeScores.append(1)
+    else:
+      #THE NET CHARGE IS CORRECT
+      for p in range(len(sequence)):
+	chargeScores.append(0)
+      
+  
+  if verbose:
+    #print endl
+    print indent + "Charge search RESULTS:"
+    print indent + sequence
+    print indent + ''.join(map(str, chargeScores))	  
+  
+  ##ADD hits to global score
+  for i in range(len(sequence)):
+    positionScores[i]+=chargeScores[i]
+  
+  
+
+                                 
 
 
 
@@ -725,6 +799,15 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
         elmSearch(sequence,positionScores, verbose)
 	if stepByStep:
 	  raw_input(indent + "Hit enter to continue with next evaluation")
+	
+	if evaluateNetCharge:
+	  if verbose:
+	    print endl
+	    print indent + "*************************************"
+	    print indent + "STARTING charge Search"
+	  #chargeSearch(sequence,positionScores, verbose)
+	  if stepByStep:
+	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  
 	if verbose:
 	  print endl
@@ -986,7 +1069,10 @@ else:
     elif (arg=='--blastweb'):
       blastWeb=True
     elif (arg=='--uvsilent'):
-      uvsilent=True  
+      uvsilent=True 
+    elif (arg=='--netcharge') and (index < len(sys.argv)):
+      targetNetCharge = int(sys.argv[index+1])
+      evaluateNetCharge=True
     elif (arg=='--verbose'):
       verbose=True
     elif (arg=='--stepped'):
@@ -1038,15 +1124,25 @@ else:
 	    y=int(sys.argv[j+1])
 	  elif(sys.argv[j]=='-v'):
 	    v=int(sys.argv[j+1])
-	
+
+
+#CHECK IF TARGET NET CHARGE IS POSSIBLE BASED ON SEQUENCE LENGTH (AND PH??)
+  if abs(targetNetCharge) > length:
+    print 'Net charge is impossible to reach with the specified sequence length'
+    exit()
+  
+  
+  
   print "************************************************"
   print "************************************************"
   print "VALUES:"
   print "length=" + str(length) 
   print "composition=" + composition
-  print "sequence=" + sequence +endl
+  print "sequence=" + sequence
+  print "target net charge=" + str(targetNetCharge)
   print "************************************************"
   print "************************************************"
+
 
 
 
