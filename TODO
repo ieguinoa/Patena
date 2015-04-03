@@ -29,11 +29,13 @@ LO QUE FALTA:
 			 BLASTDB="$HOME/ncbi-blast-2.2.29+-src/db"
 			IUPred_PATH=/home/tati/tesisBiotec/iupred/
 
-
+-modificar install.sh para exportar una variable que defina la arquitectura (o que defina directamente el ejecutable de tango (32 o 64))
 
 -dividir el repo en 2:  una parte que tenga solo el codigo (bleach)  y una parte que tenga las herramientas usadas, referencias, texto, etc.
 
 -pasar todas las herramientas a la carpeta tool
+
+-chequear que onda con la herramienta tmhmm que genera carpetas TMHMM_*
 
 -documentar todo en un README
 
@@ -55,11 +57,7 @@ HERRAMIENTAS QUE FALTAN:
 	solo deberia cambiar exampledir (poner el directorio donde esta el archivo de la secuencia FASTA) y self(no se cual de las 3 opciones va)
 
 
-
-	-Amyloid  *****WALTZ ****  PEDIR EL CODIGO 
-	http://www.ncbi.nlm.nih.gov/pubmed/20154676
-
-
+	
 	-Carga neta dada por el usuario
 
 
