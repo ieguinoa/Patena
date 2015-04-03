@@ -56,13 +56,21 @@ waltzThreshold=79.0
 toolsPath=basePath + "/"   #SET THE PATH TO THE TOOL SET 
 inputsPath=basePath + "/Input/"+ str(exeId) + "/" #SET PATH TO SAVE INPUTS FILES
 outputsPath=basePath + "/Output/" + str(exeId) + "/"
+
+
+
+#####CREATE INPUT AND OUTPUT DIRS
 try:
     os.makedirs("Input")
 except OSError as exc: 
     if exc.errno == errno.EEXIST and os.path.isdir("Input"):
         pass
 
-
+try:
+    os.makedirs("Output")
+except OSError as exc: 
+    if exc.errno == errno.EEXIST and os.path.isdir("Output"):
+        pass
 
 
 #AA FREQUENCIES TO SELECT NEW RESIDUES FOR MUTATIONS (from http://web.expasy.org/protscale/pscale/A.A.Swiss-Prot.html) 
@@ -679,7 +687,10 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	input.write(">gi" + endl)
 	input.write(sequence)
 	input.close()
-	
+	if verbose:
+	   print endl
+	   print indent + "*************************************"
+	   print indent + "FIRST PARTIAL EVALUATION"
 	###: BLAST SEARCH
 	#if verbose:
 	   #print endl
@@ -691,7 +702,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    
         ## IUPred evaluation
 	if verbose:
-	  print endl
+	  #print endl
 	  print indent + "*************************************"
 	  #print indent + "STARTING IUPred"
 	iupred(sequence, positionScores, verbose)
@@ -751,6 +762,15 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
         if stepByStep:
 	  raw_input(indent + "Hit enter to continue with next evaluation")
 	  
+	if verbose:
+	  print endl
+	  print indent + "*************************************"
+	  print indent + "Starting Waltz evaluation"
+        #waltzSearch(sequence,positionScores, verbose)
+        print ("*-**********AGREGAR WALTZ Y PROBAR QUE FUNCIONE BIEN*******************")
+        if stepByStep:
+	  raw_input(indent + "Hit enter to continue with next evaluation")
+	  
         if verbose:
 	  print endl
 	  print indent + "*************************************"
@@ -769,10 +789,10 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
         if verbose:
 	  print indent + "*************************************"
 	  print endl
-	  print indent + "FINAL RESULTS:"
+	  print indent + "RESULTS OF FIRST PARTIAL EVALUATION:"
 	  print indent + sequence
 	  print indent + ''.join(map(str, positionScores))
-	  print indent + "GLOBAL SCORE:" + str(getGlobalScore(positionScores))
+	  print indent + "SCORE:" + str(getGlobalScore(positionScores))
 	  print indent + "*************************************"
 	if stepByStep:
 	  raw_input(indent + "....hit enter to continue")
@@ -799,6 +819,8 @@ def secondPartialEvaluation(sequence, positionScores, verbose):
 	
 	##: BLAST SEARCH
 	if verbose:
+	   print indent + "*************************************"
+	   print indent + "SECOND PARTIAL EVALUATION"
 	   print endl
 	   print indent + "*************************************"
 	   #print indent + "STARTING BLAST SEARCH"
@@ -816,10 +838,10 @@ def secondPartialEvaluation(sequence, positionScores, verbose):
         if verbose:
 	  print indent + "*************************************"
 	  print endl
-	  print indent + "FINAL RESULTS:"
+	  print indent + "RESULTS OF SECOND PARTIAL EVALUATION:"
 	  print indent + sequence
 	  print indent + ''.join(map(str, positionScores))
-	  print indent + "GLOBAL SCORE:" + str(getGlobalScore(positionScores))
+	  print indent + "SCORE:" + str(getGlobalScore(positionScores))
 	  print indent + "*************************************"
 	if stepByStep:
 	  raw_input(indent + "....hit enter to continue")
@@ -843,7 +865,7 @@ def secondPartialEvaluation(sequence, positionScores, verbose):
 
 
 
-def mutation(evaluationFunction):
+#def mutation(evaluationFunction):
 
 
 
@@ -1085,11 +1107,12 @@ if rand==True:
 
 #CREATE ARRAY TO SAVE MUTATION FREQUENCY
 positionScores=[]
+partialScores=[]
 mutatedScores=[]
 for p in range(len(sequence)):
   positionScores.append(0)
   mutatedScores.append(0)
-
+  partialScores.append(0)
 
 
 time0 = time.time()   #start time
@@ -1107,6 +1130,7 @@ indent=""
 for p in range(len(sequence)):
   #positionScores.append(0)
   positionScores[p]=0
+  partialScores[p]=0
 
 
 
@@ -1114,27 +1138,53 @@ if verbose:
   print "*****************************"
   print " INITIAL EVALUATION "
   print "*****************************"    
-#EVALUATE INITIAL SEQUENCE
-sequenceEvaluation(sequence,positionScores, verbose)	
-globalScore= getGlobalScore(positionScores)
+
+
+
+##################################
+#########EVALUATE INITIAL SEQUENCE
+##################################
+
+#MAKE BOTH PARTIAL EVALUATIONS TO GET A GLOBAL SCORE
+
+#FIRST SET OF EVALUATIONS
+firstPartialEvaluation(sequence, partialScores, verbose)
+
+#SAVE RESULTS
+firstPartialScore=getGlobalScore(partialScores)
+firstPartialScores=partialScores
+
+#ADD THE SCORE TO THE GLOBAL SCORE AND RESET PARTIAL LIST
+for p in range(len(sequence)):
+  positionScores[p]=positionScores[p]+partialScores[p]
+  partialScores[p]=0
+
+#SECOND PART OF EVALUATION
+secondPartialEvaluation(sequence, partialScores,verbose)
+secondPartialScore=getGlobalScore(partialScores)
+
+#ADD THE SCORE TO THE GLOBAL SCORE AND RESET PARTIAL LIST
+for p in range(len(sequence)):
+  positionScores[p]=positionScores[p]+partialScores[p]
+  partialScores[p]=0
+
+##SUM OF SCORES LIST
+globalScore=getGlobalScore(positionScores)
 
 if verbose:
+  print "*******************************************"
+  print "INITIAL EVALUATION RESULTS"
+  print "First partial score   : "  + str(firstPartialScore)
+  print "Second partial score  : " + str(secondPartialScore) 
+  print "Global score          : " + str(globalScore)
+  print endl
+  print "*******************************************"
   print "*****************************"
   print "*****************************"
   print endl
   print endl
-
-
-
-
-
-
-
-
-
-
-
-
+  if stepByStep:
+    raw_input("Hit enter to start mutating")
 
 
 
@@ -1158,10 +1208,9 @@ while globalScore > 0 and iteration <= maxIterations:
     print "*****************************"
     print "STARTING GLOBAL ITERATION " + str(globalIteration)
     print "*****************************"
-  
-    print "Current sequence: " + sequence
-    print "Current score:    " + ''.join(map(str, positionScores))
-    print "Current global score:    " + str(globalScore)
+    print "Current sequence:         " + sequence
+    print "Current total scores:     " + ''.join(map(str, positionScores))
+    print "Current global score:     " + str(globalScore)
   if stepByStep: 
     if verbose:
 	raw_input("Hit enter to start first round of evaluations")
@@ -1181,11 +1230,10 @@ while globalScore > 0 and iteration <= maxIterations:
   ######  FIRST ROUND OF EVALUATIONS - MUTATIONS
   #################################################
   
-   
-  #previousScore=getGlobalScore(positionScores)    #CHANGE THIS!!!!
-  #if previousScore > 0:
-  firstPartialEvaluation(sequence,positionScores, verbose)	
-  partialScore=getGlobalScore(positionScores)  
+  if verbose:
+    print "FIRST ROUND OF MUTATIONS: DECISION IS BASED ON (RESULTS OF)FIRST SET OF TOOLS" 
+  
+  partialScore=firstPartialScore
   while partialScore > 0 and iteration <= maxIterations:
       weighted=[]
       #weighted IS A PAIRLIST(position,weight)
@@ -1311,7 +1359,7 @@ while globalScore > 0 and iteration <= maxIterations:
 		#return sequence
 		#break
 	  if verbose:
-	    print "*************************************"
+	    print indent + "*************************************"
 	
 
 
@@ -1353,9 +1401,7 @@ while globalScore > 0 and iteration <= maxIterations:
       if stepByStep:
 	raw_input("Hit enter to continue with next iteration")
 		
-      iteration=iteration+1   #TOTATL NUMBER OF ITERATIONS
-      
-      
+      iteration=iteration+1   #TOTAL NUMBER OF ITERATIONS
       
       
       
@@ -1363,24 +1409,32 @@ while globalScore > 0 and iteration <= maxIterations:
       
 
 
-####################################################
-##### SECOND ROUND OF EVALUATION - MUTATION  #######
-###################################################
+  #RESET LIST OF PARTIAL SCORES
+  for p in range(len(sequence)):
+    partialScores[p]=0
 
-  secondPartialEvaluation(sequence,positionScores, verbose)	
-  partialScore=getGlobalScore(positionScores)  
+  ####################################################	
+  ##### SECOND ROUND OF EVALUATION - MUTATION  #######
+  ####################################################
+  
+  
+  secondPartialEvaluation(sequence,partialScores, verbose)	
+  partialScore=getGlobalScore(partialScores)  
   while partialScore > 0 and iteration <= maxIterations:
       weighted=[]
       #weighted IS A PAIRLIST(position,weight)
       #CONTAINS THE WEIGHT USED TO SELECT THE MUTATION POSITION. EACH ELEMENT IS A PAIR (X, WEIGHT), WHERE X= POSITION AND EIGHT IS = (SCORE(X) + A BASE WEIGHT)
-      for x in range(len(positionScores)):
-	weighted.append((x, positionScores[x]+1))    #the weight is score+1 - this gives a slight chance to all the position to suffer mutation
+      for x in range(len(partialScores)):
+	weighted.append((x, partialScores[x]+1))    #the weight is score+1 - this gives a slight chance to all the position to suffer mutation
       
       
+      #MUTATION ATTEMPTS
+      #INSIDE THIS LOOP, THE VARIABLE partialScore IS NOT MODIFIED. ONLY COMPARED TO THE MUTATED SCORES
+      #THE LOOP ENDS WHEN A MUTATION IS ACCEPTED OR WHEN A LIMIT OF ATTEMPTS IS REACHED
       mutAttempts=0       #COUNT MUTATIONS ATTEMPTS
       while 10000 > mutAttempts:    ##JUST A SYMBOLIC MAX. AMOUNT OF MUTATIONS ATTEMPTS
 	  mutAttempts+=1
-	  
+
 	  indent = tab + tab    #output formatting 
 	  #SELECT A POSITION 
 	  if verbose:
@@ -1438,7 +1492,7 @@ while globalScore > 0 and iteration <= maxIterations:
 	    print indent + "DECISION"
 	    print indent + "Previous sequence"
 	    print indent + sequence
-	    print indent + ''.join(map(str, positionScores))
+	    print indent + ''.join(map(str, partialScores))
 	    print indent + "Global score: " + str(partialScore)
 	    print ""
 	    print indent + "Mutated sequence"
@@ -1446,7 +1500,7 @@ while globalScore > 0 and iteration <= maxIterations:
 	    print indent + ''.join(map(str, mutatedScores))
 	    print indent + "Global score: " + str(mutatedScore)
 	    print ""
-	  if partialScore >= getGlobalScore(positionScores):
+	  if partialScore >= mutatedScore:
 	      if verbose:
 		    print indent + "Previous score (" + str(partialScore) + ") >= Mutated score (" + str(mutatedScore) + ")" 
 		    print indent + "...ACCEPT MUTATION"
@@ -1499,16 +1553,18 @@ while globalScore > 0 and iteration <= maxIterations:
       
     
       #####END OF MUTATION ITERATION
-      if mutAttempts < 10000:   #MAKE SURE LOOP ENDED BY MUTATION ACCEPT
+
+      #MAKE SURE LOOP ENDED BY MUTATION ACCEPT
+      if mutAttempts < 10000:   
 	    #print endl
 	    print endl
 	    #print "Sequence after mutation:    " + mutatedSequence
 	    ###NOW THE SEQUENCE IS THE MUTATED SEQUENCE
 	    sequence=mutatedSequence
-	    #AND THE POSITION SCORES ARE THE ONES CORRESPONDING TO THE MUTATED SEQUENCE
-	    positionScores=mutatedScores
+	    #AND THE SCORES ARE THE ONES CORRESPONDING TO THE MUTATED SEQUENCE
+	    partialScores=mutatedScores
 	    #AND THE GLOBAL SEQUENCE SCORE IS THE ONE CORRESPONDING TO THIS NEW SEQUENCE
-	    partialScore= getGlobalScore(positionScores)
+	    partialScore= getGlobalScore(partialScores)
 	    print "Attempts before mutation accept:" + str(mutAttempts)
 	    #print endl
 	    print "*******************************************"
@@ -1526,7 +1582,7 @@ while globalScore > 0 and iteration <= maxIterations:
 	mutationsFile.write(str(iteration)+ tab + str(mutAttempts) + tab +str(beta) + endl)
 	
 	#SCORES Vs. ITERATION NUMBER
-	scoresOutputFile.write(str(iteration)+ tab + str(globalScore) + tab + str(beta) + endl)
+	scoresOutputFile.write(str(iteration)+ tab + str(partialScore) + tab + str(beta) + endl)
 	
 	#ITERATION ELAPSED TIME
 	timeX=time.time()-timePrev   #ITERATION TIME
@@ -1539,19 +1595,26 @@ while globalScore > 0 and iteration <= maxIterations:
 
 
 
-
-
-
-
-
-
-
-
-
-
-##AT THE END OF EACH GLOBAL ITERATION, THE SCORE CORRESPONDING TO  
+  if verbose:
+    print "SECOND ROUND OF EVALUATIONS FINISHED"
+    if stepByStep:
+      raw_input("HIT ENTER TO GET CURRENT GLOBAL SCORE")
+  ##AT THE END OF THE SECOND ROUND, THE SCORE CORRESPONDING TO THE SECOND PARTIAL EVALUATION IS 0 (EXCEPT WHEN THE NUMBER OF ITERATIONS IS EXCEEDED)....
+  #THEN, GLOBAL SCORE IS DEFINED BY THE FIRST PARTIAL EVALUATION
+  for p in range(len(sequence)):
+    positionScores[p]=0
+  firstPartialEvaluation(sequence, positionScores , verbose )
+  globalScore=getGlobalScore(positionScores)
   globalIteration=globalIteration+1;  
-
+  
+  #PRINT RESULTS OF GLOBAL ITERATION
+  print "*******************************************"	     
+  print "End of global iteration " + str(iteration)
+  print "Global score :    " + str(globalScore)
+  print "*******************************************"
+  print endl
+  if stepByStep:
+	raw_input("Hit enter to continue with next iteration")
 
 
 
