@@ -22,7 +22,7 @@ $opt_wwwdir = ".";   # The place where the www server looks for files
 $opt_serverhome = ".";
 $opt_html = 0;       # Produce HTML output
 $opt_short = 0;      # Short output format
-$opt_plot = 1;       # Produce graphics
+$opt_plot = 0;       # Produce graphics
 $opt_v1 = 0;         # Use old model (version 1)
 
 # Process options

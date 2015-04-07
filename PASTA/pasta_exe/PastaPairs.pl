@@ -64,8 +64,14 @@ open(fi, ">$workdir/energy");
 print fi "$energy";
 close fi;
 
-system("mkdir $workdir/graphs");
-system("mkdir $workdir/data");
+
+# # # # # # # # # 
+# ESTO LO COMENTE YO!!!
+# system("mkdir $workdir/graphs");
+# system("mkdir $workdir/data");
+# # # # # # # # # 
+
+
 
 $junk = "";
 
@@ -159,9 +165,9 @@ if ($oneallid eq "all") {
 		
 	
 			#print "\nTRYING: pasta_exe potential sequence_1 sequence_1 profile_1 free_energy_1 profile_2 free_energy_2 prob_matrix free_matrix best_pairings out_seq_1 out_seq_2 LMIN LMAX top_pairs MATRIX_CALC small_scale\n";
-	    	    	#print "\n\nTRYING: $curdir/$pastabin $pastaPot $fname.seq $fname2.seq $workdir/$pair1-$pair2.aggr_profile1.pair.dat $workdir/$pair1-$pair2.free_energy1.dat.pair.dat $workdir/$pair1-$pair2.aggr_profile2.pair.dat $workdir/$pair1-$pair2.free_energy2.dat.pair.dat $workdir/$pair1-$pair2.pairing_mat.pair.dat $workdir/$pair1-$pair2.pairing_free_energy.pair.dat $workdir/$pair1-$pair2.best_pairings_list.pair.dat $fname.nseq1 $fname2.nseq2 4 100 $Npair $smallscalen\n";
+	    	    	print "\n\nTRYING: $curdir/$pastabin $pastaPot $fname.seq $fname2.seq $workdir/$pair1-$pair2.aggr_profile1.pair.dat $workdir/$pair1-$pair2.free_energy1.dat.pair.dat $workdir/$pair1-$pair2.aggr_profile2.pair.dat $workdir/$pair1-$pair2.free_energy2.dat.pair.dat $workdir/$pair1-$pair2.pairing_mat.pair.dat $workdir/$pair1-$pair2.pairing_free_energy.pair.dat $workdir/$pair1-$pair2.best_pairings_list.pair.dat $fname.nseq1 $fname2.nseq2 4 100 $Npair $smallscalen\n";
 	
-			system("$curdir/$pastabin $pastaPot $fname.seq $fname2.seq $workdir/$pair1-$pair2.aggr_profile1.pair.dat $workdir/$pair1-$pair2.free_energy1.dat.pair.dat $workdir/$pair1-$pair2.aggr_profile2.pair.dat $workdir/$pair1-$pair2.free_energy2.dat.pair.dat $workdir/$pair1-$pair2.pairing_mat.pair.dat $workdir/$pair1-$pair2.pairing_free_energy.pair.dat $workdir/$pair1-$pair2.best_pairings_list.pair.dat $fname.seq.nseq1 $fname2.seq.nseq2 4 100 $Npair $smallscale");	    					
+# 			system("$curdir/$pastabin $pastaPot $fname.seq $fname2.seq $workdir/$pair1-$pair2.aggr_profile1.pair.dat $workdir/$pair1-$pair2.free_energy1.dat.pair.dat $workdir/$pair1-$pair2.aggr_profile2.pair.dat $workdir/$pair1-$pair2.free_energy2.dat.pair.dat $workdir/$pair1-$pair2.pairing_mat.pair.dat $workdir/$pair1-$pair2.pairing_free_energy.pair.dat $workdir/$pair1-$pair2.best_pairings_list.pair.dat $fname.seq.nseq1 $fname2.seq.nseq2 4 100 $Npair $smallscale");	    					
 
 	                #exit;
 			if ($smallscale!=0) {

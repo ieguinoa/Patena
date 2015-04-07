@@ -30,16 +30,13 @@ LO QUE FALTA:
 			IUPred_PATH=/home/tati/tesisBiotec/iupred/
 
 -modificar install.sh para exportar una variable que defina la arquitectura (o que defina directamente el ejecutable de tango (32 o 64))
+****CREO QUE NO ES NECESARIO ESTO PORQUE, ADEMAS, HAY OTRAS HERRAMIENTAS QUE NO ESTAN DISPONIBLES PARA 32BITS****
 
 -dividir el repo en 2:  una parte que tenga solo el codigo (bleach)  y una parte que tenga las herramientas usadas, referencias, texto, etc.
 
 -pasar todas las herramientas a la carpeta tool
 
--chequear que onda con la herramienta tmhmm que genera carpetas TMHMM_*
-
--documentar todo en un README
-
--traducir todo lo que falta a ingles
+-completar documentacion de README
 
 -Probar que ande bien la funcion --uvsilent   : Silente en UV (no tyr, trp, phe)
 
@@ -48,7 +45,11 @@ LO QUE FALTA:
 -Incluir ph por parametro??? algunas herramientas lo tienen en cuenta y se puede tener en cuenta para saber cual es la carga neta de cada AA
 (actualmente asumo ph=7)
 
--buscar si es posible imprimir el output por paginas tipo multitail o algo asi. probar guardando en un archivo y mostrando
+-Implementar todos los parametros para seleccionar que herramientas quiero que se usen (parametros --notango --nopasta --noblast)
+
+
+-MEJORAR EL OUTPUT de cualquier forma posible!!. buscar si es posible imprimir el output por paginas tipo multitail o algo asi. probar guardando en un archivo y mostrando
+
 
 
 ****************************************************
@@ -60,7 +61,9 @@ HERRAMIENTAS QUE FALTAN:
 	Usage: ./PastaPairs.pl [potential_file] [fasta_dir] [top_pairs] [graphics:1/0] [all/self/fasta_header] [energy cut-off]\n";
 	Ejemplo:   perl ./PastaPairs.pl pot_pasta.dat exampledir/ 10 0 self -5.5
 	solo deberia cambiar exampledir (poner el directorio donde esta el archivo de la secuencia FASTA) y self(no se cual de las 3 opciones va)
-
+	
+	El .perl abre el directorio donde (supuestamente) esta la secuencia y busca todos los archivos .fasta
+	
 
 
 

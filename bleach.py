@@ -33,32 +33,47 @@ weighted_choice = lambda s : random.choice(sum(([v]*wt for v,wt in s),[]))
 #*********************
 #******GLOBALS*******
 #******************
-maxIterations=10000
-exeId=os.getpid()     #USE THIS TO IDENTIFY 
+
+#  OUTPUT FORMATTING
 endl = "\n"
 tab = "\t"
 space=" "
 indent=""
-cutoff=0.01
-beta=0.1
+
+#  EXECUTION Id . Identify runs
+exeId=os.getpid() 
+
+#  CUTOFFS, THRESHOLDS, LIMITS ....
+maxIterations=10000
+cutoff=0.01  #BLAST cutoff
+waltzThreshold=79.0
+beta=0.1   #MC 
+targetScore=0.0
+
+
+#  EXECUTION PARAMETERS
+verbose=False
+stepByStep=False
 match=False
 rand=True
 change=True
 evaluateNetCharge=False
-verbose=False
+#targetNetCharge=0
 blastWeb=False  #BLAST SEARCH LOCAL OR WEB
-blastIt=True
-targetScore=0.0
 output=True  ##print info to file
 mutAttempts=0
-stepByStep=False
+
+
+
+#All tools enabled by default 
+runBlast=runTango=runPasta=runWaltz=runElm=runProsite=runLimbo=runTmhmm=runIupred=runAnchor=runAmyloidPattern=True
+
+
+#PATHS
 basePath=getScriptPath()
-waltzThreshold=79.0
 toolsPath=basePath + "/"   #SET THE PATH TO THE TOOL SET 
 inputsPath=basePath + "/Input/"+ str(exeId) + "/" #SET PATH TO SAVE INPUTS FILES
 outputsPath=basePath + "/Output/" + str(exeId) + "/"
-
-
 
 #####CREATE INPUT AND OUTPUT DIRS
 try:
@@ -82,7 +97,8 @@ except OSError as exc:
   
 #***************************************************************************  
   
-  
+
+##    JUST SUM UP THE INDIVIDUAL SCORES  
 def getGlobalScore(scoresList):
   score=0.0
   for listIndex in range(len(scoresList)):
@@ -179,8 +195,8 @@ def elmSearch(sequence, positionScores,verbose):
     pattern_end=int(line[1])
     if verbose:
       print indent + "Pattern found: " + line[2]
-    #print "start:" + str(pattern_start)
-    #print "end:" + str(pattern_end)
+      print "start:" + str(pattern_start)
+      print "end:" + str(pattern_end)
     for x in range(pattern_start-1,pattern_end):
       elmScores[x]+=1
       #print str(x)
@@ -253,9 +269,12 @@ def prositeSearch(sequence, positionScores,verbose):
   if verbose:
     #print endl
     print indent + "Prosite Search RESULTS:"
-    print indent + sequence
-    print indent + ''.join(map(str, prositeScores))	  
-  
+    #print indent + sequence
+    #print indent + ''.join(map(str, prositeScores))	  
+    data = [sequence,prositeScores]
+    col_width = max(len(str(word)) for row in data for word in row)   # padding
+    for row in data:
+	print indent + "|".join(str(word).ljust(col_width) for word in row)
   ##ADD hits to global score
   for i in range(len(sequence)):
     positionScores[i]+=prositeScores[i]
@@ -328,8 +347,12 @@ def chargedSearch(sequence, positionScores,verbose):
   if verbose:
     #print endl
     print indent + "Charge search RESULTS:"
-    print indent + sequence
-    print indent + ''.join(map(str, chargeScores))	  
+    #print indent + sequence
+    #print indent + ''.join(map(str, chargeScores))	  
+    data = [sequence,chargeScores]
+    col_width = max(len(str(word)) for row in data for word in row)   # padding
+    for row in data:
+	print indent + "|".join(str(word).ljust(col_width) for word in row)
   
   ##ADD hits to global score
   for i in range(len(sequence)):
@@ -417,25 +440,30 @@ def blastIt(sequence, positionScores, database, verbose):
 	    print indent + "No hits found"
 	  match=False
 
-	    
+	blastScores=[]    
+	for p in range(len(sequence)):
+	      blastScores.append(0)
 	if match:
-	#TAKE THE positionScores LIST AND PUT "1" WHERE THERE WAS A MATCH AND "0" WHERE THERE WAS A GAP OR MISMATCH
 		for j in range(len(sequence)):
 			if j< (start-1) or j > (end-1):    
+				blastScores[j]+=1
 				#print sequence[j]
-				positionScores[j]=1
+				positionScores[j]+=1
 			else:
 				if hsp.match[j-start+1] <> "+" and hsp.match[j-start+1] <> " ":
-					positionScores[j] = 1
-				else:
-					positionScores[j]=0
+					positionScores[j] += 1
+				#else:
+					#positionScores[j]+=0
 					
 	if verbose:	    
 	    #print endl
 	    print indent + "BLAST RESULTS:"
-	    print indent + sequence
-	    print indent + ''.join(map(str, positionScores))				
-					
+	    #print indent + sequence
+	    #print indent + ''.join(map(str, positionScores))				
+	    data = [sequence,blastScores]
+	    col_width = max(len(str(word)) for row in data for word in row)   # padding
+	    for row in data:
+	      print indent + "|".join(str(word).ljust(col_width) for word in row)
 					
 					
 					
@@ -473,9 +501,12 @@ def iupred(sequence, positionScores, verbose):
 			  iupredScores[x] = 1
 	  #print endl
 	  print indent + "IUPred RESULTS:"
-	  print indent + sequence
-	  print indent + ''.join(map(str, iupredScores))	  			  			
-			
+	  #print indent + sequence
+	  #print indent + ''.join(map(str, iupredScores))	  			  			
+	  data = [sequence,iupredScores]
+	  col_width = max(len(str(word)) for row in data for word in row)   # padding
+	  for row in data:
+	    print indent + "|".join(str(word).ljust(col_width) for word in row)
 	outputIUPred.seek(0)
 	rstFile_iter = iter(outputIUPred)
 	#ADD 1 TO THE POSITION IN positionScores IF THE RESULT IS LESS THAN 0.5 (PREDICTING A GLOBULAR TENDENCY)
@@ -558,7 +589,7 @@ def waltzSearch(sequence, positionScores,verbose):
   while True:
     line = proc.stdout.readline()
     if line != '':
-	if float(line.split()[2])> 79.0:
+	if float(line.split()[2])> waltzThreshold:
 	  hit_start=int(line.split()[1]) - 1
           hit_end=hit_start + 6
           for x in range(hit_start-1,hit_end):
@@ -566,15 +597,60 @@ def waltzSearch(sequence, positionScores,verbose):
     else:
       break
 
-  position=0
+  #position=0
   if verbose:
     print indent + "WALTZ RESULTS:"
-    print indent + sequence
-    print indent + ''.join(map(str, waltzScores))
-
+    #print indent + sequence
+    #print indent + ''.join(map(str, waltzScores))
+    data = [sequence,waltzScores]
+    col_width = max(len(str(word)) for row in data for word in row)   # padding
+    for row in data:
+      print indent + "|".join(str(word).ljust(col_width) for word in row)
 
   for x in range(0,len(sequence)):
     if waltzScores[x] > 0:
+      positionScores[x] += 1
+
+
+  #####################################################################################
+  #########################  PASTA EVALUATION #########################################
+  #####################################################################################
+
+
+def pastaSearch(sequence, positionScores,verbose):
+  pastaScores=[]
+  for p in range(len(sequence)):
+    pastaScores.append(0)
+
+  inputPasta= inputsPath + "sequenceFASTA"
+  #input=open(inputsPath + "sequence" , "w")
+  #input.write(">gi" + endl)
+  #input.write(sequence)
+  #input.close()
+  #proc = subprocess.Popen(['perl', toolsPath + 'waltz/scoreMatrizGT.pl', inputWaltz, toolspath + 'waltz/616.mat full'],stdout=subprocess.PIPE)
+  #while True:
+    #line = proc.stdout.readline()
+    #if line != '':
+	#if float(line.split()[2])> waltzThreshold:
+	  #hit_start=int(line.split()[1]) - 1
+          #hit_end=hit_start + 6
+          #for x in range(hit_start-1,hit_end):
+            #waltzScores[x]+=1
+    #else:
+      #break
+
+  position=0
+  if verbose:
+    print indent + "PASTA RESULTS:"
+    #print indent + sequence
+    #print indent + ''.join(map(str, pastaScores))
+    data = [sequence,pastaScores]
+    col_width = max(len(str(word)) for row in data for word in row)   # padding
+    for row in data:
+      print indent + "|".join(str(word).ljust(col_width) for word in row)
+
+  for x in range(0,len(sequence)):
+    if pastaScores[x] > 0:
       positionScores[x] += 1
 
 
@@ -639,7 +715,7 @@ def tangoSearch(sequence, positionScores,verbose):
   os.chdir(outputsPath)
   runCommand=toolsPath + 'tango/tango_i386_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="' + sequence + '" > /dev/null' 
   #runCommand=toolsPath + 'tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="' + sequence + '" > /dev/null'
-  print runCommand 
+  #print runCommand 
   os.system(runCommand)
   outputTango=open(outputTango,'r')
   os.chdir(basePath)
@@ -661,9 +737,12 @@ def tangoSearch(sequence, positionScores,verbose):
   #print str(beta) + tab + str(turn) + tab + str(helix) + tab + str(aggregation) 
   if verbose:
     print indent + "TANGO RESULTS:"
-    print indent + sequence
-    print indent + ''.join(map(str, tangoScores))	  
-    
+    #print indent + sequence
+    #print indent + ''.join(map(str, tangoScores))	  
+    data = [sequence,tangoScore]
+    col_width = max(len(str(word)) for row in data for word in row)   # padding
+    for row in data:
+      print indent + "|".join(str(word).ljust(col_width) for word in row)
     
   for x in range(0,len(sequence)):
     if tangoScores[x] > 0:
@@ -701,9 +780,12 @@ def limboEval(sequence, positionScores,verbose):
     positionScores[x] += limboScores[x]
   if verbose:
     print indent + "LIMBO RESULTS:"
-    print indent + sequence
-    print indent + ''.join(map(str, limboScores))	  
-
+    #print indent + sequence
+    #print indent + ''.join(map(str, limboScores))	  
+    data = [sequence,blastScores]
+    col_width = max(len(str(word)) for row in data for word in row)   # padding
+    for row in data:
+      print indent + "|".join(str(word).ljust(col_width) for word in row)
 
 
 
@@ -734,8 +816,12 @@ def tmhmmEval(sequence, positionScores,verbose):
 	tmhmmScores[y] += 1
   if verbose:	
     print indent + "TMHMM RESULTS:"
-    print indent + sequence
-    print indent + ''.join(map(str, tmhmmScores))		
+    #print indent + sequence
+    #print indent + ''.join(map(str, tmhmmScores))	
+    data = [sequence,blastScores]
+    col_width = max(len(str(word)) for row in data for word in row)   # padding
+    for row in data:
+      print indent + "|".join(str(word).ljust(col_width) for word in row)
   for x in range(0,len(sequence)):
     positionScores[x] += tmhmmScores[x]
 
@@ -775,92 +861,113 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  #raw_input(indent + "Hit enter to continue with next evaluation")
 	    
         ## IUPred evaluation
-	if verbose:
-	  #print endl
-	  print indent + "*************************************"
-	  #print indent + "STARTING IUPred"
-	iupred(sequence, positionScores, verbose)
-        if stepByStep:
-	  raw_input(indent + "Hit enter to continue with next evaluation")
-	  
+        if runIupred:
+	  if verbose:
+	    #print endl
+	    print indent + "*************************************"
+	    #print indent + "STARTING IUPred"
+	  iupred(sequence, positionScores, verbose)
+	  if stepByStep:
+	    raw_input(indent + "Hit enter to continue with next evaluation")
+	    
+	    
         ## ANCHOR evaluation
-	if verbose:
-	  print endl
-	  print indent + "*************************************"
-	  #print indent + "STARTING ANCHOR"
-	anchor(sequence, positionScores, verbose)
-	if stepByStep:
-	  raw_input(indent + "Hit enter to continue with next evaluation")
-	  
-	if verbose:
-	  print endl
-	  print indent + "*************************************"
-	  #print indent + "STARTING ELM Search"
-        elmSearch(sequence,positionScores, verbose)
-	if stepByStep:
-	  raw_input(indent + "Hit enter to continue with next evaluation")
+	if runAnchor:
+	  if verbose:
+	    print endl
+	    print indent + "*************************************"
+	    #print indent + "STARTING ANCHOR"
+	  anchor(sequence, positionScores, verbose)
+	  if stepByStep:
+	    raw_input(indent + "Hit enter to continue with next evaluation")
 	
+	#ELM search
+	if runElm:
+	  if verbose:
+	    print endl
+	    print indent + "*************************************"
+	    #print indent + "STARTING ELM Search"
+	  elmSearch(sequence,positionScores, verbose)
+	  if stepByStep:
+	    raw_input(indent + "Hit enter to continue with next evaluation")
+	
+	#Net charge evaluation
 	if evaluateNetCharge:
 	  if verbose:
 	    print endl
 	    print indent + "*************************************"
-	    print indent + "STARTING charge Search"
+	    print indent + "Sequence net charge evaluation"
 	  #chargeSearch(sequence,positionScores, verbose)
 	  if stepByStep:
 	    raw_input(indent + "Hit enter to continue with next evaluation")
-	  
-	if verbose:
-	  print endl
-	  print indent + "*************************************"
-	  print indent + "Prosite Search in progress..."
-        prositeSearch(sequence,positionScores, verbose)
-        if stepByStep:
-	  raw_input(indent + "Hit enter to continue with next evaluation")
 	
-	if verbose:
-	  print endl
-	  print indent + "*************************************"
-	  print indent + "STARTING LIMBO Search"
-        if (len(sequence) > 11):
-	  limboEval(sequence,positionScores, verbose)
-        else:
+	#Prosite search
+	if runProsite:
 	  if verbose:
-	    print indent + "LIMBO Search is only available for sequences of length >= 12 "
-	print indent + "*************************************"
-	  
-	if verbose:
-	  print endl
+	    print endl
+	    print indent + "*************************************"
+	    print indent + "Prosite Search in progress..."
+	  prositeSearch(sequence,positionScores, verbose)
+	  if stepByStep:
+	    raw_input(indent + "Hit enter to continue with next evaluation")
+	
+	
+	#LIMBO evaluation
+	if runLimbo:
+	  if verbose:
+	    print endl
+	    print indent + "*************************************"
+	    print indent + "STARTING LIMBO Search"
+	  if (len(sequence) > 11):
+	    limboEval(sequence,positionScores, verbose)
+	  else:
+	    if verbose:
+	      print indent + "LIMBO Search is only available for sequences of length >= 12 "
 	  print indent + "*************************************"
-	  print indent + "Search for transmembrane sections"
-        tmhmmEval(sequence,positionScores, verbose)
-        if stepByStep:
-	  raw_input(indent + "Hit enter to continue with next evaluation")
-	  
-	if verbose:
-	  print endl
-	  print indent + "EVALUATE AMYLOID FIBRIL FORMATION "
-	  print indent + "*************************************"
-	  print indent + "Search for sequence determinants"
-        amyloidPatternSearch(sequence,positionScores, verbose)
-        if stepByStep:
-	  raw_input(indent + "Hit enter to continue with next evaluation")
-	  
-	if verbose:
-	  print endl
-	  print indent + "*************************************"
-	  print indent + "Starting Waltz evaluation"
-        #waltzSearch(sequence,positionScores, verbose)
-        print ("*-**********AGREGAR WALTZ Y PROBAR QUE FUNCIONE BIEN*******************")
-        if stepByStep:
-	  raw_input(indent + "Hit enter to continue with next evaluation")
-	  
-        if verbose:
-	  print endl
-	  print indent + "*************************************"
-	  #print indent + "STARTING TANGO Search"
-        tangoSearch(sequence,positionScores, verbose)
-        if stepByStep:
-	  raw_input(indent + "Hit enter to continue with next evaluation")
+	
+	
+	#TMHMM evaluation
+	if runTmhmm:
+	  if verbose:
+	    print endl
+	    print indent + "*************************************"
+	    print indent + "Search for transmembrane sections"
+	  tmhmmEval(sequence,positionScores, verbose)
+	  if stepByStep:
+	    raw_input(indent + "Hit enter to continue with next evaluation")
+	
+	
+	#Search amyloid pattern
+	if runAmyloidPattern:
+	  if verbose:
+	    print endl
+	    print indent + "EVALUATE AMYLOID FIBRIL FORMATION "
+	    print indent + "*************************************"
+	    print indent + "Search for sequence determinants"
+	  amyloidPatternSearch(sequence,positionScores, verbose)
+	  if stepByStep:
+	    raw_input(indent + "Hit enter to continue with next evaluation")
+	
+	#Waltz evaluation
+	if runWaltz:
+	  if verbose:
+	    print endl
+	    print indent + "*************************************"
+	    print indent + "Starting Waltz evaluation"
+	  #waltzSearch(sequence,positionScores, verbose)
+	  print ("*-**********AGREGAR WALTZ Y PROBAR QUE FUNCIONE BIEN*******************")
+	  if stepByStep:
+	    raw_input(indent + "Hit enter to continue with next evaluation")
+	
+	#Tango evaluation
+	if runTango:
+	  if verbose:
+	    print endl
+	    print indent + "*************************************"
+	    #print indent + "STARTING TANGO Search"
+	  tangoSearch(sequence,positionScores, verbose)
+	  if stepByStep:
+	    raw_input(indent + "Hit enter to continue with next evaluation")
 	
 	
 	if stepByStep:
@@ -873,8 +980,12 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  print indent + "*************************************"
 	  print endl
 	  print indent + "RESULTS OF FIRST PARTIAL EVALUATION:"
-	  print indent + sequence
-	  print indent + ''.join(map(str, positionScores))
+	  #print indent + sequence
+	  data = [sequence,positionScores]
+	  col_width = max(len(str(word)) for row in data for word in row)   # padding
+	  for row in data:
+	      print indent + "|".join(str(word).ljust(col_width) for word in row)
+	  #print indent + ''.join(map(str, positionScores))
 	  print indent + "SCORE:" + str(getGlobalScore(positionScores))
 	  print indent + "*************************************"
 	if stepByStep:
@@ -984,11 +1095,11 @@ def printHelp():
   print endl + "Usage: "
   print "  python bleach.py [options]" + endl
   print "Options are:"
-  print tab + "--length " + tab + "Sequence lenght"
-  print tab + "--db " + tab + "swissprot | nr"        #blast database
-  print tab + "--composition " + tab + "[average | user_specified]"
-  print tab + "--seq " + tab + "initial-sequence"
-  print tab + "--maxmutations " + tab + "Max amount of mutations"     # 
+  print tab + "--length  sequence-length                " + tab + "Define random sequence length"
+  print tab + "--db   [swissprot | nr]			"   + tab + ""    #blast database
+  print tab + "--composition  [average | user_specified]"  + tab + "Composition used to select AA (if user_specified you must define AA frequencies)"
+  print tab + "--seq   predefined-sequence		" + tab + "Define sequence to start with"
+  print tab + "--maxmutations  max-number		"   + tab + "Limit in number of ACCEPTED mutations(NOT MUTTATION ATTEMPTS)"   # 
   #print tab + "--maxiterations"   ?????    SUM OF MUTATION ATTEMPTS ?????     ******MAINLY FOR PERFORMANCE REASONS
   
   
@@ -1075,6 +1186,32 @@ else:
       evaluateNetCharge=True
     elif (arg=='--verbose'):
       verbose=True
+    
+ ##   SELECT WHICH TOOLS WONT ME EVALUATED
+    elif (arg=='--noblast'):
+      runBlast=False
+    elif (arg=='--notango'):
+      runTango=False
+    elif (arg=='--noelm'):
+      runElm=False
+    elif (arg=='--noiupred'):
+      runIupred=False
+    elif (arg=='--noanchor'):
+      runAnchor=False
+    elif (arg=='--noprosite'):
+      runProsite=False
+    elif (arg=='--nolimbo'):
+      runLimbo=False
+    elif (arg=='--notmhmm'):
+      runTmhmm=False
+    elif (arg=='--nopasta'):
+      runPasta=False
+    elif (arg=='--nowaltz'):
+      runWaltz=False  
+    elif (arg=='--noamyloidpattern'):
+      runAmyloidPattern=False
+   
+   
     elif (arg=='--stepped'):
       stepByStep=True
       verbose=True   #MAKES NO SENSE TO GO STEP BY STEP IF CANT SEE A DETAILED OUTPUT
@@ -1127,9 +1264,10 @@ else:
 
 
 #CHECK IF TARGET NET CHARGE IS POSSIBLE BASED ON SEQUENCE LENGTH (AND PH??)
-  if abs(targetNetCharge) > length:
-    print 'Net charge is impossible to reach with the specified sequence length'
-    exit()
+  if evaluateNetCharge:
+    if abs(targetNetCharge) > length:
+      print 'Net charge is impossible to reach with the specified sequence length'
+      exit()
   
   
   
@@ -1139,7 +1277,8 @@ else:
   print "length=" + str(length) 
   print "composition=" + composition
   print "sequence=" + sequence
-  print "target net charge=" + str(targetNetCharge)
+  if evaluateNetCharge:
+    print "target net charge=" + str(targetNetCharge)
   print "************************************************"
   print "************************************************"
 
@@ -1254,15 +1393,17 @@ firstPartialScores=partialScores
 for p in range(len(sequence)):
   positionScores[p]=positionScores[p]+partialScores[p]
   partialScores[p]=0
+  
+secondPartialScore = 0  
+if runBlast:
+  #SECOND PART OF EVALUATION
+  secondPartialEvaluation(sequence, partialScores,verbose)
+  secondPartialScore=getGlobalScore(partialScores)
 
-#SECOND PART OF EVALUATION
-secondPartialEvaluation(sequence, partialScores,verbose)
-secondPartialScore=getGlobalScore(partialScores)
-
-#ADD THE SCORE TO THE GLOBAL SCORE AND RESET PARTIAL LIST
-for p in range(len(sequence)):
-  positionScores[p]=positionScores[p]+partialScores[p]
-  partialScores[p]=0
+  #ADD THE SCORE TO THE GLOBAL SCORE AND RESET PARTIAL LIST
+  for p in range(len(sequence)):
+    positionScores[p]=positionScores[p]+partialScores[p]
+    partialScores[p]=0
 
 ##SUM OF SCORES LIST
 globalScore=getGlobalScore(positionScores)
@@ -1509,194 +1650,197 @@ while globalScore > 0 and iteration <= maxIterations:
   for p in range(len(sequence)):
     partialScores[p]=0
 
-  ####################################################	
-  ##### SECOND ROUND OF EVALUATION - MUTATION  #######
-  ####################################################
-  
-  
-  secondPartialEvaluation(sequence,partialScores, verbose)	
-  partialScore=getGlobalScore(partialScores)  
-  while partialScore > 0 and iteration <= maxIterations:
-      weighted=[]
-      #weighted IS A PAIRLIST(position,weight)
-      #CONTAINS THE WEIGHT USED TO SELECT THE MUTATION POSITION. EACH ELEMENT IS A PAIR (X, WEIGHT), WHERE X= POSITION AND EIGHT IS = (SCORE(X) + A BASE WEIGHT)
-      for x in range(len(partialScores)):
-	weighted.append((x, partialScores[x]+1))    #the weight is score+1 - this gives a slight chance to all the position to suffer mutation
-      
-      
-      #MUTATION ATTEMPTS
-      #INSIDE THIS LOOP, THE VARIABLE partialScore IS NOT MODIFIED. ONLY COMPARED TO THE MUTATED SCORES
-      #THE LOOP ENDS WHEN A MUTATION IS ACCEPTED OR WHEN A LIMIT OF ATTEMPTS IS REACHED
-      mutAttempts=0       #COUNT MUTATIONS ATTEMPTS
-      while 10000 > mutAttempts:    ##JUST A SYMBOLIC MAX. AMOUNT OF MUTATIONS ATTEMPTS
-	  mutAttempts+=1
 
-	  indent = tab + tab    #output formatting 
-	  #SELECT A POSITION 
-	  if verbose:
-	    print endl
-	    print indent + "*************************************"
-	    print indent + "MUTATION ATTEMPT"
-	    print indent + "*************************************"
-	  #print indent + "Score before:    " + str(previousScore)
-	  #print indent + "Choose a position based on sequence weights"
-	  
-	  #CHOOSE A POSITION BASED ON WEIGHTS
-	  mutatePosition= weighted_choice(weighted) 
-	  if verbose:
-	    print indent + "Position chosen: " + str(mutatePosition)
-	  
-	  #SELECT THE NEW AA FOR THAT POSITION (BASED ON LIST OF FREQUENCIES)
-	  previousResidue=sequence[mutatePosition]
-	  if verbose:
-	    print indent + "Residue to mutate: " + previousResidue
-	  seleccionado= previousResidue
-	  
-	  #SELECT A NEWONE UNTIL THE RESIDUE IS DIFFERENT FROM PREVIOUS
-	  while previousResidue == seleccionado:
-	      seleccionado = weighted_choice(aaFrequencies)	
-	  if verbose:	  
-	    print indent + "New residue : " + seleccionado
+  if runBlast:
+    ####################################################	
+    ##### SECOND ROUND OF EVALUATION - MUTATION  #######
+    ####################################################
+    
+    
+    secondPartialEvaluation(sequence,partialScores, verbose)	
+    partialScore=getGlobalScore(partialScores)  
+    while partialScore > 0 and iteration <= maxIterations:
+	weighted=[]
+	#weighted IS A PAIRLIST(position,weight)
+	#CONTAINS THE WEIGHT USED TO SELECT THE MUTATION POSITION. EACH ELEMENT IS A PAIR (X, WEIGHT), WHERE X= POSITION AND EIGHT IS = (SCORE(X) + A BASE WEIGHT)
+	for x in range(len(partialScores)):
+	  weighted.append((x, partialScores[x]+1))    #the weight is score+1 - this gives a slight chance to all the position to suffer mutation
+	
+	
+	#MUTATION ATTEMPTS
+	#INSIDE THIS LOOP, THE VARIABLE partialScore IS NOT MODIFIED. ONLY COMPARED TO THE MUTATED SCORES
+	#THE LOOP ENDS WHEN A MUTATION IS ACCEPTED OR WHEN A LIMIT OF ATTEMPTS IS REACHED
+	mutAttempts=0       #COUNT MUTATIONS ATTEMPTS
+	while 10000 > mutAttempts:    ##JUST A SYMBOLIC MAX. AMOUNT OF MUTATIONS ATTEMPTS
+	    mutAttempts+=1
 
-	  ##BUILD MUTATED SEQUENCE WITH NEW RESIDUE    
-	  mutatedSequence = sequence[0:mutatePosition]
-	  mutatedSequence += seleccionado
-	  mutatedSequence += sequence[mutatePosition+1:]
-	  if verbose:
-	    print indent + "Original sequence: " + sequence
-	    print indent + "Mutated sequence : " + mutatedSequence
+	    indent = tab + tab    #output formatting 
+	    #SELECT A POSITION 
+	    if verbose:
+	      print endl
+	      print indent + "*************************************"
+	      print indent + "MUTATION ATTEMPT"
+	      print indent + "*************************************"
+	    #print indent + "Score before:    " + str(previousScore)
+	    #print indent + "Choose a position based on sequence weights"
+	    
+	    #CHOOSE A POSITION BASED ON WEIGHTS
+	    mutatePosition= weighted_choice(weighted) 
+	    if verbose:
+	      print indent + "Position chosen: " + str(mutatePosition)
+	    
+	    #SELECT THE NEW AA FOR THAT POSITION (BASED ON LIST OF FREQUENCIES)
+	    previousResidue=sequence[mutatePosition]
+	    if verbose:
+	      print indent + "Residue to mutate: " + previousResidue
+	    seleccionado= previousResidue
+	    
+	    #SELECT A NEWONE UNTIL THE RESIDUE IS DIFFERENT FROM PREVIOUS
+	    while previousResidue == seleccionado:
+		seleccionado = weighted_choice(aaFrequencies)	
+	    if verbose:	  
+	      print indent + "New residue : " + seleccionado
 
-	  ##RESET LIST OF SCORES FOR THE MUTATED SEQUENCE
-	  for p in range(len(sequence)):
-	      mutatedScores[p]=0
-	  
-	  if stepByStep:
-	    raw_input(indent + "...Hit enter to start evaluation")
-	  if verbose:
-	    print ""
-	    indent=tab + tab + tab #output formatting stuff
-	    print indent + "STARTING PROPOSED MUTATION EVALUATION"
-	  secondPartialEvaluation(mutatedSequence, mutatedScores, verbose)	 
-	  mutatedScore=getGlobalScore(mutatedScores)
-	  #if stepByStep:
-	    #raw_input(indent + "Hit enter to continue with mutation acceptance")
-	  #IF THE GLOBAL SCORE DECREASED
-	  if verbose:
-	    indent=tab + tab + tab + tab + tab
-	    print ""
-	    print indent + "*************************************"
-	    print indent + "DECISION"
-	    print indent + "Previous sequence"
-	    print indent + sequence
-	    print indent + ''.join(map(str, partialScores))
-	    print indent + "Global score: " + str(partialScore)
-	    print ""
-	    print indent + "Mutated sequence"
-	    print indent + mutatedSequence
-	    print indent + ''.join(map(str, mutatedScores))
-	    print indent + "Global score: " + str(mutatedScore)
-	    print ""
-	  if partialScore >= mutatedScore:
-	      if verbose:
-		    print indent + "Previous score (" + str(partialScore) + ") >= Mutated score (" + str(mutatedScore) + ")" 
-		    print indent + "...ACCEPT MUTATION"
-	      if stepByStep:
-		raw_input("")
-	      break
-		#raw_input(indent + "Hit enter to continue with next iteration")
-	      #return mutatedSequence
-	  else:
-	      #DECISION BASED ON MONTE CARLO
-	      if verbose:	
-		    print indent + "Previous score (" + str(partialScore) + ") < Mutated score (" + str(mutatedScore) + ")" 
-	      diff=partialScore-getGlobalScore(mutatedScores)
-	      if verbose:
-		    print indent + "SCORE DIFFERENCE:" + str(diff)
-	      exponent=diff/beta
-	      MCvalue=math.exp(exponent)
-	      if verbose:
-		    #print "  :" + str(exponent)
-		    print indent + "MC VALUE:" + str(MCvalue)     #e^(dif/beta)
-	      
-	      #GENERATE RANDOM NUMBER BETWEEN 0 AND 1
-	      randy=random.random()
-	      if verbose:
-		    print indent + "RANDOM VALUE [0,1]:" + str(randy)
-	      #print indent + "MONTE CARLO DECISION:"
-	      if MCvalue > randy:
-		#ACCEPT MUTATION
+	    ##BUILD MUTATED SEQUENCE WITH NEW RESIDUE    
+	    mutatedSequence = sequence[0:mutatePosition]
+	    mutatedSequence += seleccionado
+	    mutatedSequence += sequence[mutatePosition+1:]
+	    if verbose:
+	      print indent + "Original sequence: " + sequence
+	      print indent + "Mutated sequence : " + mutatedSequence
+
+	    ##RESET LIST OF SCORES FOR THE MUTATED SEQUENCE
+	    for p in range(len(sequence)):
+		mutatedScores[p]=0
+	    
+	    if stepByStep:
+	      raw_input(indent + "...Hit enter to start evaluation")
+	    if verbose:
+	      print ""
+	      indent=tab + tab + tab #output formatting stuff
+	      print indent + "STARTING PROPOSED MUTATION EVALUATION"
+	    secondPartialEvaluation(mutatedSequence, mutatedScores, verbose)	 
+	    mutatedScore=getGlobalScore(mutatedScores)
+	    #if stepByStep:
+	      #raw_input(indent + "Hit enter to continue with mutation acceptance")
+	    #IF THE GLOBAL SCORE DECREASED
+	    if verbose:
+	      indent=tab + tab + tab + tab + tab
+	      print ""
+	      print indent + "*************************************"
+	      print indent + "DECISION"
+	      print indent + "Previous sequence"
+	      print indent + sequence
+	      print indent + ''.join(map(str, partialScores))
+	      print indent + "Global score: " + str(partialScore)
+	      print ""
+	      print indent + "Mutated sequence"
+	      print indent + mutatedSequence
+	      print indent + ''.join(map(str, mutatedScores))
+	      print indent + "Global score: " + str(mutatedScore)
+	      print ""
+	    if partialScore >= mutatedScore:
 		if verbose:
-		    print indent + "...ACCEPT MUTATION"
+		      print indent + "Previous score (" + str(partialScore) + ") >= Mutated score (" + str(mutatedScore) + ")" 
+		      print indent + "...ACCEPT MUTATION"
 		if stepByStep:
 		  raw_input("")
+		break
 		  #raw_input(indent + "Hit enter to continue with next iteration")
 		#return mutatedSequence
-		break
-	      else:	    
+	    else:
+		#DECISION BASED ON MONTE CARLO
+		if verbose:	
+		      print indent + "Previous score (" + str(partialScore) + ") < Mutated score (" + str(mutatedScore) + ")" 
+		diff=partialScore-getGlobalScore(mutatedScores)
 		if verbose:
-		    #print "El score original " + str(getGlobalScore(mutatedScores)) + " es mayor que "+ str(getGlobalScore(positionScores))
-		    print indent + " Mutation score (" + str(mutatedScore) + ") >= Previous score (" + str(partialScore) + ")" 
-		    print indent + "...DENY MUTATION"
-		if stepByStep:
-		  raw_input(indent + "Hit enter to continue with next attempt")
-		#return sequence
-		#break
-	  if verbose:
-	    print "*************************************"
-	
-
-
-      
-    
-      #####END OF MUTATION ITERATION
-
-      #MAKE SURE LOOP ENDED BY MUTATION ACCEPT
-      if mutAttempts < 10000:   
-	    #print endl
-	    print endl
-	    #print "Sequence after mutation:    " + mutatedSequence
-	    ###NOW THE SEQUENCE IS THE MUTATED SEQUENCE
-	    sequence=mutatedSequence
-	    #AND THE SCORES ARE THE ONES CORRESPONDING TO THE MUTATED SEQUENCE
-	    partialScores=mutatedScores
-	    #AND THE GLOBAL SEQUENCE SCORE IS THE ONE CORRESPONDING TO THIS NEW SEQUENCE
-	    partialScore= getGlobalScore(partialScores)
-	    print "Attempts before mutation accept:" + str(mutAttempts)
-	    #print endl
-	    print "*******************************************"
-	  
-	     
-	    print "End of (PARTIAL) iteration " + str(iteration)
-	    print "(PARTIAL) score :    " + str(partialScore)
-	    print "*******************************************"
-	    print endl
-      else:
-	    ### EXCEEDED THE NUMBER OF ATTEMPTS, SEQUENCE NOT CHANGED
-	    print  " Mutations attempts exceeded " 
-      if output:
-	# MUTATION ATTEMPTS Vs. ITERATION NUMBER
-	mutationsFile.write(str(iteration)+ tab + str(mutAttempts) + tab +str(beta) + endl)
-	
-	#SCORES Vs. ITERATION NUMBER
-	scoresOutputFile.write(str(iteration)+ tab + str(partialScore) + tab + str(beta) + endl)
-	
-	#ITERATION ELAPSED TIME
-	timeX=time.time()-timePrev   #ITERATION TIME
-	timesOutputFile.write(str(iteration)+ tab + str(timeX) + tab + str(beta) + endl)
-      if stepByStep:
-	raw_input("Hit enter to continue with next iteration")
+		      print indent + "SCORE DIFFERENCE:" + str(diff)
+		exponent=diff/beta
+		MCvalue=math.exp(exponent)
+		if verbose:
+		      #print "  :" + str(exponent)
+		      print indent + "MC VALUE:" + str(MCvalue)     #e^(dif/beta)
 		
-      iteration=iteration+1   #TOTATL NUMBER OF ITERATIONS
+		#GENERATE RANDOM NUMBER BETWEEN 0 AND 1
+		randy=random.random()
+		if verbose:
+		      print indent + "RANDOM VALUE [0,1]:" + str(randy)
+		#print indent + "MONTE CARLO DECISION:"
+		if MCvalue > randy:
+		  #ACCEPT MUTATION
+		  if verbose:
+		      print indent + "...ACCEPT MUTATION"
+		  if stepByStep:
+		    raw_input("")
+		    #raw_input(indent + "Hit enter to continue with next iteration")
+		  #return mutatedSequence
+		  break
+		else:	    
+		  if verbose:
+		      #print "El score original " + str(getGlobalScore(mutatedScores)) + " es mayor que "+ str(getGlobalScore(positionScores))
+		      print indent + " Mutation score (" + str(mutatedScore) + ") >= Previous score (" + str(partialScore) + ")" 
+		      print indent + "...DENY MUTATION"
+		  if stepByStep:
+		    raw_input(indent + "Hit enter to continue with next attempt")
+		  #return sequence
+		  #break
+	    if verbose:
+	      print "*************************************"
+	  
+
+
+	
       
+	#####END OF MUTATION ITERATION
 
-
-
-  if verbose:
-    print "SECOND ROUND OF EVALUATIONS FINISHED"
-    if stepByStep:
-      raw_input("HIT ENTER TO GET CURRENT GLOBAL SCORE")
+	#MAKE SURE LOOP ENDED BY MUTATION ACCEPT
+	if mutAttempts < 10000:   
+	      #print endl
+	      print endl
+	      #print "Sequence after mutation:    " + mutatedSequence
+	      ###NOW THE SEQUENCE IS THE MUTATED SEQUENCE
+	      sequence=mutatedSequence
+	      #AND THE SCORES ARE THE ONES CORRESPONDING TO THE MUTATED SEQUENCE
+	      partialScores=mutatedScores
+	      #AND THE GLOBAL SEQUENCE SCORE IS THE ONE CORRESPONDING TO THIS NEW SEQUENCE
+	      partialScore= getGlobalScore(partialScores)
+	      print "Attempts before mutation accept:" + str(mutAttempts)
+	      #print endl
+	      print "*******************************************"
+	    
+	      
+	      print "End of (PARTIAL) iteration " + str(iteration)
+	      print "(PARTIAL) score :    " + str(partialScore)
+	      print "*******************************************"
+	      print endl
+	else:
+	      ### EXCEEDED THE NUMBER OF ATTEMPTS, SEQUENCE NOT CHANGED
+	      print  " Mutations attempts exceeded " 
+	if output:
+	  # MUTATION ATTEMPTS Vs. ITERATION NUMBER
+	  mutationsFile.write(str(iteration)+ tab + str(mutAttempts) + tab +str(beta) + endl)
+	  
+	  #SCORES Vs. ITERATION NUMBER
+	  scoresOutputFile.write(str(iteration)+ tab + str(partialScore) + tab + str(beta) + endl)
+	  
+	  #ITERATION ELAPSED TIME
+	  timeX=time.time()-timePrev   #ITERATION TIME
+	  timesOutputFile.write(str(iteration)+ tab + str(timeX) + tab + str(beta) + endl)
+	if stepByStep:
+	  raw_input("Hit enter to continue with next iteration")
+		  
+	iteration=iteration+1   #TOTATL NUMBER OF ITERATIONS
+	
+  
+    if verbose:
+	print "SECOND ROUND OF EVALUATIONS FINISHED"
+	if stepByStep:
+	  raw_input("HIT ENTER TO GET CURRENT GLOBAL SCORE")
+   
+   
   ##AT THE END OF THE SECOND ROUND, THE SCORE CORRESPONDING TO THE SECOND PARTIAL EVALUATION IS 0 (EXCEPT WHEN THE NUMBER OF ITERATIONS IS EXCEEDED)....
   #THEN, GLOBAL SCORE IS DEFINED BY THE FIRST PARTIAL EVALUATION
+       
   for p in range(len(sequence)):
     positionScores[p]=0
   firstPartialEvaluation(sequence, positionScores , verbose )
