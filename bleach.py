@@ -52,7 +52,8 @@ targetScore=0.0
 
 
 #  EXECUTION PARAMETERS
-verbose=False
+minimalOutput=False  #True = only print global scores at end of iteration
+verbose=False        #True = print detailed information of execution
 stepByStep=False
 match=False
 rand=True
@@ -62,7 +63,7 @@ evaluateNetCharge=False
 blastWeb=False  #BLAST SEARCH LOCAL OR WEB
 output=True  ##print info to file
 mutAttempts=0
-
+length=12   #defaul sequence length
 
 
 #All tools enabled by default 
@@ -739,7 +740,7 @@ def tangoSearch(sequence, positionScores,verbose):
     print indent + "TANGO RESULTS:"
     #print indent + sequence
     #print indent + ''.join(map(str, tangoScores))	  
-    data = [sequence,tangoScore]
+    data = [sequence,tangoScores]
     col_width = max(len(str(word)) for row in data for word in row)   # padding
     for row in data:
       print indent + "|".join(str(word).ljust(col_width) for word in row)
@@ -782,7 +783,7 @@ def limboEval(sequence, positionScores,verbose):
     print indent + "LIMBO RESULTS:"
     #print indent + sequence
     #print indent + ''.join(map(str, limboScores))	  
-    data = [sequence,blastScores]
+    data = [sequence,limboScores]
     col_width = max(len(str(word)) for row in data for word in row)   # padding
     for row in data:
       print indent + "|".join(str(word).ljust(col_width) for word in row)
@@ -818,7 +819,7 @@ def tmhmmEval(sequence, positionScores,verbose):
     print indent + "TMHMM RESULTS:"
     #print indent + sequence
     #print indent + ''.join(map(str, tmhmmScores))	
-    data = [sequence,blastScores]
+    data = [sequence,tmhmmScores]
     col_width = max(len(str(word)) for row in data for word in row)   # padding
     for row in data:
       print indent + "|".join(str(word).ljust(col_width) for word in row)
@@ -862,58 +863,66 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    
         ## IUPred evaluation
         if runIupred:
+	  if stepByStep:
+	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
 	    #print endl
 	    print indent + "*************************************"
 	    #print indent + "STARTING IUPred"
 	  iupred(sequence, positionScores, verbose)
-	  if stepByStep:
-	    raw_input(indent + "Hit enter to continue with next evaluation")
 	    
 	    
         ## ANCHOR evaluation
 	if runAnchor:
+	  if stepByStep:
+	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
 	    print endl
 	    print indent + "*************************************"
 	    #print indent + "STARTING ANCHOR"
 	  anchor(sequence, positionScores, verbose)
-	  if stepByStep:
-	    raw_input(indent + "Hit enter to continue with next evaluation")
 	
 	#ELM search
 	if runElm:
+	  if stepByStep:
+	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
 	    print endl
 	    print indent + "*************************************"
 	    #print indent + "STARTING ELM Search"
 	  elmSearch(sequence,positionScores, verbose)
-	  if stepByStep:
-	    raw_input(indent + "Hit enter to continue with next evaluation")
+	  #if stepByStep:
+	    #raw_input(indent + "Hit enter to continue with next evaluation")
 	
 	#Net charge evaluation
 	if evaluateNetCharge:
+	  if stepByStep:
+	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
 	    print endl
 	    print indent + "*************************************"
 	    print indent + "Sequence net charge evaluation"
-	  #chargeSearch(sequence,positionScores, verbose)
-	  if stepByStep:
-	    raw_input(indent + "Hit enter to continue with next evaluation")
+	  chargedSearch(sequence,positionScores, verbose)
+	  #if stepByStep:
+	    #raw_input(indent + "Hit enter to continue with next evaluation")
 	
 	#Prosite search
 	if runProsite:
+	  if stepByStep:
+	    raw_input(indent + "Hit enter to continue with next evaluation") 
 	  if verbose:
 	    print endl
 	    print indent + "*************************************"
 	    print indent + "Prosite Search in progress..."
 	  prositeSearch(sequence,positionScores, verbose)
-	  if stepByStep:
-	    raw_input(indent + "Hit enter to continue with next evaluation")
+	  #if stepByStep:
+	    #raw_input(indent + "Hit enter to continue with next evaluation")
 	
 	
 	#LIMBO evaluation
 	if runLimbo:
+	  if stepByStep:
+	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
 	    print endl
 	    print indent + "*************************************"
@@ -923,54 +932,64 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  else:
 	    if verbose:
 	      print indent + "LIMBO Search is only available for sequences of length >= 12 "
-	  print indent + "*************************************"
+	  #if stepByStep:
+	    #raw_input(indent + "Hit enter to continue with next evaluation")
+	  #print indent + "*************************************"
 	
 	
 	#TMHMM evaluation
 	if runTmhmm:
+	  if stepByStep:
+	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
 	    print endl
 	    print indent + "*************************************"
 	    print indent + "Search for transmembrane sections"
 	  tmhmmEval(sequence,positionScores, verbose)
-	  if stepByStep:
-	    raw_input(indent + "Hit enter to continue with next evaluation")
+	  
 	
 	
 	#Search amyloid pattern
 	if runAmyloidPattern:
+	  if stepByStep:
+	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
 	    print endl
 	    print indent + "EVALUATE AMYLOID FIBRIL FORMATION "
 	    print indent + "*************************************"
 	    print indent + "Search for sequence determinants"
 	  amyloidPatternSearch(sequence,positionScores, verbose)
-	  if stepByStep:
-	    raw_input(indent + "Hit enter to continue with next evaluation")
+	  #if stepByStep:
+	    #raw_input(indent + "Hit enter to continue with next evaluation")
 	
 	#Waltz evaluation
 	if runWaltz:
+	  if stepByStep:
+	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
 	    print endl
 	    print indent + "*************************************"
 	    print indent + "Starting Waltz evaluation"
 	  #waltzSearch(sequence,positionScores, verbose)
 	  print ("*-**********AGREGAR WALTZ Y PROBAR QUE FUNCIONE BIEN*******************")
-	  if stepByStep:
-	    raw_input(indent + "Hit enter to continue with next evaluation")
+	  #if stepByStep:
+	    #raw_input(indent + "Hit enter to continue with next evaluation")
 	
 	#Tango evaluation
 	if runTango:
+	  if stepByStep:
+	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
 	    print endl
 	    print indent + "*************************************"
 	    #print indent + "STARTING TANGO Search"
 	  tangoSearch(sequence,positionScores, verbose)
-	  if stepByStep:
-	    raw_input(indent + "Hit enter to continue with next evaluation")
+	  #if stepByStep:
+	    #raw_input(indent + "Hit enter to continue with next evaluation")
 	
 	
 	if stepByStep:
+	  print endl
 	  raw_input(indent + "Press enter to see final results...")
 	
 	
@@ -1184,8 +1203,12 @@ else:
     elif (arg=='--netcharge') and (index < len(sys.argv)):
       targetNetCharge = int(sys.argv[index+1])
       evaluateNetCharge=True
+    
+  ##   OUTPUT DETAIL  
     elif (arg=='--verbose'):
       verbose=True
+    elif (arg=='--minoutput'):
+      minimalOutput=True
     
  ##   SELECT WHICH TOOLS WONT ME EVALUATED
     elif (arg=='--noblast'):
@@ -1320,7 +1343,8 @@ else:
 if rand==True:
 	#****************GET RANDOM SEQUENCE*************
         #print endl
-	print "Generating random sequence..."    
+        if verbose:
+	  print "Generating random sequence..."    
 	#print endl
 	if not (composition=="user_specified"):
 	  url="http://web.expasy.org/cgi-bin/randseq/randseq.pl?size=" + str(length) + "&comp=" + composition + "&output=fasta"
@@ -1330,15 +1354,19 @@ if rand==True:
 	html = response.read()
 	i = html.index('\n')
 	sequence = html[i+1:].replace('\n', '')
-	print "*******************************" 
+	#if verbose:
+	   #print "*******************************" 
 	
 
    
 #print endl
 #PRINT STARTING SEQUENCE (BEFORE ANY MUTATION)   
 if rand==True:
-  print "INITIAL SEQUENCE:" + sequence
-
+  if verbose:
+    print "INITIAL SEQUENCE:  " + sequence
+  if stepByStep:
+    raw_input("Hit enter to start initial evaluation")
+    
 
 #CREATE ARRAY TO SAVE MUTATION FREQUENCY
 positionScores=[]
@@ -1370,6 +1398,7 @@ for p in range(len(sequence)):
 
 
 if verbose:
+  print endl
   print "*****************************"
   print " INITIAL EVALUATION "
   print "*****************************"    
@@ -1421,7 +1450,7 @@ if verbose:
   print endl
   print endl
   if stepByStep:
-    raw_input("Hit enter to start mutating")
+    raw_input("Hit enter to start mutations")
 
 
 
@@ -1848,11 +1877,12 @@ while globalScore > 0 and iteration <= maxIterations:
   globalIteration=globalIteration+1;  
   
   #PRINT RESULTS OF GLOBAL ITERATION
-  print "*******************************************"	     
-  print "End of global iteration " + str(iteration)
-  print "Global score :    " + str(globalScore)
-  print "*******************************************"
-  print endl
+  if verbose or minimalOutput:
+    print "*******************************************"	     
+    print "End of global iteration " + str(iteration)
+    print "Global score :    " + str(globalScore)
+    print "*******************************************"
+    print endl
   if stepByStep:
 	raw_input("Hit enter to continue with next iteration")
 
