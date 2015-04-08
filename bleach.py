@@ -196,8 +196,8 @@ def elmSearch(sequence, positionScores,verbose):
     pattern_end=int(line[1])
     if verbose:
       print indent + "Pattern found: " + line[2]
-      print "start:" + str(pattern_start)
-      print "end:" + str(pattern_end)
+      print indent + "start:" + str(pattern_start)
+      print indent + "end:" + str(pattern_end)
     for x in range(pattern_start-1,pattern_end):
       elmScores[x]+=1
       #print str(x)
@@ -593,7 +593,8 @@ def waltzSearch(sequence, positionScores,verbose):
     #print line
     #if line != '':
     if float(line.split()[2])> waltzThreshold:
-	  print 'Subsequence above threshold: ' +  line.split()[0]
+	  if verbose:
+	     print indent + 'Subsequence above threshold: ' +  line.split()[0]
 	  hit_start=int(line.split()[1]) - 1
           hit_end=hit_start + 6
           for x in range(hit_start-1,hit_end):
@@ -638,9 +639,10 @@ def pastaSearch(sequence, positionScores,verbose):
   outputPasta=open(inputsPath + "seq-seq.best_pairings_list.pair.dat")
   #proc = subprocess.Popen(['perl', toolsPath + 'PASTA/pasta_exe/PastaPairs.pl', toolsPath + 'PASTA/pasta_exe/pot_pasta.dat', inputsPath,  '1 0 self '+ str(pastaCutoff)],stdout=subprocess.PIPE)
   for line in outputPasta.readlines():
-	print 'Hit:'
-	print 'Energy value: ' + line.split()[4]
-	print 'Positions:    ' + line.split()[9]
+     if verbose: 
+	print indent + 'Hit:'
+	print indent + 'Energy value: ' + line.split()[4]
+	print indent + 'Positions:    ' + line.split()[9]
     #line = proc.stdout.readline()
     #print line
     #if line != '':
@@ -679,7 +681,7 @@ def amyloidPatternSearch(sequence, positionScores,verbose):
     for p in range(len(sequence)):
 	amyloidScore.append(0)
     
-    #with open(output_file_name, 'w') as file_write :
+    #/with open(output_file_name, 'w') as file_write :
     #for elm_id in elm_pattern_dict :
     where_to_start = []
     elm_pos_dict = {}
@@ -690,7 +692,8 @@ def amyloidPatternSearch(sequence, positionScores,verbose):
     for index in where_to_start :
 	    match = re.search(pattern, '%s' % sequence[index:])
 	    if match != None :
-		    print "NEUTRAL pH SEQUENCE DETERMINANT FOUND "
+		    if verbose:
+		    	print "NEUTRAL pH SEQUENCE DETERMINANT FOUND "
 		    for x in range(index,index+len(match.group())):
 		      amyloidScore[x]+=1
 		    #if verbose:     #write description next to the indexes
@@ -875,7 +878,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    
         ## IUPred evaluation
         if runIupred:
-	  if stepByStep:
+	  if stepByStep and verbose:
 	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
 	    #print endl
@@ -886,7 +889,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    
         ## ANCHOR evaluation
 	if runAnchor:
-	  if stepByStep:
+	  if stepByStep and verbose:
 	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
 	    print endl
@@ -896,7 +899,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	
 	#ELM search
 	if runElm:
-	  if stepByStep:
+	  if stepByStep and verbose:
 	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
 	    print endl
@@ -908,7 +911,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	
 	#Net charge evaluation
 	if evaluateNetCharge:
-	  if stepByStep:
+	  if stepByStep and verbose:
 	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
 	    print endl
@@ -921,7 +924,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 
         #PASTA evaluation (self aggregation)
         if runPasta:
-          if stepByStep:
+          if stepByStep and verbose:
             raw_input(indent + "Hit enter to continue with next evaluation")
           if verbose:
             print endl
@@ -933,7 +936,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	
 	#Prosite search
 	if runProsite:
-	  if stepByStep:
+	  if stepByStep and verbose:
 	    raw_input(indent + "Hit enter to continue with next evaluation") 
 	  if verbose:
 	    print endl
@@ -946,7 +949,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	
 	#LIMBO evaluation
 	if runLimbo:
-	  if stepByStep:
+	  if stepByStep and verbose:
 	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
 	    print endl
@@ -964,7 +967,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	
 	#TMHMM evaluation
 	if runTmhmm:
-	  if stepByStep:
+	  if stepByStep and verbose:
 	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
 	    print endl
@@ -976,7 +979,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	
 	#Search amyloid pattern
 	if runAmyloidPattern:
-	  if stepByStep:
+	  if stepByStep and verbose:
 	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
 	    print endl
@@ -989,8 +992,8 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	
 	#Waltz evaluation
 	if runWaltz:
-	  if stepByStep:
-	    raw_input(indent + "Hit enter to continue with next evaluation")
+	  if stepByStep and verbose:
+             raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
 	    print endl
 	    print indent + "*************************************"
@@ -1001,7 +1004,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	
 	#Tango evaluation
 	if runTango:
-	  if stepByStep:
+	  if stepByStep and verbose:
 	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
 	    print endl
@@ -1012,7 +1015,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
 	
 	
-	if stepByStep:
+	if stepByStep and verbose:
 	  print endl
 	  raw_input(indent + "Press enter to see final results...")
 	
@@ -1076,8 +1079,13 @@ def secondPartialEvaluation(sequence, positionScores, verbose):
 	  print indent + "*************************************"
 	  print endl
 	  print indent + "RESULTS OF SECOND PARTIAL EVALUATION:"
-	  print indent + sequence
-	  print indent + ''.join(map(str, positionScores))
+	  data = [sequence,positionScores]
+	  col_width = max(len(str(word)) for row in data for word in row)   # padding
+    	  for row in data:
+      	     print indent + "|".join(str(word).ljust(col_width) for word in row)
+
+ 	  #print indent + sequence
+	  #print indent + ''.join(map(str, positionScores))
 	  print indent + "SCORE:" + str(getGlobalScore(positionScores))
 	  print indent + "*************************************"
 	if stepByStep:
@@ -1498,8 +1506,12 @@ while globalScore > 0 and iteration <= maxIterations:
     print "*****************************"
     print "STARTING GLOBAL ITERATION " + str(globalIteration)
     print "*****************************"
-    print "Current sequence:         " + sequence
-    print "Current total scores:     " + ''.join(map(str, positionScores))
+    data = [sequence,positionScores]
+    col_width = max(len(str(word)) for row in data for word in row)   # padding
+    for row in data:
+    	print indent + "|".join(str(word).ljust(col_width) for word in row)
+    #print "Current sequence:         " + sequence
+    #print "Current total scores:     " + ''.join(map(str, positionScores))
     print "Current global score:     " + str(globalScore)
   if stepByStep: 
     if verbose:
@@ -1594,13 +1606,22 @@ while globalScore > 0 and iteration <= maxIterations:
 	    print indent + "*************************************"
 	    print indent + "DECISION"
 	    print indent + "Previous sequence"
-	    print indent + sequence
-	    print indent + ''.join(map(str, positionScores))
+	    data = [sequence,positionScores]
+	    col_width = max(len(str(word)) for row in data for word in row)   # padding
+    	    for row in data:
+      		print indent + "|".join(str(word).ljust(col_width) for word in row)
+	    #print indent + sequence
+	    #print indent + ''.join(map(str, positionScores))
 	    print indent + "Global score: " + str(partialScore)
 	    print ""
 	    print indent + "Mutated sequence"
-	    print indent + mutatedSequence
-	    print indent + ''.join(map(str, mutatedScores))
+	    data = [sequence,mutatedScores]
+    	    col_width = max(len(str(word)) for row in data for word in row)   # padding
+    	    for row in data:
+      		print indent + "|".join(str(word).ljust(col_width) for word in row)
+
+	    #print indent + mutatedSequence
+	    #print indent + ''.join(map(str, mutatedScores))
 	    print indent + "Global score: " + str(mutatedScore)
 	    print ""
 	  if partialScore >= getGlobalScore(positionScores):
@@ -1783,14 +1804,23 @@ while globalScore > 0 and iteration <= maxIterations:
 	      print indent + "*************************************"
 	      print indent + "DECISION"
 	      print indent + "Previous sequence"
-	      print indent + sequence
-	      print indent + ''.join(map(str, partialScores))
+	      data = [sequence,partialScores]
+	      col_width = max(len(str(word)) for row in data for word in row)   # padding
+    	      for row in data:
+      		print indent + "|".join(str(word).ljust(col_width) for word in row)
+	      #print indent + sequence
+	      #print indent + ''.join(map(str, partialScores))
+	      
 	      print indent + "Global score: " + str(partialScore)
 	      print ""
 	      print indent + "Mutated sequence"
 	      print indent + mutatedSequence
-	      print indent + ''.join(map(str, mutatedScores))
-	      print indent + "Global score: " + str(mutatedScore)
+	      data = [sequence,mutatedScores]
+	      col_width = max(len(str(word)) for row in data for word in row)   # padding
+    	      for row in data:
+      		print indent + "|".join(str(word).ljust(col_width) for word in row)
+              #print indent + ''.join(map(str, mutatedScores))
+	      #print indent + "Global score: " + str(mutatedScore)
 	      print ""
 	    if partialScore >= mutatedScore:
 		if verbose:
@@ -1896,7 +1926,7 @@ while globalScore > 0 and iteration <= maxIterations:
        
   for p in range(len(sequence)):
     positionScores[p]=0
-  firstPartialEvaluation(sequence, positionScores , verbose )
+  firstPartialEvaluation(sequence, positionScores , False )
   globalScore=getGlobalScore(positionScores)
   globalIteration=globalIteration+1;  
   
