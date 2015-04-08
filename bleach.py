@@ -49,7 +49,7 @@ cutoff=0.01  #BLAST cutoff
 waltzThreshold=79.0
 beta=0.1   #MC 
 targetScore=0.0
-
+pastaCutoff=-5.5
 
 #  EXECUTION PARAMETERS
 minimalOutput=False  #True = only print global scores at end of iteration
@@ -586,17 +586,20 @@ def waltzSearch(sequence, positionScores,verbose):
   #input.write(">gi" + endl)
   #input.write(sequence)
   #input.close()
-  proc = subprocess.Popen(['perl', toolsPath + 'waltz/scoreMatrizGT.pl', inputWaltz, toolspath + 'waltz/616.mat full'],stdout=subprocess.PIPE)
-  while True:
+  proc = subprocess.Popen(['perl', toolsPath + 'waltz/scoreMatrixGT.pl', inputWaltz, toolsPath + 'waltz/616.mat', 'full'],stdout=subprocess.PIPE)
+  #while True:
+  for q in range(0,len(sequence)-5):
     line = proc.stdout.readline()
-    if line != '':
-	if float(line.split()[2])> waltzThreshold:
+    #print line
+    #if line != '':
+    if float(line.split()[2])> waltzThreshold:
+	  print 'Subsequence above threshold: ' +  line.split()[0]
 	  hit_start=int(line.split()[1]) - 1
           hit_end=hit_start + 6
           for x in range(hit_start-1,hit_end):
             waltzScores[x]+=1
-    else:
-      break
+    #else:
+      #break
 
   #position=0
   if verbose:
@@ -623,14 +626,23 @@ def pastaSearch(sequence, positionScores,verbose):
   for p in range(len(sequence)):
     pastaScores.append(0)
 
-  inputPasta= inputsPath + "sequenceFASTA"
-  #input=open(inputsPath + "sequence" , "w")
-  #input.write(">gi" + endl)
-  #input.write(sequence)
-  #input.close()
-  #proc = subprocess.Popen(['perl', toolsPath + 'waltz/scoreMatrizGT.pl', inputWaltz, toolspath + 'waltz/616.mat full'],stdout=subprocess.PIPE)
-  #while True:
+  #inputPasta= inputsPath + "sequenceFASTA"
+  input=open(inputsPath + "seq.fasta" , "w")
+  input.write(">gi" + endl)
+  input.write(sequence)
+  input.close()
+  runCommand = "perl PASTA/pasta_exe/PastaPairs.pl PASTA/pasta_exe/pot_pasta.dat " + inputsPath +" 1 0 self " + str(pastaCutoff) +  " > /dev/null"
+  #print runCommand
+  os.system(runCommand)
+  ### CHECK THIS!!! THE OUTPUT IS IN THE SAME DIR AS INPUT (CHECK PASTA PERL SCRIPT)
+  outputPasta=open(inputsPath + "seq-seq.best_pairings_list.pair.dat")
+  #proc = subprocess.Popen(['perl', toolsPath + 'PASTA/pasta_exe/PastaPairs.pl', toolsPath + 'PASTA/pasta_exe/pot_pasta.dat', inputsPath,  '1 0 self '+ str(pastaCutoff)],stdout=subprocess.PIPE)
+  for line in outputPasta.readlines():
+	print 'Hit:'
+	print 'Energy value: ' + line.split()[4]
+	print 'Positions:    ' + line.split()[9]
     #line = proc.stdout.readline()
+    #print line
     #if line != '':
 	#if float(line.split()[2])> waltzThreshold:
 	  #hit_start=int(line.split()[1]) - 1
@@ -714,8 +726,8 @@ def tangoSearch(sequence, positionScores,verbose):
   outputTango= outputsPath+"tangoResults.txt"
   #COULD NOT CHANGE THE OUTPUT PATH OF TANGO SO I HAVE TO CHANGE DIR MOMENTLY TO GET THE OUTPUT 
   os.chdir(outputsPath)
-  runCommand=toolsPath + 'tango/tango_i386_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="' + sequence + '" > /dev/null' 
-  #runCommand=toolsPath + 'tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="' + sequence + '" > /dev/null'
+  #runCommand=toolsPath + 'tango/tango_i386_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="' + sequence + '" > /dev/null' 
+  runCommand=toolsPath + 'tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="' + sequence + '" > /dev/null'
   #print runCommand 
   os.system(runCommand)
   outputTango=open(outputTango,'r')
@@ -905,6 +917,19 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  chargedSearch(sequence,positionScores, verbose)
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
+
+
+        #PASTA evaluation (self aggregation)
+        if runPasta:
+          if stepByStep:
+            raw_input(indent + "Hit enter to continue with next evaluation")
+          if verbose:
+            print endl
+            print indent + "*************************************"
+            print indent + "PASTA evaluation"
+          pastaSearch(sequence,positionScores, verbose)
+          #if stepByStep:
+            #raw_input(indent + "Hit enter to continue with next evaluation")
 	
 	#Prosite search
 	if runProsite:
@@ -970,8 +995,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    print endl
 	    print indent + "*************************************"
 	    print indent + "Starting Waltz evaluation"
-	  #waltzSearch(sequence,positionScores, verbose)
-	  print ("*-**********AGREGAR WALTZ Y PROBAR QUE FUNCIONE BIEN*******************")
+	  waltzSearch(sequence,positionScores, verbose)
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
 	
