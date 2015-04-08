@@ -7,6 +7,7 @@ ANCHOR/anchor
 
 #ejecutable de iupred
 iupred/iupred
+iupred/iupredExe
 
 #salidas y entradas de todos
 Output/*
