@@ -32,3 +32,9 @@ OUTPUT FORMATING:
 
 
 
+
+LOG FILE FORMAT:
+	Each line has 4 columns. mutation, new sequence, score, loop id[1 | 2]
+
+     
+
