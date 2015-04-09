@@ -453,6 +453,7 @@ def blastIt(sequence, positionScores, database, verbose):
 			else:
 				if hsp.match[j-start+1] <> "+" and hsp.match[j-start+1] <> " ":
 					positionScores[j] += 1
+					blastScores[j]+=1
 				#else:
 					#positionScores[j]+=0
 					
