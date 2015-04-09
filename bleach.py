@@ -71,11 +71,12 @@ runBlast=runTango=runPasta=runWaltz=runElm=runProsite=runLimbo=runTmhmm=runIupre
 
 
 #PATHS
-basePath=getScriptPath()
-toolsPath=basePath + "/"   #SET THE PATH TO THE TOOL SET 
-inputsPath=basePath + "/Input/"+ str(exeId) + "/" #SET PATH TO SAVE INPUTS FILES
-outputsPath=basePath + "/Output/" + str(exeId) + "/"
+basePath=getScriptPath() + '/'
+toolsPath=basePath    #**************************TODO SET THE PATH TO THE TOOL SET 
 
+inputsPath=basePath + "/Input/"+ str(exeId) + "/" #SET PATH TO SAVE INPUTS FILES
+baseOutputPath=basePath + "/Output/" 
+outputsPath=baseOutputPath + str(exeId) + "/"
 #####CREATE INPUT AND OUTPUT DIRS
 try:
     os.makedirs("Input")
@@ -1346,19 +1347,25 @@ os.mkdir(inputsPath)
 os.mkdir(outputsPath)
 
 #OUTPUT
-outputPath = "Output/"   
+#outputPath = "Output/"   
+
+
+###########THESE FILES SHOULD GO TO test/results DIRECTORY ***************************
 scoresFile="scores" + str(length)   #save Scores Vs iteration number 
 mutAttemptsFile="mutationsAttempt" + str(length)  # save number of mutation attempts  Vs iteration number
 timesFile='times' + str(length)   #save times Vs iteration number
 totalTimesFile='totalTimes'  #save total time elapsed Vs sequence length
-
-
 if output:
-  totalTimesOutputFile=open( outputPath + totalTimesFile , "a")
-  timesOutputFile=open( outputPath + timesFile , "a")
-  scoresOutputFile=open( outputPath + scoresFile , "a")
-  mutationsFile=open( outputPath + mutAttemptsFile , "a")
-  
+  totalTimesOutputFile=open( baseOutputPath + totalTimesFile , "a")
+  timesOutputFile=open( baseOutputPath + timesFile , "a")
+  scoresOutputFile=open( baseOutputPath + scoresFile , "a")
+  mutationsFile=open( baseOutputPath + mutAttemptsFile , "a")
+#*************************************************
+
+
+if minimalOutput:
+  #CREATE .log FILE
+  logFileStream=open( outputsPath+logFileName, 'w')
 
 
 if uvsilent==True:   
@@ -1485,9 +1492,11 @@ if verbose:
   if stepByStep:
     raw_input("Hit enter to start mutations")
 
-
-
-
+else:
+  if minimalOutput:
+    logFileStream.write('INITIAL SEQ:   ' + sequence + tab + str(globalScore))
+    #print 'INITIAL SEQ:   ' + sequence + tab + str(globalScore)
+   
 
 
 
@@ -1577,7 +1586,7 @@ while globalScore > 0 and iteration <= maxIterations:
 	      seleccionado = weighted_choice(aaFrequencies)	
 	  if verbose:	  
 	    print indent + "New residue : " + seleccionado
-
+          
 	  ##BUILD MUTATED SEQUENCE WITH NEW RESIDUE    
 	  mutatedSequence = sequence[0:mutatePosition]
 	  mutatedSequence += seleccionado
@@ -1688,18 +1697,23 @@ while globalScore > 0 and iteration <= maxIterations:
 	    positionScores=mutatedScores
 	    #AND THE GLOBAL SEQUENCE SCORE IS THE ONE CORRESPONDING TO THIS NEW SEQUENCE
 	    partialScore= getGlobalScore(positionScores)
-	    print "Attempts before mutation accept:" + str(mutAttempts)
-	    #print endl
-	    print "*******************************************"
-	  
-	     
-	    print "End of (PARTIAL) iteration " + str(iteration)
-	    print "(PARTIAL) score :    " + str(partialScore)
-	    print "*******************************************"
-	    print endl
+	    if verbose:
+	      print "Attempts before mutation accept:" + str(mutAttempts)
+	      #print endl
+	      print "*******************************************"
+	    
+	      
+	      print "End of (PARTIAL) iteration " + str(iteration)
+	      print "(PARTIAL) score :    " + str(partialScore)
+	      print "*******************************************"
+	      print endl
+	    if minimalOutput:
+		  logFileStream.write(mutatePosition + '(' + previousResidue + ') -> ' + seleccionado + tab + sequence)
+		  #print  mutatePosition + '(' + previousResidue + ') -> ' + seleccionado + tab + sequence
       else:
-	    ### EXCEEDED THE NUMBER OF ATTEMPTS, SEQUENCE NOT CHANGED
-	    print  " Mutations attempts exceeded " 
+	   if verbose:
+	      ### EXCEEDED THE NUMBER OF ATTEMPTS, SEQUENCE NOT CHANGED
+	      print  " Mutations attempts exceeded " 
       if output:
 	# MUTATION ATTEMPTS Vs. ITERATION NUMBER
 	mutationsFile.write(str(iteration)+ tab + str(mutAttempts) + tab +str(beta) + endl)
@@ -1888,18 +1902,23 @@ while globalScore > 0 and iteration <= maxIterations:
 	      partialScores=mutatedScores
 	      #AND THE GLOBAL SEQUENCE SCORE IS THE ONE CORRESPONDING TO THIS NEW SEQUENCE
 	      partialScore= getGlobalScore(partialScores)
-	      print "Attempts before mutation accept:" + str(mutAttempts)
-	      #print endl
-	      print "*******************************************"
-	    
+	      if verbose:
+		print "Attempts before mutation accept:" + str(mutAttempts)
+		#print endl
+		print "*******************************************"
 	      
-	      print "End of (PARTIAL) iteration " + str(iteration)
-	      print "(PARTIAL) score :    " + str(partialScore)
-	      print "*******************************************"
-	      print endl
+		
+		print "End of (PARTIAL) iteration " + str(iteration)
+		print "(PARTIAL) score :    " + str(partialScore)
+		print "*******************************************"
+		print endl
+	      if minimalOutput:
+		  logFileStream.write(mutatePosition + '(' + previousResidue + ') -> ' + seleccionado + tab + sequence)
+		  #print  mutatePosition + '(' + previousResidue + ') -> ' + seleccionado + tab + sequence
 	else:
 	      ### EXCEEDED THE NUMBER OF ATTEMPTS, SEQUENCE NOT CHANGED
-	      print  " Mutations attempts exceeded " 
+	      if verbose:
+		print  " Mutations attempts exceeded " 
 	if output:
 	  # MUTATION ATTEMPTS Vs. ITERATION NUMBER
 	  mutationsFile.write(str(iteration)+ tab + str(mutAttempts) + tab +str(beta) + endl)
@@ -1932,12 +1951,14 @@ while globalScore > 0 and iteration <= maxIterations:
   globalIteration=globalIteration+1;  
   
   #PRINT RESULTS OF GLOBAL ITERATION
-  if verbose or minimalOutput:
+  if verbose:
     print "*******************************************"	     
     print "End of global iteration " + str(iteration)
     print "Global score :    " + str(globalScore)
     print "*******************************************"
     print endl
+  if minimalOutput:
+    logFileStream.write()
   if stepByStep:
 	raw_input("Hit enter to continue with next iteration")
 
@@ -1961,7 +1982,7 @@ else:
 
   #print "Final sequence: " + sequence
   #print "Final score:    " + ''.join(map(str, positionScores))
-  print "Global score: " + str(globalScore)
+  #print "Global score: " + str(globalScore)
   
 
 

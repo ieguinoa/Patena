@@ -17,8 +17,18 @@ NOT TESTED ON WINDOWS!
 
 usage:   python bleach.py  [options]
 
-WHERE options:
+
+GENERAL OPTIONS:
 	
 	--seq [sequence]	Define initial sequence
-	--verbose		Write detailed output
+	--length [seq-length]   Define initial sequence length (and generate a random sequence)
+
+
+ 
+OUTPUT FORMATING:
+	--verbose		Write detailed output in stdout
+	--minoutput		Write mutations history log in file (patena.log)
+	--stepped 		Write detailed output and wait for user input at each step
+
+
 
