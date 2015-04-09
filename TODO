@@ -24,7 +24,6 @@ LO QUE FALTA:
 
 -Probar que ande bien --netCharge 
 
-
 -Implementar todos los parametros para seleccionar que herramientas quiero que se usen (parametros --notango --nopasta --noblast)
 
-
+-Formatear la salida en colores?????

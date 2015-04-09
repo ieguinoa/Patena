@@ -1954,8 +1954,13 @@ if globalScore==0:
   print sequence
 else:
   print "REACHED LIMIT OF ITERATIONS"
-  print "Final sequence: " + sequence
-  print "Final score:    " + ''.join(map(str, positionScores))
+  data = [sequence,positionScores]
+  col_width = max(len(str(word)) for row in data for word in row)  # padding
+  for row in data:
+      print indent + "|".join(str(word).ljust(col_width) for word in row)
+
+  #print "Final sequence: " + sequence
+  #print "Final score:    " + ''.join(map(str, positionScores))
   print "Global score: " + str(globalScore)
   
 
