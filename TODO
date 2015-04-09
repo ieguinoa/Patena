@@ -1,7 +1,3 @@
-ANCHOR:
--ya hay un Makefile hecho que compila y deja un ejecutable de nombre anchor en ANCHOR/ (ya esta agregado al .gitignore)
--necesita exportar una variable con el path  ANCHOR_PATH=/home/tati/tesisBiotec/codigoBiotec/ANCHOR
-
 
 PROSITE
 -tengo que exportar una variable $PROSITE que indique la carpeta donde esta prosite.dat
@@ -10,27 +6,13 @@ en principio, la ubicacion de estos archivos tendria que estar incluida en el PA
 -necesita ademas un archivo con la base de datos de prosite: el script va a ir a buscar el archivo prosite.dat (en el directorio $PROSITE ??)
 
 
-BLAST
--el blast necesita una variable con el path a la DB
-export BLASTDB="$HOME/ncbi-blast-2.2.29+-src/db"
 
 
-IUPRED
--linkeado llama a iupred/iupred
--Se necesita una variable global que indique el path -  export IUPred_PATH=/home/tati/tesisBiotec/iupred/
 
 
 
 
 LO QUE FALTA:
-
--modificar  install.sh  para que se exporten todas las variables :
-			 ANCHOR_PATH=/home/tati/tesisBiotec/codigoBiotec/ANCHOR
-			 BLASTDB="$HOME/ncbi-blast-2.2.29+-src/db"
-			IUPred_PATH=/home/tati/tesisBiotec/iupred/
-
--modificar install.sh para exportar una variable que defina la arquitectura (o que defina directamente el ejecutable de tango (32 o 64))
-****CREO QUE NO ES NECESARIO ESTO PORQUE, ADEMAS, HAY OTRAS HERRAMIENTAS QUE NO ESTAN DISPONIBLES PARA 32BITS****
 
 -dividir el repo en 2:  una parte que tenga solo el codigo (bleach)  y una parte que tenga las herramientas usadas, referencias, texto, etc.
 
@@ -42,41 +24,7 @@ LO QUE FALTA:
 
 -Probar que ande bien --netCharge 
 
--Incluir ph por parametro??? algunas herramientas lo tienen en cuenta y se puede tener en cuenta para saber cual es la carga neta de cada AA
-(actualmente asumo ph=7)
 
 -Implementar todos los parametros para seleccionar que herramientas quiero que se usen (parametros --notango --nopasta --noblast)
-
-
--MEJORAR EL OUTPUT de cualquier forma posible!!. buscar si es posible imprimir el output por paginas tipo multitail o algo asi. probar guardando en un archivo y mostrando
-
-
-
-****************************************************
-
-HERRAMIENTAS QUE FALTAN:
-
-	-PASTA: Aggregation and secondary structure
-	ya tengo el binario (para x86_64)  (supuestamente tengo que tener R instalado)
-	Usage: ./PastaPairs.pl [potential_file] [fasta_dir] [top_pairs] [graphics:1/0] [all/self/fasta_header] [energy cut-off]\n";
-	Ejemplo:   perl ./PastaPairs.pl pot_pasta.dat exampledir/ 10 0 self -5.5
-	solo deberia cambiar exampledir (poner el directorio donde esta el archivo de la secuencia FASTA) y self(no se cual de las 3 opciones va)
-	
-	El .perl abre el directorio donde (supuestamente) esta la secuencia y busca todos los archivos .fasta
-	
-
-
-
-
-
-
-*****************************************************************
-
-
-Pruebas a realizar:
-
-	
-Probar como cambia el numero de iteraciones necesarios
-	
 
 
