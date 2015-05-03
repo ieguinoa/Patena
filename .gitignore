@@ -4,11 +4,11 @@
 *.swp
 #ejecutable de anchor
 ANCHOR/anchor
-
+Tools/ANCHOR/anchor
 #ejecutable de iupred
 iupred/iupred
-iupred/iupredExe
-
+iupredExe
+Tools/iupred.iupred
 #salidas y entradas de todos
 Output/*
 Input/*
