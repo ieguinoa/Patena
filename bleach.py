@@ -74,7 +74,7 @@ logFileName='mutations' + str(exeId) + '.log'
 
 #PATHS
 basePath=getScriptPath() + '/'
-toolsPath=basePath    #**************************TODO SET THE PATH TO THE TOOL SET 
+toolsPath=basePath + 'Tools/'    #**************************TODO SET THE PATH TO THE TOOL SET 
 inputsPath=basePath + "/Input/"+ str(exeId) + "/" #SET PATH TO SAVE INPUTS FILES
 baseOutputPath=basePath + "/Output/" 
 outputsPath=baseOutputPath + str(exeId) + "/"
