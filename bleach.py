@@ -1462,7 +1462,7 @@ time0 = time.time()   #start time
 #############################
 
 iteration=1
-globalIteration=1
+globalIteration=0
 
 
 indent=""
@@ -2000,7 +2000,7 @@ while globalScore > 0 and iteration <= maxIterations:
   if stepByStep:
 	raw_input("Hit enter to continue with next iteration")
   if testing:
-    testOutputFile.write('GLOBAL' + str(globalIteration) + endl ) 
+    testOutputFile.write('GLOBAL ' + str(globalIteration) + endl ) 
 	
 
 
