@@ -16,9 +16,9 @@ def getScriptPath():
 
 #####CREATE RESULTS DIRS
 try:
-    os.makedirs("Results")
+    os.makedirs(getScriptPath()+"/Results")
 except OSError as exc: 
-    if exc.errno == errno.EEXIST and os.path.isdir("Results"):
+    if exc.errno == errno.EEXIST and os.path.isdir(getScriptPath()+"/Results"):
         pass
       
       
