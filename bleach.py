@@ -70,6 +70,10 @@ mutAttempts=0
 length=12   #defaul sequence length
 
 
+#EVALUATION PARAMETERs (TEST MODE)
+
+
+
 #All tools enabled by default 
 runBlast=runTango=runPasta=runWaltz=runElm=runProsite=runLimbo=runTmhmm=runIupred=runAnchor=runAmyloidPattern=True
 
@@ -82,7 +86,7 @@ toolsPath=basePath + 'Tools/'    #**************************TODO SET THE PATH TO
 inputsPath=basePath + "/Input/"+ str(exeId) + "/" #SET PATH TO SAVE INPUTS FILES
 baseOutputPath=basePath + "/Output/" 
 outputsPath=baseOutputPath + str(exeId) + "/"
-testOutputPath=outputsPath
+testOutputPath=outputsPath   # DEFAULT OUTPUT FOR TESTs 
 
 
 #####CREATE INPUT AND OUTPUT DIRS
@@ -1377,16 +1381,21 @@ os.mkdir(outputsPath)
 
 
 ###########THESE FILES SHOULD GO TO test/results DIRECTORY ***************************
-scoresFile="scores" + str(length)   #save Scores Vs iteration number 
-mutAttemptsFile="mutationsAttempt" + str(length)  # save number of mutation attempts  Vs iteration number
-timesFile='times' + str(length)   #save times Vs iteration number
-totalTimesFile='totalTimes'  #save total time elapsed Vs sequence length
-if output:
-  totalTimesOutputFile=open( testOutputPath + totalTimesFile , "a")
-  timesOutputFile=open( testOutputPath + timesFile , "a")
-  scoresOutputFile=open( testOutputPath + scoresFile , "a")
-  mutationsFile=open( testOutputPath  + mutAttemptsFile , "a")
+#scoresFile="scores" + str(length)   #save Scores Vs iteration number 
+#mutAttemptsFile="mutationsAttempt" + str(length)  # save number of mutation attempts  Vs iteration number
+#timesFile='times' + str(length)   #save times Vs iteration number
+#totalTimesFile='totalTimes'  #save total time elapsed Vs sequence length
+#if output:
+  #totalTimesOutputFile=open( testOutputPath + totalTimesFile , "a")
+  #timesOutputFile=open( testOutputPath + timesFile , "a")
+  #scoresOutputFile=open( testOutputPath + scoresFile , "a")
+  #mutationsFile=open( testOutputPath  + mutAttemptsFile , "a")
 #*************************************************
+
+#TESTING MODE ON: WRITE EXECUTION PARAMETERS (TOTAL TIME, TIME PER BLOCK, MUT-ATTEMPTS, BETA VALUES, SCORES)
+if testing: 
+  testOutputFile=open(testOutputPath + str(exeId), 'w')
+  testOutputFile.write(str(beta) + tab + str(length) + endl)
 
 
 if minimalOutput:
@@ -1444,15 +1453,18 @@ for p in range(len(sequence)):
   partialScores.append(0)
 
 
-time0 = time.time()   #start time
 timePrev=time0          #Previous iteration start time
+time0 = time.time()   #start time
+
+
+
 ################################
 #### ITERATE OVER SEQUENCE ####
 #############################
 
 iteration=1
 globalIteration=1
-timePrev=time.time()
+
 
 indent=""
 
@@ -1518,11 +1530,15 @@ if verbose:
   if stepByStep:
     raw_input("Hit enter to start mutations")
 
-else:
-  if minimalOutput:
-    logFileStream.write('INITIAL SEQ.' + tab + sequence + tab + str(globalScore) + endl)
+if minimalOutput:
+  logFileStream.write('ISEQ' + tab + sequence + tab + str(globalScore) + endl)
     #print 'INITIAL SEQ:   ' + sequence + tab + str(globalScore)
-   
+
+if testing:
+  testOutputFile.write('ISEQ' + tab + sequence + tab + 'FIRST' + str(firstPartialScore) + endl)
+  testOutputFile.write('ISEQ' + tab + sequence + tab + 'SECOND' + str(secondPartialScore) + endl)
+  testOutputFile.write('ISEQ' + tab + sequence + tab + 'GLOBAL' + str(globalScore) + endl)
+  
 
 
 
@@ -1573,6 +1589,7 @@ while globalScore > 0 and iteration <= maxIterations:
   
   partialScore=firstPartialScore
   while partialScore > 0 and iteration <= maxIterations:
+      timePrev=time.time()
       weighted=[]
       #weighted IS A PAIRLIST(position,weight)
       #CONTAINS THE WEIGHT USED TO SELECT THE MUTATION POSITION. EACH ELEMENT IS A PAIR (X, WEIGHT), WHERE X= POSITION AND EIGHT IS = (SCORE(X) + A BASE WEIGHT)
@@ -1739,16 +1756,11 @@ while globalScore > 0 and iteration <= maxIterations:
 	   if verbose:
 	      ### EXCEEDED THE NUMBER OF ATTEMPTS, SEQUENCE NOT CHANGED
 	      print  " Mutations attempts exceeded " 
-      if output:
-	# MUTATION ATTEMPTS Vs. ITERATION NUMBER
-	mutationsFile.write(str(iteration)+ tab + str(mutAttempts) + tab +str(beta) + endl)
-	
-	#SCORES Vs. ITERATION NUMBER
-	scoresOutputFile.write(str(iteration)+ tab + str(globalScore) + tab + str(beta) + endl)
-	
-	#ITERATION ELAPSED TIME
+      
+      if testing:
 	timeX=time.time()-timePrev   #ITERATION TIME
-	timesOutputFile.write(str(iteration)+ tab + str(timeX) + tab + str(beta) + endl)
+	testOutputFile.write('LOOP1' + tab + str(iteration)+ tab + str(mutAttempts) + tab + str(partialScore) + tab + str(timeX) + endl ) 
+	
       if stepByStep:
 	raw_input("Hit enter to continue with next iteration")
 		
@@ -1774,6 +1786,7 @@ while globalScore > 0 and iteration <= maxIterations:
     secondPartialEvaluation(sequence,partialScores, verbose)	
     partialScore=getGlobalScore(partialScores)  
     while partialScore > 0 and iteration <= maxIterations:
+	timePrev=time.time()
 	weighted=[]
 	#weighted IS A PAIRLIST(position,weight)
 	#CONTAINS THE WEIGHT USED TO SELECT THE MUTATION POSITION. EACH ELEMENT IS A PAIR (X, WEIGHT), WHERE X= POSITION AND EIGHT IS = (SCORE(X) + A BASE WEIGHT)
@@ -1943,16 +1956,18 @@ while globalScore > 0 and iteration <= maxIterations:
 	      ### EXCEEDED THE NUMBER OF ATTEMPTS, SEQUENCE NOT CHANGED
 	      if verbose:
 		print  " Mutations attempts exceeded " 
-	if output:
+	if testing:
+	  timeX=time.time()-timePrev   #ITERATION TIME
+	  testOutputFile.write('LOOP2' + tab + str(iteration)+ tab + str(mutAttempts) + tab + str(partialScore) + tab + str(timeX) + endl ) 
+	
 	  # MUTATION ATTEMPTS Vs. ITERATION NUMBER
-	  mutationsFile.write(str(iteration)+ tab + str(mutAttempts) + tab +str(beta) + endl)
+	  #mutationsFile.write(str(iteration)+ tab + str(mutAttempts) + tab +str(beta) + endl)
 	  
 	  #SCORES Vs. ITERATION NUMBER
-	  scoresOutputFile.write(str(iteration)+ tab + str(partialScore) + tab + str(beta) + endl)
+	  #scoresOutputFile.write(str(iteration)+ tab + str(partialScore) + tab + str(beta) + endl)
 	  
 	  #ITERATION ELAPSED TIME
-	  timeX=time.time()-timePrev   #ITERATION TIME
-	  timesOutputFile.write(str(iteration)+ tab + str(timeX) + tab + str(beta) + endl)
+	  #timesOutputFile.write(str(iteration)+ tab + str(timeX) + tab + str(beta) + endl)
 	if stepByStep:
 	  raw_input("Hit enter to continue with next iteration")
 		  
@@ -1977,7 +1992,7 @@ while globalScore > 0 and iteration <= maxIterations:
   #PRINT RESULTS OF GLOBAL ITERATION
   if verbose:
     print "*******************************************"	     
-    print "End of global iteration " + str(iteration)
+    print "End of global iteration " + str(globalIteration)
     print "Global score :    " + str(globalScore)
     print "*******************************************"
     print endl
@@ -1985,7 +2000,9 @@ while globalScore > 0 and iteration <= maxIterations:
    # logFileStream.write()
   if stepByStep:
 	raw_input("Hit enter to continue with next iteration")
-
+  if testing:
+    testOutputFile.write('GLOBAL' + str(globalIteration) + endl ) 
+	
 
 
 
@@ -2014,15 +2031,17 @@ else:
 
 
 #PERFORMANCE TESTS OUTPUT
-if output:        
-  totalElapsedTime=time.time() - time0   ##
-  print "Elapsed time:",totalElapsedTime, "Seconds"
-  totalTimesOutputFile.write(str(length) + tab + str(iteration-1)+ tab + str(totalElapsedTime) + tab + str(beta) +  endl)
-
+totalElapsedTime=time.time() - time0   ##
+#if output:        
+  #print "Elapsed time:",totalElapsedTime, "Seconds"
+  #totalTimesOutputFile.write(str(length) + tab + str(iteration-1)+ tab + str(totalElapsedTime) + tab + str(beta) +  endl)
+if testing:
+  testOutputFile.write('END' + tab + str(totalElapsedTime) + tab + str(globalScore) + endl) 
+  testOutputFile.close()
   ##CLOSE ALL OUTPUT FILES
-  totalTimesOutputFile.close()
-  timesOutputFile.close()
-  scoresOutputFile.close()
-  mutationsFile.close()
+  #totalTimesOutputFile.close()
+  #timesOutputFile.close()
+  #scoresOutputFile.close()
+  #mutationsFile.close()
    
 

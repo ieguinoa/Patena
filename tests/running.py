@@ -75,15 +75,14 @@ baseOutputPath= basePath + 'Results/'
 
 # NATURAL SEQUENCES FOR TESTS
 naturalSeq=[]
-naturalSeq.append("MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHG")
-naturalSeq.append("MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHG")
-naturalSeq.append("MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHG")
-#naturalSeq[1]="MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHG"
-#naturalSeq[2]="MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHG"
+#HAEMOGLOBIN
+naturalSeq.append("MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHG")  
 
+#INSULIN
+naturalSeq.append("MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN")
 
-
-
+#HISTONE H1
+naturalSeq.append("MTENSTSAPAAKPKRAKASKKSTDHPKYSDMIVAAIQAEKNRAGSSRQSIQKYIKSHYKVGENADSQIKLSIKRLVTTGVLKQTKGVGASGSFRLAKSDE")
 
 
 
@@ -111,25 +110,42 @@ for i in range(1,len(sys.argv)):
   elif (arg=='--time' or arg== '-t'):
     #TEST total time vs sequence length
     timeTest=True  
-    
-  #elif (arg=='--score' or arg== '-s'):
-    ##TEST score vs iteration number
-    #score=True
-  #elif (arg=='--mutations' or arg== '-m'):
-    ##TEST mutation attempts  Vs. iteration number
-    #mutAttempt=True
-
-    
-  #elif (arg=='--length' or arg== '-l'):
-    ##DEFINE SEQUENCE LENGTH (USED IN SOME OF THE TESTS)
-    #length= sys.argv[i+1] 
-
-sequence="MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHG"
+  
+  elif (arg=='--length' or arg== '-l'):
+    #DEFINE SEQUENCE LENGTH (USED IN SOME OF THE TESTS)
+    length= sys.argv[i+1] 
 
 
 
+      
+#***********************************************************************
+#************************** TESTING BETA VALUES ************************
+#***********************************************************************
 
-    
+if betaTest:
+	outputPath=baseOutputPath + 'test-beta-'+ str(exeId) 
+	os.mkdir(outputPath)
+	for betaValue in np.arange(1.5,2,0.5):  #NUMBER OF BETA VARIATIONS
+		#betaValue= 1.0 + (0.5*value)  
+		
+		#FIRST MAKE 3 TESTs WITH RANDOM SEQs
+		for x in range(3):
+		  runCommand=getRunCommand(outputPath,betaValue,length)
+		  #runCommand ='python bleach.py --beta ' + str(betaValue) +  " --length " + str(length) + ' --nopasta --testoutput ' + outputPath
+		  print runCommand
+		  #os.system(runCommand)
+		  
+		#THEN 3 MORE TESTs WITH NATURAL SEQs	
+		for x in range(3):
+		  runCommand=getRunCommand(outputPath,betaValue,seq=naturalSeq[x][:length])
+		  print runCommand
+		  #os.system(runCommand)
+			
+			
+			
+			
+      
+      
       
 #***********************************************************************
 #************************** TESTING TIMES    ***************************
@@ -138,17 +154,7 @@ sequence="MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHG"
 if timeTest:
   outputPath=baseOutputPath + 'test-time-'+ str(exeId) 
   os.mkdir(outputPath)
-  length=5
-  #runCommand ='python bleach.py --beta ' + beta + ' --nopasta --testoutput ' + outputPath + ' --length ' str(length) 
-  for x in range(3):  # 3 execution with random seqs
-      runCommand=getRunCommand(outputPath, beta, length)
-      print runCommand
-      #os.system(runCommand)
-  for x in range(3):  #3 executions with 
-     runCommand=getRunCommand(outputPath, beta, seq=naturalSeq[x][:5])
-     print runCommand
-     #os.system(runCommand)    
-  for length in range(10,50,10):
+  for length in([5] + range(10,60,10)):
     for x in range(3):  # 3 execution with random seqs
       runCommand=getRunCommand(outputPath, beta, length)
       print runCommand
@@ -161,23 +167,3 @@ if timeTest:
 
     
 
-      
-#***********************************************************************
-#************************** TESTING BETA VALUES ************************
-#***********************************************************************
-
-if betaTest:
-	outputPath=baseOutputPath + 'test-beta-'+ exeId 
-	os.mkdir(outputPath)
-	for value in range(4):  #NUMBER OF BETA VARIATIONS
-		betaValue= 1.0 + (0.5*value)  
-		#runCommand ='python bleach.py --beta ' + str(betaValue) +  " --length " + str(length) + ' --nopasta --testoutput ' + outputPath
-		
-		#FIRST MAKE 3 TESTs WITH RANDOM SEQs
-		for x in range(3):
-			print runCommand
-			#os.system(runCommand)
-			
-		#THEN 3 MORE TESTs WITH NATURAL SEQs	
-		#for x in range(3):
-			
