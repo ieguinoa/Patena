@@ -47,9 +47,13 @@ exeId=os.getpid()
 maxIterations=10000
 cutoff=0.01  #BLAST cutoff
 waltzThreshold=79.0
-beta=0.1   #MC 
+beta=0.5   #MC 
 targetScore=0.0
-pastaCutoff=-5.5
+pastaThreshold=-5.5  #ENERGY Threshold
+pastaProbabilityThreshold=0.05 #Aggregation probability threshold
+iupredThreshold=0.5
+anchorThreshold=0.5
+tangoThreshold=1.0
 
 #  EXECUTION PARAMETERS
 minimalOutput=False  #True = only print global scores at end of iteration
@@ -78,6 +82,7 @@ toolsPath=basePath + 'Tools/'    #**************************TODO SET THE PATH TO
 inputsPath=basePath + "/Input/"+ str(exeId) + "/" #SET PATH TO SAVE INPUTS FILES
 baseOutputPath=basePath + "/Output/" 
 outputsPath=baseOutputPath + str(exeId) + "/"
+testOutputPath=outputsPath
 
 
 #####CREATE INPUT AND OUTPUT DIRS
@@ -256,7 +261,7 @@ def prositeSearch(sequence, positionScores,verbose):
   #input.write(">gi" + endl)
   #input.write(sequence)
   #input.close()
-  proc = subprocess.Popen(['perl', toolsPath + 'ps_scan/ps_scan.pl','-r','-o', 'scan', inputProsite],stdout=subprocess.PIPE)
+  proc = subprocess.Popen(['perl', toolsPath + 'Prosite/ps_scan/ps_scan.pl','-r','-o', 'scan', inputProsite],stdout=subprocess.PIPE)
   while True:
     line = proc.stdout.readline()
     if line != '':
@@ -273,7 +278,7 @@ def prositeSearch(sequence, positionScores,verbose):
 
   if verbose:
     #print endl
-    print indent + "Prosite Search RESULTS:"
+    print indent + "RESULTS:"
     #print indent + sequence
     #print indent + ''.join(map(str, prositeScores))	  
     data = [sequence,prositeScores]
@@ -503,10 +508,11 @@ def iupred(sequence, positionScores, verbose):
 	      iupredScores.append(0)
 	  for x in range(len(sequence)):
 		  resultX=float(iterOutputIUPred.next())
-		  if resultX < 0.5 :
+		  if resultX < iupredThreshold :
 			  iupredScores[x] = 1
 	  #print endl
-	  print indent + "IUPred RESULTS:"
+	  print indent + "RESULTS:"
+	  print indent + 'Threshold: '+ str(iupredThreshold)
 	  #print indent + sequence
 	  #print indent + ''.join(map(str, iupredScores))	  			  			
 	  data = [sequence,iupredScores]
@@ -518,10 +524,9 @@ def iupred(sequence, positionScores, verbose):
 	#ADD 1 TO THE POSITION IN positionScores IF THE RESULT IS LESS THAN 0.5 (PREDICTING A GLOBULAR TENDENCY)
 	for j in range(len(sequence)):
 		resultJ=float(rstFile_iter.next())
-		if resultJ > 0.5 :
-			positionScores[j] += 0
-		else:
-			positionScores[j] += 1				
+		if resultJ < iupredThreshold :
+			positionScores[j] += 1
+				
   
 
 
@@ -540,39 +545,40 @@ def iupred(sequence, positionScores, verbose):
 def anchor(sequence, positionScores, verbose):
   inputAnchor=inputsPath + "sequenceFASTA"
   runCommand=toolsPath + "ANCHOR/anchor" + space + inputAnchor + space + outputsPath + "outAnchor"
-  #input=open('ANCHOR/input', 'w')
-  #input.write("Name" + endl)
-  #input.write(sequence)
-  #input.close()
+ 
   os.system(runCommand)	
   outputAnchor=open(outputsPath + "outAnchor", "r")
-  #print "aca evaluo anchor"
-  #PRINT THE RESULTS OF ANCHOR
+  
+  if verbose:
+    print indent + 'Threshold: ' + str(anchorThreshold)
   anchorScores=[]
   iterOutputAnchor=iter(outputAnchor)
   for p in range(len(sequence)):
       anchorScores.append(0)
   for x in range(len(sequence)):
 	  resultX=float(iterOutputAnchor.next())
-	  if resultX >  0.5 :
+	  if resultX >  anchorThreshold :
 	    anchorScores[x] = 1
+  #PRINT THE RESULTS OF ANCHOR
   if verbose:
-    print indent + "ANCHOR RESULTS:"
-    #print indent + sequence
-    #print indent + ''.join(map(str, anchorScores))	  			  			
+    print indent + "RESULTS:"
     data = [sequence,anchorScores]
     col_width = max(len(str(word)) for row in data for word in row)   # padding
     for row in data:
       print indent + "|".join(str(word).ljust(col_width) for word in row)
   outputAnchor.seek(0)
   rstFile_iter = iter(outputAnchor)
-  #ADD 1 TO POSITIONS IN positionScores  IF THE RESULT IS GREATER THAN 0.5 (PREDICTING A DISORDERED BINDING REGION)
+  #ADD 1 TO POSITIONS IN positionScores  IF THE RESULT IS GREATER THAN Threshold (PREDICTING A DISORDERED BINDING REGION)
   for j in range(len(sequence)):
 	  resultJ=float(rstFile_iter.next())
-	  if resultJ > 0.5 :
+	  if resultJ > anchorThreshold :
 		  positionScores[j] += 1
-	  else:
-		  positionScores[j] += 0				
+	  #else:
+		  #positionScores[j] += 0				
+
+
+
+
 
 
 
@@ -582,21 +588,21 @@ def anchor(sequence, positionScores, verbose):
 
 
 def waltzSearch(sequence, positionScores,verbose):
+  
+  if verbose:
+     #print indent + "WALTZ SEARCH"
+     print indent + "Threshold: " + str(waltzThreshold)
+  #EXECUTE WALTZ EVALUATION
+  inputWaltz=inputsPath + "sequenceFASTA"
+  proc = subprocess.Popen(['perl', toolsPath + 'waltz/scoreMatrixGT.pl', inputWaltz, toolsPath + 'waltz/616.mat', 'full'],stdout=subprocess.PIPE)
+
+  #PROCESS OUTPUT  
   waltzScores=[]
   for p in range(len(sequence)):
     waltzScores.append(0)
-
-  inputWaltz=inputsPath + "sequenceFASTA"
-  #input=open(inputsPath + "sequence" , "w")
-  #input.write(">gi" + endl)
-  #input.write(sequence)
-  #input.close()
-  proc = subprocess.Popen(['perl', toolsPath + 'waltz/scoreMatrixGT.pl', inputWaltz, toolsPath + 'waltz/616.mat', 'full'],stdout=subprocess.PIPE)
-  #while True:
+ 
   for q in range(0,len(sequence)-5):
     line = proc.stdout.readline()
-    #print line
-    #if line != '':
     if float(line.split()[2])> waltzThreshold:
 	  if verbose:
 	     print indent + 'Subsequence above threshold: ' +  line.split()[0]
@@ -609,7 +615,7 @@ def waltzSearch(sequence, positionScores,verbose):
 
   #position=0
   if verbose:
-    print indent + "WALTZ RESULTS:"
+    print indent + "RESULTS:"
     #print indent + sequence
     #print indent + ''.join(map(str, waltzScores))
     data = [sequence,waltzScores]
@@ -622,56 +628,55 @@ def waltzSearch(sequence, positionScores,verbose):
       positionScores[x] += 1
 
 
+
+
+
+
+
+
   #####################################################################################
   #########################  PASTA EVALUATION #########################################
   #####################################################################################
 
 
 def pastaSearch(sequence, positionScores,verbose):
-  pastaScores=[]
-  for p in range(len(sequence)):
-    pastaScores.append(0)
-
-  #inputPasta= inputsPath + "sequenceFASTA"
   input=open(inputsPath + "seq.fasta" , "w")
   input.write(">gi" + endl)
   input.write(sequence)
   input.close()
-  runCommand = "perl PASTA/pasta_exe/PastaPairs.pl PASTA/pasta_exe/pot_pasta.dat " + inputsPath +" 1 0 self " + str(pastaCutoff) +  " > /dev/null"
-  #print runCommand
+  pastaPath=toolsPath + 'PASTA/pasta_exe/'
+  runCommand = "perl " + pastaPath+'PastaPairs.pl' + space + pastaPath +'pot_pasta.dat '+ inputsPath + " 1 0 self " + str(pastaThreshold) +  " > /dev/null"
+  #print 'comando:' + runCommand
   os.system(runCommand)
   ### CHECK THIS!!! THE OUTPUT IS IN THE SAME DIR AS INPUT (CHECK PASTA PERL SCRIPT)
   outputPasta=open(inputsPath + "seq-seq.best_pairings_list.pair.dat")
-  #proc = subprocess.Popen(['perl', toolsPath + 'PASTA/pasta_exe/PastaPairs.pl', toolsPath + 'PASTA/pasta_exe/pot_pasta.dat', inputsPath,  '1 0 self '+ str(pastaCutoff)],stdout=subprocess.PIPE)
+  pastaScores=[]
+  for p in range(len(sequence)):
+    pastaScores.append(0)
+  if verbose:
+    print indent + 'Threshold: ' + str(pastaThreshold)
   for line in outputPasta.readlines():
+     fromP, dash,toP = (line.split()[9]).partition('-')
+     for hits in range(int(fromP)-1,int(toP)):
+       pastaScores[hits]=+1 
      if verbose: 
 	print indent + 'Hit:'
-	print indent + 'Energy value: ' + line.split()[4]
+	print indent + 'Energy value: ' + line.split()[4]	
 	print indent + 'Positions:    ' + line.split()[9]
-    #line = proc.stdout.readline()
-    #print line
-    #if line != '':
-	#if float(line.split()[2])> waltzThreshold:
-	  #hit_start=int(line.split()[1]) - 1
-          #hit_end=hit_start + 6
-          #for x in range(hit_start-1,hit_end):
-            #waltzScores[x]+=1
-    #else:
-      #break
-
-  position=0
+  #position=0
   if verbose:
-    print indent + "PASTA RESULTS:"
-    #print indent + sequence
-    #print indent + ''.join(map(str, pastaScores))
+    print indent + "RESULTS:"
     data = [sequence,pastaScores]
     col_width = max(len(str(word)) for row in data for word in row)   # padding
     for row in data:
       print indent + "|".join(str(word).ljust(col_width) for word in row)
-
+  
   for x in range(0,len(sequence)):
     if pastaScores[x] > 0:
       positionScores[x] += 1
+
+
+
 
 
 
@@ -685,39 +690,39 @@ def amyloidPatternSearch(sequence, positionScores,verbose):
     amyloidScore=[]
     for p in range(len(sequence)):
 	amyloidScore.append(0)
-    
-    #/with open(output_file_name, 'w') as file_write :
-    #for elm_id in elm_pattern_dict :
-    where_to_start = []
-    elm_pos_dict = {}
+   
+   #TODO READ PATTERN FROM FILE IN Tools DIR
     pattern = re.compile("[^P][PKRHW][VLSCWFNQE][ILTYWFNE][FIY][^PKRH]")
+    where_to_start = []
+    #elm_pos_dict = {}
     for matched_string in pattern.finditer('%s' % sequence) :
 	    where_to_start.append(matched_string.start())
-    pattern = re.compile("[^P][PKRHW][VLSCWFNQE][ILTYWFNE][FIY][^PKRH]")
+    #pattern = re.compile("[^P][PKRHW][VLSCWFNQE][ILTYWFNE][FIY][^PKRH]")
+    hits=False
     for index in where_to_start :
 	    match = re.search(pattern, '%s' % sequence[index:])
 	    if match != None :
+	            hits=True
 		    if verbose:
-		    	print "NEUTRAL pH SEQUENCE DETERMINANT FOUND "
+		    	print indent + "NEUTRAL pH SEQUENCE DETERMINANT FOUND "
 		    for x in range(index,index+len(match.group())):
 		      amyloidScore[x]+=1
-		    #if verbose:     #write description next to the indexes
-		      #print elm_id
-		      #file_write.write(str(index+1) + tab + str(index+len(match.group())) + '\n')
-		      
-		      #file_write.write("%s\t%s\t%s\t%s\n" % (index+1, index+len(match.group()) , elm_id , elm_pattern_desc_dict[elm_id] ))
-		    #else:
-		      #file_write.write("%s\t%s\n" % (index+1, index+len(match.group())))
-	
+	    #else:
+	      #if verbose:
+		#print indent + 'NO MATCHES'
 	
     if verbose:
-      print indent + "AMYLOID SEQUENCE DETERMINANTS RESULTS:"
-      data = [sequence,amyloidScore]
-      col_width = max(len(str(word)) for row in data for word in row)   # padding
-      for row in data:
-	print indent + "|".join(str(word).ljust(col_width) for word in row)
-      #print indent + sequence
-      #print indent + ''.join(map(str, amyloidScore))
+      if hits:
+	print indent + "RESULTS:"
+	data = [sequence,amyloidScore]
+	col_width = max(len(str(word)) for row in data for word in row)   # padding
+	for row in data:
+	  print indent + "|".join(str(word).ljust(col_width) for word in row)
+      else:
+	print indent + 'NO HITS'
+
+
+
 
 
 
@@ -732,9 +737,11 @@ def amyloidPatternSearch(sequence, positionScores,verbose):
 
 def tangoSearch(sequence, positionScores,verbose):
   outputTango= outputsPath+"tangoResults.txt"
+  #  32bits bin
+  #runCommand=toolsPath + 'tango/tango_i386_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="' + sequence + '" > /dev/null' 
+  
   #COULD NOT CHANGE THE OUTPUT PATH OF TANGO SO I HAVE TO CHANGE DIR MOMENTLY TO GET THE OUTPUT 
   os.chdir(outputsPath)
-  #runCommand=toolsPath + 'tango/tango_i386_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="' + sequence + '" > /dev/null' 
   runCommand=toolsPath + 'tango/tango_x86_64_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="' + sequence + '" > /dev/null'
   #print runCommand 
   os.system(runCommand)
@@ -743,7 +750,9 @@ def tangoSearch(sequence, positionScores,verbose):
   tangoScores=[]
   for p in range(len(sequence)):
     tangoScores.append(0)
-  
+  if verbose:
+    #print indent + 'TANGO SEARCH'
+    print indent + 'Threshold: ' + str(tangoThreshold)
   position=0
   for line in outputTango.readlines()[1:len(sequence)+1]:
     #print line.split()[1] 
@@ -751,13 +760,12 @@ def tangoSearch(sequence, positionScores,verbose):
     turn=float(line.split()[3])
     helix=float(line.split()[4])
     aggregation=float(line.split()[5])
-    tangoCutff=1
-    if beta > tangoCutff or turn > tangoCutff or helix > tangoCutff or aggregation > tangoCutff:
+    if beta > tangoThreshold or turn > tangoThreshold or helix > tangoThreshold or aggregation > tangoThreshold:
       tangoScores[position]=1
     position+=1
   #print str(beta) + tab + str(turn) + tab + str(helix) + tab + str(aggregation) 
   if verbose:
-    print indent + "TANGO RESULTS:"
+    print indent + "RESULTS:"
     #print indent + sequence
     #print indent + ''.join(map(str, tangoScores))	  
     data = [sequence,tangoScores]
@@ -773,6 +781,9 @@ def tangoSearch(sequence, positionScores,verbose):
 
 
 
+
+
+
   ######################################################################################
   ##########################       LIMBO EVALUATION     #####################################
   ######################################################################################
@@ -783,7 +794,8 @@ def limboEval(sequence, positionScores,verbose):
   #input.write(sequence)
   #input.close()
   outputLimbo= outputsPath + "outLimbo"
-  
+  #if verbose:
+    #print indent + "LIMBO SEARCH:"
   #CALL LIMBO :   score.py + matrix + input + outpout
   runCommand="python" + space + toolsPath + "Limbo/score.py" + space + toolsPath+"Limbo/mergedmatrix.mat" + space + inputsPath + "sequenceFASTA" + space + outputLimbo
   os.system(runCommand)
@@ -800,13 +812,17 @@ def limboEval(sequence, positionScores,verbose):
   for x in range(0,len(sequence)):
     positionScores[x] += limboScores[x]
   if verbose:
-    print indent + "LIMBO RESULTS:"
+    print indent + "RESULTS:"
     #print indent + sequence
     #print indent + ''.join(map(str, limboScores))	  
     data = [sequence,limboScores]
     col_width = max(len(str(word)) for row in data for word in row)   # padding
     for row in data:
       print indent + "|".join(str(word).ljust(col_width) for word in row)
+
+
+
+
 
 
 
@@ -888,7 +904,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  if verbose:
 	    #print endl
 	    print indent + "*************************************"
-	    #print indent + "STARTING IUPred"
+	    print indent + "STARTING IUPred SEARCH"
 	  iupred(sequence, positionScores, verbose)
 	    
 	    
@@ -899,7 +915,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  if verbose:
 	    print endl
 	    print indent + "*************************************"
-	    #print indent + "STARTING ANCHOR"
+	    print indent + "STARTING ANCHOR SEARCH"
 	  anchor(sequence, positionScores, verbose)
 	
 	#ELM search
@@ -909,7 +925,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  if verbose:
 	    print endl
 	    print indent + "*************************************"
-	    #print indent + "STARTING ELM Search"
+	    print indent + "STARTING ELM Search"
 	  elmSearch(sequence,positionScores, verbose)
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
@@ -921,7 +937,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  if verbose:
 	    print endl
 	    print indent + "*************************************"
-	    print indent + "Sequence net charge evaluation"
+	    print indent + "Starting sequence net charge evaluation"
 	  chargedSearch(sequence,positionScores, verbose)
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
@@ -934,7 +950,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
           if verbose:
             print endl
             print indent + "*************************************"
-            print indent + "PASTA evaluation"
+            print indent + "Starting PASTA evaluation"
           pastaSearch(sequence,positionScores, verbose)
           #if stepByStep:
             #raw_input(indent + "Hit enter to continue with next evaluation")
@@ -988,9 +1004,10 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
 	    print endl
-	    print indent + "EVALUATE AMYLOID FIBRIL FORMATION "
+	    #print indent + "EVALUATE AMYLOID FIBRIL FORMATION "
 	    print indent + "*************************************"
-	    print indent + "Search for sequence determinants"
+	    #print endl
+	    print indent + "Search for Amyloid sequence determinants"
 	  amyloidPatternSearch(sequence,positionScores, verbose)
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
@@ -1014,7 +1031,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  if verbose:
 	    print endl
 	    print indent + "*************************************"
-	    #print indent + "STARTING TANGO Search"
+	    print indent + "STARTING TANGO Search"
 	  tangoSearch(sequence,positionScores, verbose)
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
@@ -1246,7 +1263,12 @@ else:
       verbose=True
     elif (arg=='--minoutput'):
       minimalOutput=True
-    
+    elif (arg=='--testoutput') and (index < len(sys.argv)):
+      testing=True
+      testOutputPath = sys.argv[index+1]
+      
+      
+      
  ##   SELECT WHICH TOOLS WONT ME EVALUATED
     elif (arg=='--noblast'):
       runBlast=False
@@ -1360,10 +1382,10 @@ mutAttemptsFile="mutationsAttempt" + str(length)  # save number of mutation atte
 timesFile='times' + str(length)   #save times Vs iteration number
 totalTimesFile='totalTimes'  #save total time elapsed Vs sequence length
 if output:
-  totalTimesOutputFile=open( baseOutputPath + totalTimesFile , "a")
-  timesOutputFile=open( baseOutputPath + timesFile , "a")
-  scoresOutputFile=open( baseOutputPath + scoresFile , "a")
-  mutationsFile=open( baseOutputPath + mutAttemptsFile , "a")
+  totalTimesOutputFile=open( testOutputPath + totalTimesFile , "a")
+  timesOutputFile=open( testOutputPath + timesFile , "a")
+  scoresOutputFile=open( testOutputPath + scoresFile , "a")
+  mutationsFile=open( testOutputPath  + mutAttemptsFile , "a")
 #*************************************************
 
 

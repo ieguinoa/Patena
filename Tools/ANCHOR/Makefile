@@ -16,7 +16,7 @@ objects = util.o
 all : anchor 
 
 anchor : anchor.c
-	cc anchor.c -o anchor $(ALL_FLAG)
+	cc -w anchor.c -o anchor $(ALL_FLAG)
 
 
 clean : 

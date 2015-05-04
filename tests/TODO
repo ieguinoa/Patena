@@ -1,0 +1,24 @@
+Definir valor estandar de beta:
+           para una misma longitud (caso de mayor long de secuencia). 3 sec random y 3 naturales
+           medir los parametros de ejecucion para beta en un rango definido
+           parametros: tiempo total, tiempo por bloque, % de mutaciones propuestas que fueron aceptadas, score en funcion de la iteracion
+          
+
+           
+
+Evaluacion del tiempo de ejecucion:
+para un rango de longitudes de secuencia (5-50) (5,10,20,30...).
+para cada longitud 3 secuencias random y 3 de origen natural.
+Medir todos los parametros de ejecucion.
+
+
+
+-Demostrar diferencia con linkers naturales
+Usar una secuencia linker natural y obtener el resultado de la evaluacion
+http://www.ncbi.nlm.nih.gov/pubmed/25490747
+
+
+
+Prueba de la divergencia en la ejecucion:
+usando una misma secuencia inicial (long. 30)
+evaluar una gran cantidad de veces.
