@@ -12,5 +12,5 @@ Tools/iupred.iupred
 #salidas y entradas de todos
 Output/*
 Input/*
-
 TMHMM_*
+tests/Results/*

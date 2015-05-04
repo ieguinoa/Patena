@@ -810,7 +810,7 @@ def limboEval(sequence, positionScores,verbose):
   for line in outputLimbo.readlines():
     #print line.split()[1] 
     hitStart=int(line.split()[0])  #first column is the start of the heptapeptide hit
-    for y in range(hitStart-1,hitStart+7):
+    for y in range(hitStart-1,hitStart+6):
       limboScores[y] += 1
 
   for x in range(0,len(sequence)):
@@ -1394,7 +1394,7 @@ os.mkdir(outputsPath)
 
 #TESTING MODE ON: WRITE EXECUTION PARAMETERS (TOTAL TIME, TIME PER BLOCK, MUT-ATTEMPTS, BETA VALUES, SCORES)
 if testing: 
-  testOutputFile=open(testOutputPath + str(exeId), 'w')
+  testOutputFile=open(testOutputPath + '/'+ str(exeId), 'w')
   testOutputFile.write(str(beta) + tab + str(length) + endl)
 
 
@@ -1453,7 +1453,6 @@ for p in range(len(sequence)):
   partialScores.append(0)
 
 
-timePrev=time0          #Previous iteration start time
 time0 = time.time()   #start time
 
 
@@ -1535,9 +1534,9 @@ if minimalOutput:
     #print 'INITIAL SEQ:   ' + sequence + tab + str(globalScore)
 
 if testing:
-  testOutputFile.write('ISEQ' + tab + sequence + tab + 'FIRST' + str(firstPartialScore) + endl)
-  testOutputFile.write('ISEQ' + tab + sequence + tab + 'SECOND' + str(secondPartialScore) + endl)
-  testOutputFile.write('ISEQ' + tab + sequence + tab + 'GLOBAL' + str(globalScore) + endl)
+  testOutputFile.write('ISEQ' + tab + sequence + tab + 'FIRST ' + str(firstPartialScore) + endl)
+  testOutputFile.write('ISEQ' + tab + sequence + tab + 'SECOND ' + str(secondPartialScore) + endl)
+  testOutputFile.write('ISEQ' + tab + sequence + tab + 'GLOBAL ' + str(globalScore) + endl)
   
 
 
