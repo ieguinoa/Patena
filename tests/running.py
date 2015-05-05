@@ -35,9 +35,9 @@ def printHelp():
 
 def getRunCommand(outPath,beta,length=None,seq=None):
   if seq==None and length!=None:   #RANDOM SEQUENCE 
-    return 'python bleach.py --nopasta --testoutput ' + outPath + ' --length ' + str(length) + ' --beta ' + str(beta)  
+    return 'python ../bleach.py --nopasta --testoutput ' + outPath + ' --length ' + str(length) + ' --beta ' + str(beta)  
   elif seq!=None and length==None:   #DEFINED SEQUENCE
-    return 'python bleach.py --nopasta --testoutput ' + outPath + ' --seq '+  seq + ' --beta ' + str(beta)  
+    return 'python ../bleach.py --nopasta --testoutput ' + outPath + ' --seq '+  seq + ' --beta ' + str(beta)  
   else:
     print 'ERROR: Attempting a wrong execution format' 
     exit()
@@ -49,7 +49,7 @@ def getRunCommand(outPath,beta,length=None,seq=None):
 endl = "\n"
 tab = "\t"
 beta=0.5 # DEFAULT BETA VALUE
-length=30   #DEFAULT LENGTH VALUE
+length=50   #DEFAULT LENGTH VALUE
 
 timeTest=False
 betaTest=False
@@ -125,7 +125,7 @@ for i in range(1,len(sys.argv)):
 if betaTest:
 	outputPath=baseOutputPath + 'test-beta-'+ str(exeId) 
 	os.mkdir(outputPath)
-	for betaValue in np.arange(1.5,2,0.5):  #NUMBER OF BETA VARIATIONS
+	for betaValue in np.arange(0.5,3,0.5):  #NUMBER OF BETA VARIATIONS
 		#betaValue= 1.0 + (0.5*value)  
 		
 		#FIRST MAKE 3 TESTs WITH RANDOM SEQs
@@ -133,13 +133,13 @@ if betaTest:
 		  runCommand=getRunCommand(outputPath,betaValue,length)
 		  #runCommand ='python bleach.py --beta ' + str(betaValue) +  " --length " + str(length) + ' --nopasta --testoutput ' + outputPath
 		  print runCommand
-		  #os.system(runCommand)
+		  os.system(runCommand)
 		  
 		#THEN 3 MORE TESTs WITH NATURAL SEQs	
 		for x in range(3):
 		  runCommand=getRunCommand(outputPath,betaValue,seq=naturalSeq[x][:length])
 		  print runCommand
-		  #os.system(runCommand)
+		  os.system(runCommand)
 			
 			
 			
@@ -158,11 +158,11 @@ if timeTest:
     for x in range(3):  # 3 execution with random seqs
       runCommand=getRunCommand(outputPath, beta, length)
       print runCommand
-      #os.system(runCommand)
+      os.system(runCommand)
     for x in range(3):  #3 executions with 
       runCommand=getRunCommand(outputPath, beta, seq=naturalSeq[x][:length])
       print runCommand
-      #os.system(runCommand)
+      os.system(runCommand)
 
 
     
