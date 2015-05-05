@@ -181,6 +181,26 @@ def stackedBarChart( ylabel, data, labels, filename, ticks, xlabel=None):
   pylab.savefig(filename, bbox_inches='tight')
   pylab.close()
 
+
+
+
+def scatterGraphBinaryColour(xlabel, ylabel, xRandvalues,xSeqValues, yRandValues,ySeqValues,filename,
+                          ylegend=u'',fitlegend='u', ticks='', title=u""):
+  #A = np.vstack([xvalues, np.ones(len(xvalues))]).T
+  #m, c = np.linalg.lstsq(A, yvalues)[0]
+  pylab.title(title)
+  pylab.ylabel(ylabel)
+  pylab.xlabel(xlabel)
+  plt.scatter(xRandValues,yRandValues,color='red',label=ylegend)
+  plt.scatter(xSeqValues,ySeqValues,color='blue',label=ylegend)
+  #p1 = plt.scatter(xvalues, yvalues, label=ylegend)
+  #plt.plot(xvalues, m*xvalues + c,  label=fitlegend)
+  #plt.xlim((0, max(xvalues)*1.1))
+  #plt.ylim((0, max(yvalues)*1.1))
+  pylab.legend(loc='best')
+  pylab.savefig(filename, bbox_inches='tight')
+  pylab.close()
+  
 def scatterGraphFitLineal(xlabel, ylabel, xvalues, yvalues, filename,
                           ylegend=u'',fitlegend='u', ticks='', title=u""):
   A = np.vstack([xvalues, np.ones(len(xvalues))]).T

@@ -7,7 +7,7 @@ from os.path import isfile
 from itertools import *
 import numpy as np
 import string
-sys.path.insert(0, 'common')   #GRAPHICS FUNCTIONS
+sys.path.insert(0, 'graphics')   #GRAPHICS FUNCTIONS
 
 
 def getScriptPath():

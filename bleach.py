@@ -1395,8 +1395,10 @@ os.mkdir(outputsPath)
 #TESTING MODE ON: WRITE EXECUTION PARAMETERS (TOTAL TIME, TIME PER BLOCK, MUT-ATTEMPTS, BETA VALUES, SCORES)
 if testing: 
   testOutputFile=open(testOutputPath + '/'+ str(exeId), 'w')
-  testOutputFile.write(str(beta) + tab + str(length) + endl)
-
+  if rand:
+    testOutputFile.write('RAND'+ tab +str(beta) + tab + str(length) + endl)
+  else:
+    testOutputFile.write('SEQ'+ tab + str(beta) + tab + str(length) + endl)
 
 if minimalOutput:
   #CREATE .log FILE
@@ -2000,7 +2002,7 @@ while globalScore > 0 and iteration <= maxIterations:
   if stepByStep:
 	raw_input("Hit enter to continue with next iteration")
   if testing:
-    testOutputFile.write('GLOBAL ' + str(globalIteration) + endl ) 
+    testOutputFile.write('GLOBAL ' + tab + str(globalIteration) + endl ) 
 	
 
 
