@@ -48,7 +48,7 @@ def getRunCommand(outPath,beta,length=None,seq=None):
 
 endl = "\n"
 tab = "\t"
-beta=0.5 # DEFAULT BETA VALUE
+defaultBeta=1.0 # DEFAULT BETA VALUE
 length=50   #DEFAULT LENGTH VALUE
 
 timeTest=False
@@ -152,9 +152,11 @@ if betaTest:
 #***********************************************************************
 
 if timeTest:
-  outputPath=baseOutputPath + 'test-time-'+ str(exeId) 
+  beta=defaultBeta
+  outputPath=baseOutputPath + 'test-time-'+ str(beta) + '-'+ str(exeId)
   os.mkdir(outputPath)
-  for length in([5] + range(10,60,10)):
+  #for length in([5] + range(10,60,10)):
+  for length in range(10,60,10):
     for x in range(3):  # 3 execution with random seqs
       runCommand=getRunCommand(outputPath, beta, length)
       print runCommand

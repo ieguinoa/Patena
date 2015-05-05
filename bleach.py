@@ -61,6 +61,7 @@ verbose=False        #True = print detailed information of execution
 stepByStep=False
 match=False
 rand=True
+testing=False
 change=True
 evaluateNetCharge=False
 #targetNetCharge=0
@@ -1361,6 +1362,7 @@ else:
   print "************************************************"
   print "EXECUTION PARAMETERS:"
   print 'Id=' + str(exeId) 
+  print 'Beta= '+ str(beta)
   print "Length=" + str(length) 
   print "Composition=" + composition
   print "Sequence=" + sequence
@@ -1427,7 +1429,8 @@ if rand==True:
 	  url="http://web.expasy.org/cgi-bin/randseq/randseq.pl?size=" + str(length) + "&comp=" + composition + "&output=fasta"
 	else:
 	  print "fix this"
-	response = urllib2.urlopen(url)
+	#print url
+  	response = urllib2.urlopen(url)
 	html = response.read()
 	i = html.index('\n')
 	sequence = html[i+1:].replace('\n', '')
@@ -2014,11 +2017,12 @@ while globalScore > 0 and iteration <= maxIterations:
 print "**END OF SEARCH**"
 if globalScore==0:
   print "REACHED SCORE = 0"
-  print sequence
+  print 'FINAL SEQUENCE: ' + sequence
 else:
   print "REACHED LIMIT OF ITERATIONS"
   data = [sequence,positionScores]
   col_width = max(len(str(word)) for row in data for word in row)  # padding
+  print 'LAST SEQUENCE: ' + sequence
   print 'FINAL SCORES'
   for row in data:
       print  "|".join(str(word).ljust(col_width) for word in row)
