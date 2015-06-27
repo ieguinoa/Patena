@@ -2022,6 +2022,7 @@ print "**END OF SEARCH**"
 if globalScore==0:
   print "REACHED SCORE = 0"
   print 'FINAL SEQUENCE: ' + sequence
+  
 else:
   print "REACHED LIMIT OF ITERATIONS"
   data = [sequence,positionScores]
@@ -2035,7 +2036,9 @@ else:
   #print "Final sequence: " + sequence
   #print "Final score:    " + ''.join(map(str, positionScores))
   #print "Global score: " + str(globalScore)
-  
+
+if minimalOutput:
+    logFileStream.write('END' + tab + str(globalScore) + tab + sequence + endl)  
 
 
 

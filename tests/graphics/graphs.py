@@ -13,6 +13,8 @@
 ##    'filename':"texture.png"}
 ##barGraph(**params)
 
+import matplotlib.lines as mlines
+#import matplotlib.cm as cm
 
 hasScipy = False
 try:
@@ -183,22 +185,49 @@ def stackedBarChart( ylabel, data, labels, filename, ticks, xlabel=None):
 
 
 
-
-def scatterGraphBinaryColour(xlabel, ylabel, xRandvalues,xSeqValues, yRandValues,ySeqValues,filename,
-                          ylegend=u'',fitlegend='u', ticks='', title=u""):
+def scatterGraphNaryColour(xlabel, ylabel, xValues,yValues,colorValues,filename,title=u""):
   #A = np.vstack([xvalues, np.ones(len(xvalues))]).T
   #m, c = np.linalg.lstsq(A, yvalues)[0]
   pylab.title(title)
   pylab.ylabel(ylabel)
   pylab.xlabel(xlabel)
-  plt.scatter(xRandValues,yRandValues,color='red',label=ylegend)
-  plt.scatter(xSeqValues,ySeqValues,color='blue',label=ylegend)
+  plt.scatter(xValues,yValues,color=colorValues, marker='.',linewidth='0.4',label='Random Seq.')
+  #plt.scatter(xRandValues,yRandValues,color='red',marker='x',linewidth='0.6',label='Random Seq.')
+  #plt.scatter(xSeqValues,ySeqValues,color='blue',marker='x',linewidth='0.6',label='Natural Seq.')
+  plt.xlim(0, 300)
+  plt.ylim(0, 300)
   #p1 = plt.scatter(xvalues, yvalues, label=ylegend)
   #plt.plot(xvalues, m*xvalues + c,  label=fitlegend)
-  #plt.xlim((0, max(xvalues)*1.1))
-  #plt.ylim((0, max(yvalues)*1.1))
-  pylab.legend(loc='best')
-  pylab.savefig(filename, bbox_inches='tight')
+  #plt.ylim((0, 10000)
+  #plt.xlim((0, max(yvalues)*1.1))
+  blue_dot = mlines.Line2D([], [], color='blue', marker='.', markersize=15, label='Beta 1.0')
+  red_dot = mlines.Line2D([], [], color='red', marker='.', markersize=15, label='Beta 1.0')
+  green_dot = mlines.Line2D([], [], color='green', marker='.', markersize=15, label='Beta 1.0')
+  plt.legend([green_dot, red_dot],["Beta 1.5",'Beta 0.5'])
+    #plt.legend(['r','b','g'],['sdfsdf''sdfsd''aaa'],loc='upper left')
+  #plt.legend(['Beta{}'.format(i) for i in range(len(colorValues)+1)], loc=2, bbox_to_anchor=(1.05, 1), borderaxespad=0., fontsize=11)
+  #pylab.legend(loc='upper right', frameon=True, fontsize=7)
+  pylab.savefig(filename, bbox_inches='tight', frameon=True)
+  pylab.close()
+
+
+def scatterGraphBinaryColour(xlabel, ylabel, xRandValues,xSeqValues, yRandValues,ySeqValues,filename,
+                          title=u""):
+  #A = np.vstack([xvalues, np.ones(len(xvalues))]).T
+  #m, c = np.linalg.lstsq(A, yvalues)[0]
+  pylab.title(title)
+  pylab.ylabel(ylabel)
+  pylab.xlabel(xlabel)
+  plt.scatter(xRandValues,yRandValues,color='red',marker='x',linewidth='0.6',label='Random Seq.')
+  plt.scatter(xSeqValues,ySeqValues,color='blue',marker='x',linewidth='0.6',label='Natural Seq.')
+  plt.xlim(0.0, 2.6)
+  plt.ylim(0, 7100)
+  #p1 = plt.scatter(xvalues, yvalues, label=ylegend)
+  #plt.plot(xvalues, m*xvalues + c,  label=fitlegend)
+  #plt.ylim((0, 10000)
+  #plt.xlim((0, max(yvalues)*1.1))
+  pylab.legend(loc='upper left', frameon=True, fontsize=7)
+  pylab.savefig(filename, bbox_inches='tight', frameon=True)
   pylab.close()
   
 def scatterGraphFitLineal(xlabel, ylabel, xvalues, yvalues, filename,
@@ -298,5 +327,97 @@ def comparativeScatter(xlabel, ylabel, filename, xdata, ydata, label, ymax=None,
 	pylab.axis((xmin,x2,0,ymax))
   pylab.savefig(filename, bbox_inches="tight")
   pylab.close()
+  
 
+
+#plot mean, error bars and individual values(with points)
+def meanErrorLines(xlabel, ylabel, filename, yErrorValuesSeq, yErrorValuesRand,xMeanValuesRand,xMeanValuesSeq, yMeanValuesRand, yMeanValuesSeq, title,ymax=None,xmin=None):
+  pylab.xlabel(xlabel)
+  pylab.ylabel(ylabel)
+  #frmt = ['-s','-^','-s']
+  frmt = ['-o','-s','-^','-s']
+  #plt.plot(xMeanValuesSeq,yMeanValuesSeq,label='Natural seq.')
+  
+  #plt.scatter(xValuesRand,yValuesRand,label='Random seq.')
+  plt.errorbar(xMeanValuesSeq,yMeanValuesSeq,yErrorValuesSeq, label='Natural seq.')
+  plt.errorbar(xMeanValuesRand,yMeanValuesRand,yErrorValuesRand, label='Random seq.')
+  #plt.plot(xMeanValuesRand,yMeanValuesRand,label='Random seq.')
+  
+  x1,x2,y1,y2 = pylab.axis()
+  #pylab.yscale('log')
+  if ymax:
+	pylab.axis((x1,x2,0,ymax))
+  if xmin:
+	pylab.axis((xmin,x2,0,ymax))
+  pylab.legend(loc="best")
+  #pylab.savefig(filename, bbox_inches="tight")
+  pylab.show()
+  #pylab.close()
+
+
+
+def iterationVsX(executionsList,beta,random,maxIterations,logScale,step):
+  iterations=range(1,maxIterations,step)
+  for x in range(len(executionsList)):
+    betaValue=beta[x]
+    if betaValue==0.5:
+      color='red'
+    if betaValue==2.0:
+      color='green'  
+    if random[x]==True:
+      symbol='^'
+    else:
+      symbol='o'
+    pairList=zip(iterations,executionsList[x])
+    xvalues=[]
+    yvalues=[]
+    for p in pairList:
+      xvalues.append(p[0])
+      yvalues.append(p[1])
+    plt.plot(xvalues,yvalues, marker=symbol,color=color,linestyle='-',linewidth=0.5, markersize=7)
+    #plt.plot(xvalues,yvalues)
+  
+  #if logScale:
+    #pylab.xscale('log')  
+  #x1,x2,y1,y2 = pylab.axis()
+  #pylab.axis((x1,maxI,y1,y2))
+  pylab.show()
+  
+
+
+
+def iterationVsXError(executionsList,executionsErrorList,beta,random,maxIterations,logScale,step):
+  iterations=range(1,maxIterations,step)
+  for x in range(len(executionsList)):
+    print 'iteration'
+    betaValue=beta[x]
+    if betaValue==0.5:
+      color='red'
+    if betaValue==2.0:
+      color='green'  
+    if random[x]==True:
+      symbol='*'
+    else:
+      symbol='.'
+    pairList=zip(iterations,executionsList[x])
+    errorPairList=zip(iterations, executionsErrorList[x])
+    xvalues=[]
+    yvalues=[]
+    yerrorValues=[]
+    for p in pairList:
+      xvalues.append(p[0])
+      yvalues.append(p[1])
+    for p in errorPairList:  
+      yerrorValues.append(p[1])
+    plt.errorbar(xvalues,yvalues,yerrorValues,color=color,marker=symbol,capsize=10,markeredgewidth=1)
+    #plt.plot(xvalues,yvalues, marker=symbol,color=color,linestyle='-',linewidth=0.2)
+    #plt.plot(xvalues,yvalues)
+  
+  #if logScale:
+    #pylab.xscale('log')  
+  #x1,x2,y1,y2 = pylab.axis()
+  #pylab.axis((x1,maxI,y1,y2))
+  pylab.show()
+  
+  
 initialize()
