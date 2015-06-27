@@ -48,12 +48,12 @@ def getRunCommand(outPath,beta,length=None,seq=None):
 
 endl = "\n"
 tab = "\t"
-defaultBeta=1.0 # DEFAULT BETA VALUE
+defaultBeta=0.5 # DEFAULT BETA VALUE
 length=50   #DEFAULT LENGTH VALUE
 
 timeTest=False
 betaTest=False
-
+divergenceTest=False
 #scoreTest=False
 #mutAttemptTest=False
 
@@ -115,6 +115,8 @@ for i in range(1,len(sys.argv)):
     #DEFINE SEQUENCE LENGTH (USED IN SOME OF THE TESTS)
     length= sys.argv[i+1] 
 
+  elif (arg=='--divergence' or arg== '-d'):
+   divergenceTest=True
 
 
       
@@ -125,7 +127,7 @@ for i in range(1,len(sys.argv)):
 if betaTest:
 	outputPath=baseOutputPath + 'test-beta-'+ str(exeId) 
 	os.mkdir(outputPath)
-	for betaValue in np.arange(0.5,3,0.5):  #NUMBER OF BETA VARIATIONS
+	for betaValue in np.arange(2.0,2.5,0.1):  #NUMBER OF BETA VARIATIONS
 		#betaValue= 1.0 + (0.5*value)  
 		
 		#FIRST MAKE 3 TESTs WITH RANDOM SEQs
@@ -168,4 +170,13 @@ if timeTest:
 
 
     
-
+if divergenceTest:
+   beta=defaultBeta
+   length=30
+   seq=naturalSeq[1][:length]
+   outputPath=baseOutputPath + 'test-divergence-'+ str(exeId)
+   os.mkdir(outputPath)
+   for iteration in range(0,30):
+	runCommand='python ../bleach.py --nopasta --minoutput ' + outputPath + ' --seq '+  seq + ' --beta ' + str(beta)
+        #print runCommand
+ 	os.system(runCommand)			

@@ -44,7 +44,7 @@ indent=""
 exeId=os.getpid() 
 
 #  CUTOFFS, THRESHOLDS, LIMITS ....
-maxIterations=10000
+maxIterations=4000
 cutoff=0.01  #BLAST cutoff
 waltzThreshold=79.0
 beta=0.5   #MC 
@@ -88,7 +88,7 @@ inputsPath=basePath + "/Input/"+ str(exeId) + "/" #SET PATH TO SAVE INPUTS FILES
 baseOutputPath=basePath + "/Output/" 
 outputsPath=baseOutputPath + str(exeId) + "/"
 testOutputPath=outputsPath   # DEFAULT OUTPUT FOR TESTs 
-
+logsPath=outputsPath #default path for log files
 
 #####CREATE INPUT AND OUTPUT DIRS
 try:
@@ -1266,8 +1266,9 @@ else:
   ##   OUTPUT DETAIL  
     elif (arg=='--verbose'):
       verbose=True
-    elif (arg=='--minoutput'):
+    elif (arg=='--minoutput') and (index < len(sys.argv)):
       minimalOutput=True
+      logsPath= sys.argv[index+1]
     elif (arg=='--testoutput') and (index < len(sys.argv)):
       testing=True
       testOutputPath = sys.argv[index+1]
@@ -1404,7 +1405,7 @@ if testing:
 
 if minimalOutput:
   #CREATE .log FILE
-  logFileStream=open( outputsPath+logFileName, 'w')
+  logFileStream=open( logsPath+'/'+logFileName, 'w')
 
 
 if uvsilent==True:   
@@ -1539,9 +1540,9 @@ if minimalOutput:
     #print 'INITIAL SEQ:   ' + sequence + tab + str(globalScore)
 
 if testing:
-  testOutputFile.write('ISEQ' + tab + sequence + tab + 'FIRST ' + str(firstPartialScore) + endl)
-  testOutputFile.write('ISEQ' + tab + sequence + tab + 'SECOND ' + str(secondPartialScore) + endl)
-  testOutputFile.write('ISEQ' + tab + sequence + tab + 'GLOBAL ' + str(globalScore) + endl)
+  testOutputFile.write('ISEQ' + tab + sequence + tab + 'FIRST'  + tab + str(firstPartialScore) + endl)
+  testOutputFile.write('ISEQ' + tab + sequence + tab + 'SECOND' + tab + str(secondPartialScore) + endl)
+  testOutputFile.write('ISEQ' + tab + sequence + tab + 'GLOBAL' + tab + str(globalScore) + endl)
   
 
 
@@ -1604,7 +1605,7 @@ while globalScore > 0 and iteration <= maxIterations:
       
 	
       mutAttempts=0       #COUNT MUTATIONS ATTEMPTS
-      while 10000 > mutAttempts:    ##JUST A SYMBOLIC MAX. AMOUNT OF MUTATIONS ATTEMPTS
+      while 1000 > mutAttempts:    ##JUST A SYMBOLIC MAX. AMOUNT OF MUTATIONS ATTEMPTS
 	  mutAttempts+=1
 	  
 	  indent = tab + tab    #output formatting 
@@ -1698,7 +1699,10 @@ while globalScore > 0 and iteration <= maxIterations:
 	      if verbose:
 		    print indent + "SCORE DIFFERENCE:" + str(diff)
 	      exponent=diff/beta
-	      MCvalue=math.exp(exponent)
+	      if exponent<-100:   #SATURATION
+		MCvalue=-100
+	      else:
+	      	MCvalue=math.exp(exponent)
 	      if verbose:
 		    #print "  :" + str(exponent)
 		    print indent + "MC VALUE:" + str(MCvalue)     #e^(dif/beta)
