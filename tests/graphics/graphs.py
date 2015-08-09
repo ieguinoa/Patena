@@ -339,8 +339,10 @@ def meanErrorLines(xlabel, ylabel, filename, yErrorValuesSeq, yErrorValuesRand,x
   #plt.plot(xMeanValuesSeq,yMeanValuesSeq,label='Natural seq.')
   
   #plt.scatter(xValuesRand,yValuesRand,label='Random seq.')
-  plt.errorbar(xMeanValuesSeq,yMeanValuesSeq,yErrorValuesSeq, label='Natural seq.')
-  plt.errorbar(xMeanValuesRand,yMeanValuesRand,yErrorValuesRand, label='Random seq.')
+  #plt.errorbar(xvalues,yvalues,yerrorValues,color=color,marker=symbol,markersize=5,capsize=10,capthick=1, label=label)
+   
+  plt.errorbar(xMeanValuesSeq,yMeanValuesSeq,yErrorValuesSeq,capsize=10,capthick=1,linewidth=2.5,marker='s',markersize=5,label='Natural seq.')
+  plt.errorbar(xMeanValuesRand,yMeanValuesRand,yErrorValuesRand,capsize=10,capthick=1,linewidth=2.5,marker='s',markersize=5, label='Random seq.')
   #plt.plot(xMeanValuesRand,yMeanValuesRand,label='Random seq.')
   
   x1,x2,y1,y2 = pylab.axis()
@@ -351,54 +353,141 @@ def meanErrorLines(xlabel, ylabel, filename, yErrorValuesSeq, yErrorValuesRand,x
 	pylab.axis((xmin,x2,0,ymax))
   pylab.legend(loc="best")
   #pylab.savefig(filename, bbox_inches="tight")
+  pylab.yscale('log')  
+  
+  x1,x2,y1,y2 = pylab.axis()
+  pylab.axis((0.0,3.0,y1,y2))
+  pylab.gca().xaxis.set_ticks_position('both')
+  #plt.gca().set_xticklabels(np.arange(0, 3, 0.5))
+  plt.gca().set_xticklabels(['0','0.5=13%','1.0=36%','1.5=51%','2.0=60%','2.5=67%'])
   pylab.show()
   #pylab.close()
 
 
 
-def iterationVsX(executionsList,beta,random,maxIterations,logScale,step):
+def iterationVsX(executionsList,beta,random,maxIterations,logScale,step, xlabel, ylabel):
   iterations=range(1,maxIterations,step)
   for x in range(len(executionsList)):
     betaValue=beta[x]
-    if betaValue==0.5:
+    if betaValue==0.1:
       color='red'
+      label='0.1 Natural Seq'
+      if random[x]==True:
+	#color='green'
+	label='0.1 Random Seq'
+    if betaValue==0.5:
+      color='green'
+      label='0.5 Natural Seq'
+      if random[x]==True:
+	#symbol='s'
+	label='0.5 Random Seq'
+    if betaValue==1.0:
+      color='magenta'
+      label='1.0 Natural Seq'
+      if random[x]==True:
+	#symbol='s'
+	label='1.0 Random Seq'	
+    if betaValue==1.5:
+      color='k'
+      label='1.5 Natural Seq'
+      if random[x]==True:
+	#symbol='s'
+	label='1.5 Random Seq'	  	
     if betaValue==2.0:
-      color='green'  
+      color='orange'
+      label='2.0 Natural Seq'
+      if random[x]==True:
+	#color='blue'
+	label='2.0 Random Seq'
+    if betaValue==2.4:
+      color='red'
+      label='2.4 Natural Seq'
+      if random[x]==True:
+	#color='blue'
+	label='2.4 Random Seq'
     if random[x]==True:
-      symbol='^'
+      symbol='s'
     else:
-      symbol='o'
+      symbol='*'
     pairList=zip(iterations,executionsList[x])
     xvalues=[]
     yvalues=[]
     for p in pairList:
       xvalues.append(p[0])
       yvalues.append(p[1])
-    plt.plot(xvalues,yvalues, marker=symbol,color=color,linestyle='-',linewidth=0.5, markersize=7)
+    plt.plot(xvalues,yvalues, marker=symbol,color=color,linestyle='-',linewidth=0.5, markersize=5, label=label)
     #plt.plot(xvalues,yvalues)
-  
+    
   #if logScale:
     #pylab.xscale('log')  
   #x1,x2,y1,y2 = pylab.axis()
   #pylab.axis((x1,maxI,y1,y2))
+  
+
+  handles, labels = plt.gca().get_legend_handles_labels()
+  handle_list, label_list = [], []
+  for handle, label in zip(handles, labels):
+      if label not in label_list:
+	  handle_list.append(handle)
+	  label_list.append(label)
+  plt.legend(handle_list, label_list)
+  plt.ylabel(ylabel)
+  plt.xlabel(xlabel)
+  x1,x2,y1,y2 = pylab.axis()
+  #plt.xticks(np.arange(0, 1000, 50))
+  #plt.gca().set_xticklabels(np.arange(0, 1000, 50))
+  pylab.axis((0,200,0,55))
+  #legend = plt.legend(loc="upper right")
   pylab.show()
   
 
 
 
-def iterationVsXError(executionsList,executionsErrorList,beta,random,maxIterations,logScale,step):
+def iterationVsXError(executionsList,executionsErrorList,beta,random,maxIterations,logScale,step,xlabel,ylabel):
   iterations=range(1,maxIterations,step)
   for x in range(len(executionsList)):
-    print 'iteration'
+    #print 'iteration'
     betaValue=beta[x]
-    if betaValue==0.5:
+    if betaValue==0.1:
       color='red'
+      label='0.1 Natural Seq'
+      if random[x]==True:
+	#color='green'
+	label='0.1 Random Seq'
+    if betaValue==0.5:
+      color='green'
+      label='0.5 Natural Seq'
+      if random[x]==True:
+	#symbol='s'
+	label='0.5 Random Seq'
+    if betaValue==1.0:
+      color='magenta'
+      label='1.0 Natural Seq'
+      if random[x]==True:
+	#symbol='s'
+	label='1.0 Random Seq'	
+    if betaValue==1.5:
+      color='k'
+      label='1.5 Natural Seq'
+      if random[x]==True:
+	#symbol='s'
+	label='1.5 Random Seq'	  	
     if betaValue==2.0:
-      color='green'  
+      color='orange'
+      label='2.0 Natural Seq'
+      if random[x]==True:
+	#color='blue'
+	label='2.0 Random Seq'
+    if betaValue==2.4:
+      color='red'
+      label='2.4 Natural Seq'
+      if random[x]==True:
+	#color='blue'
+	label='2.4 Random Seq'
     if random[x]==True:
-      symbol='*'
+      symbol='s'
     else:
-      symbol='.'
+      symbol='*'
     pairList=zip(iterations,executionsList[x])
     errorPairList=zip(iterations, executionsErrorList[x])
     xvalues=[]
@@ -409,14 +498,21 @@ def iterationVsXError(executionsList,executionsErrorList,beta,random,maxIteratio
       yvalues.append(p[1])
     for p in errorPairList:  
       yerrorValues.append(p[1])
-    plt.errorbar(xvalues,yvalues,yerrorValues,color=color,marker=symbol,capsize=10,markeredgewidth=1)
+    plt.errorbar(xvalues,yvalues,yerrorValues,color=color,marker=symbol,markersize=5,capsize=10,capthick=1, label=label)
     #plt.plot(xvalues,yvalues, marker=symbol,color=color,linestyle='-',linewidth=0.2)
     #plt.plot(xvalues,yvalues)
   
   #if logScale:
     #pylab.xscale('log')  
-  #x1,x2,y1,y2 = pylab.axis()
-  #pylab.axis((x1,maxI,y1,y2))
+  x1,x2,y1,y2 = pylab.axis()
+  
+  legend = plt.legend(loc="upper right")
+  plt.ylabel(ylabel)
+  plt.xlabel(xlabel)
+  #plt.xticks(np.arange(0, 1000, 50))
+  #plt.gca().set_xticklabels(np.arange(0, 1000, 50))
+  pylab.axis((0,200,0,55))
+  plt.gca().get_xaxis().get_major_formatter().labelOnlyBase = False
   pylab.show()
   
   

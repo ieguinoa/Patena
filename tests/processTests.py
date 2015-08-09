@@ -7,6 +7,7 @@ from os.path import isfile
 from itertools import *
 import numpy as np
 import string
+import matplotlib.pyplot as plt
 #import statistics
 sys.path.insert(0, 'graphics')   #GRAPHICS FUNCTIONS
 import glob
@@ -143,9 +144,6 @@ def processTimeTestResults(basePath):
     #scatterGraphBinaryColour(**params)
 
 
-
-
-
 ###################################################
 ####    PROCESS BETA TESTS RESULTS AND PLOT: ######
 ####	BETA(x)   vs   EXEC.TIME(y)log?  ##########
@@ -155,12 +153,13 @@ def processTimeTestResults(basePath):
 def makeBetaVsTime(basePath):
   betaSeqDictTime,betaRandDictTime={},{}  #save pairs (beta-[list of times])
   iterations,mutAttempts,stepScores, colorValues=[],[],[],[]
+  excludeList=[0.6,0.7,0.8,0.9,1.1,1.2,1.3,1.4,1.6,1.7,1.8,1.9,2.1,2.2,2.4]
   for files in os.listdir(basePath):
-    #randomSeq=False
+    randomSeq=False
     if not(files.endswith('.png')):
       with open(basePath+'/'+files,'r') as rawdata:
 	betaValue=0.0
-	time=7000.0 #default value(in case the execution has not finished)
+	time=16000.0 #default value(in case the execution has not finished)
 	
 	#PROCESS FILE: SAVE BETA VALUE, RAND/NATURAL AND ELAPSED TIME
 	for lines in rawdata.readlines():
@@ -174,18 +173,21 @@ def makeBetaVsTime(basePath):
 	      randomSeq=False
 	  if cols[0]=='END':
 	    time=float(cols[1])
+	    #if time>5000:
+	      #time=5000
 	
 	#SAVE EXECUTION DATA IN DICTIONARY
-	if randomSeq:
-	  if betaValue in betaRandDictTime:
-	    betaRandDictTime[betaValue].append(time)
+	if betaValue not in excludeList:
+	  if randomSeq:
+	    if betaValue in betaRandDictTime:
+	      betaRandDictTime[betaValue].append(time)
+	    else:
+	      betaRandDictTime[betaValue]=[time]
 	  else:
-	    betaRandDictTime[betaValue]=[time]
-	else:
-	  if betaValue in betaSeqDictTime:
-	    betaSeqDictTime[betaValue].append(time)
-	  else:
-	    betaSeqDictTime[betaValue]=[time]
+	    if betaValue in betaSeqDictTime:
+	      betaSeqDictTime[betaValue].append(time)
+	    else:
+	      betaSeqDictTime[betaValue]=[time]
 
 
 
@@ -230,8 +232,8 @@ def makeBetaVsTime(basePath):
       yTimeValuesSeq.append(betaSeqDictTime[key][index])			#append the value
 
   params = {
-	'xlabel': u"Beta value",
-	'ylabel': u"Total time [s]",
+	'xlabel': u"Beta=%Aceptacion score+1",
+	'ylabel': u"Tiempo ejec. [s]",
 	#'xRandValues': xRandValues,
 	#'xSeqValues': xSeqValues,
 	#'yRandValues':yRandValues,
@@ -244,7 +246,7 @@ def makeBetaVsTime(basePath):
 	'yErrorValuesSeq': yStdevTimeValuesSeq,
 	'filename': basePath+'/beta-vs-time-length50.png',
 	#'ymax':5000,
-	'title': 'Sequence length=50'
+	'title': 'Largo secuencia=50'
     }	
   meanErrorLines(**params)
 
@@ -266,13 +268,14 @@ def makeBetaVsTime(basePath):
 def makeIterationVsAcceptRate(basePath):
   betaSeqDictTime,betaRandDictTime={},{}  #save pairs (beta-[list of times])
   
-  betaList=[0.5,2.0]  #LIST OF BETAS TO PRINT
-  betaColourList=['red','green']
+  betaList=[0.5,1.5,2.4]  #LIST OF BETAS TO PRINT
+  #betaColourList=['red','green']
   betaSeqDictExecutions,betaRandDictExecutions={},{}  ##DICT OF EXECUTIONS BY BETA VALUE
   #betaValuesExecutionsRand=[]
-  maxIterations=100
+  maxIterations=350
   step=10
-  
+
+  #iterationList=range(0,10,1)+range(10,100,20)+range(200,1000,50)
   betaValues=[]
   random=[]
   executions=[]  # this lists saves the executions I want to print
@@ -283,7 +286,7 @@ def makeIterationVsAcceptRate(basePath):
       with open(basePath+'/'+files,'r') as rawdata:
 	execution=[]  #list of %accepted per step
 	betaValue=0.0
-	time=0.0 #default value(in case the execution has not finished)
+	time=15000.0 #default value(in case the execution has not finished)
 	for lines in rawdata.readlines():
 	  cols=lines.split('\t')
 	  #print cols
@@ -298,14 +301,20 @@ def makeIterationVsAcceptRate(basePath):
 	  if cols[0]=='LOOP1' or cols[0]=='LOOP2':
 	    if betaValue in betaList:
 	      iteration=int(cols[1])
-	      if (iteration%step)==0:	     
+	      #if iteration in iterationList:
+	      if ((iteration%step)==0):
+	      #if int(iteration) in np.logspace(0,3):
+		#print iteration
 		mutAttempts.append(int(cols[2]))
 		stepScores.append(float(cols[3]))
 		iterations.append(int(cols[1]))
-		acceptRate=1/(1/float(cols[2]))
-		#acceptRate=((1/float(cols[2]))*100.0)
-		execution.append(acceptRate)
-		#execution.append(int(cols[2]))
+		#acceptRate=(1/int(cols[2]))
+		#acceptRate=((1.0/int(cols[2]))*100.0)
+		#execution.append(acceptRate)
+		#SAVE MUTATTEMPTS
+		execution.append(int(cols[2]))
+		#SAVE SCORES
+		#execution.append(float(cols[3]))
 	      #colorValues.append(int(betaValue*35))
 	      #colorValues.append('red')
 	      #the iteration time is stored in cols[4] 
@@ -368,7 +377,10 @@ def makeIterationVsAcceptRate(basePath):
       'beta':betaValues,
       'logScale': True,
       'maxIterations': maxIterations,
-      'step': step
+      'step': step,
+      'xlabel':'Iteration',
+      'ylabel':'Intentos de mutac.',
+	
    }
  
   iterationVsX(**params)	    
@@ -465,8 +477,10 @@ def makeIterationVsAcceptRate(basePath):
       'beta':betaValues,
       'logScale': True,
       'maxIterations': maxIterations,
-      'step': step
-   }
+      'step': step,
+      'ylabel': 'Intentos de mutac.',
+      'xlabel': 'Iteration'
+    }
   
   iterationVsXError(**params)
   
@@ -569,10 +583,14 @@ def makeIterationVsAcceptRate(basePath):
 
 
 
+
+
+
 ####  OPEN ALL LOGS IN PATH AND ALIGN RESULT SEQUENCES 
 ####   SAVE RESULTS IN results FILE
 def getDivergenceList(basePath):
    multiAlignment=open(basePath+'/resultsList','w')
+   resultNumber=1
    for files in os.listdir(basePath):
     if (files.endswith('.log')):
        with open(basePath+'/'+files,'r') as rawdata:
@@ -582,16 +600,69 @@ def getDivergenceList(basePath):
 	#print last
 	resultSequence=last.split('\t')[1]
 	#print resultSequence
+	#multiAlignment.write('>RESULTSEQ_'+str(resultNumber) + '\n')
         multiAlignment.write(resultSequence + '\n')
+        resultNumber+=1
+
+
+
+def getIdentityPercent(seq1,seq2):
+	#print seq1
+	#print seq2
+	hits=0
+	for aa in seq1:
+		if aa == seq2[seq1.index(aa)]:
+			hits+=1
+	#print (float(hits)/(len(seq1)))*100
+	return (float(hits)/float((len(seq1))))*100
+
+
+def processDivergenceTest(basePath):
+	getDivergenceList(basePath)
+	sequenceList=[]
+	initialSeq='MALWMRLLPLLALLALWGPDPAAAFVNQHL'
+	#FIRST, LOAD SEQUENCE LIST FROM FILE
+	#sequenceList = (with open(basePath+'/'+'resultsList','r')).read().splitlines()
+	with open(basePath+'/'+'resultsList','r') as rawdata:
+		for line in rawdata.readlines():
+			sequenceList.append(line.rstrip())
+	
+	idPercentInitial, idPercentAll=[],[]
+	#FIRST, GET IDENTITY % AGAINST INITIAL SEQUENCE:
+	for seq in sequenceList:
+		idPercentInitial.append(getIdentityPercent(initialSeq,seq))
+	
+	
+	#print len(idPercentInitial)
+	plt.hist(np.asarray(idPercentInitial),10)
+	plt.title('Identity against starting sequence')	
+	plt.ylabel('Count')
+	plt.xlabel('Sequence identity %')	
+	#plt.ylim(0,15)
+	#plt.savefig('againstStart.png', bbox_inches='tight', frameon=True)
+	#plt.show()
+	#GET IDENTITY % ALL AGAINST ALL
+	for seq1 in sequenceList:
+		for seq2 in sequenceList:
+			if sequenceList.index(seq1) != sequenceList.index(seq2):
+				idPercentAll.append(getIdentityPercent(seq1,seq2))
+	plt.hist(np.asarray(idPercentAll),18)
+	plt.title('Identity against equivalent results')
+	plt.ylabel('Count')
+	plt.xlabel('Sequence identity %')
+	plt.savefig('againstAll.png', bbox_inches='tight', frameon=True)	
+	#plt.show()
 
 
 
 
 
-makeIterationVsAcceptRate('/home/ieguinoa/results/0.5-2.0')        
-        
-#getDivergenceList('/home/ieguinoa/bioTesis/patena/tests/Results/test-divergence-3831')  
-#processBetaTestResults2('/home/ieguinoa/results/betaFull')    
+#print sys.argv[1]
+#makeIterationVsAcceptRate(sys.argv[1])
+#makeIterationVsAcceptRate('/home/ieguinoa/results/0.5-2.0')        
+#makeBetaVsTime(sys.argv[1])        
+#getDivergenceList(sys.argv[1])
+processDivergenceTest(sys.argv[1])
 #processBetaTestResults('/home/ieguinoa/results/todos')    
 #processBetaTestResults('/home/ieguinoa/results/beta-0.1-1.9')
 #processBetaTestResults('/home/ieguinoa/results/beta-0.5-1.5-step-0.1')

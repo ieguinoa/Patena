@@ -650,7 +650,7 @@ def pastaSearch(sequence, positionScores,verbose):
   input.write(sequence)
   input.close()
   pastaPath=toolsPath + 'PASTA/pasta_exe/'
-  runCommand = "perl " + pastaPath+'PastaPairs.pl' + space + pastaPath +'pot_pasta.dat '+ inputsPath + " 1 0 self " + str(pastaThreshold) +  " > /dev/null"
+  runCommand = "perl " + pastaPath+'PastaPairs.pl' + space + pastaPath +'pot_pasta.dat '+ inputsPath + " 22 0 self " + str(pastaThreshold) +  " > /dev/null"
   #print 'comando:' + runCommand
   os.system(runCommand)
   ### CHECK THIS!!! THE OUTPUT IS IN THE SAME DIR AS INPUT (CHECK PASTA PERL SCRIPT)
@@ -661,13 +661,17 @@ def pastaSearch(sequence, positionScores,verbose):
   if verbose:
     print indent + 'Threshold: ' + str(pastaThreshold)
   for line in outputPasta.readlines():
-     fromP, dash,toP = (line.split()[9]).partition('-')
-     for hits in range(int(fromP)-1,int(toP)):
-       pastaScores[hits]=+1 
-     if verbose: 
-	print indent + 'Hit:'
-	print indent + 'Energy value: ' + line.split()[4]	
-	print indent + 'Positions:    ' + line.split()[9]
+     pairingEnergyValue=float(line.split()[4])
+     if pairingEnergyValue < pastaThreshold:  
+	#FALTA ANALIZAR EL OTRO SEGMENTO DE EMPAREJAMIENTO SI ES DISTINTO!!!!  
+	fromP, dash,toP = (line.split()[9]).partition('-')
+        for hits in range(int(fromP)-1,int(toP)):
+          #PONER SCORE=1 ASI NO SE INCREMENTA TANTO EL VALOR, 
+     	  pastaScores[hits]=+1 
+     	if verbose: 
+		print indent + 'Hit:'
+		print indent + 'Energy value: ' + line.split()[4]	
+		print indent + 'Positions:    ' + line.split()[9] + ' and ' + line.split[11] + ' ' + line.split[12]
   #position=0
   if verbose:
     print indent + "RESULTS:"
