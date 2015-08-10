@@ -599,22 +599,32 @@ def waltzSearch(sequence, positionScores,verbose):
      print indent + "Threshold: " + str(waltzThreshold)
   #EXECUTE WALTZ EVALUATION
   inputWaltz=inputsPath + "sequenceFASTA"
-  proc = subprocess.Popen(['perl', toolsPath + 'waltz/scoreMatrixGT.pl', inputWaltz, toolsPath + 'waltz/616.mat', 'full'],stdout=subprocess.PIPE)
+  proc = subprocess.Popen(['perl', toolsPath + 'waltz/scoreMatrixGT.pl', inputWaltz, toolsPath + 'waltz/616.mat', 'full', str(waltzThreshold)],stdout=subprocess.PIPE)
 
   #PROCESS OUTPUT  
   waltzScores=[]
   for p in range(len(sequence)):
     waltzScores.append(0)
- 
+  #for line in iter(proc.stdout.readline,''):
   for q in range(0,len(sequence)-5):
     line = proc.stdout.readline()
+    #print line.rstrip()
+    #print line.split()[0]
+    #print line.split()[1]
     if float(line.split()[2])> waltzThreshold:
-	  if verbose:
-	     print indent + 'Subsequence above threshold: ' +  line.split()[0]
 	  hit_start=int(line.split()[1]) - 1
           hit_end=hit_start + 6
-          for x in range(hit_start-1,hit_end):
-            waltzScores[x]+=1
+          for x in range(hit_start,hit_end):
+            waltzScores[x]=1
+  #for q in range(0,len(sequence)-5):
+   # line = proc.stdout.readline()
+    #if float(line.split()[2])> waltzThreshold:
+	#  if verbose:
+	 #    print indent + 'Subsequence above threshold: ' +  line.split()[0]
+	 # hit_start=int(line.split()[1]) - 1
+          #hit_end=hit_start + 6
+          #for x in range(hit_start-1,hit_end):
+          #  waltzScores[x]+=1
     #else:
       #break
 
@@ -650,7 +660,7 @@ def pastaSearch(sequence, positionScores,verbose):
   input.write(sequence)
   input.close()
   pastaPath=toolsPath + 'PASTA/pasta_exe/'
-  runCommand = "perl " + pastaPath+'PastaPairs.pl' + space + pastaPath +'pot_pasta.dat '+ inputsPath + " 22 0 self " + str(pastaThreshold) +  " > /dev/null"
+  runCommand = "perl " + pastaPath+'PastaPairs.pl' + space + pastaPath +'pot_pasta.dat '+ inputsPath + " 1 0 self " + str(pastaThreshold) +  " > /dev/null"
   #print 'comando:' + runCommand
   os.system(runCommand)
   ### CHECK THIS!!! THE OUTPUT IS IN THE SAME DIR AS INPUT (CHECK PASTA PERL SCRIPT)
@@ -661,17 +671,22 @@ def pastaSearch(sequence, positionScores,verbose):
   if verbose:
     print indent + 'Threshold: ' + str(pastaThreshold)
   for line in outputPasta.readlines():
+     #print line.split()[9]
+     #print line.split()[10]
+     #print line.split()[11]
+     #print line.split()[12]
      pairingEnergyValue=float(line.split()[4])
      if pairingEnergyValue < pastaThreshold:  
 	#FALTA ANALIZAR EL OTRO SEGMENTO DE EMPAREJAMIENTO SI ES DISTINTO!!!!  
 	fromP, dash,toP = (line.split()[9]).partition('-')
+	#print str(fromP) + str(dash) + str(toP)
         for hits in range(int(fromP)-1,int(toP)):
           #PONER SCORE=1 ASI NO SE INCREMENTA TANTO EL VALOR, 
      	  pastaScores[hits]=+1 
      	if verbose: 
 		print indent + 'Hit:'
 		print indent + 'Energy value: ' + line.split()[4]	
-		print indent + 'Positions:    ' + line.split()[9] + ' and ' + line.split[11] + ' ' + line.split[12]
+		print indent + 'Positions:    ' + line.split()[9] + ' and ' + line.split()[11] + ' ' + line.split()[12]
   #position=0
   if verbose:
     print indent + "RESULTS:"
@@ -682,7 +697,7 @@ def pastaSearch(sequence, positionScores,verbose):
   
   for x in range(0,len(sequence)):
     if pastaScores[x] > 0:
-      positionScores[x] += 1
+      positionScores[x] += pastaScores[x]
 
 
 
