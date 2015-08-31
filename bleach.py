@@ -719,10 +719,10 @@ def amyloidPatternSearch(sequence, positionScores,verbose):
     pattern = re.compile("[^P][^PKRHW][VLSCWFNQE][ILTYWFNE][FIY][^PKRH]")
     where_to_start = []
     #elm_pos_dict = {}
+    hits=False
     for matched_string in pattern.finditer('%s' % sequence) :
 	where_to_start.append(matched_string.start())
     #pattern = re.compile("[^P][PKRHW][VLSCWFNQE][ILTYWFNE][FIY][^PKRH]")
-    	hits=False
     	for index in where_to_start :
 		    match = re.search(pattern, '%s' % sequence[index:])
 		    if match != None :
