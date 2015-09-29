@@ -48,7 +48,7 @@ def getRunCommand(outPath,beta,length=None,seq=None):
 
 endl = "\n"
 tab = "\t"
-defaultBeta=0.5 # DEFAULT BETA VALUE
+defaultBeta=2.0 # DEFAULT BETA VALUE
 length=50   #DEFAULT LENGTH VALUE
 
 timeTest=False
@@ -174,9 +174,9 @@ if divergenceTest:
    beta=defaultBeta
    length=30
    seq=naturalSeq[1][:length]
-   outputPath=baseOutputPath + 'test-divergence-'+ str(exeId)
+   outputPath=baseOutputPath + 'test-divergence-beta-' + str(beta) + '-' +str(exeId)
    os.mkdir(outputPath)
-   for iteration in range(0,30):
-	runCommand='python ../bleach.py --nopasta --minoutput ' + outputPath + ' --seq '+  seq + ' --beta ' + str(beta)
+   for iteration in range(0,60):
+	runCommand='python ../bleach.py --minoutput ' + outputPath + ' --seq '+  seq + ' --beta ' + str(beta)
         #print runCommand
  	os.system(runCommand)			
