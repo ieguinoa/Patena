@@ -160,9 +160,9 @@ def processTimeTestResults(basePath):
 
 def makeBetaVsIteration(basePath):
   betaSeqDictTime,betaRandDictTime={},{}  #save pairs (beta-[list of times])
-  betaIterations,betaMutAttempts={},{}  #save pairs (beta-[list of iterations/mutAttempts])
+  betaIterations,betaMutAttempts,betaMutAttemptsPerIteration={},{},{}  #save pairs (beta-[list of iterations/mutAttempts])
   #iterations,mutAttempts,stepScores, colorValues=[],[],[],[]
-  excludeList=[0.6,0.7,0.8,0.9,1.1,1.2,1.3,1.4,1.6,1.7,1.8,1.9,2.1,2.2,2.3,2.4]
+  excludeList=[0.6,0.7,0.8,0.9,1.1,1.2,1.3,1.4,1.6,1.7,1.8,1.9,2.1,2.2,2.4]
   for files in os.listdir(basePath):
     randomSeq=False
     if not(files.endswith('.png')):
@@ -198,13 +198,15 @@ def makeBetaVsIteration(basePath):
 	#SAVE EXECUTION DATA IN DICTIONARIES
         if betaValue not in excludeList:
 	  #print betaValue
-	  print mutAttempts
+	  #print mutAttempts
 	  if betaValue in betaIterations:
 		betaIterations[betaValue].append(iterations)
 		betaMutAttempts[betaValue].append(mutAttempts)
+		betaMutAttemptsPerIteration[betaValue].append(mutAttempts/iterations)
 	  else:
 		betaIterations[betaValue]=[iterations]	
 		betaMutAttempts[betaValue]=[mutAttempts]	
+		betaMutAttemptsPerIteration[betaValue]=[mutAttempts/iterations]
           if randomSeq:
             if betaValue in betaRandDictTime:
               betaRandDictTime[betaValue].append(time)
@@ -218,11 +220,13 @@ def makeBetaVsIteration(basePath):
 
 
   #BUILD LIST OF MEANS & STDV FOR ITERATIONS AND MUTATTEMPTS
-  mutAttemptsMean, mutAttemptsStd, iterationsMean,iterationsStd,betas = [],[],[],[],[]
+  mutAttemptsPerItMean, mutAttemptsPerItStd,mutAttemptsMean, mutAttemptsStd, iterationsMean,iterationsStd,betas =[],[],[],[],[],[],[]
   keyList=betaIterations.keys()
   keyList.sort()
   for key in keyList:
 	betas.append(key)
+	mutAttemptsPerItMean.append(np.mean(np.asarray(betaMutAttemptsPerIteration[key])))
+	mutAttemptsPerItStd.append(np.std(np.asarray(betaMutAttemptsPerIteration[key])))
 	mutAttemptsMean.append(np.mean(np.asarray(betaMutAttempts[key])))
 	iterationsMean.append(np.mean(np.asarray(betaIterations[key])))
 	mutAttemptsStd.append(np.std(np.asarray(betaMutAttempts[key])))
@@ -230,21 +234,45 @@ def makeBetaVsIteration(basePath):
   #for i in range(len(betas)):
 	#print mutAttemptsMean[i]
 
+#  params = {
+ #       'xlabel': u"Beta",
+  #      'ylabel': u"Mutation Attempts - Total iterations",
+   #     'meanIterations': iterationsMean,
+   #     'meanMutAttempts': mutAttemptsMean,
+   #     'stdIterations': iterationsStd,
+   #     'stdMutAttempts': mutAttemptsStd,
+   #     'betas': betas,
+   #     'filename': basePath+'/beta-vs-iteration-length50.png',
+   #     'xmax': 2.7,
+   #     #'title': 'Largo secuencia=50'
+   #     'title': ''
+   # }
+  #meanErrorBars(**params)
+
   params = {
-        'xlabel': u"Beta",
-        'ylabel': u"Mutation Attempts - Total iterations",
-        'meanIterations': iterationsMean,
-        'meanMutAttempts': mutAttemptsMean,
-        'stdIterations': iterationsStd,
-        'stdMutAttempts': mutAttemptsStd,
-        'betas': betas,
-        'filename': basePath+'/beta-vs-iteration-length50.png',
+        'xlabel': u"Accept rate when mutation increases score by 1 PATENA Unit",
+        'ylabel': u"Count",
+        #'xRandValues': xRandValues,
+        #'xSeqValues': xSeqValues,
+        #'yRandValues':yRandValues,
+        #'ySeqValues':ySeqValues,
+        'xMeanValuesRand': betas,
+        'yMeanValuesRand': iterationsMean,
+        'xMeanValuesSeq': betas,
+        #'yMeanValuesSeq': mutAttemptsMean,
+        'yMeanValuesSeq':mutAttemptsPerItMean,
+	'yErrorValuesRand': iterationsStd,
+        #'yErrorValuesSeq': mutAttemptsStd,
+        'yErrorValuesSeq':mutAttemptsPerItStd,
+	'filename': basePath+'/beta-vs-Mut-iterations.png',
+        #'ymax':5000,
         'xmax': 2.7,
         #'title': 'Largo secuencia=50'
-        'title': ''
+        'title': '',
     }
-  meanErrorBars(**params)
-
+   
+  meanErrorLines(**params)
+ 
 
 
 
@@ -379,7 +407,7 @@ def makeBetaVsTime(basePath):
 ####       ITERATION NUMBER vs % ACEPTACION  ######
 ####   FOR EACH EXECUTION, MEAN  AND ERROR   ######
 ###################################################
-def makeIterationVsAcceptRate(basePath):
+def makeIterationVsScore(basePath):
   betaSeqDictTime,betaRandDictTime={},{}  #save pairs (beta-[list of times])
   
   betaList=[0.5,2.4]  #LIST OF BETAS TO PRINT
@@ -425,9 +453,9 @@ def makeIterationVsAcceptRate(basePath):
 		#acceptRate=((1.0/int(cols[2]))*100.0)
 		#execution.append(acceptRate)
 		#SAVE MUTATTEMPTS
-		#execution.append(int(cols[2]))
+		execution.append(int(cols[2]))
 		#SAVE SCORES
-		execution.append(float(cols[3]))
+		#execution.append(float(cols[3]))
 	      #colorValues.append(int(betaValue*35))
 	      #colorValues.append('red')
 	      #the iteration time is stored in cols[4] 
@@ -495,7 +523,6 @@ def makeIterationVsAcceptRate(basePath):
       'xlabel':'Mutation',
       #'ylabel':'Mutation attempts',
       'ylabel': 'Score[PATENA Units]',
-	
    }
  
   
@@ -618,7 +645,7 @@ def makeIterationVsAcceptRate(basePath):
       'logScale': True,
       'maxIterations': maxIterations,
       'step': step,
-      'ylabel': 'Score[PATENA Units]',
+      #'ylabel': 'Score[PATENA Units]',
       'ylabel': 'Proposed Mutations',
       'xlabel': 'Mutation'
     }
@@ -814,7 +841,7 @@ def processDivergenceTest(basePath):
 	
 		
 	#print len(idPercentInitial)
-	plt.hist(np.asarray(idPercentInitial),12,alpha=0.5)
+	#plt.hist(np.asarray(idPercentInitial),12,alpha=0.5)
 	#plt.title('Identity against starting sequence')	
 	#plt.ylabel('Count')
 	#plt.xlabel('Sequence identity %')	
@@ -840,15 +867,15 @@ def processDivergenceTest(basePath):
 			if sequenceListRandom.index(seq1Random) != sequenceListRandom.index(seq2Random):
 				idPercentAllRandom.append(getIdentityPercent(seq1Random,seq2Random))
 	
-	my_pdf = gaussian_kde(idPercentAllRandom)
-	x = np.linspace(0,50,400)
-	y = []
-	for valoresX in x:
-		if valoresX == 0.0:
-			y.append(0)
-		else:
-			y.append(my_pdf(valoresX)*5*5402)
-	plt.plot(x,y,'r')
+	#my_pdf = gaussian_kde(idPercentAllRandom)
+	#x = np.linspace(0,50,400)
+	#y = []
+	#for valoresX in x:
+	#	if valoresX == 0.0:
+	#		y.append(0)
+	#	else:
+	#		y.append(my_pdf(valoresX)*5*5402)
+	#plt.plot(x,y,'r')
 	#plt.plot(x,my_pdf(x)*5*5402,'r') 
 	#plt.hist(np.asarray(idPercentInitialRandom),12,alpha=0.5)
 	#plt.show()	
@@ -858,13 +885,19 @@ def processDivergenceTest(basePath):
         	for seq2 in sequenceList:
 			if sequenceList.index(seq1) != sequenceList.index(seq2):
 				idPercentAll.append(getIdentityPercent(seq1,seq2))
-	plt.hist(np.asarray(idPercentAll),20,alpha=0.5)
-	#plt.hist(np.asarray(idPercentAllRandom),20,alpha=0.5)
-	plt.title('Identity against equivalent results')
-	plt.ylabel('Count')
+	
+	#plt.hist((np.asarray(idPercentInitialRandom),np.asarray(idPercentInitial)),bins=[0,5,10,15, 20, 25,30,35,40,45,50],label=['Random','Results'],normed=1)
+	plt.title('Identity between initial sequence and results')
+	plt.ylabel('Frequency')
 	plt.xlabel('Sequence identity %')
-	plt.savefig('againstAll.png', bbox_inches='tight', frameon=True)	
-	plt.show()
+	#plt.savefig('againstInitial.png', bbox_inches='tight', frameon=True, dpi=180)
+	plt.hist((np.asarray(idPercentAllRandom),np.asarray(idPercentAll)),bins=[0,5,10,15, 20, 25,30,35, 40,45, 50],label=['Random sequences','PATENA Results'],normed=1)
+	plt.title('Identity between sequences')
+	plt.xticks((np.arange(0,55,5)))
+	plt.legend(loc='upper right')
+	#plt.savefig('againstInitial.png', bbox_inches='tight', frameon=True, dpi=180)
+	plt.savefig('againstAll.png', bbox_inches='tight', frameon=True, dpi=180) 
+	#plt.show()
 
 
 
@@ -918,13 +951,13 @@ def compareFrequencies(basePath):
 	aminoacids=np.asarray(expectedFreqDict.keys())
 	expectedArray=np.asarray(expectedFreqDict.values())
 	observedArray=np.asarray(aaOcurrencesDict.values())	
-	for pos in range(len(aminoacids)):
-		print   aminoacids.item(pos) + ' - ' + str(expectedArray.item(pos)) + ' - ' + str(observedArray.item(pos))	
+	#for pos in range(len(aminoacids)):
+	#	print   aminoacids.item(pos) + ' - ' + str(expectedArray.item(pos)) + ' - ' + str(observedArray.item(pos))	
 	for i in range(len(aminoacids)):
     		plt.scatter(expectedArray[i], observedArray[i], marker=('$'+aminoacids[i]+'$'), s=200)
 	#plt.scatter(expectedArray,observedArray)
-	plt.xlabel('Background frequencies')
-	plt.ylabel('Observed frequencies')
+	plt.xlabel('Background percent frequencies')
+	plt.ylabel('Observed percent frequencies')
 	x=np.arange(0,16,1)
 	y=np.arange(0,16,1)
 	plt.plot(x,y,linewidth=0.5,color='red',linestyle='--')
@@ -936,22 +969,30 @@ def compareFrequencies(basePath):
 	#plt.show()
 
 #para comparar frecuencias usar datos de /home/ieguinoa/bioTesis/patena/tests/Results/test-divergence-1
-#compareFrequencies(sys.argv[1])
+compareFrequencies(sys.argv[1])
 
 #usar datos de /home/ieguinoa/results/beta0.1-2.5/ 
-makeBetaVsIteration(sys.argv[1])
+#makeBetaVsIteration(sys.argv[1])
 
-#getListRandomSeq(10,sys.argv[1])
+
+
 #mutationsPerSite('/home/ieguinoa/bioTesis/patena/tests/Results/test-divergence-24395-beta-0.1')
-#print sys.argv[1]
-#makeIterationVsAcceptRate(sys.argv[1])
-#makeIterationVsAcceptRate('/home/ieguinoa/results/0.5-2.4')        
+
+
+#print iteration Vs score (or Vs mutation attempts)
+#makeIterationVsScore(sys.argv[1])
+
 
 #usar /home/ieguinoa/results/beta0.1-2.5
 #makeBetaVsTime(sys.argv[1])        
 
 #getDivergenceList(sys.argv[1])
+
+
+#usar datos de /home/ieguinoa/bioTesis/patena/tests/Results/test-divergence-1   (contiene la lista ya armada de sequencias resultantes y random)
 #processDivergenceTest(sys.argv[1])
+
+
 #processBetaTestResults('/home/ieguinoa/results/todos')    
 #processBetaTestResults('/home/ieguinoa/results/beta-0.1-1.9')
 #processBetaTestResults('/home/ieguinoa/results/beta-0.5-1.5-step-0.1')

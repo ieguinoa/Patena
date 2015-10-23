@@ -364,12 +364,22 @@ def comparativeScatter(xlabel, ylabel, filename, xdata, ydata, label, ymax=None,
 
 
 def meanErrorBars(xlabel, ylabel, filename, meanIterations, meanMutAttempts, stdIterations, stdMutAttempts, betas, title,ymax=None,xmax=None,xmin=None):
-  p1 = plt.bar(betas, meanIterations, width=0.1,color='r', yerr=stdIterations)
-  p2 = plt.bar(betas, meanMutAttempts, width=0.1,color='y', bottom=meanIterations, yerr=stdMutAttempts)
+  p1 = plt.bar(betas, meanIterations, width=0.15,color='r', yerr=stdIterations, align='center', error_kw=dict(ecolor='black',lw=0.3, capsize=3, capthick=0.5))
+  p2 = plt.bar(betas, meanMutAttempts, width=0.15,color='g', bottom=meanIterations, yerr=stdMutAttempts,align='center',error_kw=dict(ecolor='black', lw=0.3, capsize=3, capthick=0.5))
+  #plt.xlabelticks()
   plt.ylabel('Count')
-  plt.legend( (p1[0], p2[0]), ('Iterations', 'Mutation attempts') )
+  plt.xlabel('Beta')
+  plt.legend( (p1[0], p2[0]), ('Iterations', 'Mutation attempts') ,loc='upper left')
+  plt.xticks([0.1,0.5,1,1.5,2,2.3,2.5])  
+  #plt.gca().set_yticklabels(np.arange(0, 40, 5))
   #plt.xtickslabels['0.1','0.5','1.0','1.5','2.0','2.3','2.5'],fontsize=20)
-  plt.show()
+  plt.savefig('betaVsIerations-MutAttempts',dpi=180)
+  #plt.show()
+
+
+
+
+
 
 #plot mean, error bars and individual values(with points)
 def meanErrorLines(xlabel, ylabel, filename, yErrorValuesSeq, yErrorValuesRand,xMeanValuesRand,xMeanValuesSeq, yMeanValuesRand, yMeanValuesSeq, title,ymax=None,xmax=None,xmin=None):
@@ -377,14 +387,15 @@ def meanErrorLines(xlabel, ylabel, filename, yErrorValuesSeq, yErrorValuesRand,x
   pylab.ylabel(ylabel,fontsize=20)
   #frmt = ['-s','-^','-s']
   frmt = ['-o','-s','-^','-s']
-  #plt.plot(xMeanValuesSeq,yMeanValuesSeq,label='Natural seq.')
   
-  #plt.scatter(xValuesRand,yValuesRand,label='Random seq.')
-  #plt.errorbar(xvalues,yvalues,yerrorValues,color=color,marker=symbol,markersize=5,capsize=10,capthick=1, label=label)
-   
-  plt.errorbar(xMeanValuesSeq,yMeanValuesSeq,yErrorValuesSeq,capsize=10,capthick=1,linewidth=2.5,marker='s',markersize=10,label='Natural seq.')
-  plt.errorbar(xMeanValuesRand,yMeanValuesRand,yErrorValuesRand,capsize=10,capthick=1,linewidth=2.5,marker='s',markersize=10, label='Random seq.')
-  #plt.plot(xMeanValuesRand,yMeanValuesRand,label='Random seq.')
+  #PARA
+  plt.errorbar(xMeanValuesSeq,yMeanValuesSeq,yErrorValuesSeq,capsize=10,capthick=1,linewidth=2.5,marker='s',markersize=10,label='Mutation attempts per iteration')
+  plt.errorbar(xMeanValuesRand,yMeanValuesRand,yErrorValuesRand,capsize=10,capthick=1,linewidth=2.5,marker='s',markersize=10, label='Iterations')
+  
+  
+  #PARA IMPRIMIR BETA vs TIME DIVIDIENDO NATURAL Y RANDOM SEQ
+  #plt.errorbar(xMeanValuesSeq,yMeanValuesSeq,yErrorValuesSeq,capsize=10,capthick=1,linewidth=2.5,marker='s',markersize=10,label='Natural seq.')
+  #plt.errorbar(xMeanValuesRand,yMeanValuesRand,yErrorValuesRand,capsize=10,capthick=1,linewidth=2.5,marker='s',markersize=10, label='Random seq.')
   
   x1,x2,y1,y2 = pylab.axis()
   #pylab.yscale('log')
@@ -394,16 +405,17 @@ def meanErrorLines(xlabel, ylabel, filename, yErrorValuesSeq, yErrorValuesRand,x
 	#pylab.axis((x1,xmax,y1,y2))
   #if xmin:
 	#pylab.axis((xmin,x2,0,ymax))
-  pylab.legend(loc="best",fontsize=23)
   #pylab.savefig(filename, bbox_inches="tight")
-  #pylab.yscale('log')  
   
   x1,x2,y1,y2 = pylab.axis()
-  pylab.axis((0.0,2.7,y1,280))
+  #pylab.yscale('log')  
+  pylab.axis((0.0,2.7,0,25))  #limits for linear scale  
+  #pylab.axis((0.0,2.7,10,100000)) #limits for log scale
   #pylab.gca().xaxis.set_ticks_position('both')
   #plt.gca().set_xticklabels(np.arange(0, 3, 0.5))
   plt.gca().set_xticks([0.1,0.5,1,1.5,2,2.3,2.5])
   plt.gca().tick_params(labelsize=20) 
+  pylab.legend(loc="best",fontsize=23)
   #plt.twiny().set_xlabel('lalala')
   #plt.gca().tick_params(axis='x', which='major', labelsize=20)
   #plt.gca().tick_params(axis='y', which='major' )
@@ -471,17 +483,19 @@ def iterationVsX(executionsList,beta,random,maxIterations,logScale,step, xlabel,
       symbol='s'
     else:
       symbol='$0$'
+      #symbol='o'
     pairList=zip(iterations,executionsList[x])
     xvalues=[]
     yvalues=[]
     for p in pairList:
       xvalues.append(p[0])
       yvalues.append(p[1])
-    plt.plot(xvalues,yvalues, marker=symbol,color=color,linestyle='-',linewidth=0.5, markersize=6, label=label)
+    #color='blue'
+    plt.plot(xvalues,yvalues, marker=symbol,color=color,linestyle='-',linewidth=.5, markersize=6, label=label)
     #plt.plot(xvalues,yvalues)
     
-  if logScale:
-    pylab.xscale('log')  
+  #if logScale:
+    #pylab.xscale('log')  
   #x1,x2,y1,y2 = pylab.axis()
   #pylab.axis((x1,maxI,y1,y2))
   
@@ -492,16 +506,17 @@ def iterationVsX(executionsList,beta,random,maxIterations,logScale,step, xlabel,
       if label not in label_list:
 	  handle_list.append(handle)
 	  label_list.append(label)
-  plt.legend(handle_list, label_list,loc="upper right",fontsize=20)
-  #plt.legend(loc="upper left")
+  plt.legend(handle_list, label_list,loc="upper left",fontsize=20)
   plt.ylabel(ylabel,fontsize=23)
   plt.xlabel(xlabel,fontsize=23)
   x1,x2,y1,y2 = pylab.axis()
   #plt.xticks(np.arange(0, 1000, 50))
   #plt.gca().set_xticklabels(np.arange(0, 1000, 50))
-  pylab.axis((0,2400,0,280))
+  pylab.axis((0,200,0,170))
+  pylab.gcf().set_size_inches(13, 7)
   #legend = plt.legend(loc="upper left")
-  pylab.show()
+  pylab.savefig('iterationVsMutAttempts-individual',dpi=180)
+  #pylab.show()
   
 
 
@@ -578,10 +593,13 @@ def iterationVsXError(executionsList,executionsErrorList,beta,random,maxIteratio
   plt.xlabel(xlabel,fontsize=23)
   #plt.xticks(np.arange(0, 1000, 50))
   #plt.gca().set_xticklabels(np.arange(0, 1000, 50))
-  pylab.axis((0,2400,0,250))
+  pylab.axis((0,2400,0,130))
   plt.gca().get_xaxis().get_major_formatter().labelOnlyBase = False
   #pylab.figsize=(10,10)
-  pylab.show()
+  pylab.gcf().set_size_inches(13, 7)
+  #legend = plt.legend(loc="upper left")
+  pylab.savefig('iterationVsScore-mean',dpi=180)
+  #pylab.show()
   #pylab.savefig("exercice_2.png",figsize=(2000, 1000) ,dpi=500)
   
 initialize()
