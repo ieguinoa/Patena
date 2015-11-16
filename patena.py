@@ -18,11 +18,18 @@ import subprocess
 
 
 
+#****************************************
+
+#get path of this script
 def getScriptPath():
     return os.path.dirname(os.path.realpath(sys.argv[0]))
 
+
 #****************************************
-# CHOSE AN ITEM OF A PAIRLIST (ID, WEIGHT) , BASED ON WEIGHTS
+
+# WEIGHTED SELECTION 
+# ANON. FUNCTION: USE weighted_choide(param) TO CHOSE AN ITEM OF A PAIRLIST (ID, WEIGHT) , BASED ON WEIGHTS
+# RETURNS THE ID OF THE SELECTED ELEMENT
 weighted_choice = lambda s : random.choice(sum(([v]*wt for v,wt in s),[]))
 
 
@@ -56,6 +63,7 @@ anchorThreshold=0.5
 tangoThreshold=1.0
 
 #  EXECUTION PARAMETERS
+testTimes=False   #True=print times of each part
 minimalOutput=False  #True = only print global scores at end of iteration
 verbose=False        #True = print detailed information of execution
 stepByStep=False
@@ -69,6 +77,23 @@ blastWeb=False  #BLAST SEARCH LOCAL OR WEB
 output=True  ##print info to file
 mutAttempts=0
 length=12   #defaul sequence length
+
+
+
+# EXECUTION TIMES OF DIFFERENT PARTS
+pastaTime=0
+anchorTime=0
+tangoTime=0
+blastTime=0
+iupredTime=0
+waltzTime=0
+elmTime=0
+prositeTime=0
+tmhmmTime=0
+limboTime=0
+
+
+
 
 
 #EVALUATION PARAMETERs (TEST MODE)
@@ -923,6 +948,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    
         ## IUPred evaluation
         if runIupred:
+	  timePrev=time.time()
 	  if stepByStep and verbose:
 	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
@@ -930,10 +956,11 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    print indent + "*************************************"
 	    print indent + "STARTING IUPred SEARCH"
 	  iupred(sequence, positionScores, verbose)
-	    
+	  #iupredTime+=(time.time() - timePrev)  
 	    
         ## ANCHOR evaluation
 	if runAnchor:
+	  timePrev=time.time()
 	  if stepByStep and verbose:
 	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
@@ -941,9 +968,11 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    print indent + "*************************************"
 	    print indent + "STARTING ANCHOR SEARCH"
 	  anchor(sequence, positionScores, verbose)
+	  #anchorTime+=(time.time() - timePrev)  
 	
 	#ELM search
 	if runElm:
+	  timePrev=time.time()
 	  if stepByStep and verbose:
 	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
@@ -951,11 +980,13 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    print indent + "*************************************"
 	    print indent + "STARTING ELM Search"
 	  elmSearch(sequence,positionScores, verbose)
+	  #elmTime+=(time.time() - timePrev)
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
 	
 	#Net charge evaluation
 	if evaluateNetCharge:
+	  timePrev=time.time()
 	  if stepByStep and verbose:
 	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
@@ -969,6 +1000,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 
         #PASTA evaluation (self aggregation)
         if runPasta:
+          timePrev=time.time()
           if stepByStep and verbose:
             raw_input(indent + "Hit enter to continue with next evaluation")
           if verbose:
@@ -976,11 +1008,13 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
             print indent + "*************************************"
             print indent + "Starting PASTA evaluation"
           pastaSearch(sequence,positionScores, verbose)
+          #pastaTime+=(time.time() - timePrev)
           #if stepByStep:
             #raw_input(indent + "Hit enter to continue with next evaluation")
 	
 	#Prosite search
 	if runProsite:
+	  timePrev=time.time()
 	  if stepByStep and verbose:
 	    raw_input(indent + "Hit enter to continue with next evaluation") 
 	  if verbose:
@@ -988,12 +1022,14 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    print indent + "*************************************"
 	    print indent + "Prosite Search in progress..."
 	  prositeSearch(sequence,positionScores, verbose)
+	  #prositeTime+=(time.time() - timePrev)
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
 	
 	
 	#LIMBO evaluation
 	if runLimbo:
+	  timePrev=time.time()
 	  if stepByStep and verbose:
 	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
@@ -1002,6 +1038,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    print indent + "STARTING LIMBO Search"
 	  if (len(sequence) > 11):
 	    limboEval(sequence,positionScores, verbose)
+	    #limboTime+=(time.time() - timePrev)
 	  else:
 	    if verbose:
 	      print indent + "LIMBO Search is only available for sequences of length >= 12 "
@@ -1012,6 +1049,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	
 	#TMHMM evaluation
 	if runTmhmm:
+	  timePrev=time.time()
 	  if stepByStep and verbose:
 	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
@@ -1019,11 +1057,13 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    print indent + "*************************************"
 	    print indent + "Search for transmembrane sections"
 	  tmhmmEval(sequence,positionScores, verbose)
+	  #tmhmmTime+=(time.time() - timePrev)
 	  
 	
 	
 	#Search amyloid pattern
 	if runAmyloidPattern:
+	  timePrev=time.time()
 	  if stepByStep and verbose:
 	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
@@ -1033,11 +1073,13 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    #print endl
 	    print indent + "Search for Amyloid sequence determinants"
 	  amyloidPatternSearch(sequence,positionScores, verbose)
+	  #patternTime+=(time.time() - timePrev)
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
 	
 	#Waltz evaluation
 	if runWaltz:
+	  timePrev=time.time()
 	  if stepByStep and verbose:
              raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
@@ -1045,11 +1087,13 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    print indent + "*************************************"
 	    print indent + "Starting Waltz evaluation"
 	  waltzSearch(sequence,positionScores, verbose)
+	  #waltzTime+=(time.time() - timePrev)
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
 	
 	#Tango evaluation
 	if runTango:
+	  timePrev=time.time()
 	  if stepByStep and verbose:
 	    raw_input(indent + "Hit enter to continue with next evaluation")
 	  if verbose:
@@ -1057,6 +1101,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    print indent + "*************************************"
 	    print indent + "STARTING TANGO Search"
 	  tangoSearch(sequence,positionScores, verbose)
+	  #tangoTime+=(time.time() - timePrev)
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
 	
@@ -1110,7 +1155,9 @@ def secondPartialEvaluation(sequence, positionScores, verbose):
 	   print endl
 	   print indent + "*************************************"
 	   #print indent + "STARTING BLAST SEARCH"
+	timePrev=time.time()   
 	blastIt(sequence,positionScores,database, verbose)
+	#blastTime+=(time.time() - timePrev)
         #if stepByStep:
 	  #raw_input(indent + "Hit enter to continue with next evaluation")
 	
@@ -1190,11 +1237,11 @@ def secondPartialEvaluation(sequence, positionScores, verbose):
 ## PRINT PROGRAM HELP 
 def printHelp():
   print endl + "Usage: "
-  print "  python bleach.py [options]" + endl
+  print "  python patena.py [options]" + endl
   print "Options are:"
   print tab + "--length  sequence-length                " + tab + "Define random sequence length"
-  print tab + "--db   [swissprot | nr]			"   + tab + ""    #blast database
-  print tab + "--composition  [average | user_specified]"  + tab + "Composition used to select AA (if user_specified you must define AA frequencies)"
+  #print tab + "--db   [swissprot | nr]			"   + tab + ""    #blast database
+  #print tab + "--composition  [average | user_specified]"  + tab + "Composition used to select AA (if user_specified you must define AA frequencies)"
   print tab + "--seq   predefined-sequence		" + tab + "Define sequence to start with"
   print tab + "--maxmutations  max-number		"   + tab + "Limit in number of ACCEPTED mutations(NOT MUTTATION ATTEMPTS)"   # 
   #print tab + "--maxiterations"   ?????    SUM OF MUTATION ATTEMPTS ?????     ******MAINLY FOR PERFORMANCE REASONS
@@ -1240,7 +1287,8 @@ def printHelp():
 
 #********DEFAULTS********
 composition="average"
-a=r=n=d=c=q=e=g=h=i=l=k=m=f=p=s=t=w=y=v=0
+#a=r=n=d=c=q=e=g=h=i=l=k=m=f=p=s=t=w=y=v=-1
+userComposition={"A":-999 , "R":-999  , "N":-999  , "D":-999  , "C":-999  , "E":-999 , "Q":-999  , "G":-999  , "H":-999  , "I":-999  , "L":-999  , "K":-999  ,"M":-999  , "F":-999  , "P":-999  , "S":-999  , "T":-999  , "W":-999  , "Y":-999  , "V":-999 }
 database="uniprot_sprot.fasta"
 sequence="RANDOM"
 uvsilent=False
@@ -1291,9 +1339,10 @@ else:
     elif (arg=='--testoutput') and (index < len(sys.argv)):
       testing=True
       testOutputPath = sys.argv[index+1]
-      
-      
-      
+    elif (arg=='--gettime'):
+      testTimes=True   
+    elif (arg=='--jobid') and (index < len(sys.argv)):
+      exeId=sys.argv[index+1]
  ##   SELECT WHICH TOOLS WONT ME EVALUATED
     elif (arg=='--noblast'):
       runBlast=False
@@ -1324,72 +1373,99 @@ else:
       verbose=True   #MAKES NO SENSE TO GO STEP BY STEP IF CANT SEE A DETAILED OUTPUT
     elif (arg=='--maxiterations') and (index < len(sys.argv)):
       maxIterations=int(sys.argv[index+1])   
-    elif (arg== '--composition') and (index < len(sys.argv)):
-      composition = sys.argv[index+1]
-      if (composition=="user_specified"):  #frequencies specified by parameter
-	for j in range(index+2,len(sys.argv),2):
-	  if(sys.argv[j]=='-a'):
-	    a=int(sys.argv[j+1])
-	  elif(sys.argv[j]=='-r'):
-	    r=int(sys.argv[j+1])
-	  elif(sys.argv[j]=='-n'):
-	    n=int(sys.argv[j+1])
-	  elif(sys.argv[j]=='-d'):
-	    d=int(sys.argv[j+1])
-	  elif(sys.argv[j]=='-c'):
-	    c=int(sys.argv[j+1])
-	  elif(sys.argv[j]=='-q'):
-	    q=int(sys.argv[j+1])
-	  elif(sys.argv[j]=='-e'):
-	    e=int(sys.argv[j+1])
-	  elif(sys.argv[j]=='-g'):
-	    g=int(sys.argv[j+1])
-	  elif(sys.argv[j]=='-h'):
-	    h=int(sys.argv[j+1])
-	  elif(sys.argv[j]=='-i'):
-	    i=int(sys.argv[j+1])
-	  elif(sys.argv[j]=='-l'):
-	    l=int(sys.argv[j+1])
-	  elif(sys.argv[j]=='-k'):
-	    k=int(sys.argv[j+1])
-	  elif(sys.argv[j]=='-m'):
-	    m=int(sys.argv[j+1])
-	  elif(sys.argv[j]=='-f'):
-	    f=int(sys.argv[j+1])
-	  elif(sys.argv[j]=='-p'):
-	    p=int(sys.argv[j+1])
-	  elif(sys.argv[j]=='-s'):
-	    s=int(sys.argv[j+1])
-	  elif(sys.argv[j]=='-t'):
-	    t=int(sys.argv[j+1])
-	  elif(sys.argv[j]=='-w'):
-	    w=int(sys.argv[j+1])
-	  elif(sys.argv[j]=='-y'):
-	    y=int(sys.argv[j+1])
-	  elif(sys.argv[j]=='-v'):
-	    v=int(sys.argv[j+1])
+      
+      
+      
+    #CHECK IF THE USER DEFINED ANY OF THE AAs FREQUENCIES
+    
+    #elif (arg== '--composition') and (index < len(sys.argv)):
+      #composition = sys.argv[index+1]
+      #if (composition=="user_specified"):  #frequencies specified by parameter
+	#for j in range(index+2,len(sys.argv),2):
+    elif(arg=='-a'):
+      userComposition['A']=int(sys.argv[index+1])
+      composition=="user_specified"
+    elif(arg=='-r'):
+      userComposition['R']=int(sys.argv[index+1])
+      composition=="user_specified"
+    elif(arg=='-n'):
+      userComposition['N']=int(sys.argv[index+1])
+      composition=="user_specified"
+    elif(arg=='-d'):
+      userComposition['D']=int(sys.argv[index+1])
+      composition=="user_specified"
+    elif(arg=='-c'):
+      userComposition['C']=int(sys.argv[index+1])
+      composition=="user_specified"
+    elif(arg=='-q'):
+      userComposition['Q']=int(sys.argv[index+1])
+      composition=="user_specified"
+    elif(arg=='-e'):
+      userComposition['E']=int(sys.argv[index+1])
+      composition=="user_specified"
+    elif(arg=='-g'):
+      userComposition['G']=int(sys.argv[index+1])
+      composition=="user_specified"
+    elif(arg=='-h'):
+      userComposition['H']=int(sys.argv[index+1])
+      composition=="user_specified"
+    elif(arg=='-i'):
+      userComposition['I']=int(sys.argv[index+1])
+      composition=="user_specified"
+    elif(arg=='-l'):
+      userComposition['L']=int(sys.argv[index+1])
+      composition=="user_specified"
+    elif(arg=='-k'):
+      userComposition['K']=int(sys.argv[index+1])
+      composition=="user_specified"
+    elif(arg=='-m'):
+      userComposition['M']=int(sys.argv[index+1])
+      composition=="user_specified"
+    elif(arg=='-f'):
+      userComposition['F']=int(sys.argv[index+1])
+      composition=="user_specified"
+    elif(arg=='-p'):
+      userComposition['P']=int(sys.argv[index+1])
+      composition=="user_specified"
+    elif(arg=='-s'):
+      userComposition['S']=int(sys.argv[index+1])
+      composition=="user_specified"
+    elif(arg=='-t'):
+      userComposition['T']=int(sys.argv[index+1])
+      composition=="user_specified"
+    elif(arg=='-w'):
+      userComposition['W']=int(sys.argv[index+1])
+      composition=="user_specified"
+    elif(arg=='-y'):
+      userComposition['Y']=int(sys.argv[index+1])
+      composition=="user_specified"
+    elif(arg=='-v'):
+      userComposition['V']=int(sys.argv[index+1])
+      composition=="user_specified"
+
+
 
 
 #CHECK IF TARGET NET CHARGE IS POSSIBLE BASED ON SEQUENCE LENGTH (AND PH??)
-  if evaluateNetCharge:
-    if abs(targetNetCharge) > length:
+if evaluateNetCharge:
+  if abs(targetNetCharge) > length:
       print 'Net charge is impossible to reach with the specified sequence length'
       exit()
   
   
-  
-  print "************************************************"
-  print "************************************************"
-  print "EXECUTION PARAMETERS:"
-  print 'Id=' + str(exeId) 
-  print 'Beta= '+ str(beta)
-  print "Length=" + str(length) 
-  print "Composition=" + composition
-  print "Sequence=" + sequence
-  if evaluateNetCharge:
-    print "Target net charge=" + str(targetNetCharge)
-  print "************************************************"
-  print "************************************************"
+
+print "************************************************"
+print "************************************************"
+print "EXECUTION PARAMETERS:"
+print 'Id=' + str(exeId) 
+print 'Beta= '+ str(beta)
+print "Length=" + str(length) 
+print "Composition=" + composition
+print "Sequence=" + sequence
+if evaluateNetCharge:
+  print "Target net charge=" + str(targetNetCharge)
+print "************************************************"
+print "************************************************"
 
 
 
@@ -1427,11 +1503,56 @@ if minimalOutput:
   logFileStream=open( logsPath+'/'+logFileName, 'w')
 
 
-if uvsilent==False:   
-  aaFrequencies= [("A",825), ("R",553),("N",406),("D",545),("C",137),("E",393),("Q",675),("G",707),("H",227),("I",596),("L",966),("K",548),("M",242),("F",386),("P",470),("S",656),("T",534),("W",108),("Y",292),("V",687) ]
-else:
-  aaFrequencies= [("A",825), ("R",553),("N",406),("D",545),("C",137),("E",393),("Q",675),("G",707),("H",227),("I",596),("L",966),("K",548),("M",242),("F",0),("P",470),("S",656),("T",534),("W",0),("Y",0),("V",687) ]
 
+
+#AMINOACIDS FREQUENCIES....
+# THESE FREQUENCIES ARE USED TO SELECT REPLACEMENTS DURING MUTATIONS
+# THE SELECTION IS MADE USING A WEIGTHED SELECTION. THE ONLY REQUERIMENT IS THAT THE FREQUENCIES (WEIGHTS) ARE WHOLE NUMBERS
+
+# STANDARD COMPOSITION 
+#if uvsilent==False:   
+standardComposition={"A":825 , "R":553 , "N":406 , "D":545 , "C":137 , "E":393 , "Q":675 , "G":707 , "H":227 , "I":596 , "L":966 , "K":548 ,"M":242 , "F":386 , "P":470 , "S":656 , "T":534 , "W":108 , "Y":292 , "V":687}
+  #aaFrequencies= [("A",825), ("R",553),("N",406),("D",545),("C",137),("E",393),("Q",675),("G",707),("H",227),("I",596),("L",966),("K",548),("M",242),("F",386),("P",470),("S",656),("T",534),("W",108),("Y",292),("V",687) ]
+#else:
+  #aaFrequencies= [("A",825), ("R",553),("N",406),("D",545),("C",137),("E",393),("Q",675),("G",707),("H",227),("I",596),("L",966),("K",548),("M",242),("F",0),("P",470),("S",656),("T",534),("W",0),("Y",0),("V",687) ]
+
+#print str(standardComposition)
+
+if uvsilent:
+# RESET Y,W,F FREQ = 0 
+    userComposition['Y']=0
+    userComposition['W']=0
+    userComposition['F']=0
+
+
+if (composition=="user_specified"):   
+# USER HAS DEFINED AT LEAST ONE OF THE FREQUENCIES, THE FREQUENCIES DEFINED ARE IN
+#FIRST CHECK IF THE SUM OF FREQUENCIES DEFINED IS LESS THAN 100 percent
+  print 'entro'
+  freqSum=0
+  for key in userComposition:
+    if userComposition[key] != -999:    #THE USER HAS DEFINED THIS FREQUENCE
+      freqSum+= userComposition[key]
+  if freqSum > 100:
+    print 'Total defined frequencies exceeded 100%'
+    exit()
+
+
+#REDEFINE TOTAL aaFrequencies USING THE USER DEFINED FREQUENCIES
+#TODO ***********************************************************
+# TEMP. SOLUTION: JUST COPY THE FREQUENCIES DEFINED BY USER AND REPLACE UNKNOWN BY STANDARD
+for key in userComposition: 
+    if userComposition[key] == -999:
+      userComposition[key] = standardComposition[key]
+    else: 
+      userComposition[key] = userComposition[key]*100  #change the frequencies to 10000 base
+
+
+
+#CONVERT FREQUENCIES TO LIST OF PAIRS (AA, FREQ)
+aaFrequencies=userComposition.items()
+#print str(aaFrequencies)
+#aaFrequencies= [("A",825), ("R",553),("N",406),("D",545),("C",137),("E",393),("Q",675),("G",707),("H",227),("I",596),("L",966),("K",548),("M",242),("F",386),("P",470),("S",656),("T",534),("W",108),("Y",292),("V",687) ]
 
 
 
@@ -1439,24 +1560,30 @@ else:
 # FORMAT TO REQUEST RANDOM SEQUENCE:   
 #http://web.expasy.org/cgibin/randseq/randseq.pl?size=100&comp=user_specified&A=10&R=10&N=10&D=10&C=10&Q=10&E=10&G=10&H=0&I=0&L=0&K=0&M=0&F=0&P=0&S=0&T=0&W=0&Y=10&V=0&output=fasta   
 
-if rand==True:
-	#****************GET RANDOM SEQUENCE*************
-        #print endl
-        if verbose:
-	  print "Generating random sequence..."    
-	#print endl
-	if not (composition=="user_specified"):
-	  url="http://web.expasy.org/cgi-bin/randseq/randseq.pl?size=" + str(length) + "&comp=" + composition + "&output=fasta"
-	else:
-	  print "fix this"
-	#print url
-  	response = urllib2.urlopen(url)
-	html = response.read()
-	i = html.index('\n')
-	sequence = html[i+1:].replace('\n', '')
-	#if verbose:
-	   #print "*******************************" 
+#if rand==True:
+	##****************GET RANDOM SEQUENCE*************
+        ##print endl
+        #if verbose:
+	  #print "Generating random sequence..."    
+	##print endl
+	#if not (composition=="user_specified"):
+	  #url="http://web.expasy.org/cgi-bin/randseq/randseq.pl?size=" + str(length) + "&comp=" + composition + "&output=fasta"
+	#else:
+	  #print "fix this"
+	##print url
+  	#response = urllib2.urlopen(url)
+	#html = response.read()
+	#i = html.index('\n')
+	#sequence = html[i+1:].replace('\n', '')
+	##if verbose:
+	   ##print "*******************************" 
 	
+
+#GENERATE RANDOM SEQUENCE WITH THE DEFINED COMPOSITION
+sequence=[]
+for x in range(0,length):
+  sequence.append(weighted_choice(aaFrequencies)) 
+sequence=''.join(sequence)
 
    
 #print endl
@@ -1479,6 +1606,8 @@ for p in range(len(sequence)):
 
 
 time0 = time.time()   #start time
+
+timePrev=time.time()  #used to measure execution times of different parts (evaluation, mutations, etc)
 
 
 
@@ -1614,11 +1743,11 @@ while globalScore > 0 and iteration <= maxIterations:
   partialScore=firstPartialScore
   while partialScore > 0 and iteration <= maxIterations:
       timePrev=time.time()
-      weighted=[]
-      #weighted IS A PAIRLIST(position,weight)
+      weights=[]
+      #weights IS A PAIRLIST(position,weight)
       #CONTAINS THE WEIGHT USED TO SELECT THE MUTATION POSITION. EACH ELEMENT IS A PAIR (X, WEIGHT), WHERE X= POSITION AND EIGHT IS = (SCORE(X) + A BASE WEIGHT)
       for x in range(len(positionScores)):
-	weighted.append((x, positionScores[x]+1))    #the weight is score+1 - this gives a slight chance to all the position to suffer mutation
+	weights.append((x, positionScores[x]+1))    #the weight is score+1 - this gives a slight chance to all the position to suffer mutation
       
       
       
@@ -1638,7 +1767,7 @@ while globalScore > 0 and iteration <= maxIterations:
 	  #print indent + "Choose a position based on sequence weights"
 	  
 	  #CHOOSE A POSITION BASED ON WEIGHTS
-	  mutatePosition= weighted_choice(weighted) 
+	  mutatePosition= weighted_choice(weights) 
 	  if verbose:
 	    print indent + "Position chosen: " + str(mutatePosition)
 	  
@@ -1814,11 +1943,11 @@ while globalScore > 0 and iteration <= maxIterations:
     partialScore=getGlobalScore(partialScores)  
     while partialScore > 0 and iteration <= maxIterations:
 	timePrev=time.time()
-	weighted=[]
-	#weighted IS A PAIRLIST(position,weight)
+	weights=[]
+	#weights IS A PAIRLIST(position,weight)
 	#CONTAINS THE WEIGHT USED TO SELECT THE MUTATION POSITION. EACH ELEMENT IS A PAIR (X, WEIGHT), WHERE X= POSITION AND EIGHT IS = (SCORE(X) + A BASE WEIGHT)
 	for x in range(len(partialScores)):
-	  weighted.append((x, partialScores[x]+1))    #the weight is score+1 - this gives a slight chance to all the position to suffer mutation
+	  weights.append((x, partialScores[x]+1))    #the weight is score+1 - this gives a slight chance to all the position to suffer mutation
 	
 	
 	#MUTATION ATTEMPTS
@@ -1839,7 +1968,7 @@ while globalScore > 0 and iteration <= maxIterations:
 	    #print indent + "Choose a position based on sequence weights"
 	    
 	    #CHOOSE A POSITION BASED ON WEIGHTS
-	    mutatePosition= weighted_choice(weighted) 
+	    mutatePosition= weighted_choice(weights) 
 	    if verbose:
 	      print indent + "Position chosen: " + str(mutatePosition)
 	    
@@ -2075,4 +2204,17 @@ if testing:
   #scoresOutputFile.close()
   #mutationsFile.close()
    
-
+if testTimes:
+    evaluationTime=totalElapsedTime-(pastaTime + anchorTime + tangoTime + blastTime + iupredTime + waltzTime + elmTime + prositeTime + tmhmmTime + limboTime) 
+    print 'Total Elapsed Time: ' + totalElapsedTime
+    print 'Time spent on evaluations: ' +  evaluationTime
+    print 'Time spent in ELM: ' + pastaTime
+    print 'Time spent in ANCHOR: ' + anchorTime
+    print 'Time spent in TANGO: ' + tangoTime
+    print 'Time spent in BLAST: ' + blastTime
+    print 'Time spent in IUPred: ' + iupredTime
+    print 'Time spent in Waltz: ' + waltzTime
+    print 'Time spent in ELM: ' + elmTime
+    print 'Time spent in Prosite: ' + prositeTime
+    print 'Time spent in TMHMM: ' + thmmTime
+    print 'Time spent in Limbo: ' + limboTime
