@@ -193,8 +193,8 @@ def makeBetaVsIteration(basePath):
 	#if iterations>5000:
 	#	iterations=5000
 	#print str(mutAttempts) + str(files)
-	#if mutAttempts > 4000:
-	#	mutAttempts=4000
+	if mutAttempts > 15000:
+		mutAttempts=15000
 	#SAVE EXECUTION DATA IN DICTIONARIES
         if betaValue not in excludeList:
 	  #print betaValue
@@ -259,11 +259,11 @@ def makeBetaVsIteration(basePath):
         'xMeanValuesRand': betas,
         'yMeanValuesRand': iterationsMean,
         'xMeanValuesSeq': betas,
-        #'yMeanValuesSeq': mutAttemptsMean,
-        'yMeanValuesSeq':mutAttemptsPerItMean,
+        'yMeanValuesSeq': mutAttemptsMean,
+        #'yMeanValuesSeq':mutAttemptsPerItMean,
 	'yErrorValuesRand': iterationsStd,
-        #'yErrorValuesSeq': mutAttemptsStd,
-        'yErrorValuesSeq':mutAttemptsPerItStd,
+        'yErrorValuesSeq': mutAttemptsStd,
+        #'yErrorValuesSeq':mutAttemptsPerItStd,
 	'filename': basePath+'/beta-vs-Mut-iterations.png',
         #'ymax':5000,
         'xmax': 2.7,
@@ -517,16 +517,16 @@ def makeIterationVsScore(basePath):
       'executionsList':executions,
       'random':random,
       'beta':betaValues,
-      'logScale': True,
+      'logScale': False,
       'maxIterations': maxIterations,
       'step': step,
       'xlabel':'Mutation',
-      #'ylabel':'Mutation attempts',
-      'ylabel': 'Score[PATENA Units]',
+      'ylabel':'Mutation attempts',
+      #'ylabel': 'Score[PATENA Units]',
    }
  
   
-  iterationVsX(**params)	    
+  #iterationVsX(**params)	    
  
  
  
@@ -646,11 +646,11 @@ def makeIterationVsScore(basePath):
       'maxIterations': maxIterations,
       'step': step,
       #'ylabel': 'Score[PATENA Units]',
-      'ylabel': 'Proposed Mutations',
+      'ylabel': 'Mutation attempts',
       'xlabel': 'Mutation'
     }
   
-  #iterationVsXError(**params)
+  iterationVsXError(**params)
   
   
   
@@ -969,7 +969,7 @@ def compareFrequencies(basePath):
 	#plt.show()
 
 #para comparar frecuencias usar datos de /home/ieguinoa/bioTesis/patena/tests/Results/test-divergence-1
-compareFrequencies(sys.argv[1])
+#compareFrequencies(sys.argv[1])
 
 #usar datos de /home/ieguinoa/results/beta0.1-2.5/ 
 #makeBetaVsIteration(sys.argv[1])
@@ -980,7 +980,7 @@ compareFrequencies(sys.argv[1])
 
 
 #print iteration Vs score (or Vs mutation attempts)
-#makeIterationVsScore(sys.argv[1])
+makeIterationVsScore(sys.argv[1])
 
 
 #usar /home/ieguinoa/results/beta0.1-2.5

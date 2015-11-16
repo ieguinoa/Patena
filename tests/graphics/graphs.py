@@ -389,7 +389,7 @@ def meanErrorLines(xlabel, ylabel, filename, yErrorValuesSeq, yErrorValuesRand,x
   frmt = ['-o','-s','-^','-s']
   
   #PARA
-  plt.errorbar(xMeanValuesSeq,yMeanValuesSeq,yErrorValuesSeq,capsize=10,capthick=1,linewidth=2.5,marker='s',markersize=10,label='Mutation attempts per iteration')
+  plt.errorbar(xMeanValuesSeq,yMeanValuesSeq,yErrorValuesSeq,capsize=10,capthick=1,linewidth=2.5,marker='s',markersize=10,label='Total mutation attempts')
   plt.errorbar(xMeanValuesRand,yMeanValuesRand,yErrorValuesRand,capsize=10,capthick=1,linewidth=2.5,marker='s',markersize=10, label='Iterations')
   
   
@@ -409,7 +409,7 @@ def meanErrorLines(xlabel, ylabel, filename, yErrorValuesSeq, yErrorValuesRand,x
   
   x1,x2,y1,y2 = pylab.axis()
   #pylab.yscale('log')  
-  pylab.axis((0.0,2.7,0,25))  #limits for linear scale  
+  pylab.axis((0.0,2.7,0,17000))  #limits for linear scale  
   #pylab.axis((0.0,2.7,10,100000)) #limits for log scale
   #pylab.gca().xaxis.set_ticks_position('both')
   #plt.gca().set_xticklabels(np.arange(0, 3, 0.5))
@@ -493,6 +493,7 @@ def iterationVsX(executionsList,beta,random,maxIterations,logScale,step, xlabel,
     #color='blue'
     plt.plot(xvalues,yvalues, marker=symbol,color=color,linestyle='-',linewidth=.5, markersize=6, label=label)
     #plt.plot(xvalues,yvalues)
+    #plt.plot(xvalues,yvalues, marker=symbol,color=color,linestyle='-',linewidth=.5, markersize=6, label=label)	
     
   #if logScale:
     #pylab.xscale('log')  
@@ -504,18 +505,16 @@ def iterationVsX(executionsList,beta,random,maxIterations,logScale,step, xlabel,
   handle_list, label_list = [], []
   for handle, label in zip(handles, labels):
       if label not in label_list:
-	  handle_list.append(handle)
-	  label_list.append(label)
-  plt.legend(handle_list, label_list,loc="upper left",fontsize=20)
+  	  handle_list.append(handle)
+  	  label_list.append(label)
+  plt.legend(handle_list, label_list,loc="upper left",fontsize=16)
   plt.ylabel(ylabel,fontsize=23)
   plt.xlabel(xlabel,fontsize=23)
   x1,x2,y1,y2 = pylab.axis()
-  #plt.xticks(np.arange(0, 1000, 50))
-  #plt.gca().set_xticklabels(np.arange(0, 1000, 50))
   pylab.axis((0,200,0,170))
   pylab.gcf().set_size_inches(13, 7)
   #legend = plt.legend(loc="upper left")
-  pylab.savefig('iterationVsMutAttempts-individual',dpi=180)
+  pylab.savefig('iterationVsMutAttempts-individual',dpi=300)
   #pylab.show()
   
 
@@ -588,17 +587,15 @@ def iterationVsXError(executionsList,executionsErrorList,beta,random,maxIteratio
     pylab.xscale('log')  
   x1,x2,y1,y2 = pylab.axis()
    #plt.figure(figsize=(20,10))
-  legend = plt.legend(loc="upper right",fontsize=20)
+  legend = plt.legend(loc="upper left",fontsize=20)
   plt.ylabel(ylabel,fontsize=23)
   plt.xlabel(xlabel,fontsize=23)
   #plt.xticks(np.arange(0, 1000, 50))
   #plt.gca().set_xticklabels(np.arange(0, 1000, 50))
   pylab.axis((0,2400,0,130))
-  plt.gca().get_xaxis().get_major_formatter().labelOnlyBase = False
-  #pylab.figsize=(10,10)
+  #plt.gca().get_xaxis().get_major_formatter().labelOnlyBase = False
   pylab.gcf().set_size_inches(13, 7)
-  #legend = plt.legend(loc="upper left")
-  pylab.savefig('iterationVsScore-mean',dpi=180)
+  pylab.savefig('iterationVsMutAttempts-mean',dpi=300)
   #pylab.show()
   #pylab.savefig("exercice_2.png",figsize=(2000, 1000) ,dpi=500)
   
