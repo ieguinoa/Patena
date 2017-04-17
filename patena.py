@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import urllib2
 import StringIO
 import sys
@@ -18,9 +19,16 @@ import subprocess
 
 
 
+##TODO: CHECK NECESSARY ENVIRONMENT VARS:
+#ANCHOR_PATH=$DIR/Tools/ANCHOR
+#IUPred_PATH=$DIR/Tools/iupred
+#PASTA_PATH=$DIR/Tools/PASTA/pasta_exe
+#PROSITE=$DIR/Tools/Prosite/ps_scan
+
+
 #****************************************
 
-#get path of this script
+#get base path
 def getScriptPath():
     return os.path.dirname(os.path.realpath(sys.argv[0]))
 
@@ -77,8 +85,8 @@ blastWeb=False  #BLAST SEARCH LOCAL OR WEB
 output=True  ##print info to file
 mutAttempts=0
 length=12   #defaul sequence length
-
-
+global_evaluation=False  #when True, just make a general evaluation of the sequence: run all tools(from each loop) and print the results of each 
+detailed_output=False
 
 # EXECUTION TIMES OF DIFFERENT PARTS
 pastaTime=0
@@ -176,7 +184,7 @@ def makeElmSearch(sequence,verbose):
 
   #print "SEARCHING ELMS IN %s\n ..." % filename
   elm_pattern_desc_dict = {}
-  if verbose:     #ONLY IF ITS REQUIRED TO PRINT A DETAILED A OUTPUT, READ THE DESCRIPTION OF EACH ELM FROM A DIFFERENT FILE
+  if verbose or detailed_output:     #ONLY IF ITS REQUIRED TO PRINT A DETAILED A OUTPUT, READ THE DESCRIPTION OF EACH ELM FROM A DIFFERENT FILE
     with open(toolsPath + "ELM/elm_patterns_desc_20150301.txt", 'rU') as file_desc_open :
 	    patterns_desc = file_desc_open.readlines()
 	    for line in patterns_desc :
@@ -205,7 +213,9 @@ def makeElmSearch(sequence,verbose):
 		  for index in where_to_start :
 			  match = re.search(pattern, '%s' % sequence[index:])
 			  if match != None :
-				  if verbose:     #write description next to the indexes
+				  #if detailed_output:
+				#	detailedOutFile.write(tab + str(index+1) + tab + str(index+len(match.group())) + tab+ elm_id +tab+ elm_pattern_desc_dict[elm_id] + '\n')	
+				  if verbose or detailed_output:     #write description next to the indexes
 				    #print elm_id
 				    file_write.write(str(index+1) + tab + str(index+len(match.group())) + tab+ elm_id +tab+ elm_pattern_desc_dict[elm_id] + '\n')
 				    #file_write.write("%s\t%s\t%s\t%s\n" % (index+1, index+len(match.group()) , elm_id , elm_pattern_desc_dict[elm_id] ))
@@ -227,12 +237,16 @@ def elmSearch(sequence, positionScores,verbose):
   hitsFile=outputsPath + "outputELM"    #THE OUTPUT OF THE SEARCH CONTAINS THE LIST OF ELMs FOUND, NOW I HAVE TO PROCESS IT
   with open(hitsFile, "r") as input_file:
     lines=input_file.readlines()
+  if detailed_output:
+          detailedOutFile.write('ELM search output: Pattern match - start - end')	
   if verbose:  
     print indent + "ELM Search:"
   for line in lines:
     line=line.split("\t")
     pattern_start=int(line[0])
     pattern_end=int(line[1])
+    if detailed_output:
+          detailedOutFile.write(line[2] + '\t' + str(pattern_start) + '\t' +str(pattern_end))
     if verbose:
       print indent + "Pattern found: " + line[2]
       print indent + "start:" + str(pattern_start)
@@ -291,6 +305,8 @@ def prositeSearch(sequence, positionScores,verbose):
   #input.write(">gi" + endl)
   #input.write(sequence)
   #input.close()
+  if detailed_output:
+          detailedOutFile.write('Prosite search results:\n' ) 	
   proc = subprocess.Popen(['perl', toolsPath + 'Prosite/ps_scan/ps_scan.pl','-r','-o', 'scan', inputProsite],stdout=subprocess.PIPE)
   while True:
     line = proc.stdout.readline()
@@ -301,7 +317,9 @@ def prositeSearch(sequence, positionScores,verbose):
 	prositeScores[x]+=1
       if verbose:
 	  print indent + "Hit: " +line
-      #print "Hit:" + line.split()[0] + "-" +line.split()[1] + space +  line.split()[2] + space + line.split()[3] + space + line.split()[4]
+      if detailed_output:
+          detailedOutFile.write(line + '\n')
+	#print "Hit:" + line.split()[0] + "-" +line.split()[1] + space +  line.split()[2] + space + line.split()[3] + space + line.split()[4]
     else:
       break	      
 
@@ -436,7 +454,8 @@ def blastIt(sequence, positionScores, database, verbose):
 	  first = blast_records.next() 
 	  
 	
-	
+	if detailed_output:
+                detailedOutFile.write('BLAST RESULTS: E-value - match - subject - query start - query end')
 	#first.alignments contains all de alignments found
 	if len(first.alignments) > 0:
 	#get first alignment
@@ -463,6 +482,8 @@ def blastIt(sequence, positionScores, database, verbose):
 	      end=hsp.query_end
 	      
 	      #length = (end-start) ???
+	      if detailed_output:
+          	detailedOutFile.write(str(hsp.expect) + tab + str(hsp.match) + str(hsp.sbjct) + tab + str(hsp.query_start) + str(hsp.query_end) )	
 	      if verbose:
 		print indent + "E-Value:     " + str(hsp.expect)
 		print indent + "Query:       " + hsp.query 
@@ -529,26 +550,33 @@ def iupred(sequence, positionScores, verbose):
 	#input.close()
 	os.system(runCommand)	
 	outputIUPred=open(outputsPath + "outIUPred", "r")
-	
+	if detailed_output:
+                detailedOutFile.write('IUPred results: \n')
+		detailedOutFile.write('Threshold: ' str(iupredThreshold) + '\n')
 	#PRINT THE RESULTS OF IUPred
-	if verbose:
+	if verbose or detailed_output:
 	  iupredScores=[]
+
 	  iterOutputIUPred=iter(outputIUPred)
 	  for p in range(len(sequence)):
 	      iupredScores.append(0)
 	  for x in range(len(sequence)):
 		  resultX=float(iterOutputIUPred.next())
+		  if detailed_output:
+			detailedOutFile.write(str(resultX)+'\n')
 		  if resultX < iupredThreshold :
 			  iupredScores[x] = 1
 	  #print endl
-	  print indent + "RESULTS:"
-	  print indent + 'Threshold: '+ str(iupredThreshold)
-	  #print indent + sequence
-	  #print indent + ''.join(map(str, iupredScores))	  			  			
+          if verbose:
+	  	print indent + "RESULTS:"
+	  	print indent + 'Threshold: '+ str(iupredThreshold)
+	  	#print indent + sequence
+	  	#print indent + ''.join(map(str, iupredScores))	  			  			
 	  data = [sequence,iupredScores]
 	  col_width = max(len(str(word)) for row in data for word in row)   # padding
 	  for row in data:
-	    print indent + "|".join(str(word).ljust(col_width) for word in row)
+	    if verbose:	
+	    	print indent + "|".join(str(word).ljust(col_width) for word in row)
 	outputIUPred.seek(0)
 	rstFile_iter = iter(outputIUPred)
 	#ADD 1 TO THE POSITION IN positionScores IF THE RESULT IS LESS THAN 0.5 (PREDICTING A GLOBULAR TENDENCY)
@@ -579,6 +607,10 @@ def anchor(sequence, positionScores, verbose):
   os.system(runCommand)	
   outputAnchor=open(outputsPath + "outAnchor", "r")
   
+  if detailed_output:
+                detailedOutFile.write('ANCHOR Results\n')
+		detailedOutFile.write('Threshold: ' str(anchorThreshold) + '\n')
+		
   if verbose:
     print indent + 'Threshold: ' + str(anchorThreshold)
   anchorScores=[]
@@ -587,6 +619,8 @@ def anchor(sequence, positionScores, verbose):
       anchorScores.append(0)
   for x in range(len(sequence)):
 	  resultX=float(iterOutputAnchor.next())
+	  if detailed_output:
+                detailedOutFile.write(str(resultX) + '\n')
 	  if resultX >  anchorThreshold :
 	    anchorScores[x] = 1
   #PRINT THE RESULTS OF ANCHOR
@@ -618,7 +652,9 @@ def anchor(sequence, positionScores, verbose):
 
 
 def waltzSearch(sequence, positionScores,verbose):
-  
+  if detailed_output:
+                detailedOutFile.write('WALTZ Results:\n')
+		detailedOutFile.write( "Threshold: " + str(waltzThreshold))
   if verbose:
      #print indent + "WALTZ SEARCH"
      print indent + "Threshold: " + str(waltzThreshold)
@@ -636,6 +672,8 @@ def waltzSearch(sequence, positionScores,verbose):
     #print line.rstrip()
     #print line.split()[0]
     #print line.split()[1]
+    if detailed_output:
+                detailedOutFile.write(str(line.split()[2])+'\n')	
     if float(line.split()[2])> waltzThreshold:
 	  hit_start=int(line.split()[1]) - 1
           hit_end=hit_start + 6
@@ -693,6 +731,9 @@ def pastaSearch(sequence, positionScores,verbose):
   pastaScores=[]
   for p in range(len(sequence)):
     pastaScores.append(0)
+  if detailed_output:
+                detailedOutFile.write('PASTA results: Energy value - ......\n')
+                detailedOutFile.write('Threshold ' + str(pastaThreshold))
   if verbose:
     print indent + 'Threshold: ' + str(pastaThreshold)
   for line in outputPasta.readlines():
@@ -708,6 +749,8 @@ def pastaSearch(sequence, positionScores,verbose):
         for hits in range(int(fromP)-1,int(toP)):
           #PONER SCORE=1 ASI NO SE INCREMENTA TANTO EL VALOR, 
      	  pastaScores[hits]=+1 
+        if detailed_output:
+                detailedOutFile.write(str(line.split()[4]) + tab + str(line.split()[9]) + ' and ' + str(line.split()[11]) + ' ' + str(line.split()[12]) + '\n')
      	if verbose: 
 		print indent + 'Hit:'
 		print indent + 'Energy value: ' + line.split()[4]	
@@ -752,6 +795,8 @@ def amyloidPatternSearch(sequence, positionScores,verbose):
 		    match = re.search(pattern, '%s' % sequence[index:])
 		    if match != None :
 		            hits=True
+			    if detailed_output:
+                		detailedOutFile.write("Acidic pH SEQUENCE DETERMINANT FOUND \n")
 			    if verbose:
 			    	print indent + "Acidic pH SEQUENCE DETERMINANT FOUND "
 			    for x in range(index,index+len(match.group())):
@@ -797,6 +842,9 @@ def tangoSearch(sequence, positionScores,verbose):
   outputTango=open(outputTango,'r')
   os.chdir(basePath)
   tangoScores=[]
+  if detailed_output:
+          detailedOutFile.write('Tango search: beta - turn - helix - aggregation'  + '\n' )
+      	  detailedOutFile.write('Threshold: ' + str(tangoThreshold) + '\n')
   for p in range(len(sequence)):
     tangoScores.append(0)
   if verbose:
@@ -805,6 +853,8 @@ def tangoSearch(sequence, positionScores,verbose):
   position=0
   for line in outputTango.readlines()[1:len(sequence)+1]:
     #print line.split()[1] 
+    if detailed_output:
+          detailedOutFile.write(str(line.split()[2]) + tab + str(line.split()[3]) +  tab + str(line.split()[4]) +  tab + str(line.split()[5]) +  tab + str(line.split()[6]) ) 
     beta=float(line.split()[2])
     turn=float(line.split()[3])
     helix=float(line.split()[4])
@@ -850,11 +900,15 @@ def limboEval(sequence, positionScores,verbose):
   os.system(runCommand)
   outputLimbo=open(outputLimbo,'r')
   limboScores=[]
+  if detailed_output:
+          detailedOutFile.write('Limbo results: hit start - hit end')
   for p in range(len(sequence)):
     limboScores.append(0)
   for line in outputLimbo.readlines():
     #print line.split()[1] 
     hitStart=int(line.split()[0])  #first column is the start of the heptapeptide hit
+    if detailed_output:
+          detailedOutFile.write(str(hitStart) + tab + str(hitStart+5) + '\n')	
     for y in range(hitStart-1,hitStart+6):
       limboScores[y] += 1
 
@@ -891,13 +945,17 @@ def tmhmmEval(sequence, positionScores,verbose):
   os.system(runCommand)
   outputTmhmm=open(outputTmhmm,'r')
   tmhmmScores=[]
+  if detailed_output:
+          detailedOutFile.write('TMHMM evaluation: hit start - hit end\n')
   for p in range(len(sequence)):
     tmhmmScores.append(0)
   for line in outputTmhmm.readlines():
     if line.split()[0] == "TMhelix":
       #print "hit de estee"
       hitStart=int(line.split()[1])-1 
-      hitEnd=int(line.split()[2]) 
+      hitEnd=int(line.split()[2])
+      if detailed_output:
+          detailedOutFile.write(str(hitStart) + tab + str(hitEnd)+ '\n')
       for y in range(hitStart,hitEnd):
 	tmhmmScores[y] += 1
   if verbose:	
@@ -1308,6 +1366,7 @@ if len(sys.argv) < 2:
 else:
   for index in range(1,len(sys.argv)):
     arg = sys.argv[index]
+
     
     if (arg=='-H' or arg== '-help' or arg== '--help'):
       printHelp()
@@ -1320,6 +1379,8 @@ else:
       sequence = sys.argv[index+1]
       length=len(sequence)
       rand=False
+    elif (--globalEvaluation)
+	global_evaluation=True
     elif (arg=='--db') and (index < len(sys.argv)):
       database = sys.argv[index+1]
     elif (arg=='--blastweb'):
@@ -1329,21 +1390,9 @@ else:
     elif (arg=='--netcharge') and (index < len(sys.argv)):
       targetNetCharge = int(sys.argv[index+1])
       evaluateNetCharge=True
-    
-  ##   OUTPUT DETAIL  
-    elif (arg=='--verbose'):
-      verbose=True
-    elif (arg=='--minoutput') and (index < len(sys.argv)):
-      minimalOutput=True
-      logsPath= sys.argv[index+1]
-    elif (arg=='--testoutput') and (index < len(sys.argv)):
-      testing=True
-      testOutputPath = sys.argv[index+1]
-    elif (arg=='--gettime'):
-      testTimes=True   
-    elif (arg=='--jobid') and (index < len(sys.argv)):
-      exeId=sys.argv[index+1]
- ##   SELECT WHICH TOOLS WONT ME EVALUATED
+ 
+
+##   SELECT WHICH TOOLS WONT ME EVALUATED
     elif (arg=='--noblast'):
       runBlast=False
     elif (arg=='--notango'):
@@ -1443,6 +1492,24 @@ else:
       userComposition['V']=int(sys.argv[index+1])
       composition=="user_specified"
 
+
+   
+###   OUTPUT DETAILS
+    elif (arg=='--verbose'):
+      verbose=True 
+    elif (arg=='--detailed') and (index < len(sys.argv)): # print detailed output for each (to output file) 
+      detailed_output=True
+      detailedOutFile=open(sys.argv[index+1],'w') 	
+    elif (arg=='--minoutput') and (index < len(sys.argv)):
+      minimalOutput=True
+      logsPath= sys.argv[index+1]
+    elif (arg=='--testoutput') and (index < len(sys.argv)):
+      testing=True
+      testOutputPath = sys.argv[index+1]
+    elif (arg=='--gettime'):
+      testTimes=True   
+    elif (arg=='--jobid') and (index < len(sys.argv)):
+      exeId=sys.argv[index+1]
 
 
 
@@ -1668,6 +1735,13 @@ if runBlast:
 ##SUM OF SCORES LIST
 globalScore=getGlobalScore(positionScores)
 
+if detailed_output:
+	detailedOutFile.write('***********PRINT VALUES PER POSITION')
+        detailedOutFile.write("First partial score   : "  + str(firstPartialScore))
+	detailedOutFile.write("Second partial score  : " + str(secondPartialScore))
+	detailedOutFile.write("Global score          : " + str(globalScore))
+
+
 if verbose:
   print "*******************************************"
   print "INITIAL EVALUATION RESULTS"
@@ -1699,6 +1773,17 @@ if testing:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 ######################################################
 ######################################################
 #########  GLOBAL LOOP  ##############################
@@ -1706,7 +1791,7 @@ if testing:
 ######################################################
 
 
-while globalScore > 0 and iteration <= maxIterations:
+while globalScore > 0 and iteration <= maxIterations and (not global_evaluation):
   if verbose:
     print "*****************************"
     print "STARTING GLOBAL ITERATION " + str(globalIteration)
