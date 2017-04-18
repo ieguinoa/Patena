@@ -238,7 +238,7 @@ def elmSearch(sequence, positionScores,verbose):
   with open(hitsFile, "r") as input_file:
     lines=input_file.readlines()
   if detailed_output:
-          detailedOutFile.write('ELM search output: Pattern match - start - end')	
+          detailedOutFile.write('ELM search output: Pattern match - start - end \n')	
   if verbose:  
     print indent + "ELM Search:"
   for line in lines:
@@ -246,7 +246,7 @@ def elmSearch(sequence, positionScores,verbose):
     pattern_start=int(line[0])
     pattern_end=int(line[1])
     if detailed_output:
-          detailedOutFile.write(line[2] + '\t' + str(pattern_start) + '\t' +str(pattern_end))
+          detailedOutFile.write(line[2] + '\t' + str(pattern_start) + '\t' +str(pattern_end) + '\n')
     if verbose:
       print indent + "Pattern found: " + line[2]
       print indent + "start:" + str(pattern_start)
@@ -552,7 +552,7 @@ def iupred(sequence, positionScores, verbose):
 	outputIUPred=open(outputsPath + "outIUPred", "r")
 	if detailed_output:
                 detailedOutFile.write('IUPred results: \n')
-		detailedOutFile.write('Threshold: ' str(iupredThreshold) + '\n')
+		detailedOutFile.write('Threshold: ' + str(iupredThreshold) + '\n')
 	#PRINT THE RESULTS OF IUPred
 	if verbose or detailed_output:
 	  iupredScores=[]
@@ -609,7 +609,7 @@ def anchor(sequence, positionScores, verbose):
   
   if detailed_output:
                 detailedOutFile.write('ANCHOR Results\n')
-		detailedOutFile.write('Threshold: ' str(anchorThreshold) + '\n')
+		detailedOutFile.write('Threshold: ' + str(anchorThreshold) + '\n')
 		
   if verbose:
     print indent + 'Threshold: ' + str(anchorThreshold)
@@ -995,7 +995,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	   print endl
 	   print indent + "*************************************"
 	   print indent + "FIRST PARTIAL EVALUATION"
-	###: BLAST SEARCH
+	###: BLAST SEARCH   ****MOVED TO 2ND PARTIAL EVALUATION (PERFORMANCE REASONS)
 	#if verbose:
 	   #print endl
 	   #print indent + "*************************************"
@@ -1003,7 +1003,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	#blastIt(sequence,positionScores,database, verbose)
         #if stepByStep:
 	  #raw_input(indent + "Hit enter to continue with next evaluation")
-	    
+	 
         ## IUPred evaluation
         if runIupred:
 	  timePrev=time.time()
@@ -1015,7 +1015,9 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    print indent + "STARTING IUPred SEARCH"
 	  iupred(sequence, positionScores, verbose)
 	  #iupredTime+=(time.time() - timePrev)  
-	    
+	  if detailed_output:
+        	detailedOutFile.write('***********\n\n' )
+   
         ## ANCHOR evaluation
 	if runAnchor:
 	  timePrev=time.time()
@@ -1027,7 +1029,8 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    print indent + "STARTING ANCHOR SEARCH"
 	  anchor(sequence, positionScores, verbose)
 	  #anchorTime+=(time.time() - timePrev)  
-	
+	  if detailed_output:
+                detailedOutFile.write('***********\n\n' )
 	#ELM search
 	if runElm:
 	  timePrev=time.time()
@@ -1041,7 +1044,9 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  #elmTime+=(time.time() - timePrev)
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
-	
+	  if detailed_output:
+                detailedOutFile.write('***********\n\n' )
+
 	#Net charge evaluation
 	if evaluateNetCharge:
 	  timePrev=time.time()
@@ -1054,7 +1059,8 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  chargedSearch(sequence,positionScores, verbose)
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
-
+	  if detailed_output:
+                detailedOutFile.write('***********\n\n' )
 
         #PASTA evaluation (self aggregation)
         if runPasta:
@@ -1069,7 +1075,10 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
           #pastaTime+=(time.time() - timePrev)
           #if stepByStep:
             #raw_input(indent + "Hit enter to continue with next evaluation")
-	
+	  if detailed_output:
+                detailedOutFile.write('***********\n\n' )
+
+
 	#Prosite search
 	if runProsite:
 	  timePrev=time.time()
@@ -1083,7 +1092,8 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  #prositeTime+=(time.time() - timePrev)
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
-	
+          if detailed_output:
+                detailedOutFile.write('***********\n\n' )	
 	
 	#LIMBO evaluation
 	if runLimbo:
@@ -1103,7 +1113,8 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
 	  #print indent + "*************************************"
-	
+	  if detailed_output:
+                detailedOutFile.write('***********\n\n' )
 	
 	#TMHMM evaluation
 	if runTmhmm:
@@ -1116,7 +1127,8 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    print indent + "Search for transmembrane sections"
 	  tmhmmEval(sequence,positionScores, verbose)
 	  #tmhmmTime+=(time.time() - timePrev)
-	  
+	  if detailed_output:
+                detailedOutFile.write('***********\n\n' )
 	
 	
 	#Search amyloid pattern
@@ -1134,7 +1146,10 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  #patternTime+=(time.time() - timePrev)
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
-	
+	  if detailed_output:
+                detailedOutFile.write('***********\n\n' )
+
+
 	#Waltz evaluation
 	if runWaltz:
 	  timePrev=time.time()
@@ -1148,7 +1163,9 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  #waltzTime+=(time.time() - timePrev)
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
-	
+          if detailed_output:
+                detailedOutFile.write('***********\n\n' )	
+
 	#Tango evaluation
 	if runTango:
 	  timePrev=time.time()
@@ -1162,8 +1179,10 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  #tangoTime+=(time.time() - timePrev)
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
+	  if detailed_output:
+                detailedOutFile.write('***********\n\n' )
 	
-	
+
 	if stepByStep and verbose:
 	  print endl
 	  raw_input(indent + "Press enter to see final results...")
@@ -1218,7 +1237,8 @@ def secondPartialEvaluation(sequence, positionScores, verbose):
 	#blastTime+=(time.time() - timePrev)
         #if stepByStep:
 	  #raw_input(indent + "Hit enter to continue with next evaluation")
-	
+	if detailed_output:
+                detailedOutFile.write('***********\n\n' )	
 	
 	if stepByStep:
 	  raw_input(indent + "Press enter to see final results...")
@@ -1379,8 +1399,8 @@ else:
       sequence = sys.argv[index+1]
       length=len(sequence)
       rand=False
-    elif (--globalEvaluation)
-	global_evaluation=True
+    elif (arg=='--noMutations'):
+      global_evaluation=True
     elif (arg=='--db') and (index < len(sys.argv)):
       database = sys.argv[index+1]
     elif (arg=='--blastweb'):
@@ -1736,10 +1756,20 @@ if runBlast:
 globalScore=getGlobalScore(positionScores)
 
 if detailed_output:
-	detailedOutFile.write('***********PRINT VALUES PER POSITION')
-        detailedOutFile.write("First partial score   : "  + str(firstPartialScore))
-	detailedOutFile.write("Second partial score  : " + str(secondPartialScore))
-	detailedOutFile.write("Global score          : " + str(globalScore))
+        detailedOutFile.write("First partial score"+ tab  + str(firstPartialScore) + '\n')
+	detailedOutFile.write("Second partial score" +tab+ str(secondPartialScore) + '\n')
+	detailedOutFile.write("Global score"+tab + str(globalScore) + '\n')
+	index=0
+	for aa in sequence:
+		detailedOutFile.write(aa + tab + str(positionScores[index]))
+		index+=1
+		detailedOutFile.write('\n')
+	#for score in positionScores:
+        #        detailedOutFile.write(str(score) + tab)
+        #data = [sequence,positionScores]
+        #col_width = max(len(str(word)) for row in data for word in row)  # padding
+        #for row in data:
+        #      detailedOutFile.write("|".join(str(word).ljust(col_width) for word in row))
 
 
 if verbose:
@@ -1766,7 +1796,6 @@ if testing:
   testOutputFile.write('ISEQ' + tab + sequence + tab + 'SECOND' + tab + str(secondPartialScore) + endl)
   testOutputFile.write('ISEQ' + tab + sequence + tab + 'GLOBAL' + tab + str(globalScore) + endl)
   
-
 
 
 
@@ -2251,55 +2280,56 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
 #### GLOBAL LOOP END ####################
 #########################################
 
-print "**END OF SEARCH**"
-if globalScore==0:
-  print "REACHED SCORE = 0"
-  print 'FINAL SEQUENCE: ' + sequence
-  
-else:
-  print "REACHED LIMIT OF ITERATIONS"
-  data = [sequence,positionScores]
-  col_width = max(len(str(word)) for row in data for word in row)  # padding
-  print 'LAST SEQUENCE: ' + sequence
-  print 'FINAL SCORES'
-  for row in data:
-      print  "|".join(str(word).ljust(col_width) for word in row)
-  print "Global score: " + str(globalScore)
+if not global_evaluation:
+	print "**END OF SEARCH**"
+	if globalScore==0:
+	  print "REACHED SCORE = 0"
+	  print 'FINAL SEQUENCE: ' + sequence
+	  
+	else:
+	  print "REACHED LIMIT OF ITERATIONS"
+	  data = [sequence,positionScores]
+	  col_width = max(len(str(word)) for row in data for word in row)  # padding
+	  print 'LAST SEQUENCE: ' + sequence
+	  print 'FINAL SCORES'
+	  for row in data:
+	      print  "|".join(str(word).ljust(col_width) for word in row)
+	  print "Global score: " + str(globalScore)
 
-  #print "Final sequence: " + sequence
-  #print "Final score:    " + ''.join(map(str, positionScores))
-  #print "Global score: " + str(globalScore)
+	  #print "Final sequence: " + sequence
+	  #print "Final score:    " + ''.join(map(str, positionScores))
+	  #print "Global score: " + str(globalScore)
 
-if minimalOutput:
-    logFileStream.write('END' + tab + str(globalScore) + tab + sequence + endl)  
+	if minimalOutput:
+	    logFileStream.write('END' + tab + str(globalScore) + tab + sequence + endl)  
 
 
 
-#PERFORMANCE TESTS OUTPUT
-totalElapsedTime=time.time() - time0   ##
-#if output:        
-  #print "Elapsed time:",totalElapsedTime, "Seconds"
-  #totalTimesOutputFile.write(str(length) + tab + str(iteration-1)+ tab + str(totalElapsedTime) + tab + str(beta) +  endl)
-if testing:
-  testOutputFile.write('END' + tab + str(totalElapsedTime) + tab + str(globalScore) + endl) 
-  testOutputFile.close()
-  ##CLOSE ALL OUTPUT FILES
-  #totalTimesOutputFile.close()
-  #timesOutputFile.close()
-  #scoresOutputFile.close()
-  #mutationsFile.close()
-   
-if testTimes:
-    evaluationTime=totalElapsedTime-(pastaTime + anchorTime + tangoTime + blastTime + iupredTime + waltzTime + elmTime + prositeTime + tmhmmTime + limboTime) 
-    print 'Total Elapsed Time: ' + totalElapsedTime
-    print 'Time spent on evaluations: ' +  evaluationTime
-    print 'Time spent in ELM: ' + pastaTime
-    print 'Time spent in ANCHOR: ' + anchorTime
-    print 'Time spent in TANGO: ' + tangoTime
-    print 'Time spent in BLAST: ' + blastTime
-    print 'Time spent in IUPred: ' + iupredTime
-    print 'Time spent in Waltz: ' + waltzTime
-    print 'Time spent in ELM: ' + elmTime
-    print 'Time spent in Prosite: ' + prositeTime
-    print 'Time spent in TMHMM: ' + thmmTime
-    print 'Time spent in Limbo: ' + limboTime
+	#PERFORMANCE TESTS OUTPUT
+	totalElapsedTime=time.time() - time0   ##
+	#if output:        
+	  #print "Elapsed time:",totalElapsedTime, "Seconds"
+	  #totalTimesOutputFile.write(str(length) + tab + str(iteration-1)+ tab + str(totalElapsedTime) + tab + str(beta) +  endl)
+	if testing:
+	  testOutputFile.write('END' + tab + str(totalElapsedTime) + tab + str(globalScore) + endl) 
+	  testOutputFile.close()
+	  ##CLOSE ALL OUTPUT FILES
+	  #totalTimesOutputFile.close()
+	  #timesOutputFile.close()
+	  #scoresOutputFile.close()
+	  #mutationsFile.close()
+	   
+	if testTimes:
+	    evaluationTime=totalElapsedTime-(pastaTime + anchorTime + tangoTime + blastTime + iupredTime + waltzTime + elmTime + prositeTime + tmhmmTime + limboTime) 
+	    print 'Total Elapsed Time: ' + totalElapsedTime
+	    print 'Time spent on evaluations: ' +  evaluationTime
+	    print 'Time spent in ELM: ' + pastaTime
+	    print 'Time spent in ANCHOR: ' + anchorTime
+	    print 'Time spent in TANGO: ' + tangoTime
+	    print 'Time spent in BLAST: ' + blastTime
+	    print 'Time spent in IUPred: ' + iupredTime
+	    print 'Time spent in Waltz: ' + waltzTime
+	    print 'Time spent in ELM: ' + elmTime
+	    print 'Time spent in Prosite: ' + prositeTime
+	    print 'Time spent in TMHMM: ' + thmmTime
+	    print 'Time spent in Limbo: ' + limboTime
