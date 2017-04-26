@@ -238,7 +238,9 @@ def elmSearch(sequence, positionScores,verbose):
   with open(hitsFile, "r") as input_file:
     lines=input_file.readlines()
   if detailed_output:
-          detailedOutFile.write('ELM search output: Pattern match - start - end \n')	
+          detailedOutFile.write('ELM: search functional features using Eukaryotic linear motifs')
+	  detailedOutFile.write('Results:\n')
+	  detailedOutFile.write('Pattern match - start - end\n')	
   if verbose:  
     print indent + "ELM Search:"
   for line in lines:
@@ -551,8 +553,9 @@ def iupred(sequence, positionScores, verbose):
 	os.system(runCommand)	
 	outputIUPred=open(outputsPath + "outIUPred", "r")
 	if detailed_output:
-                detailedOutFile.write('IUPred results: \n')
+                detailedOutFile.write('IUPred: search for well-defined tertiary structure \n')
 		detailedOutFile.write('Threshold: ' + str(iupredThreshold) + '\n')
+                detailedOutFile.write('Results\n') 
 	#PRINT THE RESULTS OF IUPred
 	if verbose or detailed_output:
 	  iupredScores=[]
@@ -562,8 +565,8 @@ def iupred(sequence, positionScores, verbose):
 	      iupredScores.append(0)
 	  for x in range(len(sequence)):
 		  resultX=float(iterOutputIUPred.next())
-		  if detailed_output:
-			detailedOutFile.write(str(resultX)+'\n')
+		  if detailed_output and (resultX < iupredThreshold):
+			detailedOutFile.write('Position ' + str(x) + ' below threshold with value ' + str(resultX)+'\n')
 		  if resultX < iupredThreshold :
 			  iupredScores[x] = 1
 	  #print endl
@@ -608,8 +611,9 @@ def anchor(sequence, positionScores, verbose):
   outputAnchor=open(outputsPath + "outAnchor", "r")
   
   if detailed_output:
-                detailedOutFile.write('ANCHOR Results\n')
+                detailedOutFile.write('ANCHOR: Search for binding regions in IDP\n')
 		detailedOutFile.write('Threshold: ' + str(anchorThreshold) + '\n')
+		detailedOutFile.write('Results \n')
 		
   if verbose:
     print indent + 'Threshold: ' + str(anchorThreshold)
@@ -619,8 +623,8 @@ def anchor(sequence, positionScores, verbose):
       anchorScores.append(0)
   for x in range(len(sequence)):
 	  resultX=float(iterOutputAnchor.next())
-	  if detailed_output:
-                detailedOutFile.write(str(resultX) + '\n')
+	  if detailed_output and (resultX >  anchorThreshold):
+                detailedOutFile.write('Position ' + str(x) + ' above threshold with value: ' + str(resultX) + '\n')
 	  if resultX >  anchorThreshold :
 	    anchorScores[x] = 1
   #PRINT THE RESULTS OF ANCHOR
@@ -653,8 +657,8 @@ def anchor(sequence, positionScores, verbose):
 
 def waltzSearch(sequence, positionScores,verbose):
   if detailed_output:
-                detailedOutFile.write('WALTZ Results:\n')
-		detailedOutFile.write( "Threshold: " + str(waltzThreshold))
+                detailedOutFile.write('WALTZ: prediction of amylogenic regions \n')
+		detailedOutFile.write( "Threshold: " + str(waltzThreshold) + '\n')
   if verbose:
      #print indent + "WALTZ SEARCH"
      print indent + "Threshold: " + str(waltzThreshold)
@@ -672,13 +676,13 @@ def waltzSearch(sequence, positionScores,verbose):
     #print line.rstrip()
     #print line.split()[0]
     #print line.split()[1]
-    if detailed_output:
-                detailedOutFile.write(str(line.split()[2])+'\n')	
     if float(line.split()[2])> waltzThreshold:
 	  hit_start=int(line.split()[1]) - 1
           hit_end=hit_start + 6
           for x in range(hit_start,hit_end):
             waltzScores[x]=1
+          if detailed_output:
+                detailedOutFile.write('Subsequence ' + str(hit_start) + ' - ' + str(hit_end) + ' is above threshold with value ' + str(line.split()[2])+'\n')	
   #for q in range(0,len(sequence)-5):
    # line = proc.stdout.readline()
     #if float(line.split()[2])> waltzThreshold:
@@ -732,8 +736,8 @@ def pastaSearch(sequence, positionScores,verbose):
   for p in range(len(sequence)):
     pastaScores.append(0)
   if detailed_output:
-                detailedOutFile.write('PASTA results: Energy value - ......\n')
-                detailedOutFile.write('Threshold ' + str(pastaThreshold))
+                detailedOutFile.write('PASTA: predict aggregation-prone portions of the sequence\n')
+                detailedOutFile.write('Threshold: ' + str(pastaThreshold) + '\n')
   if verbose:
     print indent + 'Threshold: ' + str(pastaThreshold)
   for line in outputPasta.readlines():
@@ -750,7 +754,7 @@ def pastaSearch(sequence, positionScores,verbose):
           #PONER SCORE=1 ASI NO SE INCREMENTA TANTO EL VALOR, 
      	  pastaScores[hits]=+1 
         if detailed_output:
-                detailedOutFile.write(str(line.split()[4]) + tab + str(line.split()[9]) + ' and ' + str(line.split()[11]) + ' ' + str(line.split()[12]) + '\n')
+                detailedOutFile.write(str(line.split()[4]) + tab + 'Segment ' + str(line.split()[9]) + ' and segment ' + str(line.split()[11]) + ' in ' + str(line.split()[12]) + ' have a pairing energy value (PASTA UNITS) of '+ str(line.split()[4]) + ' which is lower than the threshold' '\n')
      	if verbose: 
 		print indent + 'Hit:'
 		print indent + 'Energy value: ' + line.split()[4]	
@@ -788,33 +792,39 @@ def amyloidPatternSearch(sequence, positionScores,verbose):
     where_to_start = []
     #elm_pos_dict = {}
     hits=False
+    if detailed_output:
+                detailedOutFile.write('Searching determinants for amyloid formation in acidic pH\n')
     for matched_string in pattern.finditer('%s' % sequence) :
 	where_to_start.append(matched_string.start())
-    #pattern = re.compile("[^P][PKRHW][VLSCWFNQE][ILTYWFNE][FIY][^PKRH]")
+        #pattern = re.compile("[^P][PKRHW][VLSCWFNQE][ILTYWFNE][FIY][^PKRH]")
     	for index in where_to_start :
 		    match = re.search(pattern, '%s' % sequence[index:])
 		    if match != None :
 		            hits=True
 			    if detailed_output:
-                		detailedOutFile.write("Acidic pH SEQUENCE DETERMINANT FOUND \n")
-			    if verbose:
-			    	print indent + "Acidic pH SEQUENCE DETERMINANT FOUND "
+                		detailedOutFile.write("Sequence determinant found: ")
+				detailedOutFile.write("Start: " + str(index) + ' - End: ' + str(len(match.group())) )
+			    if verbose: 
+			    	print indent + "Acidic pH: SEQUENCE DETERMINANT FOUND "
 			    for x in range(index,index+len(match.group())):
 			      amyloidScore[x]+=1
 	    #else:
 	      #if verbose:
 		#print indent + 'NO MATCHES'
-	
-    if verbose:
+
+    if verbose or detailed_output:
       if hits:
-	print indent + "RESULTS:"
+	if verbose:
+		print indent + "Sequence determinants for amyloid formation in acidic pH: FOUND"
 	data = [sequence,amyloidScore]
 	col_width = max(len(str(word)) for row in data for word in row)   # padding
 	for row in data:
 	  print indent + "|".join(str(word).ljust(col_width) for word in row)
       else:
-	print indent + 'NO HITS'
-
+	if verbose:
+		print indent + 'NO HITS'
+	else:
+		detailedOutFile.write('NO hits found \n')
 
 
 
@@ -853,14 +863,16 @@ def tangoSearch(sequence, positionScores,verbose):
   position=0
   for line in outputTango.readlines()[1:len(sequence)+1]:
     #print line.split()[1] 
-    if detailed_output:
-          detailedOutFile.write(str(line.split()[2]) + tab + str(line.split()[3]) +  tab + str(line.split()[4]) +  tab + str(line.split()[5]) +  tab + str(line.split()[6]) ) 
     beta=float(line.split()[2])
     turn=float(line.split()[3])
     helix=float(line.split()[4])
     aggregation=float(line.split()[5])
     if beta > tangoThreshold or turn > tangoThreshold or helix > tangoThreshold or aggregation > tangoThreshold:
       tangoScores[position]=1
+      if detailed_output:
+          detailedOutFile.write('Position ' + str(position) + ' has at least one value above threshold. Values are: \n')
+          detailedOutFile.write(str(line.split()[2]) + tab + str(line.split()[3]) +  tab + str(line.split()[4]) +  tab + str(line.split()[5]) +  tab + str(line.split()[6]) + '\n' )
+ 
     position+=1
   #print str(beta) + tab + str(turn) + tab + str(helix) + tab + str(aggregation) 
   if verbose:
@@ -893,6 +905,8 @@ def limboEval(sequence, positionScores,verbose):
   #input.write(sequence)
   #input.close()
   outputLimbo= outputsPath + "outLimbo"
+  if detailed_output:
+          detailedOutFile.write('Limbo: Search for chaperone binding site\n ')
   #if verbose:
     #print indent + "LIMBO SEARCH:"
   #CALL LIMBO :   score.py + matrix + input + outpout
@@ -901,7 +915,7 @@ def limboEval(sequence, positionScores,verbose):
   outputLimbo=open(outputLimbo,'r')
   limboScores=[]
   if detailed_output:
-          detailedOutFile.write('Limbo results: hit start - hit end')
+          detailedOutFile.write('Results: hit start - hit end \n')
   for p in range(len(sequence)):
     limboScores.append(0)
   for line in outputLimbo.readlines():
@@ -946,7 +960,8 @@ def tmhmmEval(sequence, positionScores,verbose):
   outputTmhmm=open(outputTmhmm,'r')
   tmhmmScores=[]
   if detailed_output:
-          detailedOutFile.write('TMHMM evaluation: hit start - hit end\n')
+          detailedOutFile.write('TMHMM: search for transmembrane helices in the sequence\n')
+	  detailedOutFile.write('Hit start - Hit end\n')
   for p in range(len(sequence)):
     tmhmmScores.append(0)
   for line in outputTmhmm.readlines():
@@ -1016,7 +1031,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  iupred(sequence, positionScores, verbose)
 	  #iupredTime+=(time.time() - timePrev)  
 	  if detailed_output:
-        	detailedOutFile.write('***********\n\n' )
+        	detailedOutFile.write('\n\n***********\n\n' )
    
         ## ANCHOR evaluation
 	if runAnchor:
@@ -1030,7 +1045,8 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  anchor(sequence, positionScores, verbose)
 	  #anchorTime+=(time.time() - timePrev)  
 	  if detailed_output:
-                detailedOutFile.write('***********\n\n' )
+                detailedOutFile.write('\n\n***********\n\n' )
+
 	#ELM search
 	if runElm:
 	  timePrev=time.time()
@@ -1045,7 +1061,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
 	  if detailed_output:
-                detailedOutFile.write('***********\n\n' )
+                detailedOutFile.write('\n\n***********\n\n' )
 
 	#Net charge evaluation
 	if evaluateNetCharge:
@@ -1060,7 +1076,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
 	  if detailed_output:
-                detailedOutFile.write('***********\n\n' )
+                detailedOutFile.write('\n\n***********\n\n' )
 
         #PASTA evaluation (self aggregation)
         if runPasta:
@@ -1076,7 +1092,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
           #if stepByStep:
             #raw_input(indent + "Hit enter to continue with next evaluation")
 	  if detailed_output:
-                detailedOutFile.write('***********\n\n' )
+                detailedOutFile.write('\n\n***********\n\n' )
 
 
 	#Prosite search
@@ -1093,7 +1109,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
           if detailed_output:
-                detailedOutFile.write('***********\n\n' )	
+                detailedOutFile.write('\n\n***********\n\n' )	
 	
 	#LIMBO evaluation
 	if runLimbo:
@@ -1114,7 +1130,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
 	  #print indent + "*************************************"
 	  if detailed_output:
-                detailedOutFile.write('***********\n\n' )
+                detailedOutFile.write('\n\n***********\n\n' )
 	
 	#TMHMM evaluation
 	if runTmhmm:
@@ -1128,7 +1144,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  tmhmmEval(sequence,positionScores, verbose)
 	  #tmhmmTime+=(time.time() - timePrev)
 	  if detailed_output:
-                detailedOutFile.write('***********\n\n' )
+                detailedOutFile.write('\n\n***********\n\n' )
 	
 	
 	#Search amyloid pattern
@@ -1147,7 +1163,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
 	  if detailed_output:
-                detailedOutFile.write('***********\n\n' )
+                detailedOutFile.write('\n\n***********\n\n' )
 
 
 	#Waltz evaluation
@@ -1164,7 +1180,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
           if detailed_output:
-                detailedOutFile.write('***********\n\n' )	
+                detailedOutFile.write('\n\n***********\n\n' )	
 
 	#Tango evaluation
 	if runTango:
@@ -1180,7 +1196,7 @@ def firstPartialEvaluation(sequence, positionScores, verbose):
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with next evaluation")
 	  if detailed_output:
-                detailedOutFile.write('***********\n\n' )
+                detailedOutFile.write('\n\n***********\n\n' )
 	
 
 	if stepByStep and verbose:
@@ -1238,7 +1254,7 @@ def secondPartialEvaluation(sequence, positionScores, verbose):
         #if stepByStep:
 	  #raw_input(indent + "Hit enter to continue with next evaluation")
 	if detailed_output:
-                detailedOutFile.write('***********\n\n' )	
+                detailedOutFile.write('\n\n***********\n\n' )	
 	
 	if stepByStep:
 	  raw_input(indent + "Press enter to see final results...")
@@ -1541,21 +1557,6 @@ if evaluateNetCharge:
   
   
 
-print "************************************************"
-print "************************************************"
-print "EXECUTION PARAMETERS:"
-print 'Id=' + str(exeId) 
-print 'Beta= '+ str(beta)
-print "Length=" + str(length) 
-print "Composition=" + composition
-print "Sequence=" + sequence
-if evaluateNetCharge:
-  print "Target net charge=" + str(targetNetCharge)
-print "************************************************"
-print "************************************************"
-
-
-
 
 #MAKE INPUT FOLDER
 os.mkdir(inputsPath)
@@ -1667,18 +1668,32 @@ aaFrequencies=userComposition.items()
 	
 
 #GENERATE RANDOM SEQUENCE WITH THE DEFINED COMPOSITION
-sequence=[]
-for x in range(0,length):
-  sequence.append(weighted_choice(aaFrequencies)) 
-sequence=''.join(sequence)
-
-   
-#print endl
-#PRINT STARTING SEQUENCE (BEFORE ANY MUTATION)   
 if rand==True:
-  if verbose:
-    print "INITIAL SEQUENCE:    " + sequence
-  if stepByStep:
+	sequence=[]
+	for x in range(0,length):
+	  sequence.append(weighted_choice(aaFrequencies)) 
+	sequence=''.join(sequence)
+
+  
+
+
+#####   ALWAYS PRINT GENERAL PARAMETERS OF EXECUTION
+#print endl
+print "************************************************"
+print "************************************************"
+print "EXECUTION PARAMETERS:"
+print 'Id=' + str(exeId) 
+print 'Beta= '+ str(beta)
+print "Length=" + str(length) 
+print "Composition=" + composition
+print "Sequence=" + sequence
+if evaluateNetCharge:
+  print "Target net charge=" + str(targetNetCharge)
+print "************************************************"
+print "************************************************"
+
+
+if stepByStep:
     raw_input("Hit enter to start initial evaluation")
     
 
