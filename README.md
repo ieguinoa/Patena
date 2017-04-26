@@ -1,9 +1,9 @@
-Patena
+PATENA
 
 
 --------------------------------------------------------------------------
 
-Insallation guide:
+Installation guide:
 
 clone this repo: git clone https://github.com/ieguinoa/patena \\
 install: source install.sh \\
@@ -13,7 +13,7 @@ REQUIREMENTS:
 	-python
 	-perl
 	-biopython
-	-BLAST(blastp in path and BLASTDB defined with the path to DB)(or run web BLAST which considerably increases running time) 
+	-BLAST: PATENA searches for possible functional elements in the sequences based on sequence homology evidence, for this it uses a BLAST search against a DB of known protein sequences. blastp should be in PATH and the env variable BLASTDB must be defined as the path to blast DBs dir. The DB of proteins to search against should preferentialy be UniprotKB. The name of the DB is (by default) uniprot_sprot.fasta, although this can be changed using parameter --db [DB_NAME]. An alternative option to the local blast is to run web BLAST (--blastweb), although this increases considerably the running time.
 
 
 NOT TESTED ON WINDOWS!
