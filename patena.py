@@ -308,11 +308,13 @@ def prositeSearch(sequence, positionScores,verbose):
   #input.write(sequence)
   #input.close()
   if detailed_output:
-          detailedOutFile.write('Prosite search results:\n' ) 	
+          detailedOutFile.write('PROSITE: search protein domains, families and functional sites\n' ) 	
+	  detailedOutFile.write('Site start - end - description \n')
   proc = subprocess.Popen(['perl', toolsPath + 'Prosite/ps_scan/ps_scan.pl','-r','-o', 'scan', inputProsite],stdout=subprocess.PIPE)
   while True:
     line = proc.stdout.readline()
     if line != '':
+      hits=True
       pattern_start=int(line.split()[0])  
       pattern_end=int(line.split()[2])
       for x in range(pattern_start-1,pattern_end):
@@ -320,11 +322,14 @@ def prositeSearch(sequence, positionScores,verbose):
       if verbose:
 	  print indent + "Hit: " +line
       if detailed_output:
-          detailedOutFile.write(line + '\n')
+          detailedOutFile.write(line)
 	#print "Hit:" + line.split()[0] + "-" +line.split()[1] + space +  line.split()[2] + space + line.split()[3] + space + line.split()[4]
     else:
       break	      
-
+ 
+  if not hits:
+ 	if detailed_output:
+            detailedOutFile.write('NO HITS FOUND')		
 
   if verbose:
     #print endl
@@ -445,6 +450,7 @@ def blastIt(sequence, positionScores, database, verbose):
 	else:     # LOCAL BLAST SEARCH
 	  if verbose:
 	    print indent + "LOCAL BLAST SEARCH IN PROGRESS..."
+          
 	  input=open(inputBlast, 'w')
 	  input.write(sequence)
 	  input.close()
@@ -457,7 +463,10 @@ def blastIt(sequence, positionScores, database, verbose):
 	  
 	
 	if detailed_output:
-                detailedOutFile.write('BLAST RESULTS: E-value - match - subject - query start - query end')
+                detailedOutFile.write('BLAST search against   \n')
+		detailedOutFile.write('e-value cutoff: ' + str(cutoff)+ '\n')
+                detailedOutFile.write('Database: Uniprot/Swissprot\n')
+                detailedOutFile.write('Hits are shown as: E-value - match - subject - query start - query end\n')
 	#first.alignments contains all de alignments found
 	if len(first.alignments) > 0:
 	#get first alignment
@@ -485,7 +494,7 @@ def blastIt(sequence, positionScores, database, verbose):
 	      
 	      #length = (end-start) ???
 	      if detailed_output:
-          	detailedOutFile.write(str(hsp.expect) + tab + str(hsp.match) + str(hsp.sbjct) + tab + str(hsp.query_start) + str(hsp.query_end) )	
+          	detailedOutFile.write(str(hsp.expect) + tab + str(hsp.match) + tab +str(hsp.sbjct) + tab + str(hsp.query_start) + tab+str(hsp.query_end) + '\n')	
 	      if verbose:
 		print indent + "E-Value:     " + str(hsp.expect)
 		print indent + "Query:       " + hsp.query 
@@ -502,7 +511,10 @@ def blastIt(sequence, positionScores, database, verbose):
 	  if verbose:
 	    print indent + "No hits found"
 	  match=False
-
+        
+        if detailed_output:
+                if not match:
+                	detailedOutFile.write('NO hits found\n') 
 	blastScores=[]    
 	for p in range(len(sequence)):
 	      blastScores.append(0)
@@ -853,8 +865,9 @@ def tangoSearch(sequence, positionScores,verbose):
   os.chdir(basePath)
   tangoScores=[]
   if detailed_output:
-          detailedOutFile.write('Tango search: beta - turn - helix - aggregation'  + '\n' )
+          detailedOutFile.write('Tango: prediction of aggregating regions in unfolded polypeptide chains')
       	  detailedOutFile.write('Threshold: ' + str(tangoThreshold) + '\n')
+          detailedOutFile.write('Values are shown as: beta - turn - helix - aggregation'  + '\n') 
   for p in range(len(sequence)):
     tangoScores.append(0)
   if verbose:
@@ -1771,12 +1784,20 @@ if runBlast:
 globalScore=getGlobalScore(positionScores)
 
 if detailed_output:
-        detailedOutFile.write("First partial score"+ tab  + str(firstPartialScore) + '\n')
-	detailedOutFile.write("Second partial score" +tab+ str(secondPartialScore) + '\n')
-	detailedOutFile.write("Global score"+tab + str(globalScore) + '\n')
 	index=0
+        detailedOutFile.write('\n')
+        detailedOutFile.write('*************************\n')
+        detailedOutFile.write('\n')
+        #detailedOutFile.write("First partial score"+ tab  + str(firstPartialScore) + '\n')
+	#detailedOutFile.write("Second partial score" +tab+ str(secondPartialScore) + '\n')
+	detailedOutFile.write("Global score"+tab + str(globalScore) + '\n')
+ 	#detailedOutFile.write('\n')
+        #detailedOutFile.write('*************************\n')
+	detailedOutFile.write('\n')
+        detailedOutFile.write('Scores per position:\n')
+        detailedOutFile.write('Pos' +tab+'AA' +tab+ 'Score\n')
 	for aa in sequence:
-		detailedOutFile.write(aa + tab + str(positionScores[index]))
+		detailedOutFile.write(str(index) + tab + aa + tab + str(positionScores[index]))
 		index+=1
 		detailedOutFile.write('\n')
 	#for score in positionScores:
