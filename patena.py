@@ -16,7 +16,7 @@ from array import array
 import math
 import random
 import subprocess
-
+import shutil
 
 
 ##TODO: CHECK NECESSARY ENVIRONMENT VARS:
@@ -114,14 +114,6 @@ runBlast=runTango=runPasta=runWaltz=runElm=runProsite=runLimbo=runTmhmm=runIupre
 #FILES
 logFileName='mutations' + str(exeId) + '.log'
 
-#PATHS
-basePath=getScriptPath() + '/'
-toolsPath=basePath + 'Tools/'    #**************************TODO SET THE PATH TO THE TOOL SET 
-inputsPath=basePath + "/Input/"+ str(exeId) + "/" #SET PATH TO SAVE INPUTS FILES
-baseOutputPath=basePath + "/Output/" 
-outputsPath=baseOutputPath + str(exeId) + "/"
-testOutputPath=outputsPath   # DEFAULT OUTPUT FOR TESTs 
-logsPath=outputsPath #default path for log files
 
 #####CREATE INPUT AND OUTPUT DIRS
 try:
@@ -311,6 +303,7 @@ def prositeSearch(sequence, positionScores,verbose):
           detailedOutFile.write('PROSITE: search protein domains, families and functional sites\n' ) 	
 	  detailedOutFile.write('Site start - end - description \n')
   proc = subprocess.Popen(['perl', toolsPath + 'Prosite/ps_scan/ps_scan.pl','-r','-o', 'scan', inputProsite],stdout=subprocess.PIPE)
+  hits=False
   while True:
     line = proc.stdout.readline()
     if line != '':
@@ -1571,9 +1564,44 @@ if evaluateNetCharge:
   
 
 
-#MAKE INPUT FOLDER
-os.mkdir(inputsPath)
-os.mkdir(outputsPath)
+
+#PATHS
+basePath=getScriptPath() + '/'
+toolsPath=basePath + 'Tools/'    #**************************TODO SET THE PATH TO THE TOOL SET 
+inputsPath=basePath + "/Input/"+ str(exeId) + "/" #SET PATH TO SAVE INPUTS FILES
+baseOutputPath=basePath + "/Output/" 
+outputsPath=baseOutputPath + str(exeId) + "/"
+testOutputPath=outputsPath   # DEFAULT OUTPUT FOR TESTs 
+logsPath=outputsPath #default path for log files
+
+
+
+##### TRY TO CREATE INPUT AND OUTPUT DIRS
+try:
+    os.makedirs(inputsPath)
+except OSError as exc:
+    if exc.errno == errno.EEXIST and os.path.isdir(inputsPath):
+        # if exists, just remove it and create it again
+        shutil.rmtree(inputsPath)
+        os.makedirs(inputsPath)
+        pass
+
+
+try:
+    os.makedirs(outputsPath)
+except OSError as exc:
+    if exc.errno == errno.EEXIST and os.path.isdir(inputsPath):
+        # if exists, just remove it and create it again
+        shutil.rmtree(outputsPath)
+        os.makedirs(outputsPath)
+        pass
+
+
+
+
+
+
+
 
 #OUTPUT
 #outputPath = "Output/"   
