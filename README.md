@@ -20,7 +20,7 @@ NOT TESTED ON WINDOWS!
 
 
 USAGE:   
-	python patena.py  [options]
+	```python patena.py  [options]```
 
 OPTIONS:
 	
@@ -30,10 +30,11 @@ OPTIONS:
 
  
 OUTPUT FORMATING:
+```
 	--verbose		Write detailed output in stdout
 	--logoutput		Write mutations history log in file (patena.log)
 	--stepped 		Write detailed output and wait for user input at each step
-
+```
 
 
 
