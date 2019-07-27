@@ -19,10 +19,10 @@ REQUIREMENTS:
 NOT TESTED ON WINDOWS!
 
 
-usage:   python patena.py  [options]
+USAGE:   
+	python patena.py  [options]
 
-
-GENERAL OPTIONS:
+OPTIONS:
 	
 	--seq [sequence]	Define initial sequence
 	--length [seq-length]   Define initial sequence length (and generate a random sequence)
