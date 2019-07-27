@@ -21,7 +21,7 @@ NOT TESTED ON WINDOWS!
 
 USAGE:   
 	```
-	aaapython patena.py  [options]
+	python patena.py  [options]
 	```
 
 OPTIONS:
