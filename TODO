@@ -14,16 +14,18 @@ en principio, la ubicacion de estos archivos tendria que estar incluida en el PA
 
 LO QUE FALTA:
 
--dividir el repo en 2:  una parte que tenga solo el codigo (bleach)  y una parte que tenga las herramientas usadas, referencias, texto, etc.
+- dividir el repo en 2:  una parte que tenga solo el codigo (bleach)  y una parte que tenga las herramientas usadas, referencias, texto, etc.
 
--pasar todas las herramientas a la carpeta tool
+- pasar todas las herramientas de terceros que ahora estan en /tools a dependencias conda....quizas pueda dejarlas como opcion algunas (como alternativa a conda) porque ya estan en el repo
 
--completar documentacion de README
+- Armar un file requirements.txt con todas las dependencias conda
 
--Probar que ande bien la funcion --uvsilent   : Silente en UV (no tyr, trp, phe)
+-completar documentacion
 
--Probar que ande bien --netCharge 
+-Probar la funcion --uvsilent: Silente en UV (no tyr, trp, phe)
+
+-Probar la opcion --netCharge 
 
 -Implementar todos los parametros para seleccionar que herramientas quiero que se usen (parametros --notango --nopasta --noblast)
 
--Formatear la salida en colores?????
+-Formatear la salida...colores??
