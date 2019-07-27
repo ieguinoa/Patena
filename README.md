@@ -7,7 +7,7 @@ Installation guide:
 
 1. clone this repo: git clone https://github.com/ieguinoa/patena
 1. install: source install.sh
-DONE!
+1. DONE!
 
 REQUIREMENTS: 
 * python
@@ -25,14 +25,9 @@ USAGE:
 ```
 
 OPTIONS:
-	
+```	
 	--seq [sequence]	Define initial sequence
 	--length [seq-length]   Define initial sequence length (and generate a random sequence)
-
-
- 
-OUTPUT FORMATING:
-```
 	--verbose		Write detailed output in stdout
 	--logoutput		Write mutations history log in file (patena.log)
 	--stepped 		Write detailed output and wait for user input at each step
