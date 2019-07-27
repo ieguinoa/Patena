@@ -20,9 +20,9 @@ NOT TESTED ON WINDOWS!
 
 
 USAGE:   
-	```
+```
 	python patena.py  [options]
-	```
+```
 
 OPTIONS:
 	
