@@ -14,6 +14,8 @@ en principio, la ubicacion de estos archivos tendria que estar incluida en el PA
 
 LO QUE FALTA:
 
+- armar un test que corra con la opcion --test (sin setear variables globales)
+
 - dividir el repo en 2:  una parte que tenga solo el codigo (bleach)  y una parte que tenga las herramientas usadas, referencias, texto, etc.
 
 - pasar todas las herramientas de terceros que ahora estan en /tools a dependencias conda....quizas pueda dejarlas como opcion algunas (como alternativa a conda) porque ya estan en el repo
