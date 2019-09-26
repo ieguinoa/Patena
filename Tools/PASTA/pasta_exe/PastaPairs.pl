@@ -16,15 +16,15 @@
 
 #------------------------------------------------------------------------------------
 
-$curdir = "/home/ieguinoa/pasta_exe/";
+#$curdir = "...."; # this path used to be hardcoded in PASTA exe... changed it to a parameter at the end of the command call
 $pastabin = "pasta_64";
 
 $date = localtime time;
 print "$date\n";
 
 
-if (scalar(@ARGV)!=6) {
-    print "Usage: ./PastaPairs.pl [potential_file] [fasta_dir] [top_pairs] [graphics:1/0] [all/self/fasta_header] [energy cut-off]\n";
+if (scalar(@ARGV)!=7) {
+    print "Usage: ./PastaPairs.pl [potential_file] [fasta_dir] [top_pairs] [graphics:1/0] [all/self/fasta_header] [energy cut-off] [pasta_exe_dir]\n";
     print "See README file for examples\n";
     exit;
 }
@@ -63,6 +63,9 @@ chomp($energy);
 open(fi, ">$workdir/energy");
 print fi "$energy";
 close fi;
+
+$curdir = shift @ARGV;   # add an extra parameter at the end to define the curdir (otherwise I need to hardcode it)
+
 
 #system("mkdir $workdir/graphs");
 #system("mkdir $workdir/data");

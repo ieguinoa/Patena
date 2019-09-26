@@ -732,7 +732,7 @@ def pastaSearch(sequence, positionScores,verbose):
   input.write(sequence)
   input.close()
   pastaPath=toolsPath + 'PASTA/pasta_exe/'
-  runCommand = "perl " + pastaPath+'PastaPairs.pl' + space + pastaPath +'pot_pasta.dat '+ inputsPath + " 1 0 self " + str(pastaThreshold) +  " > /dev/null"
+  runCommand = "perl " + pastaPath+'PastaPairs.pl' + space + pastaPath +'pot_pasta.dat '+ inputsPath + " 1 0 self " + str(pastaThreshold) + space + pastaPath + " > /dev/null"
   #print 'comando:' + runCommand
   os.system(runCommand)
   ### CHECK THIS!!! THE OUTPUT IS IN THE SAME DIR AS INPUT (CHECK PASTA PERL SCRIPT)
