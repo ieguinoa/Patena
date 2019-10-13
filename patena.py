@@ -1657,7 +1657,6 @@ if uvsilent:
 if (composition=="user_specified"):   
 # USER HAS DEFINED AT LEAST ONE OF THE FREQUENCIES, THE FREQUENCIES DEFINED ARE IN
 #FIRST CHECK IF THE SUM OF FREQUENCIES DEFINED IS LESS THAN 100 percent
-  print 'entro'
   freqSum=0
   for key in userComposition:
     if userComposition[key] != -999:    #THE USER HAS DEFINED THIS FREQUENCE
