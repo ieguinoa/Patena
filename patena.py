@@ -35,7 +35,7 @@ def getScriptPath():
 
 #****************************************
 
-# WEIGHTED SELECTION 
+# WEIGHTED SELECTION
 # ANON. FUNCTION: USE weighted_choide(param) TO CHOSE AN ITEM OF A PAIRLIST (ID, WEIGHT) , BASED ON WEIGHTS
 # RETURNS THE ID OF THE SELECTED ELEMENT
 weighted_choice = lambda s : random.choice(sum(([v]*wt for v,wt in s),[]))
@@ -56,13 +56,13 @@ space=" "
 indent=""
 
 #  EXECUTION Id . Identify runs
-exeId=os.getpid() 
+exeId=os.getpid()
 
 #  CUTOFFS, THRESHOLDS, LIMITS ....
 maxIterations=4000
 cutoff=0.01  #BLAST cutoff
 waltzThreshold=79.0
-beta=0.5   #MC 
+beta=0.5   #MC
 targetScore=0.0
 pastaThreshold=-5.5  #ENERGY Threshold
 pastaProbabilityThreshold=0.05 #Aggregation probability threshold
@@ -134,11 +134,9 @@ except OSError as exc:
 
 
 
-  
-#***************************************************************************  
-  
+#**************************************************************************
 
-##    JUST SUM UP THE INDIVIDUAL SCORES  
+##    JUST SUM UP THE INDIVIDUAL SCORES
 def getGlobalScore(scoresList):
   score=0.0
   for listIndex in range(len(scoresList)):
@@ -147,11 +145,9 @@ def getGlobalScore(scoresList):
 
 
 
-#***************************************  
+#**************************************
 
 
-
-  
 
 
 
@@ -523,19 +519,15 @@ def blastIt(sequence, positionScores, database, verbose):
 					blastScores[j]+=1
 				#else:
 					#positionScores[j]+=0
-					
-	if verbose:	    
+	if verbose:
 	    #print endl
 	    print indent + "BLAST RESULTS:"
 	    #print indent + sequence
-	    #print indent + ''.join(map(str, positionScores))				
+	    #print indent + ''.join(map(str, positionScores))
 	    data = [sequence,blastScores]
 	    col_width = max(len(str(word)) for row in data for word in row)   # padding
 	    for row in data:
 	      print indent + "|".join(str(word).ljust(col_width) for word in row)
-					
-					
-					
 
 
 
@@ -555,7 +547,7 @@ def iupred(sequence, positionScores, verbose):
 	#input.write("Name" + endl)
 	#input.write(sequence)
 	#input.close()
-	os.system(runCommand)	
+	os.system(runCommand)
 	outputIUPred=open(outputsPath + "outIUPred", "r")
 	if detailed_output:
                 detailedOutFile.write('IUPred: search for well-defined tertiary structure \n')

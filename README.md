@@ -6,8 +6,8 @@
 Installation guide:
 
 1. clone this repo: git clone https://github.com/ieguinoa/patena
-1. install: source install.sh
-1. DONE!
+1. To install patena just run: source install.sh
+
 
 REQUIREMENTS: 
 * python
