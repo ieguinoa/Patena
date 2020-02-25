@@ -1,7 +1,7 @@
 # PATENA
 
 
---------------------------------------------------------------------------
+-------------------------------------------------------------------------
 
 Installation guide:
 
@@ -37,5 +37,25 @@ OPTIONS:
 LOG FILE FORMAT:
 	Each line has 4 columns. mutation, new sequence, score, loop id[1 | 2]
 
-     
 
+
+-------------------------------------------------------------------------
+
+     
+TODO
+
+Functional/code work:
+    - finish the move of tool_functions. Check that the last moves are working
+    - Fix the parameters setting mess: switch to argparse, use a config, something.
+    - Make tests!!
+
+
+Towards making a Python package out of PATENA:
+    - Move the bin/external code to a bin dir. Initially it will still be compiled using an install.sh file but all bins should go to a predefined dir with predefined names...no need to set env. variables.
+Could add a check to see if the user already has any of these tools installed and in PATH?
+    - Same for any other reference files, put them all in a standardized place that python package can reach.
+
+
+Future plans:
+ - Make a conda recipe
+ - Can add a way to plug-in any external tests on the sequence? so users can define their own set of tests that want to be applied on it? may be hard to generalize and come up with a simple way for users to define the input/command/output to add a test. 
