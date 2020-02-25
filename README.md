@@ -3,7 +3,7 @@
 
 -------------------------------------------------------------------------
 
-Installation guide:
+## Installation guide:
 
 1. clone this repo: git clone https://github.com/ieguinoa/patena
 1. To install patena just run: source install.sh
@@ -42,7 +42,7 @@ LOG FILE FORMAT:
 -------------------------------------------------------------------------
 
      
-TODO
+## TODO
 
 Functional/code work:
  - finish the move of tool_functions. Check that the last moves are working
