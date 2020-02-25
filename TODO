@@ -1,4 +1,4 @@
-Functional/code TODO:
+Functional/code work:
     - finish the move of tool_functions. Check that the last moves are working
     - Fix the parameters setting mess: switch to argparse, use a config, something.
     - Make tests!!
@@ -10,4 +10,6 @@ Could add a check to see if the user already has any of these tools installed an
     - Same for any other reference files, put them all in a standardized place that python package can reach.
 
 
-
+Future plans:
+ - Make a conda recipe
+ - Can add a way to plug-in any external tests on the sequence? so users can define their own set of tests that want to be applied on it? may be hard to generalize and come up with a simple way for users to define the input/command/output to add a test. 
