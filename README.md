@@ -46,6 +46,7 @@ TODO
 
 Functional/code work:
  - finish the move of tool_functions. Check that the last moves are working
+ - refactorize the call to test a function. This can be easily put in a method that takes the tool name as parameter, as all the context commands are the same (debug, output, etc)
  - Fix the parameters setting mess: switch to argparse, use a config, something.
  - Make tests!!
 
