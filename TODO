@@ -1,33 +1,13 @@
-
-PROSITE
--tengo que exportar una variable $PROSITE que indique la carpeta donde esta prosite.dat
-supuestamente este script llama a otros programas (pfscan, pfsearch, etc) que ya vienen compilados y se pueden bajar los binarios (ver ps_scan/README)
-en principio, la ubicacion de estos archivos tendria que estar incluida en el PATH ( export PATH=$PATH:/home/tati/ps_scan)
--necesita ademas un archivo con la base de datos de prosite: el script va a ir a buscar el archivo prosite.dat (en el directorio $PROSITE ??)
+Functional/code TODO:
+    - finish the move of tool_functions. Check that the last moves are working
+    - Fix the parameters setting mess: switch to argparse, use a config, something.
+    - Make tests!!
 
 
+Towards making a Python package out of PATENA:
+    - Move the bin/external code to a bin dir. Initially it will still be compiled using an install.sh file but all bins should go to a predefined dir with predefined names...no need to set env. variables.
+Could add a check to see if the user already has any of these tools installed and in PATH?
+    - Same for any other reference files, put them all in a standardized place that python package can reach.
 
 
 
-
-
-
-LO QUE FALTA:
-
-- armar un test que corra con la opcion --test (sin setear variables globales)
-
-- dividir el repo en 2:  una parte que tenga solo el codigo (bleach)  y una parte que tenga las herramientas usadas, referencias, texto, etc.
-
-- pasar todas las herramientas de terceros que ahora estan en /tools a dependencias conda....quizas pueda dejarlas como opcion algunas (como alternativa a conda) porque ya estan en el repo
-
-- Armar un file requirements.txt con todas las dependencias conda
-
--completar documentacion
-
--Probar la funcion --uvsilent: Silente en UV (no tyr, trp, phe)
-
--Probar la opcion --netCharge 
-
--Implementar todos los parametros para seleccionar que herramientas quiero que se usen (parametros --notango --nopasta --noblast)
-
--Formatear la salida...colores??
