@@ -1,6 +1,8 @@
 import os
 import sys
 import re
+import subprocess
+
 #  OUTPUT FORMATTING
 endl = "\n"
 tab = "\t"
@@ -12,7 +14,8 @@ def getScriptPath():
 
 basePath=getScriptPath() + '/'
 toolsPath=basePath + 'Tools/'    #**************************TODO SET THE PATH TO THE TOOL SET 
-print("import tools_functions")
+
+
 
 def makeElmSearch(sequence,outputsPath,verbose,detailed_output):
   ##MAKE THE SEARCH AND SAVE RESULTS IN outputELM
@@ -66,7 +69,7 @@ def makeElmSearch(sequence,outputsPath,verbose,detailed_output):
 
 
 
-def elmSearch(sequence, positionScores,outputsPath,verbose,detailed_output):
+def elmSearch(sequence, positionScores,config_params,inputsPath,outputsPath,verbose,detailed_output):
   
   makeElmSearch(sequence,outputsPath,verbose,detailed_output)   #SEARCH FOR MOTIFS IN MY SEQUENCE AND SAVE RESULTS IN A FILE	
   elmScores=[]
@@ -117,7 +120,8 @@ def elmSearch(sequence, positionScores,outputsPath,verbose,detailed_output):
     positionScores[i]+=elmScores[i]
 
 
-def iupred(sequence, positionScores,iupredThreshold, inputsPath,outputsPath,verbose,detailed_output):
+def iupred(sequence, positionScores,config_params, inputsPath,outputsPath,verbose,detailed_output):
+        iupredThreshold=config_params['iupredThreshold']
 	runCommand=toolsPath + "iupred/iupredExe"+ space + inputsPath + "sequenceFASTA" +space+ "long" + space + outputsPath + "outIUPred"
 	#input=open(inputsPath+"iupred/inputIupred"+exeid, 'w')
 	#input.write("Name" + endl)
@@ -162,7 +166,8 @@ def iupred(sequence, positionScores,iupredThreshold, inputsPath,outputsPath,verb
 			positionScores[j] += 1
 
 
-def anchor(sequence, positionScores,anchorThreshold, inputsPath,outputsPath,verbose,detailed_output):
+def anchor(sequence, positionScores,config_params,inputsPath,outputsPath,verbose,detailed_output):
+  anchorThreshold=config_params['anchorThreshold']
   inputAnchor=inputsPath + "sequenceFASTA"
   runCommand=toolsPath + "ANCHOR/anchor" + space + inputAnchor + space + outputsPath + "outAnchor"
  
@@ -205,7 +210,8 @@ def anchor(sequence, positionScores,anchorThreshold, inputsPath,outputsPath,verb
 
 
 
-def pastaSearch(sequence,pastaThreshold,inputsPath, positionScores,verbose,detailed_output):
+def pastaSearch(sequence,positionScores,config_params,inputsPath, outputsPath,verbose,detailed_output):
+  pastaThreshold=config_params['pastaThreshold']
   input=open(inputsPath + "seq.fasta" , "w")
   input.write(">gi" + endl)
   input.write(sequence)
@@ -257,7 +263,7 @@ def pastaSearch(sequence,pastaThreshold,inputsPath, positionScores,verbose,detai
 
 
 
-def prositeSearch(sequence, positionScores,verbose):
+def prositeSearch(sequence,positionScores,config_params,inputsPath,outputsPath,verbose,detailed_output):
   #NEW LIST TO SAVE HITS
   prositeScores=[]
   for p in range(len(sequence)):
@@ -310,7 +316,7 @@ def prositeSearch(sequence, positionScores,verbose):
   ##########################       LIMBO EVALUATION     #####################################
   ######################################################################################
  
-def limboEval(sequence, positionScores,verbose):
+def limboEval(sequence, positionScores,config_params,inputsPath,outputsPath,verbose,detailed_output):
   #input=open(inputsPath + "sequenceLimbo" + exeId, "w")
   #input.write(">gi" + endl)
   #input.write(sequence)
@@ -330,10 +336,10 @@ def limboEval(sequence, positionScores,verbose):
   for p in range(len(sequence)):
     limboScores.append(0)
   for line in outputLimbo.readlines():
-    #print line.split()[1] 
+    #print line.split()[1]
     hitStart=int(line.split()[0])  #first column is the start of the heptapeptide hit
     if detailed_output:
-          detailedOutFile.write(str(hitStart) + tab + str(hitStart+5) + '\n')	
+          detailedOutFile.write(str(hitStart) + tab + str(hitStart+5) + '\n')
     for y in range(hitStart-1,hitStart+6):
       limboScores[y] += 1
 
@@ -342,14 +348,14 @@ def limboEval(sequence, positionScores,verbose):
   if verbose:
     print indent + "RESULTS:"
     #print indent + sequence
-    #print indent + ''.join(map(str, limboScores))	  
+    #print indent + ''.join(map(str, limboScores))
     data = [sequence,limboScores]
     col_width = max(len(str(word)) for row in data for word in row)   # padding
     for row in data:
       print indent + "|".join(str(word).ljust(col_width) for word in row)
 
 
-def tmhmmEval(sequence, positionScores,verbose):
+def tmhmmEval(sequence, positionScores,config_params,inputsPath,outputsPath,verbose,detailed_output):
   #input=open("sequenceTmhmm", "w")
   #input.write(">gi" + endl)
   #input.write(sequence)
@@ -373,10 +379,10 @@ def tmhmmEval(sequence, positionScores,verbose):
           detailedOutFile.write(str(hitStart) + tab + str(hitEnd)+ '\n')
       for y in range(hitStart,hitEnd):
 	tmhmmScores[y] += 1
-  if verbose:	
+  if verbose:
     print indent + "TMHMM RESULTS:"
     #print indent + sequence
-    #print indent + ''.join(map(str, tmhmmScores))	
+    #print indent + ''.join(map(str, tmhmmScores))
     data = [sequence,tmhmmScores]
     col_width = max(len(str(word)) for row in data for word in row)   # padding
     for row in data:
@@ -386,7 +392,7 @@ def tmhmmEval(sequence, positionScores,verbose):
 
 
 
-def amyloidPatternSearch(sequence, positionScores,verbose):
+def amyloidPatternSearch(sequence, positionScores,config_params,inputsPath,outputsPath,verbose,detailed_output):
     amyloidScore=[]
     for p in range(len(sequence)):
 	amyloidScore.append(0)
@@ -432,7 +438,8 @@ def amyloidPatternSearch(sequence, positionScores,verbose):
 
 
 
-def waltzSearch(sequence, positionScores,verbose):
+def waltzSearch(sequence, positionScores,config_params,inputsPath,outputsPath,verbose,detailed_output):
+  waltzThreshold=config_params['waltzThreshold']
   if detailed_output:
                 detailedOutFile.write('WALTZ: prediction of amylogenic regions \n')
 		detailedOutFile.write( "Threshold: " + str(waltzThreshold) + '\n')
@@ -487,7 +494,8 @@ def waltzSearch(sequence, positionScores,verbose):
       positionScores[x] += 1
 
 
-def tangoSearch(sequence, positionScores,verbose):
+def tangoSearch(sequence, positionScores,config_params,inputsPath,outputsPath,verbose,detailed_output):
+  tangoThreshold=config_params['tangoThreshold']
   outputTango= outputsPath+"tangoResults.txt"
   #  32bits bin
   #runCommand=toolsPath + 'tango/tango_i386_release tangoResults nt="N" ct="N" ph="7" te="298" io="0.05" seq="' + sequence + '" > /dev/null' 
@@ -539,3 +547,178 @@ def tangoSearch(sequence, positionScores,verbose):
 
 
 
+def chargedSearch(sequence, positionScores,config_params,inputsPath,outputsPath,verbose,detailed_output):
+  targetNetCharge=config_params['targetNetCharge']
+  chargeScores=[]
+  #FIRST EVALUATE THE NET CHARGE OF SEQUENCE
+  netCharge=0
+  for p in range(len(sequence)):
+      	if (sequence[p]=='K') or (sequence[p]=='R') or (sequence[p]=='H'):
+	  #IF POSITIVELY CHARGED
+	  netCharge+=1
+	else:
+	  if (sequence[p]=='E') or (sequence[p]=='D'):
+	    #IF NEGATIVELY CHARGED
+	    netCharge-=1
+
+
+  #SET SCORE VALUES BASED ON NET-CHARGE IMPULSE
+  if netCharge > targetNetCharge:
+    #AIMING FOR A MORE NEGATIVE NET CHARGE
+    for p in range(len(sequence)):
+	if (sequence[p]=='K') or (sequence[p]=='R') or (sequence[p]=='H'):
+	  #POSITIVELY CHARGED AA
+	  chargeScores.append(2)
+	else:
+	  if (sequence[p]=='E') or (sequence[p]=='D'):
+	    #IF NEGATIVELY CHARGED
+	    chargeScores.append(0)
+	  else:
+	    #NEUTRAL AA
+	    chargeScores.append(1)
+  else:
+    if netCharge < targetNetCharge:
+      #AIMING FOR A MORE POSITIVE NET CHARGE
+      for p in range(len(sequence)):
+		if (sequence[p]=='K') or (sequence[p]=='R') or (sequence[p]=='H'):
+		  chargeScores.append(0)
+		else:
+		  if (sequence[p]=='E') or (sequence[p]=='D'):
+		    #IF NEGATIVELY CHARGED
+		    chargeScores.append(2)
+		  else:
+		    #NEUTRAL AA
+		    chargeScores.append(1)
+    else:
+      #THE NET CHARGE IS CORRECT
+      for p in range(len(sequence)):
+	chargeScores.append(0)
+  if verbose:
+    #print endl
+    print indent + "Charge search RESULTS:"
+    #print indent + sequence
+    #print indent + ''.join(map(str, chargeScores))
+    data = [sequence,chargeScores]
+    col_width = max(len(str(word)) for row in data for word in row)   # padding
+    for row in data:
+	print indent + "|".join(str(word).ljust(col_width) for word in row)
+  ##ADD hits to global score
+  for i in range(len(sequence)):
+    positionScores[i]+=chargeScores[i]
+
+
+
+
+def blastIt(sequence, positionScores, database, inputsPath,verbose, detailed_output):
+        global match
+        ##BLAST SEARCH
+        inputBlast=inputsPath+"inputBlast"
+	outputBlast=outputsPath+"outputBlast"
+        if blastWeb:       # WEB BLAST SEARCH
+	  if verbose:
+	    print indent + "WEB BLAST SEARCH IN PROGRESS..." 
+	  result = NCBIWWW.qblast("blastp", database , sequence)
+	  records = NCBIXML.parse(result)
+	  first = records.next()
+	else:     # LOCAL BLAST SEARCH
+	  if verbose:
+	    print indent + "LOCAL BLAST SEARCH IN PROGRESS..."
+	  input=open(inputBlast, 'w')
+	  input.write(sequence)
+	  input.close()
+	  commandLine=NcbiblastpCommandline(query=inputBlast, db=database, evalue=0.001, outfmt=5, out=outputBlast)
+	  #print commandLine
+	  stdout, stderr = commandLine()
+	  result_handle = open(outputBlast)
+	  blast_records = NCBIXML.parse(result_handle)
+	  first = blast_records.next() 
+	if detailed_output:
+                detailedOutFile.write('BLAST search against   \n')
+		detailedOutFile.write('e-value cutoff: ' + str(cutoff)+ '\n')
+                detailedOutFile.write('Database: Uniprot/Swissprot\n')
+                detailedOutFile.write('Hits are shown as: E-value - match - subject - query start - query end\n')
+	#first.alignments contains all de alignments found
+	if len(first.alignments) > 0:
+	#get first alignment
+	  firstAlign=first.alignments[0]
+	  #print endl
+	  #print alignment stats 
+	  if verbose:
+	    print indent +"Cutoff:" + str(cutoff)
+	  for hsp in firstAlign.hsps:
+	    if hsp.expect < cutoff:
+	      match=True   #we have a match
+	      if verbose:
+		print indent + "****Alignment****"  
+		print indent + "Sequence name:", firstAlign.title
+	      #length of the alignment (could be shorter than full sequence)
+	      length=firstAlign.length
+	      #starting position of alignment in the sequence
+	      start=hsp.query_start	
+	      #ending position of the alignment in the sequence
+	      end=hsp.query_end
+	      
+	      #length = (end-start) ???
+	      if detailed_output:
+          	detailedOutFile.write(str(hsp.expect) + tab + str(hsp.match) + tab +str(hsp.sbjct) + tab + str(hsp.query_start) + tab+str(hsp.query_end) + '\n')	
+	      if verbose:
+		print indent + "E-Value:     " + str(hsp.expect)
+		print indent + "Query:       " + hsp.query 
+		print indent + "Match:       " + hsp.match
+		print indent + "Subject:     " + hsp.sbjct 
+		print indent + "Query Length:", len(sequence)
+		print indent + "Query Start: ", hsp.query_start
+		print indent + "Query end:   ", hsp.query_end
+	    else:
+	      if verbose:
+		print indent + "No hits found"
+	      match=False
+	else:
+	  if verbose:
+	    print indent + "No hits found"
+	  match=False
+        
+        if detailed_output:
+                if not match:
+                	detailedOutFile.write('NO hits found\n') 
+	blastScores=[]    
+	for p in range(len(sequence)):
+	      blastScores.append(0)
+	if match:
+		for j in range(len(sequence)):
+			if j< (start-1) or j > (end-1):    
+				blastScores[j]+=1
+				#print sequence[j]
+				positionScores[j]+=1
+			else:
+				if hsp.match[j-start+1] <> "+" and hsp.match[j-start+1] <> " ":
+					positionScores[j] += 1
+					blastScores[j]+=1
+				#else:
+					#positionScores[j]+=0
+	if verbose:
+	    #print endl
+	    print indent + "BLAST RESULTS:"
+	    #print indent + sequence
+	    #print indent + ''.join(map(str, positionScores))
+	    data = [sequence,blastScores]
+	    col_width = max(len(str(word)) for row in data for word in row)   # padding
+	    for row in data:
+	      print indent + "|".join(str(word).ljust(col_width) for word in row)
+
+
+
+# should match the names in the execution_set
+# {'Tango','Pasta','Waltz','ELM','Prosite','Limbo','Tmhmm','Iupred','Anchor','Amyloid Pattern'
+tool_functions_dict={'ELM':elmSearch,
+                     'IUpred':iupred,
+                     'Tango':tangoSearch,
+                     'Pasta':pastaSearch,
+                     'Waltz':waltzSearch,
+                     'Prosite':prositeSearch,
+                     'Limbo':limboEval,
+                     'Tmhmm':tmhmmEval,
+                     'Anchor':anchor,
+                     'Amyloid Pattern':amyloidPatternSearch,
+                     'Net charge':chargedSearch
+                    }
