@@ -45,13 +45,16 @@ LOG FILE FORMAT:
 ## TODO
 
 Functional/code work:
- - finish the move of tool_functions. Check that the last moves are working
+ - extract the indicated functions: mutate_sequence() and  monte_carlo_eval() 
+ - move the logging/any print  to be handled by a package (e.g check logmuse)
+ - move arguments to argparse
  - refactorize the call to test a function. This can be easily put in a method that takes the tool name as parameter, as all the context commands are the same (debug, output, etc)
  - Fix the parameters setting mess: switch to argparse, use a config, something.
  - Make tests!!
 
 
 Towards making a Python package out of PATENA:
+- add whats missing to make it a complete package with patena command as entry point  (see package template https://github.com/databio/example_python_CLI)
  - Move the bin/external code to a bin dir. Initially it will still be compiled using an install.sh file but all bins should go to a predefined dir with predefined names...no need to set env. variables.
 Could add a check to see if the user already has any of these tools installed and in PATH?
  - Same for any other reference files, put them all in a standardized place that python package can reach.

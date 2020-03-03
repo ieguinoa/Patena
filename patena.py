@@ -194,7 +194,21 @@ def print_evaluation_time(total_elapsed_time,times_dict):
 
 
 
-
+def print_execution_params(exeId,beta,length,composition,sequence,evaluateNetCharge,targetNetCharge)
+    #####   ALWAYS PRINT GENERAL PARAMETERS OF EXECUTION
+    #print endl
+    print "************************************************"
+    print "************************************************"
+    print "EXECUTION PARAMETERS:"
+    print 'Id=' + str(exeId) 
+    print 'Beta= '+ str(beta)
+    print "Length=" + str(length) 
+    print "Composition=" + composition
+    print "Sequence=" + sequence
+    if evaluateNetCharge:
+      print "Target net charge=" + str(targetNetCharge)
+    print "************************************************"
+    print "************************************************"
 
 
 
@@ -664,20 +678,8 @@ if rand==True:
   
 
 
-#####   ALWAYS PRINT GENERAL PARAMETERS OF EXECUTION
-#print endl
-print "************************************************"
-print "************************************************"
-print "EXECUTION PARAMETERS:"
-print 'Id=' + str(exeId) 
-print 'Beta= '+ str(beta)
-print "Length=" + str(length) 
-print "Composition=" + composition
-print "Sequence=" + sequence
-if evaluateNetCharge:
-  print "Target net charge=" + str(targetNetCharge)
-print "************************************************"
-print "************************************************"
+
+print_execution_params(exeId,beta,length,composition,sequence,evaluateNetCharge,targetNetCharge)
 
 
 if stepByStep:
@@ -964,6 +966,10 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
 		#raw_input(indent + "Hit enter to continue with next iteration")
 	      #return mutatedSequence
 	  else:
+            
+              ###  THIS SHOULD BE EXTRACTED to a function monte_carlo_eval() that returns true or false 
+              # IT IS ALSO REPEATED IN THE 2ND ROUND OF EVALUATIONS
+              
 	      #DECISION BASED ON MONTE CARLO
 	      if verbose:	
 		    print indent + "Previous score (" + str(partialScore) + ") < Mutated score (" + str(mutatedScore) + ")" 
@@ -1002,6 +1008,7 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
 		  raw_input(indent + "Hit enter to continue with next attempt")
 		#return sequence
 		#break
+        ##########  until here goes the new monte_carlo_eval() function
 	  if verbose:
 	    print indent + "*************************************"
 	
@@ -1081,6 +1088,9 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
 	while 10000 > mutAttempts:    ##JUST A SYMBOLIC MAX. AMOUNT OF MUTATIONS ATTEMPTS
 	    mutAttempts+=1
 
+
+
+         ####################  from here it can be extracted to a function mutate_sequence() that returnes the mutated sequence
 	    indent = tab + tab    #output formatting 
 	    #SELECT A POSITION 
 	    if verbose:
@@ -1126,6 +1136,12 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
 	      print ""
 	      indent=tab + tab + tab #output formatting stuff
 	      print indent + "STARTING PROPOSED MUTATION EVALUATION"
+
+            ########### UNTIL HERE THE new function mutate_sequence()
+              
+
+
+
 	    secondPartialEvaluation(mutatedSequence, mutatedScores, verbose)	 
 	    mutatedScore=getGlobalScore(mutatedScores)
 	    #if stepByStep:
@@ -1165,6 +1181,9 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
 		  #raw_input(indent + "Hit enter to continue with next iteration")
 		#return mutatedSequence
 	    else:
+
+
+                #############THIS COULD BE AN EXTRACTED FUNCTION called monte_carlo() that returns true or false wheter it accepts or not
 		#DECISION BASED ON MONTE CARLO
 		if verbose:	
 		      print indent + "Previous score (" + str(partialScore) + ") < Mutated score (" + str(mutatedScore) + ")" 
