@@ -246,11 +246,7 @@ def firstPartialEvaluation(sequence, config_params,positionScores, verbose):
 	  print endl
 	  print indent + "RESULTS OF FIRST PARTIAL EVALUATION:"
 	  #print indent + sequence
-	  data = [sequence,positionScores]
-	  col_width = max(len(str(word)) for row in data for word in row)   # padding
-	  for row in data:
-	      print indent + "|".join(str(word).ljust(col_width) for word in row)
-	  #print indent + ''.join(map(str, positionScores))
+          print_formatted_scores(sequence,positionScores)
 	  print indent + "SCORE:" + str(getGlobalScore(positionScores))
 	  print indent + "*************************************"
 	if stepByStep:
@@ -295,13 +291,7 @@ def secondPartialEvaluation(sequence, positionScores, verbose):
 	  print indent + "*************************************"
 	  print endl
 	  print indent + "RESULTS OF SECOND PARTIAL EVALUATION:"
-	  data = [sequence,positionScores]
-	  col_width = max(len(str(word)) for row in data for word in row)   # padding
-    	  for row in data:
-      	     print indent + "|".join(str(word).ljust(col_width) for word in row)
-
- 	  #print indent + sequence
-	  #print indent + ''.join(map(str, positionScores))
+          print_formatted_scores(sequence,positionScores)
 	  print indent + "SCORE:" + str(getGlobalScore(positionScores))
 	  print indent + "*************************************"
 	if stepByStep:
@@ -387,6 +377,11 @@ def mc_evaluation(partialScore,mutatedScore):
 
 
 
+def print_formatted_scores(sequence, scores):
+    data = [sequence,scores]
+    col_width = max(len(str(word)) for row in data for word in row)  # padding
+    for row in data:
+        print  "|".join(str(word).ljust(col_width) for word in row)
 
 #***********************************************************************
 
@@ -857,29 +852,28 @@ if detailed_output:
 
 
 if verbose:
-  print "*******************************************"
-  print "INITIAL EVALUATION RESULTS"
-  print "First partial score   : "  + str(firstPartialScore)
-  print "Second partial score  : " + str(secondPartialScore) 
-  print "Global score          : " + str(globalScore)
-  print endl
-  print "*******************************************"
-  print "*****************************"
-  print "*****************************"
-  print endl
-  print endl
-  if stepByStep:
-    raw_input("Hit enter to start mutations")
+    print "*******************************************"
+    print "INITIAL EVALUATION RESULTS"
+    print "First partial score   : "  + str(firstPartialScore)
+    print "Second partial score  : " + str(secondPartialScore) 
+    print "Global score          : " + str(globalScore)
+    print endl
+    print "*******************************************"
+    print "*****************************"
+    print "*****************************"
+    print endl
+    print endl
+    if stepByStep:
+        raw_input("Hit enter to start mutations")
 
 if minimalOutput:
-  logFileStream.write('ISEQ' + tab + sequence + tab + str(globalScore) + endl)
+    logFileStream.write('ISEQ' + tab + sequence + tab + str(globalScore) + endl)
     #print 'INITIAL SEQ:   ' + sequence + tab + str(globalScore)
 
 if testing:
-  testOutputFile.write('ISEQ' + tab + sequence + tab + 'FIRST'  + tab + str(firstPartialScore) + endl)
-  testOutputFile.write('ISEQ' + tab + sequence + tab + 'SECOND' + tab + str(secondPartialScore) + endl)
-  testOutputFile.write('ISEQ' + tab + sequence + tab + 'GLOBAL' + tab + str(globalScore) + endl)
-  
+    testOutputFile.write('ISEQ' + tab + sequence + tab + 'FIRST'  + tab + str(firstPartialScore) + endl)
+    testOutputFile.write('ISEQ' + tab + sequence + tab + 'SECOND' + tab + str(secondPartialScore) + endl)
+    testOutputFile.write('ISEQ' + tab + sequence + tab + 'GLOBAL' + tab + str(globalScore) + endl)
 
 
 
@@ -900,14 +894,9 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
     print "*****************************"
     print "STARTING GLOBAL ITERATION " + str(globalIteration)
     print "*****************************"
-    data = [sequence,positionScores]
-    col_width = max(len(str(word)) for row in data for word in row)   # padding
-    for row in data:
-    	print indent + "|".join(str(word).ljust(col_width) for word in row)
-    #print "Current sequence:         " + sequence
-    #print "Current total scores:     " + ''.join(map(str, positionScores))
+    print_formatted_scores(sequence,positionScores)
     print "Current global score:     " + str(globalScore)
-  if stepByStep: 
+  if stepByStep:
     if verbose:
 	raw_input("Hit enter to start first round of evaluations")
     else:
@@ -957,22 +946,11 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
 	    print indent + "*************************************"
 	    print indent + "DECISION"
 	    print indent + "Previous sequence"
-	    data = [sequence,positionScores]
-	    col_width = max(len(str(word)) for row in data for word in row)   # padding
-    	    for row in data:
-      		print indent + "|".join(str(word).ljust(col_width) for word in row)
-	    #print indent + sequence
-	    #print indent + ''.join(map(str, positionScores))
+            print_formatted_scores(sequence,positionScores)
 	    print indent + "Global score: " + str(partialScore)
 	    print ""
 	    print indent + "Mutated sequence"
-	    data = [sequence,mutatedScores]
-    	    col_width = max(len(str(word)) for row in data for word in row)   # padding
-    	    for row in data:
-      		print indent + "|".join(str(word).ljust(col_width) for word in row)
-
-	    #print indent + mutatedSequence
-	    #print indent + ''.join(map(str, mutatedScores))
+            print_formatted_scores(sequence,mutatedScores)
 	    print indent + "Global score: " + str(mutatedScore)
 	    print ""
 	  if partialScore >= getGlobalScore(positionScores):
@@ -1080,22 +1058,12 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
 	      print indent + "*************************************"
 	      print indent + "DECISION"
 	      print indent + "Previous sequence"
-	      data = [sequence,partialScores]
-	      col_width = max(len(str(word)) for row in data for word in row)   # padding
-    	      for row in data:
-      		print indent + "|".join(str(word).ljust(col_width) for word in row)
-	      #print indent + sequence
-	      #print indent + ''.join(map(str, partialScores))
+              print_formatted_scores(sequence,partialScores)
 	      print indent + "Global score: " + str(partialScore)
 	      print ""
 	      print indent + "Mutated sequence"
 	      print indent + mutatedSequence
-	      data = [sequence,mutatedScores]
-	      col_width = max(len(str(word)) for row in data for word in row)   # padding
-    	      for row in data:
-      		print indent + "|".join(str(word).ljust(col_width) for word in row)
-              #print indent + ''.join(map(str, mutatedScores))
-	      #print indent + "Global score: " + str(mutatedScore)
+              print_formatted_scores(sequence,mutatedScores)
 	      print ""
 	    if partialScore >= mutatedScore:
 		if verbose:
@@ -1195,12 +1163,9 @@ if not global_evaluation:
 	  print 'FINAL SEQUENCE: ' + sequence
 	else:
 	  print "REACHED LIMIT OF ITERATIONS"
-	  data = [sequence,positionScores]
-	  col_width = max(len(str(word)) for row in data for word in row)  # padding
-	  print 'LAST SEQUENCE: ' + sequence
-	  print 'FINAL SCORES'
-	  for row in data:
-	      print  "|".join(str(word).ljust(col_width) for word in row)
+          print 'LAST SEQUENCE: ' + sequence
+          print 'FINAL SCORES'
+          print_formatted_scores(sequence, positionScores)
 	  print "Global score: " + str(globalScore)
 
 	  #print "Final sequence: " + sequence
