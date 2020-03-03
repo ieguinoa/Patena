@@ -314,6 +314,80 @@ def secondPartialEvaluation(sequence, positionScores, verbose):
 
 
 
+
+
+
+def mutation_attempt(sequence):
+    indent = tab + tab    #output formatting
+    #SELECT A POSITION
+    if verbose:
+        print endl
+        print indent + "*************************************"
+        print indent + "MUTATION ATTEMPT"
+        print indent + "*************************************"
+    #CHOOSE A POSITION BASED ON WEIGHTS
+    mutatePosition= weighted_choice(weights)
+    if verbose:
+        print indent + "Position chosen: " + str(mutatePosition)
+    #SELECT THE NEW AA FOR THAT POSITION (BASED ON LIST OF FREQUENCIES)
+    previousResidue=sequence[mutatePosition]
+    if verbose:
+        print indent + "Residue to mutate: " + previousResidue
+    selected= previousResidue
+    #SELECT A NEWONE UNTIL THE RESIDUE IS DIFFERENT FROM PREVIOUS
+    while previousResidue == selected:
+        selected = weighted_choice(aaFrequencies)
+    if verbose:
+        print indent + "New residue : " + selected
+    ##BUILD MUTATED SEQUENCE WITH NEW RESIDUE
+    mutatedSequence = sequence[0:mutatePosition]
+    mutatedSequence += selected
+    mutatedSequence += sequence[mutatePosition+1:]
+    if verbose:
+        print indent + "Original sequence: " + sequence
+        print indent + "Mutated sequence : " + mutatedSequence
+    return mutatedSequence
+
+
+
+
+def mc_evaluation(partialScore,mutatedScore):
+    if verbose:
+        print indent + "Previous score (" + str(partialScore) + ") < Mutated score (" + str(mutatedScore) + ")" 
+    diff=partialScore-getGlobalScore(mutatedScores)
+    if verbose:
+        print indent + "SCORE DIFFERENCE:" + str(diff)
+    exponent=diff/beta
+    if exponent<-100:   #SATURATION
+        MCvalue=-100
+    else:
+        MCvalue=math.exp(exponent)
+    if verbose:
+        #print "  :" + str(exponent)
+        print indent + "MC VALUE:" + str(MCvalue)     #e^(dif/beta)
+    #GENERATE RANDOM NUMBER BETWEEN 0 AND 1
+    randy=random.random()
+    if verbose:
+        print indent + "RANDOM VALUE [0,1]:" + str(randy)
+    #print indent + "MONTE CARLO DECISION:"
+    if MCvalue > randy:
+        #ACCEPT MUTATION
+        if verbose:
+            print indent + "...ACCEPT MUTATION"
+        if stepByStep:
+            raw_input("")
+        return True
+    else:
+        if verbose:
+            print indent + " Mutation score (" + str(mutatedScore) + ") >= Previous score (" + str(partialScore) + ")" 
+            print indent + "...DENY MUTATION"
+        if stepByStep:
+          raw_input(indent + "Hit enter to continue with next attempt")
+        return False
+
+
+
+
 #***********************************************************************
 
 
@@ -521,8 +595,6 @@ if evaluateNetCharge:
   if abs(targetNetCharge) > length:
       print 'Net charge is impossible to reach with the specified sequence length'
       exit()
-  
-  
 
 
 
@@ -816,15 +888,6 @@ if testing:
 
 
 
-
-
-
-
-
-
-
-
-
 ######################################################
 ######################################################
 #########  GLOBAL LOOP  ##############################
@@ -849,23 +912,13 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
 	raw_input("Hit enter to start first round of evaluations")
     else:
 	raw_input('')
- 
- 
-    
-  
- 
- 
- 
- 
- 
-  
+
+
   #################################################
   ######  FIRST ROUND OF EVALUATIONS - MUTATIONS
   #################################################
-  
   if verbose:
     print "FIRST ROUND OF MUTATIONS: DECISION IS BASED ON (RESULTS OF)FIRST SET OF TOOLS" 
-  
   partialScore=firstPartialScore
   while partialScore > 0 and iteration <= maxIterations:
       timePrev=time.time()
@@ -874,60 +927,26 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
       #CONTAINS THE WEIGHT USED TO SELECT THE MUTATION POSITION. EACH ELEMENT IS A PAIR (X, WEIGHT), WHERE X= POSITION AND EIGHT IS = (SCORE(X) + A BASE WEIGHT)
       for x in range(len(positionScores)):
 	weights.append((x, positionScores[x]+1))    #the weight is score+1 - this gives a slight chance to all the position to suffer mutation
-      
-      
-      
-	
       mutAttempts=0       #COUNT MUTATIONS ATTEMPTS
       while 1000 > mutAttempts:    ##JUST A SYMBOLIC MAX. AMOUNT OF MUTATIONS ATTEMPTS
 	  mutAttempts+=1
-	  
-	  indent = tab + tab    #output formatting 
-	  #SELECT A POSITION 
-	  if verbose:
-	    print endl
-	    print indent + "*************************************"
-	    print indent + "MUTATION ATTEMPT"
-	    print indent + "*************************************"
-	  #print indent + "Score before:    " + str(previousScore)
-	  #print indent + "Choose a position based on sequence weights"
-	  
-	  #CHOOSE A POSITION BASED ON WEIGHTS
-	  mutatePosition= weighted_choice(weights) 
-	  if verbose:
-	    print indent + "Position chosen: " + str(mutatePosition)
-	  
-	  #SELECT THE NEW AA FOR THAT POSITION (BASED ON LIST OF FREQUENCIES)
-	  previousResidue=sequence[mutatePosition]
-	  if verbose:
-	    print indent + "Residue to mutate: " + previousResidue
-	  seleccionado= previousResidue
-	  
-	  #SELECT A NEWONE UNTIL THE RESIDUE IS DIFFERENT FROM PREVIOUS
-	  while previousResidue == seleccionado:
-	      seleccionado = weighted_choice(aaFrequencies)	
-	  if verbose:	  
-	    print indent + "New residue : " + seleccionado
-          
-	  ##BUILD MUTATED SEQUENCE WITH NEW RESIDUE    
-	  mutatedSequence = sequence[0:mutatePosition]
-	  mutatedSequence += seleccionado
-	  mutatedSequence += sequence[mutatePosition+1:]
-	  if verbose:
-	    print indent + "Original sequence: " + sequence
-	    print indent + "Mutated sequence : " + mutatedSequence
 
+
+
+          ################********************
+          ####
+          # get a possible mutation
+          mutated_sequence=mutation_attempt(sequence, weights)
 	  ##RESET LIST OF SCORES FOR THE MUTATED SEQUENCE
 	  for p in range(len(sequence)):
 	      mutatedScores[p]=0
-	  
 	  if stepByStep:
 	    raw_input(indent + "...Hit enter to start evaluation")
 	  if verbose:
 	    print ""
 	    indent=tab + tab + tab #output formatting stuff
 	    print indent + "STARTING PROPOSED MUTATION EVALUATION"
-	  firstPartialEvaluation(mutatedSequence, config_params, mutatedScores, verbose)	 
+	  firstPartialEvaluation(mutatedSequence, config_params, mutatedScores, verbose)
 	  mutatedScore=getGlobalScore(mutatedScores)
 	  #if stepByStep:
 	    #raw_input(indent + "Hit enter to continue with mutation acceptance")
@@ -966,56 +985,15 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
 		#raw_input(indent + "Hit enter to continue with next iteration")
 	      #return mutatedSequence
 	  else:
-            
-              ###  THIS SHOULD BE EXTRACTED to a function monte_carlo_eval() that returns true or false 
-              # IT IS ALSO REPEATED IN THE 2ND ROUND OF EVALUATIONS
-              
-	      #DECISION BASED ON MONTE CARLO
-	      if verbose:	
-		    print indent + "Previous score (" + str(partialScore) + ") < Mutated score (" + str(mutatedScore) + ")" 
-	      diff=partialScore-getGlobalScore(mutatedScores)
-	      if verbose:
-		    print indent + "SCORE DIFFERENCE:" + str(diff)
-	      exponent=diff/beta
-	      if exponent<-100:   #SATURATION
-		MCvalue=-100
-	      else:
-	      	MCvalue=math.exp(exponent)
-	      if verbose:
-		    #print "  :" + str(exponent)
-		    print indent + "MC VALUE:" + str(MCvalue)     #e^(dif/beta)
-	      
-	      #GENERATE RANDOM NUMBER BETWEEN 0 AND 1
-	      randy=random.random()
-	      if verbose:
-		    print indent + "RANDOM VALUE [0,1]:" + str(randy)
-	      #print indent + "MONTE CARLO DECISION:"
-	      if MCvalue > randy:
-		#ACCEPT MUTATION
-		if verbose:
-		    print indent + "...ACCEPT MUTATION"
-		if stepByStep:
-		  raw_input("")
-		  #raw_input(indent + "Hit enter to continue with next iteration")
-		#return mutatedSequence
-		break
-	      else:	    
-		if verbose:
-		    #print "El score original " + str(getGlobalScore(mutatedScores)) + " es mayor que "+ str(getGlobalScore(positionScores))
-		    print indent + " Mutation score (" + str(mutatedScore) + ") >= Previous score (" + str(partialScore) + ")" 
-		    print indent + "...DENY MUTATION"
-		if stepByStep:
-		  raw_input(indent + "Hit enter to continue with next attempt")
-		#return sequence
-		#break
-        ##########  until here goes the new monte_carlo_eval() function
+                #decide using MC whether the mutation is accepted
+                mc_decision =  mc_evaluation(partialScore, mutatedScores )
+                if mc_decision:
+                    #if true then accept the mutation...no need to keep trying new mutations
+                    break
 	  if verbose:
 	    print indent + "*************************************"
-	
 
 
-      
-    
       #####END OF MUTATION ITERATION
       if mutAttempts < 10000:   #MAKE SURE LOOP ENDED BY MUTATION ACCEPT
 	    #print "Sequence after mutation:    " + mutatedSequence
@@ -1030,8 +1008,6 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
 	      print "Attempts before mutation accept:" + str(mutAttempts)
 	      #print endl
 	      print "*******************************************"
-	    
-	      
 	      print "End of (PARTIAL) iteration " + str(iteration)
 	      print "(PARTIAL) score :    " + str(partialScore)
 	      print "*******************************************"
@@ -1043,20 +1019,13 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
 	   if verbose:
 	      ### EXCEEDED THE NUMBER OF ATTEMPTS, SEQUENCE NOT CHANGED
 	      print  " Mutations attempts exceeded " 
-      
+
       if testing:
 	timeX=time.time()-timePrev   #ITERATION TIME
 	testOutputFile.write('LOOP1' + tab + str(iteration)+ tab + str(mutAttempts) + tab + str(partialScore) + tab + str(timeX) + endl ) 
-	
       if stepByStep:
 	raw_input("Hit enter to continue with next iteration")
-		
       iteration=iteration+1   #TOTAL NUMBER OF ITERATIONS
-      
-      
-      
-      
-      
 
 
   #RESET LIST OF PARTIAL SCORES
@@ -1065,13 +1034,12 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
 
 
   if runBlast:
-    ####################################################	
+    ####################################################
     ##### SECOND ROUND OF EVALUATION - MUTATION  #######
     ####################################################
-    
-    
-    secondPartialEvaluation(sequence,partialScores, verbose)	
-    partialScore=getGlobalScore(partialScores)  
+
+    secondPartialEvaluation(sequence,partialScores, verbose)
+    partialScore=getGlobalScore(partialScores)
     while partialScore > 0 and iteration <= maxIterations:
 	timePrev=time.time()
 	weights=[]
@@ -1079,57 +1047,19 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
 	#CONTAINS THE WEIGHT USED TO SELECT THE MUTATION POSITION. EACH ELEMENT IS A PAIR (X, WEIGHT), WHERE X= POSITION AND EIGHT IS = (SCORE(X) + A BASE WEIGHT)
 	for x in range(len(partialScores)):
 	  weights.append((x, partialScores[x]+1))    #the weight is score+1 - this gives a slight chance to all the position to suffer mutation
-	
-	
 	#MUTATION ATTEMPTS
 	#INSIDE THIS LOOP, THE VARIABLE partialScore IS NOT MODIFIED. ONLY COMPARED TO THE MUTATED SCORES
 	#THE LOOP ENDS WHEN A MUTATION IS ACCEPTED OR WHEN A LIMIT OF ATTEMPTS IS REACHED
 	mutAttempts=0       #COUNT MUTATIONS ATTEMPTS
 	while 10000 > mutAttempts:    ##JUST A SYMBOLIC MAX. AMOUNT OF MUTATIONS ATTEMPTS
 	    mutAttempts+=1
+	    indent = tab + tab    #output formatting
 
-
-
-         ####################  from here it can be extracted to a function mutate_sequence() that returnes the mutated sequence
-	    indent = tab + tab    #output formatting 
-	    #SELECT A POSITION 
-	    if verbose:
-	      print endl
-	      print indent + "*************************************"
-	      print indent + "MUTATION ATTEMPT"
-	      print indent + "*************************************"
-	    #print indent + "Score before:    " + str(previousScore)
-	    #print indent + "Choose a position based on sequence weights"
-	    
-	    #CHOOSE A POSITION BASED ON WEIGHTS
-	    mutatePosition= weighted_choice(weights) 
-	    if verbose:
-	      print indent + "Position chosen: " + str(mutatePosition)
-	    
-	    #SELECT THE NEW AA FOR THAT POSITION (BASED ON LIST OF FREQUENCIES)
-	    previousResidue=sequence[mutatePosition]
-	    if verbose:
-	      print indent + "Residue to mutate: " + previousResidue
-	    seleccionado= previousResidue
-	    
-	    #SELECT A NEWONE UNTIL THE RESIDUE IS DIFFERENT FROM PREVIOUS
-	    while previousResidue == seleccionado:
-		seleccionado = weighted_choice(aaFrequencies)	
-	    if verbose:	  
-	      print indent + "New residue : " + seleccionado
-
-	    ##BUILD MUTATED SEQUENCE WITH NEW RESIDUE    
-	    mutatedSequence = sequence[0:mutatePosition]
-	    mutatedSequence += seleccionado
-	    mutatedSequence += sequence[mutatePosition+1:]
-	    if verbose:
-	      print indent + "Original sequence: " + sequence
-	      print indent + "Mutated sequence : " + mutatedSequence
-
+            ## Attempt mutation
+            mutatedSequence=mutation_attempt(sequence)
 	    ##RESET LIST OF SCORES FOR THE MUTATED SEQUENCE
 	    for p in range(len(sequence)):
 		mutatedScores[p]=0
-	    
 	    if stepByStep:
 	      raw_input(indent + "...Hit enter to start evaluation")
 	    if verbose:
@@ -1137,12 +1067,9 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
 	      indent=tab + tab + tab #output formatting stuff
 	      print indent + "STARTING PROPOSED MUTATION EVALUATION"
 
-            ########### UNTIL HERE THE new function mutate_sequence()
-              
 
 
-
-	    secondPartialEvaluation(mutatedSequence, mutatedScores, verbose)	 
+	    secondPartialEvaluation(mutatedSequence, mutatedScores, verbose)
 	    mutatedScore=getGlobalScore(mutatedScores)
 	    #if stepByStep:
 	      #raw_input(indent + "Hit enter to continue with mutation acceptance")
@@ -1159,7 +1086,6 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
       		print indent + "|".join(str(word).ljust(col_width) for word in row)
 	      #print indent + sequence
 	      #print indent + ''.join(map(str, partialScores))
-	      
 	      print indent + "Global score: " + str(partialScore)
 	      print ""
 	      print indent + "Mutated sequence"
@@ -1181,44 +1107,10 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
 		  #raw_input(indent + "Hit enter to continue with next iteration")
 		#return mutatedSequence
 	    else:
-
-
-                #############THIS COULD BE AN EXTRACTED FUNCTION called monte_carlo() that returns true or false wheter it accepts or not
-		#DECISION BASED ON MONTE CARLO
-		if verbose:	
-		      print indent + "Previous score (" + str(partialScore) + ") < Mutated score (" + str(mutatedScore) + ")" 
-		diff=partialScore-getGlobalScore(mutatedScores)
-		if verbose:
-		      print indent + "SCORE DIFFERENCE:" + str(diff)
-		exponent=diff/beta
-		MCvalue=math.exp(exponent)
-		if verbose:
-		      #print "  :" + str(exponent)
-		      print indent + "MC VALUE:" + str(MCvalue)     #e^(dif/beta)
-		
-		#GENERATE RANDOM NUMBER BETWEEN 0 AND 1
-		randy=random.random()
-		if verbose:
-		      print indent + "RANDOM VALUE [0,1]:" + str(randy)
-		#print indent + "MONTE CARLO DECISION:"
-		if MCvalue > randy:
-		  #ACCEPT MUTATION
-		  if verbose:
-		      print indent + "...ACCEPT MUTATION"
-		  if stepByStep:
-		    raw_input("")
-		    #raw_input(indent + "Hit enter to continue with next iteration")
-		  #return mutatedSequence
-		  break
-		else:	    
-		  if verbose:
-		      #print "El score original " + str(getGlobalScore(mutatedScores)) + " es mayor que "+ str(getGlobalScore(positionScores))
-		      print indent + " Mutation score (" + str(mutatedScore) + ") >= Previous score (" + str(partialScore) + ")" 
-		      print indent + "...DENY MUTATION"
-		  if stepByStep:
-		    raw_input(indent + "Hit enter to continue with next attempt")
-		  #return sequence
-		  #break
+                mc_decision =  mc_evaluation(partialScore, mutatedScores )
+                if mc_decision:
+                    #if true then accept the mutation...no need to keep trying new mutations
+                    break
 	    if verbose:
 	      print "*************************************"
 
@@ -1226,7 +1118,7 @@ while globalScore > 0 and iteration <= maxIterations and (not global_evaluation)
 	#####END OF MUTATION ITERATION
 
 	#MAKE SURE LOOP ENDED BY MUTATION ACCEPT
-	if mutAttempts < 10000:   
+	if mutAttempts < 10000:
 	      #print "Sequence after mutation:    " + mutatedSequence
 	      ###NOW THE SEQUENCE IS THE MUTATED SEQUENCE
 	      sequence=mutatedSequence
