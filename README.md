@@ -46,7 +46,7 @@ LOG FILE FORMAT:
 
 Functional/code work:
  - extract the indicated functions: mutate_sequence() and  monte_carlo_eval() 
- - move the logging/any print  to be handled by a package (e.g check logmuse)
+ - move the logging/any print  to be handled by a package (e.g check logmuse or logging ->  https://docs.python.org/2/howto/logging.html#logging-from-multiple-modules
  - move arguments to argparse
  - refactorize the call to test a function. This can be easily put in a method that takes the tool name as parameter, as all the context commands are the same (debug, output, etc)
  - Fix the parameters setting mess: switch to argparse, use a config, something.
