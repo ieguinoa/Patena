@@ -653,15 +653,15 @@ except OSError as exc:
 
 #TESTING MODE ON: WRITE EXECUTION PARAMETERS (TOTAL TIME, TIME PER BLOCK, MUT-ATTEMPTS, BETA VALUES, SCORES)
 if testing: 
-  testOutputFile=open(testOutputPath + '/'+ str(exeId), 'w')
-  if rand:
-    testOutputFile.write('RAND'+ tab +str(beta) + tab + str(length) + endl)
-  else:
-    testOutputFile.write('SEQ'+ tab + str(beta) + tab + str(length) + endl)
+    testOutputFile=open(testOutputPath + '/'+ str(exeId), 'w')
+    if rand:
+        testOutputFile.write('RAND'+ tab +str(beta) + tab + str(length) + endl)
+    else:
+        testOutputFile.write('SEQ'+ tab + str(beta) + tab + str(length) + endl)
 
 if minimalOutput:
-  #CREATE .log FILE
-  logFileStream=open( logsPath+'/'+logFileName, 'w')
+    #CREATE .log FILE
+    logFileStream=open( logsPath+'/'+logFileName, 'w')
 
 
 
@@ -689,13 +689,13 @@ if uvsilent:
 if (composition=="user_specified"):   
 # USER HAS DEFINED AT LEAST ONE OF THE FREQUENCIES, THE FREQUENCIES DEFINED ARE IN
 #FIRST CHECK IF THE SUM OF FREQUENCIES DEFINED IS LESS THAN 100 percent
-  freqSum=0
-  for key in userComposition:
-    if userComposition[key] != -999:    #THE USER HAS DEFINED THIS FREQUENCE
-      freqSum+= userComposition[key]
-  if freqSum > 100:
-    print 'Total defined frequencies exceeded 100%'
-    exit()
+    freqSum=0
+    for key in userComposition:
+        if userComposition[key] != -999:    #THE USER HAS DEFINED THIS FREQUENCE
+            freqSum+= userComposition[key]
+    if freqSum > 100:
+        print 'Total defined frequencies exceeded 100%'
+        exit()
 
 
 #REDEFINE TOTAL aaFrequencies USING THE USER DEFINED FREQUENCIES
@@ -813,46 +813,46 @@ firstPartialScores=partialScores
 
 #ADD THE SCORE TO THE GLOBAL SCORE AND RESET PARTIAL LIST
 for p in range(len(sequence)):
-  position_scores[p]=position_scores[p]+partialScores[p]
-  partialScores[p]=0
+    position_scores[p]=position_scores[p]+partialScores[p]
+    partialScores[p]=0
   
 secondPartialScore = 0  
 if runBlast:
-  #SECOND PART OF EVALUATION
-  secondPartialEvaluation(sequence, partialScores,verbose)
-  secondPartialScore=get_global_score(partialScores)
+    #SECOND PART OF EVALUATION
+    secondPartialEvaluation(sequence, partialScores,verbose)
+    secondPartialScore=get_global_score(partialScores)
 
-  #ADD THE SCORE TO THE GLOBAL SCORE AND RESET PARTIAL LIST
-  for p in range(len(sequence)):
-    position_scores[p]=position_scores[p]+partialScores[p]
-    partialScores[p]=0
+    #ADD THE SCORE TO THE GLOBAL SCORE AND RESET PARTIAL LIST
+    for p in range(len(sequence)):
+        position_scores[p]=position_scores[p]+partialScores[p]
+        partialScores[p]=0
 
 ##SUM OF SCORES LIST
 global_score=get_global_score(position_scores)
 
 if detailed_output:
-	index=0
+    index=0
+    detailedOutFile.write('\n')
+    detailedOutFile.write('*************************\n')
+    detailedOutFile.write('\n')
+    #detailedOutFile.write("First partial score"+ tab  + str(firstPartialScore) + '\n')
+    #detailedOutFile.write("Second partial score" +tab+ str(secondPartialScore) + '\n')
+    detailedOutFile.write("Global score"+tab + str(global_score) + '\n')
+    #detailedOutFile.write('\n')
+    #detailedOutFile.write('*************************\n')
+    detailedOutFile.write('\n')
+    detailedOutFile.write('Scores per position:\n')
+    detailedOutFile.write('Pos' +tab+'AA' +tab+ 'Score\n')
+    for aa in sequence:
+        detailedOutFile.write(str(index) + tab + aa + tab + str(position_scores[index]))
+        index+=1
         detailedOutFile.write('\n')
-        detailedOutFile.write('*************************\n')
-        detailedOutFile.write('\n')
-        #detailedOutFile.write("First partial score"+ tab  + str(firstPartialScore) + '\n')
-	#detailedOutFile.write("Second partial score" +tab+ str(secondPartialScore) + '\n')
-	detailedOutFile.write("Global score"+tab + str(global_score) + '\n')
- 	#detailedOutFile.write('\n')
-        #detailedOutFile.write('*************************\n')
-	detailedOutFile.write('\n')
-        detailedOutFile.write('Scores per position:\n')
-        detailedOutFile.write('Pos' +tab+'AA' +tab+ 'Score\n')
-	for aa in sequence:
-		detailedOutFile.write(str(index) + tab + aa + tab + str(position_scores[index]))
-		index+=1
-		detailedOutFile.write('\n')
-	#for score in position_scores:
-        #        detailedOutFile.write(str(score) + tab)
-        #data = [sequence,position_scores]
-        #col_width = max(len(str(word)) for row in data for word in row)  # padding
-        #for row in data:
-        #      detailedOutFile.write("|".join(str(word).ljust(col_width) for word in row))
+    #for score in position_scores:
+    #        detailedOutFile.write(str(score) + tab)
+    #data = [sequence,position_scores]
+    #col_width = max(len(str(word)) for row in data for word in row)  # padding
+    #for row in data:
+    #      detailedOutFile.write("|".join(str(word).ljust(col_width) for word in row))
 
 
 if verbose:
