@@ -29,7 +29,7 @@ import tool_functions
 #****************************************
 
 #get base path
-def getScriptPath():
+def get_script_path():
     return os.path.dirname(os.path.realpath(sys.argv[0]))
 
 
@@ -58,33 +58,23 @@ indent=""
 #  EXECUTION Id . Identify runs
 exeId=os.getpid()
 
-#  CUTOFFS, THRESHOLDS, LIMITS ....
-maxIterations=4000
-cutoff=0.01  #BLAST cutoff
-waltzThreshold=79.0
+#  CUTOFFS, THRESHOLDS, LIMITS , DEFAULTS
+max_interations=4000
 beta=0.5   #MC
 targetScore=0.0
-pastaThreshold=-5.5  #ENERGY Threshold
-pastaProbabilityThreshold=0.05 #Aggregation probability threshold
-iupredThreshold=0.5
-anchorThreshold=0.5
-tangoThreshold=1.0
-targetNetCharge=0
+composition="average"
+#a=r=n=d=c=q=e=g=h=i=l=k=m=f=p=s=t=w=y=v=-1
+userComposition={"A":-999 , "R":-999  , "N":-999  , "D":-999  , "C":-999  , "E":-999 , "Q":-999  , "G":-999  , "H":-999  , "I":-999  , "L":-999  , "K":-999  ,"M":-999  , "F":-999  , "P":-999  , "S":-999  , "T":-999  , "W":-999  , "Y":-999  , "V":-999 }
+database="uniprot_sprot.fasta"
+sequence="RANDOM"
+uvsilent=False
 
-
-
-
-### TODO:
-# Make use of this  dictionary with the parameters to the set of tools and then get rid of the infividual vars (e.g pastaThershold, etc)
-# step 1: when parsing parameters then modify this config_parms dict and not the individual vars.
-
-##Default values
-config_params= { 'iupredThreshold': iupredThreshold,
-                'anchorThreshold':anchorThreshold,
-                'waltzThreshold':waltzThreshold,
-                'pastaThreshold':pastaThreshold,
-                'targetNetCharge':targetNetCharge,
-                'tangoThreshold':tangoThreshold
+config_params = { 'iupredThreshold': 0.5,
+                'anchorThreshold': 0.5,
+                'waltzThreshold': 79.0,
+                'pastaThreshold': -5.5,
+                'targetNetCharge': 0,
+                'tangoThreshold': 1.0
                }
 
 
@@ -94,12 +84,10 @@ testTimes=False   #True=print times of each part
 minimalOutput=False  #True = only print global scores at end of iteration
 verbose=False        #True = print detailed information of execution
 step_by_step=False
-match=False
 rand=True
 testing=False
 change=True
 evaluateNetCharge=False
-blastWeb=False  #BLAST SEARCH LOCAL OR WEB
 output=True  ##print info to file
 mutation_attempts=0
 length=12   #defaul sequence length
@@ -161,7 +149,7 @@ except OSError as exc:
 
 class Mutation: 
     def __init__(self,mutated_sequence,position,previous,replacement):
-        self.sequence=sequence
+        self.sequence=mutated_sequence
         self.mutated_position=position
         self.prev_aa=previous
         self.replacement_aa=replacement
@@ -195,19 +183,19 @@ def print_evaluation_time(total_elapsed_time,times_dict):
 
 
 
-def print_execution_params(exeId,beta,length,composition,sequence,evaluateNetCharge,targetNetCharge)
+def print_execution_params(exe_id,beta,length,composition,sequence,evaluate_netcharge,target_net_charge):
     #####   ALWAYS PRINT GENERAL PARAMETERS OF EXECUTION
     #print endl
     print "************************************************"
     print "************************************************"
     print "EXECUTION PARAMETERS:"
-    print 'Id=' + str(exeId) 
+    print 'Id=' + str(exe_id) 
     print 'Beta= '+ str(beta)
     print "Length=" + str(length) 
     print "Composition=" + composition
     print "Sequence=" + sequence
-    if evaluateNetCharge:
-      print "Target net charge=" + str(targetNetCharge)
+    if evaluate_netcharge:
+      print "Target net charge=" + str(target_net_charge)
     print "************************************************"
     print "************************************************"
 
@@ -237,10 +225,11 @@ def firstPartialEvaluation(sequence, config_params,position_scores, verbose):
                 if step_by_step and verbose:
                     raw_input(indent + "Hit enter to continue with next evaluation")
                 print indent + "STARTING "+ tool_name +" execution"
-                tool_functions.tool_functions_dict[tool_name](sequence, position_scores,config_params, inputsPath,outputsPath,verbose,detailed_output)
+                tool_functions.tool_functions_dict[tool_name](sequence, position_scores,config_params, inputsPath,job_out_path,verbose,detailed_output)
                 if detailed_output:
-                    detailedOutFile.write('\n\n***********\n\n' )
+                    details_out.write('\n\n***********\n\n' )
                 times_dict[tool_name]+=(time.time() - timePrev)
+        score_result=get_global_score(position_scores)
         ##PRINT SCORE
         if verbose:
 	  print indent + "*************************************"
@@ -248,10 +237,11 @@ def firstPartialEvaluation(sequence, config_params,position_scores, verbose):
 	  print indent + "RESULTS OF FIRST PARTIAL EVALUATION:"
 	  #print indent + sequence
           print_formatted_scores(sequence,position_scores)
-	  print indent + "SCORE:" + str(get_global_score(position_scores))
+	  print indent + "SCORE:" + str(score_result)
 	  print indent + "*************************************"
 	if step_by_step:
 	  raw_input(indent + "....hit enter to continue")
+        return score_result
 
 
 
@@ -284,7 +274,7 @@ def secondPartialEvaluation(sequence, position_scores, verbose):
         #if step_by_step:
 	  #raw_input(indent + "Hit enter to continue with next evaluation")
 	if detailed_output:
-                detailedOutFile.write('\n\n***********\n\n' )
+                details_out.write('\n\n***********\n\n' )
 	if step_by_step:
 	  raw_input(indent + "Press enter to see final results...")
         ##PRINT SCORE
@@ -308,7 +298,7 @@ def secondPartialEvaluation(sequence, position_scores, verbose):
 
 
 
-def mutation_attempt(sequence):
+def mutation_attempt(sequence,weights):
     indent = tab + tab    #output formatting
     #SELECT A POSITION
     if verbose:
@@ -319,7 +309,7 @@ def mutation_attempt(sequence):
     #CHOOSE A POSITION BASED ON WEIGHTS
     mutate_position= weighted_choice(weights)
     if verbose:
-        print indent + "Position chosen: " + str(mutatePosition)
+        print indent + "Position chosen: " + str(mutate_position)
     #SELECT THE NEW AA FOR THAT POSITION (BASED ON LIST OF FREQUENCIES)
     previous_residue=sequence[mutate_position]
     if verbose:
@@ -410,23 +400,13 @@ def printHelp():
 
 
 
+#***********************************************************************
 
 #**************************
 #**************************
-#******* MAIN *************
+#******* PARAMATERS *******
 #**************************
 
-
-
-
-
-#********DEFAULTS********
-composition="average"
-#a=r=n=d=c=q=e=g=h=i=l=k=m=f=p=s=t=w=y=v=-1
-userComposition={"A":-999 , "R":-999  , "N":-999  , "D":-999  , "C":-999  , "E":-999 , "Q":-999  , "G":-999  , "H":-999  , "I":-999  , "L":-999  , "K":-999  ,"M":-999  , "F":-999  , "P":-999  , "S":-999  , "T":-999  , "W":-999  , "Y":-999  , "V":-999 }
-database="uniprot_sprot.fasta"
-sequence="RANDOM"
-uvsilent=False
 
 
 
@@ -463,13 +443,10 @@ else:
     elif (arg=='--uvsilent'):
       uvsilent=True 
     elif (arg=='--netcharge') and (index < len(sys.argv)):
-      targetNetCharge = int(sys.argv[index+1])
+      config_params['targetNetCharge'] = int(sys.argv[index+1])
       evaluateNetCharge=True
-      execution_set.add('Net charge'})  # 'Net charge' is not in the execution_set by default, only included by user request
+      execution_set.add('Net charge')  # 'Net charge' is not in the execution_set by default, only included by user request
 
-### TODO: CREATE A DICT OR SET WITH THE TOOLS THAT SHOULD BE APPLIED
-##   SELECT WHICH TOOLS WONT ME EVALUATED
-# remove from the execution_set
 # execution_set={'Tango','Pasta','Waltz','ELM','Prosite','Limbo','Tmhmm','IUpred','Anchor','Amyloid Pattern'}
     elif (arg=='--noblast'):
       runBlast=False
@@ -498,7 +475,7 @@ else:
       step_by_step=True
       verbose=True   #MAKES NO SENSE TO GO STEP BY STEP IF CANT SEE A DETAILED OUTPUT
     elif (arg=='--maxiterations') and (index < len(sys.argv)):
-      maxIterations=int(sys.argv[index+1])
+      max_interations=int(sys.argv[index+1])
 
 
 
@@ -575,7 +552,7 @@ else:
       verbose=True 
     elif (arg=='--detailed') and (index < len(sys.argv)): # print detailed output for each (to output file) 
       detailed_output=True
-      detailedOutFile=open(sys.argv[index+1],'w') 	
+      details_out=open(sys.argv[index+1],'w') 	
     elif (arg=='--minoutput') and (index < len(sys.argv)):
       minimalOutput=True
       logsPath= sys.argv[index+1]
@@ -589,22 +566,36 @@ else:
 
 
 
+
+
+
+
+
+
+
+
+
+#***********************************************************************
+
+### PRE-RUN SETUP AND PARAMS CHECK
+
+# ****************************************
+
 #CHECK IF TARGET NET CHARGE IS POSSIBLE BASED ON SEQUENCE LENGTH (AND PH??)
 if evaluateNetCharge:
-  if abs(targetNetCharge) > length:
+  if abs(config_params['targetNetCharge']) > length:
       print 'Net charge is impossible to reach with the specified sequence length'
       exit()
 
 
 
 #PATHS
-basePath=getScriptPath() + '/'
-# toolsPath=basePath + 'Tools/'    #**************************TODO SET THE PATH TO THE TOOL SET 
-inputsPath=basePath + "/Input/"+ str(exeId) + "/" #SET PATH TO SAVE INPUTS FILES
-baseOutputPath=basePath + "/Output/" 
-outputsPath=baseOutputPath + str(exeId) + "/"
-testOutputPath=outputsPath   # DEFAULT OUTPUT FOR TESTs 
-logsPath=outputsPath #default path for log files
+base_path=get_script_path() + '/'
+# toolsPath=base_path + 'Tools/'    #**************************TODO SET THE PATH TO THE TOOL SET 
+inputsPath=base_path + "/inputs/"+ str(exeId) + "/" #SET PATH TO SAVE INPUTS FILES
+job_out_path=base_path + "/outputs/" + str(exeId) + "/"
+testOutputPath=job_out_path   # DEFAULT OUTPUT FOR TESTs 
+logsPath=job_out_path #default path for log files
 
 
 
@@ -620,12 +611,12 @@ except OSError as exc:
 
 
 try:
-    os.makedirs(outputsPath)
+    os.makedirs(job_out_path)
 except OSError as exc:
     if exc.errno == errno.EEXIST and os.path.isdir(inputsPath):
         # if exists, just remove it and create it again
-        shutil.rmtree(outputsPath)
-        os.makedirs(outputsPath)
+        shutil.rmtree(job_out_path)
+        os.makedirs(job_out_path)
         pass
 
 
@@ -750,7 +741,7 @@ if rand==True:
 
 
 
-print_execution_params(exeId,beta,length,composition,sequence,evaluateNetCharge,targetNetCharge)
+print_execution_params(exeId,beta,length,composition,sequence,evaluateNetCharge,config_params['targetNetCharge'])
 
 
 if step_by_step:
@@ -805,10 +796,10 @@ if verbose:
 #MAKE BOTH PARTIAL EVALUATIONS TO GET A GLOBAL SCORE
 
 #FIRST SET OF EVALUATIONS
-firstPartialEvaluation(sequence, config_params,partialScores, verbose)
+firstPartialScore=firstPartialEvaluation(sequence, config_params,partialScores, verbose)
 
 #SAVE RESULTS
-firstPartialScore=get_global_score(partialScores)
+# firstPartialScore=get_global_score(partialScores)
 firstPartialScores=partialScores
 
 #ADD THE SCORE TO THE GLOBAL SCORE AND RESET PARTIAL LIST
@@ -832,27 +823,27 @@ global_score=get_global_score(position_scores)
 
 if detailed_output:
     index=0
-    detailedOutFile.write('\n')
-    detailedOutFile.write('*************************\n')
-    detailedOutFile.write('\n')
-    #detailedOutFile.write("First partial score"+ tab  + str(firstPartialScore) + '\n')
-    #detailedOutFile.write("Second partial score" +tab+ str(secondPartialScore) + '\n')
-    detailedOutFile.write("Global score"+tab + str(global_score) + '\n')
-    #detailedOutFile.write('\n')
-    #detailedOutFile.write('*************************\n')
-    detailedOutFile.write('\n')
-    detailedOutFile.write('Scores per position:\n')
-    detailedOutFile.write('Pos' +tab+'AA' +tab+ 'Score\n')
+    details_out.write('\n')
+    details_out.write('*************************\n')
+    details_out.write('\n')
+    #details_out.write("First partial score"+ tab  + str(firstPartialScore) + '\n')
+    #details_out.write("Second partial score" +tab+ str(secondPartialScore) + '\n')
+    details_out.write("Global score"+tab + str(global_score) + '\n')
+    #details_out.write('\n')
+    #details_out.write('*************************\n')
+    details_out.write('\n')
+    details_out.write('Scores per position:\n')
+    details_out.write('Pos' +tab+'AA' +tab+ 'Score\n')
     for aa in sequence:
-        detailedOutFile.write(str(index) + tab + aa + tab + str(position_scores[index]))
+        details_out.write(str(index) + tab + aa + tab + str(position_scores[index]))
         index+=1
-        detailedOutFile.write('\n')
+        details_out.write('\n')
     #for score in position_scores:
-    #        detailedOutFile.write(str(score) + tab)
+    #        details_out.write(str(score) + tab)
     #data = [sequence,position_scores]
     #col_width = max(len(str(word)) for row in data for word in row)  # padding
     #for row in data:
-    #      detailedOutFile.write("|".join(str(word).ljust(col_width) for word in row))
+    #      details_out.write("|".join(str(word).ljust(col_width) for word in row))
 
 
 if verbose:
@@ -893,7 +884,7 @@ if testing:
 ######################################################
 
 
-while global_score > 0 and iteration <= maxIterations and (not global_evaluation):
+while global_score > 0 and iteration <= max_interations and (not global_evaluation):
     if verbose:
         print "*****************************"
         print "STARTING GLOBAL ITERATION " + str(global_iteration)
@@ -913,7 +904,7 @@ while global_score > 0 and iteration <= maxIterations and (not global_evaluation
     if verbose:
         print "FIRST ROUND OF MUTATIONS: DECISION IS BASED ON (RESULTS OF)FIRST SET OF TOOLS" 
     partialScore=firstPartialScore
-    while partialScore > 0 and iteration <= maxIterations:
+    while partialScore > 0 and iteration <= max_interations:
         timePrev=time.time()
         weights=[]
         #weights IS A PAIRLIST(position,weight)
@@ -926,7 +917,7 @@ while global_score > 0 and iteration <= maxIterations and (not global_evaluation
             ################********************
             ####
             # get a possible mutation
-            mutation=mutation_attempt(sequence, weights)
+            mutation=mutation_attempt(sequence,weights)
             ##RESET LIST OF SCORES FOR THE MUTATED SEQUENCE
             for p in range(len(sequence)):
                 mutatedScores[p]=0
@@ -936,8 +927,8 @@ while global_score > 0 and iteration <= maxIterations and (not global_evaluation
                 print ""
                 indent=tab + tab + tab #output formatting stuff
                 print indent + "STARTING PROPOSED MUTATION EVALUATION"
-            firstPartialEvaluation(mutation.sequence, config_params, mutatedScores, verbose)
-            mutatedScore=get_global_score(mutatedScores)
+            mutatedScore=firstPartialEvaluation(mutation.sequence, config_params, mutatedScores, verbose)
+            # mutatedScore=get_global_score(mutatedScores)
             #if step_by_step:
               #raw_input(indent + "Hit enter to continue with mutation acceptance")
             #IF THE GLOBAL SCORE DECREASED
@@ -954,7 +945,7 @@ while global_score > 0 and iteration <= maxIterations and (not global_evaluation
                 print_formatted_scores(mutation.sequence,mutatedScores)
                 print indent + "Global score: " + str(mutatedScore)
                 print ""
-            if partialScore >= get_global_score(position_scores):
+            if partialScore >= mutatedScore: #get_global_score(position_scores):
                 if verbose:
                     print indent + "Previous score (" + str(partialScore) + ") >= Mutated score (" + str(mutatedScore) + ")" 
                     print indent + "...ACCEPT MUTATION"
@@ -975,7 +966,7 @@ while global_score > 0 and iteration <= maxIterations and (not global_evaluation
         if mutation_attempts < 10000:   #MAKE SURE LOOP ENDED BY MUTATION ACCEPT
             #print "Sequence after mutation:    " + mutatedSequence
             ###NOW THE SEQUENCE IS THE MUTATED SEQUENCE
-            sequence=mutatedSequence
+            sequence=mutation.sequence
             #AND THE POSITION SCORES ARE THE ONES CORRESPONDING TO THE MUTATED SEQUENCE
             position_scores=mutatedScores
             #AND THE GLOBAL SEQUENCE SCORE IS THE ONE CORRESPONDING TO THIS NEW SEQUENCE
@@ -1020,7 +1011,7 @@ while global_score > 0 and iteration <= maxIterations and (not global_evaluation
 
         secondPartialEvaluation(sequence,partialScores, verbose)
         partialScore=get_global_score(partialScores)
-        while partialScore > 0 and iteration <= maxIterations:
+        while partialScore > 0 and iteration <= max_interations:
             timePrev=time.time()
             weights=[]
             #weights IS A PAIRLIST(position,weight)
@@ -1036,7 +1027,7 @@ while global_score > 0 and iteration <= maxIterations and (not global_evaluation
                 indent = tab + tab    #output formatting
 
                 ## Attempt mutation
-                mutation=mutation_attempt(sequence)
+                mutation=mutation_attempt(sequence,weights)
                 ##RESET LIST OF SCORES FOR THE MUTATED SEQUENCE
                 for p in range(len(sequence)):
                     mutatedScores[p]=0
@@ -1136,8 +1127,8 @@ while global_score > 0 and iteration <= maxIterations and (not global_evaluation
 
     for p in range(len(sequence)):
         position_scores[p]=0
-    firstPartialEvaluation(sequence, config_params,position_scores , False )
-    global_score=get_global_score(position_scores)
+    global_score=firstPartialEvaluation(sequence, config_params,position_scores , False )
+    #global_score=get_global_score(position_scores)
     global_iteration=global_iteration+1;  
     #PRINT RESULTS OF GLOBAL ITERATION
     if verbose:
