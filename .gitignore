@@ -3,15 +3,16 @@
 *.o
 *~
 *.swp
-#ejecutable de anchor
+#some tool bins
 ANCHOR/anchor
 Tools/ANCHOR/anchor
-#ejecutable de iupred
 iupred/iupred
 iupredExe
 Tools/iupred.iupred
-#salidas y entradas de todos
-Output/*
+#inputs outputs
+outputs/*
+inputs/*
 Input/*
+Output/*
 TMHMM_*
 tests/Results/*
