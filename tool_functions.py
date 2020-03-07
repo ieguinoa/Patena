@@ -9,63 +9,60 @@ tab = "\t"
 space=" "
 indent=""
 #get base path
-def getScriptPath():
+def get_script_path():
     return os.path.dirname(os.path.realpath(sys.argv[0]))
 
-basePath=getScriptPath() + '/'
-toolsPath=basePath + 'Tools/'    #**************************TODO SET THE PATH TO THE TOOL SET 
+base_path = get_script_path() + '/'
+toolsPath = base_path + 'Tools/'    #**************************TODO SET THE PATH TO THE TOOL SET 
 
 
 
 def run_elm_search(sequence,outputsPath,verbose,detailed_output):
-  ##MAKE THE SEARCH AND SAVE RESULTS IN outputELM
-  elm_pattern_dict = {}
-  with open(toolsPath + "ELM/elm_patterns_20150301.txt", 'rU') as file_open :
-	  patterns = file_open.readlines()
-	  for line in patterns :
-		  line = line.split("\t")
-		  elm_id = line[0]
-		  elm_pattern = line[1].replace("\n","")
-		  elm_pattern_dict[elm_id] = elm_pattern
-
-  #print "SEARCHING ELMS IN %s\n ..." % filename
-  elm_pattern_desc_dict = {}
-  if verbose or detailed_output:     #ONLY IF ITS REQUIRED TO PRINT A DETAILED A OUTPUT, READ THE DESCRIPTION OF EACH ELM FROM A DIFFERENT FILE
-    with open(toolsPath + "ELM/elm_patterns_desc_20150301.txt", 'rU') as file_desc_open :
-	    patterns_desc = file_desc_open.readlines()
-	    for line in patterns_desc :
-		    line = line.split("\t")
-		    elm_id = line[0]
-		    #print line[1]
-		    elm_pattern_desc = line[1].replace("\n","")
-		    elm_pattern_desc_dict[elm_id] = elm_pattern_desc
-  #output_file_name = "elms_search_in_%s.txt" % filename[:-4]
-  output_file_name=outputsPath + "outputELM"
-  uniprot_list = []
-  sequence_dict = {}
-
-  #with open(filename, 'rU') as file_open :
-	  #my_seq = file_open.read()
-  with open(output_file_name, 'w') as file_write :
-	  for elm_id in elm_pattern_dict :
-		  where_to_start = []
-		  elm_pos_dict = {}
-		  pattern = re.compile('(?=%s)' % elm_pattern_dict[elm_id])
-		  for matched_string in pattern.finditer('%s' % sequence) :
-			  where_to_start.append(matched_string.start())
-		  pattern = re.compile(elm_pattern_dict[elm_id])
-		  for index in where_to_start :
-			  match = re.search(pattern, '%s' % sequence[index:])
-			  if match != None :
-				  #if detailed_output:
-				#	detailedOutFile.write(tab + str(index+1) + tab + str(index+len(match.group())) + tab+ elm_id +tab+ elm_pattern_desc_dict[elm_id] + '\n')	
-				  if verbose or detailed_output:     #write description next to the indexes
-				    #print elm_id
-				    file_write.write(str(index+1) + tab + str(index+len(match.group())) + tab+ elm_id +tab+ elm_pattern_desc_dict[elm_id] + '\n')
-				    #file_write.write("%s\t%s\t%s\t%s\n" % (index+1, index+len(match.group()) , elm_id , elm_pattern_desc_dict[elm_id] ))
-				  else:
-				    file_write.write("%s\t%s\n" % (index+1, index+len(match.group())))
-
+    ##MAKE THE SEARCH AND SAVE RESULTS IN outputELM
+    elm_pattern_dict = {}
+    with open(toolsPath + "ELM/elm_patterns_20150301.txt", 'rU') as file_open :
+        patterns = file_open.readlines()
+        for line in patterns :
+            line = line.split("\t")
+            elm_id = line[0]
+            elm_pattern = line[1].replace("\n","")
+            elm_pattern_dict[elm_id] = elm_pattern
+    #print "SEARCHING ELMS IN %s\n ..." % filename
+    elm_pattern_desc_dict = {}
+    if verbose or detailed_output:     #ONLY IF ITS REQUIRED TO PRINT A DETAILED A OUTPUT, READ THE DESCRIPTION OF EACH ELM FROM A DIFFERENT FILE
+         with open(toolsPath + "ELM/elm_patterns_desc_20150301.txt", 'rU') as file_desc_open :
+            patterns_desc = file_desc_open.readlines()
+            for line in patterns_desc :
+                line = line.split("\t")
+                elm_id = line[0]
+                #print line[1]
+                elm_pattern_desc = line[1].replace("\n","")
+                elm_pattern_desc_dict[elm_id] = elm_pattern_desc
+    #output_file_name = "elms_search_in_%s.txt" % filename[:-4]
+    output_file_name=outputsPath + "outputELM"
+    uniprot_list = []
+    sequence_dict = {}
+    #with open(filename, 'rU') as file_open :
+  	  #my_seq = file_open.read()
+    with open(output_file_name, 'w') as file_write :
+        for elm_id in elm_pattern_dict :
+            where_to_start = []
+            elm_pos_dict = {}
+            pattern = re.compile('(?=%s)' % elm_pattern_dict[elm_id])
+            for matched_string in pattern.finditer('%s' % sequence) :
+                where_to_start.append(matched_string.start())
+                pattern = re.compile(elm_pattern_dict[elm_id])
+                for index in where_to_start :
+                    match = re.search(pattern, '%s' % sequence[index:])
+                    if match != None :
+                        #if detailed_output:
+                        #	detailedOutFile.write(tab + str(index+1) + tab + str(index+len(match.group())) + tab+ elm_id +tab+ elm_pattern_desc_dict[elm_id] + '\n')	
+                        if verbose or detailed_output:     #write description next to the indexes
+                            #print elm_id
+                            file_write.write(str(index+1) + tab + str(index+len(match.group())) + tab+ elm_id +tab+ elm_pattern_desc_dict[elm_id] + '\n')
+                            #file_write.write("%s\t%s\t%s\t%s\n" % (index+1, index+len(match.group()) , elm_id , elm_pattern_desc_dict[elm_id] ))
+                        else:
+                            file_write.write("%s\t%s\n" % (index+1, index+len(match.group())))
 
 
 
@@ -165,96 +162,92 @@ def iupred(sequence, positionScores,config_params, inputsPath,outputsPath,verbos
 
 
 def anchor(sequence, positionScores,config_params,inputsPath,outputsPath,verbose,detailed_output):
-  anchorThreshold=config_params['anchorThreshold']
-  inputAnchor=inputsPath + "sequenceFASTA"
-  runCommand=toolsPath + "ANCHOR/anchor" + space + inputAnchor + space + outputsPath + "outAnchor"
-  os.system(runCommand)
-  outputAnchor=open(outputsPath + "outAnchor", "r")
-  if detailed_output:
-                detailedOutFile.write('ANCHOR: Search for binding regions in IDP\n')
-		detailedOutFile.write('Threshold: ' + str(anchorThreshold) + '\n')
-		detailedOutFile.write('Results \n')
-  if verbose:
-    print indent + 'Threshold: ' + str(anchorThreshold)
-  anchorScores=[]
-  iterOutputAnchor=iter(outputAnchor)
-  for p in range(len(sequence)):
-      anchorScores.append(0)
-  for x in range(len(sequence)):
-	  resultX=float(iterOutputAnchor.next())
-	  if detailed_output and (resultX >  anchorThreshold):
-                detailedOutFile.write('Position ' + str(x) + ' above threshold with value: ' + str(resultX) + '\n')
-	  if resultX >  anchorThreshold :
-	    anchorScores[x] = 1
-  #PRINT THE RESULTS OF ANCHOR
-  if verbose:
-    print indent + "RESULTS:"
-    data = [sequence,anchorScores]
-    col_width = max(len(str(word)) for row in data for word in row)   # padding
-    for row in data:
-      print indent + "|".join(str(word).ljust(col_width) for word in row)
-  outputAnchor.seek(0)
-  rstFile_iter = iter(outputAnchor)
-  #ADD 1 TO POSITIONS IN positionScores  IF THE RESULT IS GREATER THAN Threshold (PREDICTING A DISORDERED BINDING REGION)
-  for j in range(len(sequence)):
-	  resultJ=float(rstFile_iter.next())
-	  if resultJ > anchorThreshold :
-		  positionScores[j] += 1
-	  #else:
-		  #positionScores[j] += 0
-
+    anchorThreshold = config_params['anchorThreshold']
+    inputAnchor = inputsPath + "sequenceFASTA"
+    runCommand = toolsPath + "ANCHOR/anchor" + space + inputAnchor + space + outputsPath + "outAnchor"
+    os.system(runCommand)
+    outputAnchor = open(outputsPath + "outAnchor", "r")
+    if detailed_output:
+        detailedOutFile.write('ANCHOR: Search for binding regions in IDP\n')
+        detailedOutFile.write('Threshold: ' + str(anchorThreshold) + '\n')
+        detailedOutFile.write('Results \n')
+    if verbose:
+        print indent + 'Threshold: ' + str(anchorThreshold)
+    anchorScores=[]
+    iterOutputAnchor=iter(outputAnchor)
+    for p in range(len(sequence)):
+        anchorScores.append(0)
+    for x in range(len(sequence)):
+        resultX=float(iterOutputAnchor.next())
+        if detailed_output and (resultX >  anchorThreshold):
+            detailedOutFile.write('Position ' + str(x) + ' above threshold with value: ' + str(resultX) + '\n')
+        if resultX >  anchorThreshold :
+            anchorScores[x] = 1
+    #PRINT THE RESULTS OF ANCHOR
+    if verbose:
+        print indent + "RESULTS:"
+        data = [sequence,anchorScores]
+        col_width = max(len(str(word)) for row in data for word in row)   # padding
+        for row in data:
+            print indent + "|".join(str(word).ljust(col_width) for word in row)
+    outputAnchor.seek(0)
+    rstFile_iter = iter(outputAnchor)
+    #ADD 1 TO POSITIONS IN positionScores  IF THE RESULT IS GREATER THAN Threshold (PREDICTING A DISORDERED BINDING REGION)
+    for j in range(len(sequence)):
+        resultJ=float(rstFile_iter.next())
+        if resultJ > anchorThreshold :
+            positionScores[j] += 1
 
 
 def pastaSearch(sequence,positionScores,config_params,inputsPath, outputsPath,verbose,detailed_output):
-  pastaThreshold=config_params['pastaThreshold']
-  input=open(inputsPath + "seq.fasta" , "w")
-  input.write(">gi" + endl)
-  input.write(sequence)
-  input.close()
-  pastaPath=toolsPath + 'PASTA/pasta_exe/'
-  runCommand = "perl " + pastaPath+'PastaPairs.pl' + space + pastaPath +'pot_pasta.dat '+ inputsPath + " 1 0 self " + str(pastaThreshold) + space + pastaPath + " > /dev/null"
-  #print 'comando:' + runCommand
-  os.system(runCommand)
-  ### CHECK THIS!!! THE OUTPUT IS IN THE SAME DIR AS INPUT (CHECK PASTA PERL SCRIPT)
-  outputPasta=open(inputsPath + "seq-seq.best_pairings_list.pair.dat")
-  pastaScores=[]
-  for p in range(len(sequence)):
-    pastaScores.append(0)
-  if detailed_output:
-                detailedOutFile.write('PASTA: predict aggregation-prone portions of the sequence\n')
-                detailedOutFile.write('Threshold: ' + str(pastaThreshold) + '\n')
-  if verbose:
-    print indent + 'Threshold: ' + str(pastaThreshold)
-  for line in outputPasta.readlines():
-     #print line.split()[9]
-     #print line.split()[10]
-     #print line.split()[11]
-     #print line.split()[12]
-     pairingEnergyValue=float(line.split()[4])
-     if pairingEnergyValue < pastaThreshold:  
-	#FALTA ANALIZAR EL OTRO SEGMENTO DE EMPAREJAMIENTO SI ES DISTINTO!!!!  
-	fromP, dash,toP = (line.split()[9]).partition('-')
-	#print str(fromP) + str(dash) + str(toP)
-        for hits in range(int(fromP)-1,int(toP)):
-          #PONER SCORE=1 ASI NO SE INCREMENTA TANTO EL VALOR, 
-     	  pastaScores[hits]=+1 
-        if detailed_output:
+    pastaThreshold=config_params['pastaThreshold']
+    input=open(inputsPath + "seq.fasta" , "w")
+    input.write(">gi" + endl)
+    input.write(sequence)
+    input.close()
+    pastaPath=toolsPath + 'PASTA/pasta_exe/'
+    runCommand = "perl " + pastaPath+'PastaPairs.pl' + space + pastaPath +'pot_pasta.dat '+ inputsPath + " 1 0 self " + str(pastaThreshold) + space + pastaPath + " > /dev/null"
+    #print 'comando:' + runCommand
+    os.system(runCommand)
+    ### CHECK THIS!!! THE OUTPUT IS IN THE SAME DIR AS INPUT (CHECK PASTA PERL SCRIPT)
+    outputPasta=open(inputsPath + "seq-seq.best_pairings_list.pair.dat")
+    pastaScores=[]
+    for p in range(len(sequence)):
+        pastaScores.append(0)
+    if detailed_output:
+        detailedOutFile.write('PASTA: predict aggregation-prone portions of the sequence\n')
+        detailedOutFile.write('Threshold: ' + str(pastaThreshold) + '\n')
+    if verbose:
+        print indent + 'Threshold: ' + str(pastaThreshold)
+    for line in outputPasta.readlines():
+        #print line.split()[9]
+        #print line.split()[10]
+        #print line.split()[11]
+        #print line.split()[12]
+        pairingEnergyValue=float(line.split()[4])
+        if pairingEnergyValue < pastaThreshold:
+            #TODO: NEED TO CHECK THE OTHER SEGMENT OF PAIRING IF ITS DIFFERENT
+            fromP, dash,toP = (line.split()[9]).partition('-')
+            #print str(fromP) + str(dash) + str(toP)
+            for hits in range(int(fromP)-1,int(toP)):
+                #set scoring=1 so the value is not incremented so much
+                pastaScores[hits]=+1
+            if detailed_output:
                 detailedOutFile.write(str(line.split()[4]) + tab + 'Segment ' + str(line.split()[9]) + ' and segment ' + str(line.split()[11]) + ' in ' + str(line.split()[12]) + ' have a pairing energy value (PASTA UNITS) of '+ str(line.split()[4]) + ' which is lower than the threshold' '\n')
-     	if verbose: 
-		print indent + 'Hit:'
-		print indent + 'Energy value: ' + line.split()[4]	
-		print indent + 'Positions:    ' + line.split()[9] + ' and ' + line.split()[11] + ' ' + line.split()[12]
-  #position=0
-  if verbose:
-    print indent + "RESULTS:"
-    data = [sequence,pastaScores]
-    col_width = max(len(str(word)) for row in data for word in row)   # padding
-    for row in data:
-      print indent + "|".join(str(word).ljust(col_width) for word in row)
-  
-  for x in range(0,len(sequence)):
-    if pastaScores[x] > 0:
-      positionScores[x] += pastaScores[x]
+            if verbose:
+                print 'Hit:'
+                print 'Energy value: ' + line.split()[4]
+                print 'Positions:    ' + line.split()[9] + ' and ' + line.split()[11] + ' ' + line.split()[12]
+    #position=0
+    if verbose:
+        print "RESULTS:"
+        data = [sequence,pastaScores]
+        col_width = max(len(str(word)) for row in data for word in row)   # padding
+        for row in data:
+            print indent + "|".join(str(word).ljust(col_width) for word in row)
+    for x in range(0,len(sequence)):
+        if pastaScores[x] > 0:
+            positionScores[x] += pastaScores[x]
 
 
 
@@ -387,45 +380,41 @@ def tmhmmEval(sequence, positionScores,config_params,inputsPath,outputsPath,verb
 def amyloidPatternSearch(sequence, positionScores,config_params,inputsPath,outputsPath,verbose,detailed_output):
     amyloidScore = []
     for p in range(len(sequence)):
-	amyloidScore.append(0)
+        amyloidScore.append(0)
    #TODO READ PATTERN FROM FILE IN Tools DIR
     pattern = re.compile("[^P][^PKRHW][VLSCWFNQE][ILTYWFNE][FIY][^PKRH]")
     where_to_start = []
     #elm_pos_dict = {}
     hits = False
     if detailed_output:
-                detailedOutFile.write('Searching determinants for amyloid formation in acidic pH\n')
+        detailedOutFile.write('Searching determinants for amyloid formation in acidic pH\n')
     for matched_string in pattern.finditer('%s' % sequence) :
-	where_to_start.append(matched_string.start())
+        where_to_start.append(matched_string.start())
         #pattern = re.compile("[^P][PKRHW][VLSCWFNQE][ILTYWFNE][FIY][^PKRH]")
-    	for index in where_to_start :
-		    match = re.search(pattern, '%s' % sequence[index:])
-		    if match != None :
-		            hits=True
-			    if detailed_output:
-                		detailedOutFile.write("Sequence determinant found: ")
-				detailedOutFile.write("Start: " + str(index) + ' - End: ' + str(len(match.group())) )
-			    if verbose: 
-			    	print indent + "Acidic pH: SEQUENCE DETERMINANT FOUND "
-			    for x in range(index,index+len(match.group())):
-			      amyloidScore[x] += 1
-	    #else:
-	      #if verbose:
-		#print indent + 'NO MATCHES'
-
+        for index in where_to_start :
+            match = re.search(pattern, '%s' % sequence[index:])
+            if match != None :
+                hits=True
+                if detailed_output:
+                    detailedOutFile.write("Sequence determinant found: ")
+                    detailedOutFile.write("Start: " + str(index) + ' - End: ' + str(len(match.group())) )
+                if verbose: 
+                    print indent + "Acidic pH: SEQUENCE DETERMINANT FOUND "
+                for x in range(index,index+len(match.group())):
+                    amyloidScore[x] += 1
     if verbose or detailed_output:
-      if hits:
-	if verbose:
-		print indent + "Sequence determinants for amyloid formation in acidic pH: FOUND"
-	data = [sequence,amyloidScore]
-	col_width = max(len(str(word)) for row in data for word in row)   # padding
-	for row in data:
-	  print indent + "|".join(str(word).ljust(col_width) for word in row)
-      else:
-	if verbose:
-		print indent + 'NO HITS'
-	else:
-		detailedOutFile.write('NO hits found \n')
+        if hits:
+            if verbose:
+                print indent + "Sequence determinants for amyloid formation in acidic pH: FOUND"
+            data = [sequence,amyloidScore]
+            col_width = max(len(str(word)) for row in data for word in row)   # padding
+            for row in data:
+                print indent + "|".join(str(word).ljust(col_width) for word in row)
+        else:
+            if verbose:
+                print indent + 'NO HITS'
+            else:
+                detailedOutFile.write('NO hits found \n')
 
 
 
@@ -497,11 +486,11 @@ def tangoSearch(sequence, positionScores,config_params,inputsPath,outputsPath,ve
     #print runCommand 
     os.system(runCommand)
     outputTango=open(outputTango,'r')
-    os.chdir(basePath)
+    os.chdir(base_path)
     tangoScores = []
     if detailed_output:
         detailedOutFile.write('Tango: prediction of aggregating regions in unfolded polypeptide chains')
-        # detailedOutFile.write('Threshold: ' + str(tangoThreshold) + '\n')
+        detailedOutFile.write('Threshold: ' + str(tangoThreshold) + '\n')
         detailedOutFile.write('Values are shown as: beta - turn - helix - aggregation'  + '\n') 
     for p in range(len(sequence)):
         tangoScores.append(0)
@@ -667,7 +656,7 @@ def blastIt(sequence, positionScores, database, inputsPath,verbose, detailed_out
         if detailed_output:
                 if not match:
                 	detailedOutFile.write('NO hits found\n') 
-	blastScores=[]    
+	blastScores=[]
 	for p in range(len(sequence)):
 	      blastScores.append(0)
 	if match:
