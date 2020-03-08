@@ -417,7 +417,7 @@ def main():
     parser.add_argument('--stepped', dest="step_by_step",action='store_true',help='Ask for user input after each step.')
     parser.add_argument("--detailed-output", action='store', type=argparse.FileType('w'), dest='details_out',help="Directs the output to a name of your choice")
     parser.add_argument('--max-iterations', nargs=1, type=int, default=4000, help='Max ammount of iterations')
-    parser.add_argument('--length', nargs=1, type=int, default=12, help='Sequence length')
+    parser.add_argument('--length',  type=int, default=12, help='Sequence length')
     parser.add_argument('--beta', nargs=1, type=float, default=0.5, help='Monte Carlo Beta value')
     parser.add_argument('--net-charge', nargs=1, type=int, help='Net charge of the final sequence')
     parser.add_argument('--seq', nargs=1, help='Starting sequence')
@@ -432,7 +432,7 @@ def main():
     verbose = args.verbose
     testTimes = args.testTimes
     step_by_step = args.step_by_step
-    length= args.length
+    length = args.length
     beta = args.beta
 
     ### TODO:check sequence with re
@@ -714,7 +714,6 @@ def main():
             #sequence = html[i+1:].replace('\n', '')
             ##if verbose:
                ##print "*******************************" 
-            
 
     #GENERATE RANDOM SEQUENCE WITH THE DEFINED COMPOSITION
     if not sequence:
