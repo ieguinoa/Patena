@@ -338,6 +338,15 @@ def main():
     output=True  ##print info to file
     # global_evaluation=False  #when True, just make a general evaluation of the sequence: run all tools(from each loop) and print the results of each 
 
+    #FILES
+    logFileName='mutations' + str(exeId) + '.log'
+
+
+
+    #AA FREQUENCIES TO SELECT NEW RESIDUES FOR MUTATIONS (from http://web.expasy.org/protscale/pscale/A.A.Swiss-Prot.html) 
+    #aaFrequencies= [("A",825), ("R",553),("N",406),("D",545),("C",137),("E",393),("Q",675),("G",707),("H",227),("I",596),("L",966),("K",548),("M",242),("F",386),("P",470),("S",656),("T",534),("W",108),("Y",292),("V",687) ]
+
+
     # EXECUTION TIMES OF DIFFERENT PARTS
     times_dict={
         'Tango':0.0,
@@ -353,40 +362,7 @@ def main():
         'Net charge':0.0
     }
 
-
-
-
-    #EVALUATION PARAMETERs (TEST MODE)
-
-
-
-    #All tools enabled by default 
-    #runBlast=runTango=runPasta=runWaltz=runElm=runProsite=runLimbo=runTmhmm=runIupred=runAnchor=runAmyloidPattern=True
-
-    #TODO CHANGE TO USAGE OF EXECUTION SET
     execution_set={'Tango','Pasta','Waltz','ELM','Prosite','Limbo','Tmhmm','IUpred','Anchor','Amyloid Pattern'}
-
-    #FILES
-    logFileName='mutations' + str(exeId) + '.log'
-
-
-    #####CREATE INPUT AND OUTPUT DIRS
-    try:
-        os.makedirs("Input")
-    except OSError as exc: 
-        if exc.errno == errno.EEXIST and os.path.isdir("Input"):
-            pass
-
-    try:
-        os.makedirs("Output")
-    except OSError as exc: 
-        if exc.errno == errno.EEXIST and os.path.isdir("Output"):
-            pass
-
-
-    #AA FREQUENCIES TO SELECT NEW RESIDUES FOR MUTATIONS (from http://web.expasy.org/protscale/pscale/A.A.Swiss-Prot.html) 
-    #aaFrequencies= [("A",825), ("R",553),("N",406),("D",545),("C",137),("E",393),("Q",675),("G",707),("H",227),("I",596),("L",966),("K",548),("M",242),("F",386),("P",470),("S",656),("T",534),("W",108),("Y",292),("V",687) ]
-
 
     evaluateNetCharge = False
 
@@ -571,10 +547,10 @@ def main():
 
 
     #***********************************************************************
-
     ### PRE-RUN SETUP AND PARAMS CHECK
-
     # ****************************************
+
+
 
     #CHECK IF TARGET NET CHARGE IS POSSIBLE BASED ON SEQUENCE LENGTH (AND PH??)
     if evaluateNetCharge:
@@ -585,13 +561,24 @@ def main():
 
 
     #PATHS
+    #####CREATE INPUT AND OUTPUT DIRS
+    try:
+        os.makedirs("Input")
+    except OSError as exc: 
+        if exc.errno == errno.EEXIST and os.path.isdir("Input"):
+            pass
+    try:
+        os.makedirs("Output")
+    except OSError as exc: 
+        if exc.errno == errno.EEXIST and os.path.isdir("Output"):
+            pass
+
     base_path=get_script_path() + '/'
     # toolsPath=base_path + 'Tools/'    #**************************TODO SET THE PATH TO THE TOOL SET 
     inputsPath=base_path + "/inputs/"+ str(exeId) + "/" #SET PATH TO SAVE INPUTS FILES
     job_out_path=base_path + "/outputs/" + str(exeId) + "/"
     testOutputPath=job_out_path   # DEFAULT OUTPUT FOR TESTs 
     logsPath=job_out_path #default path for log files
-
 
 
     ##### TRY TO CREATE INPUT AND OUTPUT DIRS
