@@ -317,28 +317,26 @@ def print_formatted_scores(sequence, scores):
 
 def main():
     #  CUTOFFS, THRESHOLDS, LIMITS , DEFAULTS
-    targetScore=0.0
+    targetScore=0.0 ### not working????
     composition="average"
     #a=r=n=d=c=q=e=g=h=i=l=k=m=f=p=s=t=w=y=v=-1
     userComposition={"A":-999 , "R":-999  , "N":-999  , "D":-999  , "C":-999  , "E":-999 , "Q":-999  , "G":-999  , "H":-999  , "I":-999  , "L":-999  , "K":-999  ,"M":-999  , "F":-999  , "P":-999  , "S":-999  , "T":-999  , "W":-999  , "Y":-999  , "V":-999 }
     database="uniprot_sprot.fasta"
-    sequence="RANDOM"
+    # sequence="RANDOM"
 
 
 
 
     #  EXECUTION PARAMETERS
-    testTimes=False   #True=print times of each part
+    # testTimes=False   #True=print times of each part
     min_logging=False  #True = only print global scores at end of iteration
     # verbose=False        #True = print detailed information of execution
     # step_by_step=False
     # rand=True
     testing=False
-    change=True
-    evaluateNetCharge=False
+    # change=True
     output=True  ##print info to file
     # global_evaluation=False  #when True, just make a general evaluation of the sequence: run all tools(from each loop) and print the results of each 
-    detailed_output=False
 
     # EXECUTION TIMES OF DIFFERENT PARTS
     times_dict={
@@ -400,13 +398,8 @@ def main():
                    }
 
 
-
-
-
-
     #**************************
     #******* PARAMS *******
-
 
     parser = argparse.ArgumentParser(description='Evaluate/Generate linker sequences')
     parser.add_argument('--evaluation-only', dest="global_evaluation",action='store_true',help='Only perform evaluation steps on the sequence. Do NOT attempt mutations.')
@@ -416,7 +409,7 @@ def main():
     parser.add_argument('--verbose', dest="verbose",action='store_true',help='Verbose output.')
     parser.add_argument('--stepped', dest="step_by_step",action='store_true',help='Ask for user input after each step.')
     parser.add_argument("--detailed-output", action='store', type=argparse.FileType('w'), dest='details_out',help="Directs the output to a name of your choice")
-    parser.add_argument('--max-iterations', nargs=1, type=int, default=4000, help='Max ammount of iterations')
+    parser.add_argument('--max-iterations', nargs=1, type=int, default=4000, help='Max amount of iterations')
     parser.add_argument('--length',  type=int, default=12, help='Sequence length')
     parser.add_argument('--beta', nargs=1, type=float, default=0.5, help='Monte Carlo Beta value')
     parser.add_argument('--net-charge', nargs=1, type=int, help='Net charge of the final sequence')
