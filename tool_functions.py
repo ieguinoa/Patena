@@ -276,7 +276,7 @@ def prositeSearch(sequence,positionScores,config_params,inputsPath,outputsPath,v
             for x in range(pattern_start-1,pattern_end):
                 prositeScores[x]+=1
             if verbose:
-                print indent + "Hit: " +line
+                print indent + "Hit: " + line.strip('\n')
             if detailed_output:
                 detailedOutFile.write(line)
             #print "Hit:" + line.split()[0] + "-" +line.split()[1] + space +  line.split()[2] + space + line.split()[3] + space + line.split()[4]
