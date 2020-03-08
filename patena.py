@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import argparse
 import urllib2
 import StringIO
 import sys
@@ -44,6 +45,7 @@ weighted_choice = lambda s : random.choice(sum(([v]*wt for v,wt in s),[]))
 
 
 
+### TODO: move all global values inside main function
 
 #*********************
 #******GLOBALS*******
@@ -59,39 +61,27 @@ indent=""
 exeId=os.getpid()
 
 #  CUTOFFS, THRESHOLDS, LIMITS , DEFAULTS
-max_interations=4000
-beta=0.5   #MC
 targetScore=0.0
 composition="average"
 #a=r=n=d=c=q=e=g=h=i=l=k=m=f=p=s=t=w=y=v=-1
 userComposition={"A":-999 , "R":-999  , "N":-999  , "D":-999  , "C":-999  , "E":-999 , "Q":-999  , "G":-999  , "H":-999  , "I":-999  , "L":-999  , "K":-999  ,"M":-999  , "F":-999  , "P":-999  , "S":-999  , "T":-999  , "W":-999  , "Y":-999  , "V":-999 }
 database="uniprot_sprot.fasta"
 sequence="RANDOM"
-uvsilent=False
 
-config_params = { 'iupredThreshold': 0.5,
-                'anchorThreshold': 0.5,
-                'waltzThreshold': 79.0,
-                'pastaThreshold': -5.5,
-                'targetNetCharge': 0,
-                'tangoThreshold': 1.0
-               }
 
 
 
 #  EXECUTION PARAMETERS
 testTimes=False   #True=print times of each part
 min_logging=False  #True = only print global scores at end of iteration
-verbose=False        #True = print detailed information of execution
-step_by_step=False
-rand=True
+# verbose=False        #True = print detailed information of execution
+# step_by_step=False
+# rand=True
 testing=False
 change=True
 evaluateNetCharge=False
 output=True  ##print info to file
-mutation_attempts=0
-length=12   #defaul sequence length
-global_evaluation=False  #when True, just make a general evaluation of the sequence: run all tools(from each loop) and print the results of each 
+# global_evaluation=False  #when True, just make a general evaluation of the sequence: run all tools(from each loop) and print the results of each 
 detailed_output=False
 
 # EXECUTION TIMES OF DIFFERENT PARTS
@@ -183,7 +173,7 @@ def print_evaluation_time(total_elapsed_time,times_dict):
 
 
 
-def print_execution_params(exe_id,beta,length,composition,sequence,evaluate_netcharge,target_net_charge):
+def print_execution_params(exe_id,beta,length,composition,sequence,evaluate_netcharge,config_params):
     #####   ALWAYS PRINT GENERAL PARAMETERS OF EXECUTION
     #print endl
     print "************************************************"
@@ -195,7 +185,7 @@ def print_execution_params(exe_id,beta,length,composition,sequence,evaluate_netc
     print "Composition=" + composition
     print "Sequence=" + sequence
     if evaluate_netcharge:
-      print "Target net charge=" + str(target_net_charge)
+      print "Target net charge=" + str(config_params['targetNetCharge'])
     print "************************************************"
     print "************************************************"
 
@@ -258,37 +248,37 @@ def firstPartialEvaluation(sequence, config_params,position_scores, verbose):
 
 
 def secondPartialEvaluation(sequence, position_scores, verbose):
-	#SAVE SEQUENCE TO EVALUATE(FASTA FORMAT) IN A FILE
-	input=open(inputsPath + "sequenceFASTA"  , "w")
-	input.write(">gi" + endl)
-	input.write(sequence)
-	input.close()
-	##: BLAST SEARCH
-	if verbose:
-	   print indent + "*************************************"
-	   print indent + "SECOND PARTIAL EVALUATION"
-	   print endl
-	   print indent + "*************************************"
-	   #print indent + "STARTING BLAST SEARCH"
-	timePrev=time.time()
-	tool_functions.blastIt(sequence,position_scores,database,inputsPath, verbose,detailed_output)
-	#blastTime+=(time.time() - timePrev)
-        #if step_by_step:
-	  #raw_input(indent + "Hit enter to continue with next evaluation")
-	if detailed_output:
-                details_out.write('\n\n***********\n\n' )
-	if step_by_step:
-	  raw_input(indent + "Press enter to see final results...")
-        ##PRINT SCORE
-        if verbose:
-	  print indent + "*************************************"
-	  print endl
-	  print indent + "RESULTS OF SECOND PARTIAL EVALUATION:"
-          print_formatted_scores(sequence,position_scores)
-	  print indent + "SCORE:" + str(get_global_score(position_scores))
-	  print indent + "*************************************"
-	if step_by_step:
-	  raw_input(indent + "....hit enter to continue")
+    #SAVE SEQUENCE TO EVALUATE(FASTA FORMAT) IN A FILE
+    input=open(inputsPath + "sequenceFASTA"  , "w")
+    input.write(">gi" + endl)
+    input.write(sequence)
+    input.close()
+    ##: BLAST SEARCH
+    if verbose:
+        print indent + "*************************************"
+        print indent + "SECOND PARTIAL EVALUATION"
+        print endl
+        print indent + "*************************************"
+        #print indent + "STARTING BLAST SEARCH"
+    timePrev=time.time()
+    tool_functions.blastIt(sequence,position_scores,database,inputsPath, verbose,detailed_output)
+    #blastTime+=(time.time() - timePrev)
+    #if step_by_step:
+      #raw_input(indent + "Hit enter to continue with next evaluation")
+    if detailed_output:
+        details_out.write('\n\n***********\n\n' )
+    if step_by_step:
+        raw_input(indent + "Press enter to see final results...")
+    ##PRINT SCORE
+    if verbose:
+        print indent + "*************************************"
+        print endl
+        print indent + "RESULTS OF SECOND PARTIAL EVALUATION:"
+        print_formatted_scores(sequence,position_scores)
+        print indent + "SCORE:" + str(get_global_score(position_scores))
+        print indent + "*************************************"
+    if step_by_step:
+        raw_input(indent + "....hit enter to continue")
 
 
 
@@ -335,7 +325,7 @@ def mutation_attempt(sequence,weights,eval_step,iteration,mutation_attempts):
 
 
 
-def mc_evaluation(partialScore,mutated_score,eval_step,iteration,mutation_attempts):
+def mc_evaluation(partialScore,mutated_score,eval_step,iteration,mutation_attempts,verbose):
     if verbose:
         print str(iteration) + tab + str(mutation_attempts) +  eval_step + tab + "PREV-SCORE (" + str(partialScore) + ") < MUT-SCORE (" + str(mutated_score) + ")" 
     diff=partialScore-mutated_score
@@ -372,17 +362,6 @@ def print_formatted_scores(sequence, scores):
 
 
 
-## PRINT PROGRAM HELP 
-def printHelp():
-  print endl + "Usage: "
-  print "  python patena.py [options]" + endl
-  print "Options are:"
-  print tab + "--length  sequence-length                " + tab + "Define random sequence length"
-  #print tab + "--db   [swissprot | nr]			"   + tab + ""    #blast database
-  #print tab + "--composition  [average | user_specified]"  + tab + "Composition used to select AA (if user_specified you must define AA frequencies)"
-  print tab + "--seq   predefined-sequence		" + tab + "Define sequence to start with"
-  print tab + "--maxmutations  max-number		"   + tab + "Limit in number of ACCEPTED mutations(NOT MUTTATION ATTEMPTS)"   # 
-  #print tab + "--maxiterations"   ?????    SUM OF MUTATION ATTEMPTS ?????     ******MAINLY FOR PERFORMANCE REASONS
 
 
 
@@ -395,167 +374,197 @@ def printHelp():
 
 #***********************************************************************
 
+
+
+
+
+
 #**************************
 #**************************
-#******* PARAMATERS *******
+#******* MAIN *******
 #**************************
 
 
 
 
 
-#*******PARAMETERS******
-if len(sys.argv) < 2:
-  print "************************************************"
-  print "************************************************"
-  print "USING DEFAULT VALUES - If you want a specific configuration, see the options using  --help"
-  print "************************************************"
-  print "************************************************"
 
 
-else:
-  for index in range(1,len(sys.argv)):
-    arg = sys.argv[index]
-    if (arg=='-H' or arg== '-help' or arg== '--help'):
-      printHelp()
-      exit()
-    elif (arg=='--length') and (index < len(sys.argv)):
-      length = int(sys.argv[index+1])
-    elif (arg=='--beta') and (index < len(sys.argv)):
-      beta = float(sys.argv[index+1])  
-    elif (arg=='--seq') and (index < len(sys.argv)):
-      sequence = sys.argv[index+1]
-      length=len(sequence)
-      rand=False
-    elif (arg=='--noMutations'):
-      global_evaluation=True
-    elif (arg=='--db') and (index < len(sys.argv)):
-      database = sys.argv[index+1]
-    elif (arg=='--blastweb'):
-      blastWeb=True
-    elif (arg=='--uvsilent'):
-      uvsilent=True 
-    elif (arg=='--netcharge') and (index < len(sys.argv)):
-      config_params['targetNetCharge'] = int(sys.argv[index+1])
-      evaluateNetCharge=True
-      execution_set.add('Net charge')  # 'Net charge' is not in the execution_set by default, only included by user request
+evaluateNetCharge = False
 
-# execution_set={'Tango','Pasta','Waltz','ELM','Prosite','Limbo','Tmhmm','IUpred','Anchor','Amyloid Pattern'}
-    elif (arg=='--noblast'):
-      runBlast=False
-    elif (arg=='--notango'):
-      execution_set.remove('Tango')
-    elif (arg=='--noelm'):
-      execution_set.remove('ELM')
-    elif (arg=='--noiupred'):
-      execution_set.remove('IUpred')
-    elif (arg=='--noanchor'):
-      execution_set.remove('Anchor')
-    elif (arg=='--noprosite'):
-      execution_set.remove('Prosite')
-    elif (arg=='--nolimbo'):
-      execution_set.remove('Limbo')
-    elif (arg=='--notmhmm'):
-      execution_set.remove('Tmhmm')
-    elif (arg=='--nopasta'):
-      execution_set.remove('Pasta')
-    elif (arg=='--nowaltz'):
-      execution_set.remove('Waltz')
-    elif (arg=='--noamyloidpattern'):
-      execution_set.remove('Amyloid Pattern')
-
-    elif (arg=='--stepped'):
-      step_by_step=True
-      verbose=True   #MAKES NO SENSE TO GO STEP BY STEP IF CANT SEE A DETAILED OUTPUT
-    elif (arg=='--maxiterations') and (index < len(sys.argv)):
-      max_interations=int(sys.argv[index+1])
+config_params = { 'iupredThreshold': 0.5,
+                'anchorThreshold': 0.5,
+                'waltzThreshold': 79.0,
+                'pastaThreshold': -5.5,
+                'tangoThreshold': 1.0
+               }
 
 
 
-    #CHECK IF THE USER DEFINED ANY OF THE AAs FREQUENCIES
-    #elif (arg== '--composition') and (index < len(sys.argv)):
-      #composition = sys.argv[index+1]
-      #if (composition=="user_specified"):  #frequencies specified by parameter
-	#for j in range(index+2,len(sys.argv),2):
-    elif(arg=='-a'):
-      userComposition['A']=int(sys.argv[index+1])
-      composition=="user_specified"
-    elif(arg=='-r'):
-      userComposition['R']=int(sys.argv[index+1])
-      composition=="user_specified"
-    elif(arg=='-n'):
-      userComposition['N']=int(sys.argv[index+1])
-      composition=="user_specified"
-    elif(arg=='-d'):
-      userComposition['D']=int(sys.argv[index+1])
-      composition=="user_specified"
-    elif(arg=='-c'):
-      userComposition['C']=int(sys.argv[index+1])
-      composition=="user_specified"
-    elif(arg=='-q'):
-      userComposition['Q']=int(sys.argv[index+1])
-      composition=="user_specified"
-    elif(arg=='-e'):
-      userComposition['E']=int(sys.argv[index+1])
-      composition=="user_specified"
-    elif(arg=='-g'):
-      userComposition['G']=int(sys.argv[index+1])
-      composition=="user_specified"
-    elif(arg=='-h'):
-      userComposition['H']=int(sys.argv[index+1])
-      composition=="user_specified"
-    elif(arg=='-i'):
-      userComposition['I']=int(sys.argv[index+1])
-      composition=="user_specified"
-    elif(arg=='-l'):
-      userComposition['L']=int(sys.argv[index+1])
-      composition=="user_specified"
-    elif(arg=='-k'):
-      userComposition['K']=int(sys.argv[index+1])
-      composition=="user_specified"
-    elif(arg=='-m'):
-      userComposition['M']=int(sys.argv[index+1])
-      composition=="user_specified"
-    elif(arg=='-f'):
-      userComposition['F']=int(sys.argv[index+1])
-      composition=="user_specified"
-    elif(arg=='-p'):
-      userComposition['P']=int(sys.argv[index+1])
-      composition=="user_specified"
-    elif(arg=='-s'):
-      userComposition['S']=int(sys.argv[index+1])
-      composition=="user_specified"
-    elif(arg=='-t'):
-      userComposition['T']=int(sys.argv[index+1])
-      composition=="user_specified"
-    elif(arg=='-w'):
-      userComposition['W']=int(sys.argv[index+1])
-      composition=="user_specified"
-    elif(arg=='-y'):
-      userComposition['Y']=int(sys.argv[index+1])
-      composition=="user_specified"
-    elif(arg=='-v'):
-      userComposition['V']=int(sys.argv[index+1])
-      composition=="user_specified"
 
 
 
-###   OUTPUT DETAILS
-    elif (arg=='--verbose'):
-      verbose=True 
-    elif (arg=='--detailed') and (index < len(sys.argv)): # print detailed output for each (to output file) 
-      detailed_output=True
-      details_out=open(sys.argv[index+1],'w') 	
-    elif (arg=='--minoutput') and (index < len(sys.argv)):
-      min_logging=True
-      logsPath= sys.argv[index+1]
-    elif (arg=='--testoutput') and (index < len(sys.argv)):
-      testing=True
-      testOutputPath = sys.argv[index+1]
-    elif (arg=='--gettime'):
-      testTimes=True   
-    elif (arg=='--jobid') and (index < len(sys.argv)):
-      exeId=sys.argv[index+1]
+#**************************
+#******* PARAMS *******
+
+
+parser = argparse.ArgumentParser(description='Evaluate/Generate linker sequences')
+parser.add_argument('--evaluation-only', dest="global_evaluation",action='store_true',help='Only perform evaluation steps on the sequence. Do NOT attempt mutations.')
+parser.add_argument('--blast-web', dest="blast_web",action='store_true',help='Use BLAST web service instead of local installation.')
+parser.add_argument('--uvsilent', dest="uvsilent",action='store_true',help='UV silent........')
+parser.add_argument('--gettime', dest="testTimes",action='store_true',help='Print execution times for each evaluation.')
+parser.add_argument('--verbose', dest="verbose",action='store_true',help='Verbose output.')
+parser.add_argument('--stepped', dest="step_by_step",action='store_true',help='Ask for user input after each step.')
+parser.add_argument("--detailed-output", action='store', type=argparse.FileType('w'), dest='details_out',help="Directs the output to a name of your choice")
+parser.add_argument('--max-iterations', nargs=1, type=int, default=4000, help='Max ammount of iterations')
+parser.add_argument('--length', nargs=1, type=int, default=12, help='Sequence length')
+parser.add_argument('--beta', nargs=1, type=float, default=0.5, help='Monte Carlo Beta value')
+parser.add_argument('--net-charge', nargs=1, type=int, help='Net charge of the final sequence')
+parser.add_argument('--seq', nargs=1, help='Starting sequence')
+
+
+
+args = parser.parse_args()
+global_evaluation = args.global_evaluation
+blastWeb = args.blast_web
+uvsilent = args.uvsilent
+max_iterations = args.max_iterations
+verbose = args.verbose
+testTimes = args.testTimes
+step_by_step = args.step_by_step
+length= args.length
+beta = args.beta
+
+### TODO:check sequence with re
+## (ARNDCQEGHILKMFPSTWYV)
+sequence=args.seq  #sequence could be None if it was not defined by user
+
+
+if step_by_step:
+    verbose = True   #MAKES NO SENSE TO GO STEP BY STEP IF CANT SEE A DETAILED OUTPUT
+
+details_out = args.details_out
+detailed_output = False
+if details_out:
+    detailed_output = True
+
+if args.net_charge:  # != None
+    evaluateNetCharge=True
+    config_params['targetNetCharge'] = args.net_charge
+    execution_set.add('Net charge')  # 'Net charge' is not in the execution_set by default, only included by user request
+
+
+
+
+
+
+## parameters that may be removed
+# elif (arg=='--minoutput') and (index < len(sys.argv)):
+  # min_logging=True
+  # logsPath= sys.argv[index+1]
+# elif (arg=='--testoutput') and (index < len(sys.argv)):
+  # testing=True
+  # testOutputPath = sys.argv[index+1]
+    # elif (arg=='--jobid') and (index < len(sys.argv)):
+      # exeId=sys.argv[index+1]
+    # elif (arg=='--db') and (index < len(sys.argv)):
+      # database = sys.argv[index+1]
+
+
+
+
+runBlast=False
+### NEED TO ADD:
+# # execution_set={'Tango','Pasta','Waltz','ELM','Prosite','Limbo','Tmhmm','IUpred','Anchor','Amyloid Pattern'}
+    # elif (arg=='--noblast'):
+      # runBlast=False
+    # elif (arg=='--notango'):
+      # execution_set.remove('Tango')
+    # elif (arg=='--noelm'):
+      # execution_set.remove('ELM')
+    # elif (arg=='--noiupred'):
+      # execution_set.remove('IUpred')
+    # elif (arg=='--noanchor'):
+      # execution_set.remove('Anchor')
+    # elif (arg=='--noprosite'):
+      # execution_set.remove('Prosite')
+    # elif (arg=='--nolimbo'):
+      # execution_set.remove('Limbo')
+    # elif (arg=='--notmhmm'):
+      # execution_set.remove('Tmhmm')
+    # elif (arg=='--nopasta'):
+      # execution_set.remove('Pasta')
+    # elif (arg=='--nowaltz'):
+      # execution_set.remove('Waltz')
+    # elif (arg=='--noamyloidpattern'):
+      # execution_set.remove('Amyloid Pattern')
+
+
+
+
+    # elif(arg=='-a'):
+      # userComposition['A']=int(sys.argv[index+1])
+      # composition=="user_specified"
+    # elif(arg=='-r'):
+      # userComposition['R']=int(sys.argv[index+1])
+      # composition=="user_specified"
+    # elif(arg=='-n'):
+      # userComposition['N']=int(sys.argv[index+1])
+      # composition=="user_specified"
+    # elif(arg=='-d'):
+      # userComposition['D']=int(sys.argv[index+1])
+      # composition=="user_specified"
+    # elif(arg=='-c'):
+      # userComposition['C']=int(sys.argv[index+1])
+      # composition=="user_specified"
+    # elif(arg=='-q'):
+      # userComposition['Q']=int(sys.argv[index+1])
+      # composition=="user_specified"
+    # elif(arg=='-e'):
+      # userComposition['E']=int(sys.argv[index+1])
+      # composition=="user_specified"
+    # elif(arg=='-g'):
+      # userComposition['G']=int(sys.argv[index+1])
+      # composition=="user_specified"
+    # elif(arg=='-h'):
+      # userComposition['H']=int(sys.argv[index+1])
+      # composition=="user_specified"
+    # elif(arg=='-i'):
+      # userComposition['I']=int(sys.argv[index+1])
+      # composition=="user_specified"
+    # elif(arg=='-l'):
+      # userComposition['L']=int(sys.argv[index+1])
+      # composition=="user_specified"
+    # elif(arg=='-k'):
+      # userComposition['K']=int(sys.argv[index+1])
+      # composition=="user_specified"
+    # elif(arg=='-m'):
+      # userComposition['M']=int(sys.argv[index+1])
+      # composition=="user_specified"
+    # elif(arg=='-f'):
+      # userComposition['F']=int(sys.argv[index+1])
+      # composition=="user_specified"
+    # elif(arg=='-p'):
+      # userComposition['P']=int(sys.argv[index+1])
+      # composition=="user_specified"
+    # elif(arg=='-s'):
+      # userComposition['S']=int(sys.argv[index+1])
+      # composition=="user_specified"
+    # elif(arg=='-t'):
+      # userComposition['T']=int(sys.argv[index+1])
+      # composition=="user_specified"
+    # elif(arg=='-w'):
+      # userComposition['W']=int(sys.argv[index+1])
+      # composition=="user_specified"
+    # elif(arg=='-y'):
+      # userComposition['Y']=int(sys.argv[index+1])
+      # composition=="user_specified"
+    # elif(arg=='-v'):
+      # userComposition['V']=int(sys.argv[index+1])
+      # composition=="user_specified"
+
+
+
 
 
 
@@ -576,9 +585,9 @@ else:
 
 #CHECK IF TARGET NET CHARGE IS POSSIBLE BASED ON SEQUENCE LENGTH (AND PH??)
 if evaluateNetCharge:
-  if abs(config_params['targetNetCharge']) > length:
-      print 'Net charge is impossible to reach with the specified sequence length'
-      exit()
+    if abs(config_params['targetNetCharge']) > length:
+        print 'Net charge is impossible to reach with the specified sequence length'
+        exit()
 
 
 
@@ -614,6 +623,7 @@ except OSError as exc:
 
 
 
+mutation_attempts=0
 
 
 
@@ -724,17 +734,17 @@ aaFrequencies=userComposition.items()
 	
 
 #GENERATE RANDOM SEQUENCE WITH THE DEFINED COMPOSITION
-if rand==True:
-	sequence=[]
-	for x in range(0,length):
-	  sequence.append(weighted_choice(aaFrequencies)) 
-	sequence=''.join(sequence)
+if not sequence:
+    sequence=[]
+    for x in range(0,length):
+        sequence.append(weighted_choice(aaFrequencies)) 
+    sequence=''.join(sequence)
 
   
 
 
 
-print_execution_params(exeId,beta,length,composition,sequence,evaluateNetCharge,config_params['targetNetCharge'])
+print_execution_params(exeId,beta,length,composition,sequence,evaluateNetCharge,config_params)
 
 
 if step_by_step:
@@ -877,7 +887,7 @@ if testing:
 ######################################################
 
 
-while global_score > 0 and iteration <= max_interations and (not global_evaluation):
+while global_score > 0 and iteration <= max_iterations and (not global_evaluation):
     if verbose:
         print "*****************************"
         print "STARTING GLOBAL ITERATION " + str(global_iteration)
@@ -897,7 +907,7 @@ while global_score > 0 and iteration <= max_interations and (not global_evaluati
     if verbose:
         print "FIRST ROUND OF MUTATIONS: DECISION IS BASED ON (RESULTS OF)FIRST SET OF TOOLS" 
     partialScore=firstPartialScore
-    while partialScore > 0 and iteration <= max_interations:
+    while partialScore > 0 and iteration <= max_iterations:
         timePrev=time.time()
         weights=[]
         #weights IS A PAIRLIST(position,weight)
@@ -940,7 +950,7 @@ while global_score > 0 and iteration <= max_interations and (not global_evaluati
                 print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "SCORE:" + str(mutatedScore)
                 print "*************************************"
                 # print ""
-            print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "ATTEMPT REUSLTS"
+                print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "ATTEMPT RESULTS"
             if partialScore >= mutatedScore: #get_global_score(position_scores):
                 if verbose:
                     print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "PREV-SCORE (" + str(partialScore) + ") >= MUT-SCORE (" + str(mutatedScore) + ")" 
@@ -950,7 +960,7 @@ while global_score > 0 and iteration <= max_interations and (not global_evaluati
                 break
             else:
                 #decide using MC whether the mutation is accepted
-                mc_decision =  mc_evaluation(partialScore, mutatedScore,"EVAL1",iteration, mutation_attempts)
+                mc_decision =  mc_evaluation(partialScore, mutatedScore,"EVAL1",iteration, mutation_attempts,verbose)
                 if mc_decision:
                     if verbose:
                         #if true then accept the mutation...no need to keep trying new mutations
@@ -1015,7 +1025,7 @@ while global_score > 0 and iteration <= max_interations and (not global_evaluati
 
         secondPartialEvaluation(sequence,partialScores, verbose)
         partialScore=get_global_score(partialScores)
-        while partialScore > 0 and iteration <= max_interations:
+        while partialScore > 0 and iteration <= max_iterations:
             timePrev=time.time()
             weights=[]
             #weights IS A PAIRLIST(position,weight)
@@ -1069,7 +1079,7 @@ while global_score > 0 and iteration <= max_interations and (not global_evaluati
                       #raw_input(indent + "Hit enter to continue with next iteration")
                     #return mutatedSequence
                 else:
-                    mc_decision =  mc_evaluation(partialScore, mutatedScore, "EVAL2",iteration, mutation_attempts)
+                    mc_decision =  mc_evaluation(partialScore, mutatedScore, "EVAL2",iteration, mutation_attempts,verbose)
                     if mc_decision:
                         #if true then accept the mutation...no need to keep trying new mutations
                         break

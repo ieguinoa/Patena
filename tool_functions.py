@@ -464,10 +464,10 @@ def waltzSearch(sequence, positionScores,config_params,inputsPath,outputsPath,ve
         print indent + "RESULTS:"
         #print indent + sequence
         #print indent + ''.join(map(str, waltzScores))
-    data = [sequence,waltzScores]
-    col_width = max(len(str(word)) for row in data for word in row)   # padding
-    for row in data:
-        print indent + "|".join(str(word).ljust(col_width) for word in row)
+        data = [sequence,waltzScores]
+        col_width = max(len(str(word)) for row in data for word in row)   # padding
+        for row in data:
+            print indent + "|".join(str(word).ljust(col_width) for word in row)
 
     for x in range(0,len(sequence)):
         if waltzScores[x] > 0:
