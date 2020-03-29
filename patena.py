@@ -72,6 +72,8 @@ class Mutation:
         self.prev_aa=previous
         self.replacement_aa=replacement
 
+    def to_dict(self):
+        return {'mutated_sequence':self.sequence,'mutated_position':self.mutated_position,'previous_residue':self.prev_aa,'replacement_aa':self.replacement_aa}
 
 #**************************************************************************
 
@@ -129,7 +131,7 @@ def print_execution_params(exe_id,beta,length,composition,sequence,evaluate_netc
 
 def firstPartialEvaluation(sequence, config_params,position_scores,execution_set,times_dict,inputsPath,job_out_path,step_by_step,detailed_output,verbose):
         #SAVE SEQUENCE TO EVALUATE(FASTA FORMAT) IN A FILE
-        input=open(inputsPath + "sequenceFASTA"  , "w")
+        input = open(inputsPath + "sequenceFASTA"  , "w")
         input.write(">gi" + endl)
         input.write(sequence)
         input.close()
@@ -604,7 +606,8 @@ def main():
 
     if json_out:
         json_dict = {}
-
+        if not global_evaluation:
+            mutations_list = []  # save ordered list of mutations to add to the json out
     #OUTPUT
     #outputPath = "Output/"   
 
@@ -666,10 +669,10 @@ def main():
     #REDEFINE TOTAL aaFrequencies USING THE USER DEFINED FREQUENCIES
     #TODO ***********************************************************
     # TEMP. SOLUTION: JUST COPY THE FREQUENCIES DEFINED BY USER AND REPLACE UNKNOWN BY STANDARD
-    for key in userComposition: 
+    for key in userComposition:
         if userComposition[key] == -999:
           userComposition[key] = standardComposition[key]
-        else: 
+        else:
           userComposition[key] = userComposition[key]*100  #change the frequencies to 10000 base
 
 
@@ -704,7 +707,7 @@ def main():
     if not sequence:
         sequence=[]
         for x in range(0,length):
-            sequence.append(weighted_choice(aaFrequencies)) 
+            sequence.append(weighted_choice(aaFrequencies))
         sequence=''.join(sequence)
 
     print_execution_params(exeId,beta,length,composition,sequence,evaluateNetCharge,config_params)
@@ -812,6 +815,8 @@ def main():
         print(endl)
         if step_by_step:
             input("Hit enter to proceed with mutations")
+    if json_out:
+        json_dict['initialScore'] = global_score
 
     if min_logging:
         log_file_stream.write('ISEQ' + tab + sequence + tab + str(global_score) + endl)
@@ -893,6 +898,10 @@ def main():
                     if verbose:
                         print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "PREV-SCORE (" + str(partialScore) + ") >= MUT-SCORE (" + str(mutatedScore) + ")") 
                         print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "ACCEPT MUTATION")
+                    if json_out:
+                        mutation_dict = mutation.to_dict()
+                        mutation_dict['method'] = 'score_difference'
+                        mutations_list.append(mutation_dict)
                     if step_by_step:
                         input("")
                     break
@@ -904,6 +913,10 @@ def main():
                             #if true then accept the mutation...no need to keep trying new mutations
                             print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "PREV-SCORE (" + str(partialScore) + ") < MUT-SCORE (" + str(mutatedScore) + ")") 
                             print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "ACCEPT MUTATION - MONTE CARLO DECISION")
+                        if json_out:
+                            mutation_dict = mutation.to_dict()
+                            mutation_dict['method'] = 'MC'
+                            mutations_list.append(mutation_dict)
                         break
                     else:
                         if verbose:
@@ -1011,6 +1024,10 @@ def main():
                             print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "ACCEPT MUTATION")
                             # print indent + "Previous score (" + str(partialScore) + ") >= Mutated score (" + str(mutatedScore) + ")" 
                             # print indent + "...ACCEPT MUTATION"
+                        if json_out:
+                            mutation_dict = mutation.to_dict()
+                            mutation_dict['method'] = 'score_difference'
+                            mutations_list.append(mutation_dict)
                         if step_by_step:
                             input("")
                         break
@@ -1023,6 +1040,10 @@ def main():
                                 print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "PREV-SCORE (" + str(partialScore) + ") < MUT-SCORE (" + str(mutatedScore) + ")") 
                                 print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "ACCEPT MUTATION - MONTE CARLO DECISION")
                             #if true then accept the mutation...no need to keep trying new mutations
+                            if json_out:
+                                mutation_dict = mutation.to_dict()
+                                mutation_dict['method'] = 'MC'
+                                mutations_list.append(mutation_dict)
                             break
                         else:
                             if verbose:
@@ -1116,6 +1137,7 @@ def main():
         if min_logging:
             log_file_stream.write('END' + tab + str(global_score) + tab + sequence + endl)  
         if json_out:
+            json_dict['mutationsHistory'] = mutations_list
             json_dict['finalScore'] = global_score
             json_dict['finalSequence'] = sequence
         #PERFORMANCE TESTS OUTPUT
@@ -1133,7 +1155,6 @@ def main():
             #mutationsFile.close()
         if testTimes:
             print_evaluation_time(total_elapsed_time,times_dict)
-
     if json_out:
         with open('result.json', 'w') as fp:
             json.dump(json_dict, fp)
