@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import argparse
-import urllib2
-import StringIO
+import urllib.request, urllib.error, urllib.parse
+import io
 import sys
 import os
 # import re
@@ -89,12 +89,12 @@ def print_evaluation_time(total_elapsed_time,times_dict):
     # before i was doing this calculation:
     # evaluationTime=total_elapsed_time-(pastaTime + anchorTime + tangoTime + blastTime + iupredTime + waltzTime + elmTime + prositeTime + tmhmmTime + limboTime)
     # not sure what was that idea, it doesnt makes sense
-    print 'Total Elapsed Time: ' + total_elapsed_timed
+    print('Total Elapsed Time: ' + total_elapsed_timed)
     evaluation_time=0
-    for key,value in times_dict.items():
+    for key,value in list(times_dict.items()):
         evaluation_time+=value
-        print 'Time spent in '+ key +': ' + value
-    print 'Time spent on evaluations: ' +  evaluation_time
+        print('Time spent in '+ key +': ' + value)
+    print('Time spent on evaluations: ' +  evaluation_time)
 
 
 
@@ -103,18 +103,18 @@ def print_evaluation_time(total_elapsed_time,times_dict):
 def print_execution_params(exe_id,beta,length,composition,sequence,evaluate_netcharge,config_params):
     #####   ALWAYS PRINT GENERAL PARAMETERS OF EXECUTION
     #print endl
-    print "************************************************"
-    print "************************************************"
-    print "EXECUTION PARAMETERS:"
-    print 'Id=' + str(exe_id) 
-    print 'Beta= '+ str(beta)
-    print "Length=" + str(length) 
-    print "Composition=" + composition
-    print "Sequence=" + sequence
+    print("************************************************")
+    print("************************************************")
+    print("EXECUTION PARAMETERS:")
+    print('Id=' + str(exe_id)) 
+    print('Beta= '+ str(beta))
+    print("Length=" + str(length)) 
+    print("Composition=" + composition)
+    print("Sequence=" + sequence)
     if evaluate_netcharge:
-      print "Target net charge=" + str(config_params['targetNetCharge'])
-    print "************************************************"
-    print "************************************************"
+        print("Target net charge=" + str(config_params['targetNetCharge']))
+    print("************************************************")
+    print("************************************************")
 
 
 
@@ -127,23 +127,23 @@ def print_execution_params(exe_id,beta,length,composition,sequence,evaluate_netc
 
 
 def firstPartialEvaluation(sequence, config_params,position_scores,execution_set,times_dict,inputsPath,job_out_path,step_by_step,detailed_output,verbose):
-	#SAVE SEQUENCE TO EVALUATE(FASTA FORMAT) IN A FILE
-	input=open(inputsPath + "sequenceFASTA"  , "w")
-	input.write(">gi" + endl)
-	input.write(sequence)
-	input.close()
-	if verbose:
-	   # print endl
-	   print "*************************************"
-	   print "FIRST PARTIAL EVALUATION"
-        for tool_name in tool_functions.tool_functions_dict.keys():
+        #SAVE SEQUENCE TO EVALUATE(FASTA FORMAT) IN A FILE
+        input=open(inputsPath + "sequenceFASTA"  , "w")
+        input.write(">gi" + endl)
+        input.write(sequence)
+        input.close()
+        if verbose:
+            # print endl
+            print("*************************************")
+            print("FIRST PARTIAL EVALUATION")
+        for tool_name in list(tool_functions.tool_functions_dict.keys()):
             if tool_name in execution_set:  ## this set has the set of enabled tools to run
                 timePrev=time.time()
                 if step_by_step:
-                    raw_input("Hit enter to continue with next evaluation")
+                    input("Hit enter to continue with next evaluation")
                 if verbose:
-                    print indent + "*************************************"
-                    print "STARTING "+ tool_name +" execution"
+                    print(indent + "*************************************")
+                    print("STARTING "+ tool_name +" execution")
                 tool_functions.tool_functions_dict[tool_name](sequence, position_scores,config_params, inputsPath,job_out_path,verbose,detailed_output)
                 if detailed_output:
                     details_out.write('\n\n***********\n\n' )
@@ -151,15 +151,15 @@ def firstPartialEvaluation(sequence, config_params,position_scores,execution_set
         score_result=get_global_score(position_scores)
         ##PRINT SCORE
         if verbose:
-	  print indent + "*************************************"
-	  # print endl
-	  print indent + "RESULTS OF FIRST PARTIAL EVALUATION:"
-	  #print indent + sequence
-          print_formatted_scores(sequence,position_scores)
-	  print indent + "SCORE:" + str(score_result)
-	  print indent + "*************************************"
-	if step_by_step:
-	  raw_input(indent + "....hit enter to continue")
+            print(indent + "*************************************")
+            # print endl
+            print(indent + "RESULTS OF FIRST PARTIAL EVALUATION:")
+            #print indent + sequence
+            print_formatted_scores(sequence,position_scores)
+            print(indent + "SCORE:" + str(score_result))
+            print(indent + "*************************************")
+        if step_by_step:
+            input(indent + "....hit enter to continue")
         return score_result
 
 
@@ -182,10 +182,10 @@ def secondPartialEvaluation(sequence, position_scores, verbose):
     input.close()
     ##: BLAST SEARCH
     if verbose:
-        print indent + "*************************************"
-        print indent + "SECOND PARTIAL EVALUATION"
+        print(indent + "*************************************")
+        print(indent + "SECOND PARTIAL EVALUATION")
         # print endl
-        print indent + "*************************************"
+        print(indent + "*************************************")
         #print indent + "STARTING BLAST SEARCH"
     timePrev=time.time()
     tool_functions.blastIt(sequence,position_scores,database,inputsPath, verbose,detailed_output)
@@ -195,17 +195,17 @@ def secondPartialEvaluation(sequence, position_scores, verbose):
     if detailed_output:
         details_out.write('\n\n***********\n\n' )
     if step_by_step:
-        raw_input(indent + "Press enter to see final results...")
+        input(indent + "Press enter to see final results...")
     ##PRINT SCORE
     if verbose:
-        print indent + "*************************************"
+        print(indent + "*************************************")
         # print endl
-        print indent + "RESULTS OF SECOND PARTIAL EVALUATION:"
+        print(indent + "RESULTS OF SECOND PARTIAL EVALUATION:")
         print_formatted_scores(sequence,position_scores)
-        print indent + "SCORE:" + str(get_global_score(position_scores))
-        print indent + "*************************************"
+        print(indent + "SCORE:" + str(get_global_score(position_scores)))
+        print(indent + "*************************************")
     if step_by_step:
-        raw_input(indent + "....hit enter to continue")
+        input(indent + "....hit enter to continue")
 
 
 
@@ -222,30 +222,30 @@ def mutation_attempt(sequence,weights,aaFrequencies,eval_step,iteration,mutation
     #SELECT A POSITION
     if verbose:
         # print endl
-        print "*************************************"
-        print "MUTATION ATTEMPT"
-        print "*************************************"
+        print("*************************************")
+        print("MUTATION ATTEMPT")
+        print("*************************************")
     #CHOOSE A POSITION BASED ON WEIGHTS
     mutate_position= weighted_choice(weights)
     if verbose:
-        print str(iteration) + tab + str(mutation_attempts) +tab+ eval_step + tab + "SEL POSITION:"  + tab +  str(mutate_position)
+        print(str(iteration) + tab + str(mutation_attempts) +tab+ eval_step + tab + "SEL POSITION:"  + tab +  str(mutate_position))
     #SELECT THE NEW AA FOR THAT POSITION (BASED ON LIST OF FREQUENCIES)
     previous_residue=sequence[mutate_position]
     if verbose:
-        print str(iteration) + tab + str(mutation_attempts) +tab+  eval_step + tab + "AA MUTATE:"  + tab +  previous_residue
+        print(str(iteration) + tab + str(mutation_attempts) +tab+  eval_step + tab + "AA MUTATE:"  + tab +  previous_residue)
     selected= previous_residue
     #SELECT A NEWONE UNTIL THE RESIDUE IS DIFFERENT FROM PREVIOUS
     while previous_residue == selected:
         selected = weighted_choice(aaFrequencies)
     if verbose:
-        print str(iteration) + tab + str(mutation_attempts) +tab+  eval_step + tab + "NEW:       "  + tab +  selected
+        print(str(iteration) + tab + str(mutation_attempts) +tab+  eval_step + tab + "NEW:       "  + tab +  selected)
     ##BUILD MUTATED SEQUENCE WITH NEW RESIDUE
     mutated_sequence = sequence[0:mutate_position]
     mutated_sequence += selected
     mutated_sequence += sequence[mutate_position+1:]
     if verbose:
-        print str(iteration) + tab + str(mutation_attempts) +tab+ eval_step + tab +"PREV-SEQ:"  + tab +  sequence
-        print str(iteration) + tab + str(mutation_attempts) +tab+ eval_step + tab +"NEW-SEQ:" + tab +  mutated_sequence
+        print(str(iteration) + tab + str(mutation_attempts) +tab+ eval_step + tab +"PREV-SEQ:"  + tab +  sequence)
+        print(str(iteration) + tab + str(mutation_attempts) +tab+ eval_step + tab +"NEW-SEQ:" + tab +  mutated_sequence)
     #create Mutation instance with all the info
     return Mutation(mutated_sequence,mutate_position,previous_residue,selected)
 
@@ -254,10 +254,10 @@ def mutation_attempt(sequence,weights,aaFrequencies,eval_step,iteration,mutation
 
 def mc_evaluation(beta,partialScore,mutated_score,eval_step,iteration,mutation_attempts,verbose):
     if verbose:
-        print str(iteration) + tab + str(mutation_attempts) +tab+  eval_step + tab + "PREV-SCORE (" + str(partialScore) + ") < MUT-SCORE (" + str(mutated_score) + ")" 
+        print(str(iteration) + tab + str(mutation_attempts) +tab+  eval_step + tab + "PREV-SCORE (" + str(partialScore) + ") < MUT-SCORE (" + str(mutated_score) + ")") 
     diff=partialScore-mutated_score
     if verbose:
-        print str(iteration) + tab + str(mutation_attempts) +tab+  eval_step + tab + "SCORE-DIFF:" + str(diff)
+        print(str(iteration) + tab + str(mutation_attempts) +tab+  eval_step + tab + "SCORE-DIFF:" + str(diff))
     exponent=diff/beta
     if exponent<-100:   #SATURATION
         MCvalue=-100
@@ -265,11 +265,11 @@ def mc_evaluation(beta,partialScore,mutated_score,eval_step,iteration,mutation_a
         MCvalue=math.exp(exponent)
     if verbose:
         #print "  :" + str(exponent)
-        print str(iteration) + tab + str(mutation_attempts) +tab+  eval_step + tab + "MC VALUE:" + str(MCvalue)     #e^(dif/beta)
+        print(str(iteration) + tab + str(mutation_attempts) +tab+  eval_step + tab + "MC VALUE:" + str(MCvalue))     #e^(dif/beta)
     #GENERATE RANDOM NUMBER BETWEEN 0 AND 1
     randy=random.random()
     if verbose:
-        print str(iteration) + tab + str(mutation_attempts) +tab+  eval_step + tab + "RANDOM VALUE [0,1]:" + str(randy)
+        print(str(iteration) + tab + str(mutation_attempts) +tab+  eval_step + tab + "RANDOM VALUE [0,1]:" + str(randy))
     #print indent + "MONTE CARLO DECISION:"
     if MCvalue > randy:
         #ACCEPT MUTATION
@@ -283,7 +283,7 @@ def print_formatted_scores(sequence, scores):
     data = [sequence,scores]
     col_width = max(len(str(word)) for row in data for word in row)  # padding
     for row in data:
-        print  "|".join(str(word).ljust(col_width) for word in row)
+        print("|".join(str(word).ljust(col_width) for word in row))
 
 #***********************************************************************
 
@@ -555,7 +555,7 @@ def main():
     #CHECK IF TARGET NET CHARGE IS POSSIBLE BASED ON SEQUENCE LENGTH (AND PH??)
     if evaluateNetCharge:
         if abs(config_params['targetNetCharge']) > length:
-            print 'Net charge is impossible to reach with the specified sequence length'
+            print('Net charge is impossible to reach with the specified sequence length')
             exit()
 
 
@@ -654,7 +654,7 @@ def main():
             if userComposition[key] != -999:    #THE USER HAS DEFINED THIS FREQUENCE
                 freqSum+= userComposition[key]
         if freqSum > 100:
-            print 'Total defined frequencies exceeded 100%'
+            print('Total defined frequencies exceeded 100%')
             exit()
 
 
@@ -670,7 +670,7 @@ def main():
 
 
     #CONVERT FREQUENCIES TO LIST OF PAIRS (AA, FREQ)
-    aaFrequencies=userComposition.items()
+    aaFrequencies=list(userComposition.items())
     #print str(aaFrequencies)
     #aaFrequencies= [("A",825), ("R",553),("N",406),("D",545),("C",137),("E",393),("Q",675),("G",707),("H",227),("I",596),("L",966),("K",548),("M",242),("F",386),("P",470),("S",656),("T",534),("W",108),("Y",292),("V",687) ]
 
@@ -704,7 +704,7 @@ def main():
 
     print_execution_params(exeId,beta,length,composition,sequence,evaluateNetCharge,config_params)
     if step_by_step:
-        raw_input("Hit enter to start initial evaluation")
+        input("Hit enter to start initial evaluation")
     #CREATE ARRAY TO SAVE MUTATION FREQUENCY
     position_scores=[]
     partialScores=[]
@@ -728,10 +728,10 @@ def main():
         position_scores[p]=0
         partialScores[p]=0
     if verbose:
-        print endl
-        print "*****************************"
-        print " INITIAL EVALUATION "
-        print "*****************************"    
+        print(endl)
+        print("*****************************")
+        print(" INITIAL EVALUATION ")
+        print("*****************************")    
     #MAKE BOTH PARTIAL EVALUATIONS TO GET A GLOBAL SCORE
 
     #FIRST SET OF EVALUATIONS
@@ -786,19 +786,19 @@ def main():
 
 
     if verbose:
-        print "*******************************************"
-        print "INITIAL EVALUATION RESULTS"
-        print "First partial score   : "  + str(firstPartialScore)
-        print "Second partial score  : " + str(secondPartialScore) 
-        print "Global score          : " + str(global_score)
-        print endl
-        print "*******************************************"
-        print "*****************************"
-        print "*****************************"
-        print endl
-        print endl
+        print("*******************************************")
+        print("INITIAL EVALUATION RESULTS")
+        print("First partial score   : "  + str(firstPartialScore))
+        print("Second partial score  : " + str(secondPartialScore)) 
+        print("Global score          : " + str(global_score))
+        print(endl)
+        print("*******************************************")
+        print("*****************************")
+        print("*****************************")
+        print(endl)
+        print(endl)
         if step_by_step:
-            raw_input("Hit enter to proceed with mutations")
+            input("Hit enter to proceed with mutations")
 
     if min_logging:
         log_file_stream.write('ISEQ' + tab + sequence + tab + str(global_score) + endl)
@@ -827,21 +827,21 @@ def main():
 
     while global_score > 0 and iteration <= max_iterations and (not global_evaluation):
         if verbose:
-            print "*****************************"
-            print "STARTING GLOBAL ITERATION " + str(global_iteration)
-            print "*****************************"
+            print("*****************************")
+            print("STARTING GLOBAL ITERATION " + str(global_iteration))
+            print("*****************************")
             print_formatted_scores(sequence,position_scores)
-            print "Current global score:     " + str(global_score)
+            print("Current global score:     " + str(global_score))
         if step_by_step:
-            raw_input("Hit enter to start first round of evaluations")
-            raw_input('')
+            input("Hit enter to start first round of evaluations")
+            input('')
 
 
         #################################################
         ######  FIRST ROUND OF EVALUATIONS - MUTATIONS
         #################################################
         if verbose:
-            print "FIRST ROUND OF MUTATIONS: DECISION IS BASED ON (RESULTS OF)FIRST SET OF TOOLS" 
+            print("FIRST ROUND OF MUTATIONS: DECISION IS BASED ON (RESULTS OF)FIRST SET OF TOOLS") 
         partialScore=firstPartialScore
         while partialScore > 0 and iteration <= max_iterations:
             timePrev=time.time()
@@ -859,29 +859,29 @@ def main():
                 for p in range(len(sequence)):
                     mutatedScores[p]=0
                 if step_by_step:
-                    raw_input("...Hit enter to start evaluation")
+                    input("...Hit enter to start evaluation")
                 if verbose:
-                    print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "STARTING PROPOSED MUTATION EVALUATION"
+                    print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "STARTING PROPOSED MUTATION EVALUATION")
                 mutatedScore=firstPartialEvaluation(mutation.sequence, config_params, mutatedScores,execution_set,times_dict,inputsPath,job_out_path,step_by_step,detailed_output,verbose)
                 #if step_by_step:
                   #raw_input(indent + "Hit enter to continue with mutation acceptance")
                 if verbose:
-                    print "*************************************"
-                    print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "MUTATION ATTEMPT RESULTS"
-                    print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "PREV-SEQ:"
+                    print("*************************************")
+                    print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "MUTATION ATTEMPT RESULTS")
+                    print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "PREV-SEQ:")
                     print_formatted_scores(sequence,position_scores)
-                    print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "PREV-SCORE:" + str(partialScore)
-                    print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "MUT-SEQ:"
+                    print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "PREV-SCORE:" + str(partialScore))
+                    print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "MUT-SEQ:")
                     print_formatted_scores(mutation.sequence,mutatedScores)
-                    print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "MUT-SCORE:" + str(mutatedScore)
+                    print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "MUT-SCORE:" + str(mutatedScore))
                     # print "*************************************"
                     # print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "ATTEMPT RESULTS"
                 if partialScore >= mutatedScore: #get_global_score(position_scores):
                     if verbose:
-                        print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "PREV-SCORE (" + str(partialScore) + ") >= MUT-SCORE (" + str(mutatedScore) + ")" 
-                        print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "ACCEPT MUTATION"
+                        print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "PREV-SCORE (" + str(partialScore) + ") >= MUT-SCORE (" + str(mutatedScore) + ")") 
+                        print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "ACCEPT MUTATION")
                     if step_by_step:
-                        raw_input("")
+                        input("")
                     break
                 else:
                     #decide using MC whether the mutation is accepted
@@ -889,16 +889,16 @@ def main():
                     if mc_decision:
                         if verbose:
                             #if true then accept the mutation...no need to keep trying new mutations
-                            print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "PREV-SCORE (" + str(partialScore) + ") < MUT-SCORE (" + str(mutatedScore) + ")" 
-                            print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "ACCEPT MUTATION - MONTE CARLO DECISION"
+                            print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "PREV-SCORE (" + str(partialScore) + ") < MUT-SCORE (" + str(mutatedScore) + ")") 
+                            print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "ACCEPT MUTATION - MONTE CARLO DECISION")
                         break
                     else:
                         if verbose:
-                            print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "PREV-SCORE (" + str(partialScore) + ") < MUT-SCORE (" + str(mutatedScore) + ")" 
-                            print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "DENY MUTATION - MONTE CARLO DECISION"
+                            print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "PREV-SCORE (" + str(partialScore) + ") < MUT-SCORE (" + str(mutatedScore) + ")") 
+                            print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "DENY MUTATION - MONTE CARLO DECISION")
 
                 if verbose:
-                    print "*************************************"
+                    print("*************************************")
 
 
             #####END OF MUTATION ITERATION
@@ -910,11 +910,11 @@ def main():
                 #AND THE GLOBAL SEQUENCE SCORE IS THE ONE CORRESPONDING TO THIS NEW SEQUENCE
                 partialScore = mutatedScore # get_global_score(position_scores)
                 if verbose:
-                    print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "ATTEMPTS MADE:" +tab+ str(mutation_attempts)
-                    print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "END"
+                    print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "ATTEMPTS MADE:" +tab+ str(mutation_attempts))
+                    print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL1" + tab + "END")
                     # print "(PARTIAL) score :    " + str(partialScore)
-                    print "*******************************************"
-                    print endl
+                    print("*******************************************")
+                    print(endl)
                 if min_logging:
                     ## TODO : CHECK THIS FIX!!!! ***fix this, i should print the new selected AA but after refactoring to mutation_attempt() method I dont get that anymore
                     # change mutation_attempt() to retun an Object of a class that has the 
@@ -924,13 +924,13 @@ def main():
             else:
                 if verbose:
                     ### EXCEEDED THE NUMBER OF ATTEMPTS, SEQUENCE NOT CHANGED
-                    print  str(iteration) + tab + str(mutation_attempts) +tab+ "EVAL1" + tab + "ATTEMPTS EXCEEDED" 
+                    print(str(iteration) + tab + str(mutation_attempts) +tab+ "EVAL1" + tab + "ATTEMPTS EXCEEDED") 
 
             if testing:
                 timeX=time.time()-timePrev   #ITERATION TIME
                 testOutputFile.write('LOOP1' + tab + str(iteration)+ tab + str(mutation_attempts) + tab + str(partialScore) + tab + str(timeX) + endl ) 
             if step_by_step:
-                raw_input("Hit enter to continue with next iteration")
+                input("Hit enter to continue with next iteration")
             iteration=iteration+1   #TOTAL NUMBER OF ITERATIONS
 
 
@@ -967,23 +967,23 @@ def main():
                     for p in range(len(sequence)):
                         mutatedScores[p]=0
                     if step_by_step:
-                        raw_input("...Hit enter to start evaluation")
+                        input("...Hit enter to start evaluation")
                     if verbose:
-                        print str(iteration) + tab + str(mutation_attempts) +tab+ "EVAL2" + tab + "START MUT EVAL"
+                        print(str(iteration) + tab + str(mutation_attempts) +tab+ "EVAL2" + tab + "START MUT EVAL")
                     secondPartialEvaluation(mutation.sequence, mutatedScores, verbose)
                     mutatedScore=get_global_score(mutatedScores)
                     #if step_by_step:
                       #raw_input(indent + "Hit enter to continue with mutation acceptance")
                     #IF THE GLOBAL SCORE DECREASED
                     if verbose:
-                        print "*************************************"
-                        print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "MUTATION ATTEMPT RESULTS"
-                        print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "PREV-SEQ:"
+                        print("*************************************")
+                        print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "MUTATION ATTEMPT RESULTS")
+                        print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "PREV-SEQ:")
                         print_formatted_scores(sequence,position_scores)
-                        print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "PREV-SCORE:" + str(partialScore)
-                        print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "MUT-SEQ:"
+                        print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "PREV-SCORE:" + str(partialScore))
+                        print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "MUT-SEQ:")
                         print_formatted_scores(mutation.sequence,mutatedScores)
-                        print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "MUT-SCORE:" + str(mutatedScore)
+                        print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "MUT-SCORE:" + str(mutatedScore))
                         # print "*************************************"
                         # print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "DECISION"
                         # print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "PREV-SEQ"
@@ -994,12 +994,12 @@ def main():
                         # print_formatted_scores(sequence,mutatedScores)
                     if partialScore >= mutatedScore:
                         if verbose:
-                            print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "PREV-SCORE (" + str(partialScore) + ") >= MUT-SCORE (" + str(mutatedScore) + ")" 
-                            print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "ACCEPT MUTATION"
+                            print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "PREV-SCORE (" + str(partialScore) + ") >= MUT-SCORE (" + str(mutatedScore) + ")") 
+                            print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "ACCEPT MUTATION")
                             # print indent + "Previous score (" + str(partialScore) + ") >= Mutated score (" + str(mutatedScore) + ")" 
                             # print indent + "...ACCEPT MUTATION"
                         if step_by_step:
-                            raw_input("")
+                            input("")
                         break
                           #raw_input(indent + "Hit enter to continue with next iteration")
                         #return mutatedSequence
@@ -1007,16 +1007,16 @@ def main():
                         mc_decision =  mc_evaluation(beta,partialScore, mutatedScore, "EVAL2",iteration, mutation_attempts,verbose)
                         if mc_decision:
                             if verbose:
-                                print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "PREV-SCORE (" + str(partialScore) + ") < MUT-SCORE (" + str(mutatedScore) + ")" 
-                                print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "ACCEPT MUTATION - MONTE CARLO DECISION"
+                                print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "PREV-SCORE (" + str(partialScore) + ") < MUT-SCORE (" + str(mutatedScore) + ")") 
+                                print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "ACCEPT MUTATION - MONTE CARLO DECISION")
                             #if true then accept the mutation...no need to keep trying new mutations
                             break
                         else:
                             if verbose:
-                                print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "PREV-SCORE (" + str(partialScore) + ") < MUT-SCORE (" + str(mutatedScore) + ")" 
-                                print str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "DENY MUTATION - MONTE CARLO DECISION"
+                                print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "PREV-SCORE (" + str(partialScore) + ") < MUT-SCORE (" + str(mutatedScore) + ")") 
+                                print(str(iteration) + tab + str(mutation_attempts) +tab+  "EVAL2" + tab + "DENY MUTATION - MONTE CARLO DECISION")
                     if verbose:
-                        print "*************************************"
+                        print("*************************************")
                 #####END OF MUTATION ITERATION
 
                 #MAKE SURE LOOP ENDED BY MUTATION ACCEPT
@@ -1030,12 +1030,12 @@ def main():
                     partialScore= get_global_score(partialScores)
                     if verbose:
                         # print endl
-                        print "Attempts before mutation accept:" + str(mutation_attempts)
+                        print("Attempts before mutation accept:" + str(mutation_attempts))
                         #print endl
-                        print "*******************************************"
-                        print "End of (PARTIAL) iteration " + str(iteration)
-                        print "(PARTIAL) score :    " + str(partialScore)
-                        print "*******************************************"
+                        print("*******************************************")
+                        print("End of (PARTIAL) iteration " + str(iteration))
+                        print("(PARTIAL) score :    " + str(partialScore))
+                        print("*******************************************")
                         # print endl
                     if min_logging:
                         log_file_stream.write(str(mutation.mutated_position) + '(' + mutation.prev_aa + ')->' + mutation.replacement_aa + tab + sequence + endl)
@@ -1044,7 +1044,7 @@ def main():
                 else:
                     ### EXCEEDED THE NUMBER OF ATTEMPTS, SEQUENCE NOT CHANGED
                     if verbose:
-                        print  " Mutations attempts exceeded " 
+                        print(" Mutations attempts exceeded ") 
                 if testing:
                     timeX=time.time()-timePrev   #ITERATION TIME
                     testOutputFile.write('LOOP2' + tab + str(iteration)+ tab + str(mutation_attempts) + tab + str(partialScore) + tab + str(timeX) + endl ) 
@@ -1055,12 +1055,12 @@ def main():
                     #ITERATION ELAPSED TIME
                     #timesOutputFile.write(str(iteration)+ tab + str(timeX) + tab + str(beta) + endl)
                 if step_by_step:
-                    raw_input("Hit enter to continue with next iteration")
+                    input("Hit enter to continue with next iteration")
                 iteration=iteration+1   #TOTATL NUMBER OF ITERATIONS
             if verbose:
-                print "SECOND ROUND OF EVALUATIONS FINISHED"
+                print("SECOND ROUND OF EVALUATIONS FINISHED")
                 if step_by_step:
-                    raw_input("HIT ENTER TO GET CURRENT GLOBAL SCORE")
+                    input("HIT ENTER TO GET CURRENT GLOBAL SCORE")
 
 
         ##AT THE END OF THE SECOND ROUND, THE SCORE CORRESPONDING TO THE SECOND PARTIAL EVALUATION IS 0 (EXCEPT WHEN THE NUMBER OF ITERATIONS IS EXCEEDED)....
@@ -1068,18 +1068,18 @@ def main():
 
         for p in range(len(sequence)):
             position_scores[p]=0
-        global_score=firstPartialEvaluation(sequence, config_params,position_scores,execution_set,times_dict,times_dict,inputsPath,job_out_path,step_by_step,detailed_output,False )
+        global_score=firstPartialEvaluation(sequence, config_params,position_scores,execution_set,times_dict,inputsPath,job_out_path,step_by_step,detailed_output,False )
         #global_score=get_global_score(position_scores)
         global_iteration=global_iteration+1;  
         #PRINT RESULTS OF GLOBAL ITERATION
         if verbose:
-            print "*******************************************"	     
-            print "End of global iteration " + str(global_iteration)
-            print "Global score :    " + str(global_score)
-            print "*******************************************"
-            print endl
+            print("*******************************************")	     
+            print("End of global iteration " + str(global_iteration))
+            print("Global score :    " + str(global_score))
+            print("*******************************************")
+            print(endl)
         if step_by_step:
-            raw_input("Hit enter to continue with next iteration")
+            input("Hit enter to continue with next iteration")
         if testing:
             testOutputFile.write('GLOBAL ' + tab + str(global_iteration) + endl )
 
@@ -1090,16 +1090,16 @@ def main():
     #########################################
 
     if not global_evaluation:
-        print "**END OF SEARCH**"
+        print("**END OF SEARCH**")
         if global_score==0:
-            print "REACHED SCORE = 0"
-            print 'FINAL SEQUENCE: ' + sequence
+            print("REACHED SCORE = 0")
+            print('FINAL SEQUENCE: ' + sequence)
         else:
-            print "REACHED LIMIT OF ITERATIONS"
-            print 'LAST SEQUENCE: ' + sequence
-            print 'FINAL SCORES'
+            print("REACHED LIMIT OF ITERATIONS")
+            print('LAST SEQUENCE: ' + sequence)
+            print('FINAL SCORES')
             print_formatted_scores(sequence, position_scores)
-            print "Global score: " + str(global_score)
+            print("Global score: " + str(global_score))
         if min_logging:
             log_file_stream.write('END' + tab + str(global_score) + tab + sequence + endl)  
 

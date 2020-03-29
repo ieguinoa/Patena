@@ -88,19 +88,19 @@ def elmSearch(sequence, positionScores,config_params,inputsPath,outputsPath,verb
         if detailed_output:
             detailedOutFile.write(line[2] + '\t' + str(pattern_start) + '\t' +str(pattern_end) + '\n')
         if verbose:
-            print indent + "Pattern found: " + line[2]
-            print indent + "start:" + str(pattern_start)
-            print indent + "end:" + str(pattern_end)
+            print(indent + "Pattern found: " + line[2])
+            print(indent + "start:" + str(pattern_start))
+            print(indent + "end:" + str(pattern_end))
         for x in range(pattern_start-1,pattern_end):
             elm_scores[x]+=1
             #print str(x)
     if verbose:
         # print ""
-        print indent + "ELM Search RESULTS:"
+        print(indent + "ELM Search RESULTS:")
         data = [sequence,elm_scores]
         col_width = max(len(str(word)) for row in data for word in row)
         for row in data:
-            print indent + "|".join(str(word).ljust(col_width) for word in row)
+            print(indent + "|".join(str(word).ljust(col_width) for word in row))
         #print indent + '\t'.join(map(str, sequence))
         #for u in range(len(sequence)):
           #if sequence[u]>=10:
@@ -136,14 +136,14 @@ def iupred(sequence, positionScores,config_params, inputsPath,outputsPath,verbos
         for p in range(len(sequence)):
             iupredScores.append(0)
         for x in range(len(sequence)):
-            resultX = float(iterOutputIUPred.next())
+            resultX = float(next(iterOutputIUPred))
             if detailed_output and (resultX < iupredThreshold):
                 detailedOutFile.write('Position ' + str(x) + ' below threshold with value ' + str(resultX)+'\n')
             if resultX < iupredThreshold :
                 iupredScores[x] = 1
         #print endl
         if verbose:
-            print indent + "RESULTS:"
+            print(indent + "RESULTS:")
             # print indent + 'Threshold: '+ str(iupredThreshold)
             #print indent + sequence
             #print indent + ''.join(map(str, iupredScores))
@@ -151,12 +151,12 @@ def iupred(sequence, positionScores,config_params, inputsPath,outputsPath,verbos
         col_width = max(len(str(word)) for row in data for word in row)   # padding
         for row in data:
             if verbose:
-                print indent + "|".join(str(word).ljust(col_width) for word in row)
+                print(indent + "|".join(str(word).ljust(col_width) for word in row))
         outputIUPred.seek(0)
         rstFile_iter = iter(outputIUPred)
         #ADD 1 TO THE POSITION IN positionScores IF THE RESULT IS LESS THAN 0.5 (PREDICTING A GLOBULAR TENDENCY)
         for j in range(len(sequence)):
-            resultJ=float(rstFile_iter.next())
+            resultJ=float(next(rstFile_iter))
             if resultJ < iupredThreshold :
                 positionScores[j] += 1
 
@@ -172,29 +172,29 @@ def anchor(sequence, positionScores,config_params,inputsPath,outputsPath,verbose
         detailedOutFile.write('Threshold: ' + str(anchorThreshold) + '\n')
         detailedOutFile.write('Results \n')
     if verbose:
-        print indent + 'Threshold: ' + str(anchorThreshold)
+        print(indent + 'Threshold: ' + str(anchorThreshold))
     anchorScores=[]
     iterOutputAnchor=iter(outputAnchor)
     for p in range(len(sequence)):
         anchorScores.append(0)
     for x in range(len(sequence)):
-        resultX=float(iterOutputAnchor.next())
+        resultX=float(next(iterOutputAnchor))
         if detailed_output and (resultX >  anchorThreshold):
             detailedOutFile.write('Position ' + str(x) + ' above threshold with value: ' + str(resultX) + '\n')
         if resultX >  anchorThreshold :
             anchorScores[x] = 1
     #PRINT THE RESULTS OF ANCHOR
     if verbose:
-        print indent + "RESULTS:"
+        print(indent + "RESULTS:")
         data = [sequence,anchorScores]
         col_width = max(len(str(word)) for row in data for word in row)   # padding
         for row in data:
-            print indent + "|".join(str(word).ljust(col_width) for word in row)
+            print(indent + "|".join(str(word).ljust(col_width) for word in row))
     outputAnchor.seek(0)
     rstFile_iter = iter(outputAnchor)
     #ADD 1 TO POSITIONS IN positionScores  IF THE RESULT IS GREATER THAN Threshold (PREDICTING A DISORDERED BINDING REGION)
     for j in range(len(sequence)):
-        resultJ=float(rstFile_iter.next())
+        resultJ=float(next(rstFile_iter))
         if resultJ > anchorThreshold :
             positionScores[j] += 1
 
@@ -218,7 +218,7 @@ def pastaSearch(sequence,positionScores,config_params,inputsPath, outputsPath,ve
         detailedOutFile.write('PASTA: predict aggregation-prone portions of the sequence\n')
         detailedOutFile.write('Threshold: ' + str(pastaThreshold) + '\n')
     if verbose:
-        print indent + 'Threshold: ' + str(pastaThreshold)
+        print(indent + 'Threshold: ' + str(pastaThreshold))
     for line in outputPasta.readlines():
         #print line.split()[9]
         #print line.split()[10]
@@ -235,16 +235,16 @@ def pastaSearch(sequence,positionScores,config_params,inputsPath, outputsPath,ve
             if detailed_output:
                 detailedOutFile.write(str(line.split()[4]) + tab + 'Segment ' + str(line.split()[9]) + ' and segment ' + str(line.split()[11]) + ' in ' + str(line.split()[12]) + ' have a pairing energy value (PASTA UNITS) of '+ str(line.split()[4]) + ' which is lower than the threshold' '\n')
             if verbose:
-                print 'Hit:'
-                print 'Energy value: ' + line.split()[4]
-                print 'Positions:    ' + line.split()[9] + ' and ' + line.split()[11] + ' ' + line.split()[12]
+                print('Hit:')
+                print('Energy value: ' + line.split()[4])
+                print('Positions:    ' + line.split()[9] + ' and ' + line.split()[11] + ' ' + line.split()[12])
     #position=0
     if verbose:
-        print "RESULTS:"
+        print("RESULTS:")
         data = [sequence,pastaScores]
         col_width = max(len(str(word)) for row in data for word in row)   # padding
         for row in data:
-            print indent + "|".join(str(word).ljust(col_width) for word in row)
+            print(indent + "|".join(str(word).ljust(col_width) for word in row))
     for x in range(0,len(sequence)):
         if pastaScores[x] > 0:
             positionScores[x] += pastaScores[x]
@@ -264,11 +264,10 @@ def prositeSearch(sequence,positionScores,config_params,inputsPath,outputsPath,v
     #input.close()
     if detailed_output:
         detailedOutFile.write('PROSITE: search protein domains, families and functional sites\n' )
-  	detailedOutFile.write('Site start - end - description \n')
-    proc = subprocess.Popen(['perl', toolsPath + 'Prosite/ps_scan/ps_scan.pl','-r','-o', 'scan', inputProsite],stdout=subprocess.PIPE)
+        detailedOutFile.write('Site start - end - description \n')
+    proc = subprocess.Popen(['perl', toolsPath + 'Prosite/ps_scan/ps_scan.pl','-r','-o', 'scan', inputProsite],stdout=subprocess.PIPE,encoding='utf-8')
     hits=False
-    while True:
-        line = proc.stdout.readline()
+    for line in proc.stdout:
         if line != '':
             hits=True
             pattern_start=int(line.split()[0])
@@ -276,7 +275,7 @@ def prositeSearch(sequence,positionScores,config_params,inputsPath,outputsPath,v
             for x in range(pattern_start-1,pattern_end):
                 prositeScores[x]+=1
             if verbose:
-                print indent + "Hit: " + line.strip('\n')
+                print(indent + "Hit: " + line.strip('\n'))
             if detailed_output:
                 detailedOutFile.write(line)
             #print "Hit:" + line.split()[0] + "-" +line.split()[1] + space +  line.split()[2] + space + line.split()[3] + space + line.split()[4]
@@ -287,13 +286,13 @@ def prositeSearch(sequence,positionScores,config_params,inputsPath,outputsPath,v
             detailedOutFile.write('NO HITS FOUND')
     if verbose:
         #print endl
-        print indent + "RESULTS:"
+        print(indent + "RESULTS:")
         #print indent + sequence
         #print indent + ''.join(map(str, prositeScores))
         data = [sequence,prositeScores]
         col_width = max(len(str(word)) for row in data for word in row)   # padding
         for row in data:
-            print indent + "|".join(str(word).ljust(col_width) for word in row)
+            print(indent + "|".join(str(word).ljust(col_width) for word in row))
     ##ADD hits to global score
     for i in range(len(sequence)):
         positionScores[i]+=prositeScores[i]
@@ -331,13 +330,13 @@ def limboEval(sequence, positionScores,config_params,inputsPath,outputsPath,verb
     for x in range(0,len(sequence)):
         positionScores[x] += limboScores[x]
     if verbose:
-        print indent + "RESULTS:"
+        print(indent + "RESULTS:")
         #print indent + sequence
         #print indent + ''.join(map(str, limboScores))
         data = [sequence,limboScores]
         col_width = max(len(str(word)) for row in data for word in row)   # padding
         for row in data:
-            print indent + "|".join(str(word).ljust(col_width) for word in row)
+            print(indent + "|".join(str(word).ljust(col_width) for word in row))
 
 
 
@@ -365,13 +364,13 @@ def tmhmmEval(sequence, positionScores,config_params,inputsPath,outputsPath,verb
             for y in range(hitStart,hitEnd):
                 tmhmmScores[y] += 1
     if verbose:
-        print indent + "TMHMM RESULTS:"
+        print(indent + "TMHMM RESULTS:")
         #print indent + sequence
         #print indent + ''.join(map(str, tmhmmScores))
         data = [sequence,tmhmmScores]
         col_width = max(len(str(word)) for row in data for word in row)   # padding
         for row in data:
-            print indent + "|".join(str(word).ljust(col_width) for word in row)
+            print(indent + "|".join(str(word).ljust(col_width) for word in row))
     for x in range(0,len(sequence)):
         positionScores[x] += tmhmmScores[x]
 
@@ -399,20 +398,20 @@ def amyloidPatternSearch(sequence, positionScores,config_params,inputsPath,outpu
                     detailedOutFile.write("Sequence determinant found: ")
                     detailedOutFile.write("Start: " + str(index) + ' - End: ' + str(len(match.group())) )
                 if verbose: 
-                    print indent + "Acidic pH: SEQUENCE DETERMINANT FOUND "
+                    print(indent + "Acidic pH: SEQUENCE DETERMINANT FOUND ")
                 for x in range(index,index+len(match.group())):
                     amyloidScore[x] += 1
     if verbose or detailed_output:
         if hits:
             if verbose:
-                print indent + "Sequence determinants for amyloid formation in acidic pH: FOUND"
+                print(indent + "Sequence determinants for amyloid formation in acidic pH: FOUND")
             data = [sequence,amyloidScore]
             col_width = max(len(str(word)) for row in data for word in row)   # padding
             for row in data:
-                print indent + "|".join(str(word).ljust(col_width) for word in row)
+                print(indent + "|".join(str(word).ljust(col_width) for word in row))
         else:
             if verbose:
-                print indent + 'NO HITS'
+                print(indent + 'NO HITS')
             else:
                 detailedOutFile.write('NO hits found \n')
 
@@ -441,7 +440,7 @@ def waltzSearch(sequence, positionScores,config_params,inputsPath,outputsPath,ve
         #print line.split()[0]
         #print line.split()[1]
         if float(line.split()[2])> waltzThreshold:
-	    hit_start = int(line.split()[1]) - 1
+            hit_start = int(line.split()[1]) - 1
             hit_end = hit_start + 6
             for x in range(hit_start,hit_end):
                 waltzScores[x] = 1
@@ -461,13 +460,13 @@ def waltzSearch(sequence, positionScores,config_params,inputsPath,outputsPath,ve
 
     #position=0
     if verbose:
-        print indent + "RESULTS:"
+        print(indent + "RESULTS:")
         #print indent + sequence
         #print indent + ''.join(map(str, waltzScores))
         data = [sequence,waltzScores]
         col_width = max(len(str(word)) for row in data for word in row)   # padding
         for row in data:
-            print indent + "|".join(str(word).ljust(col_width) for word in row)
+            print(indent + "|".join(str(word).ljust(col_width) for word in row))
 
     for x in range(0,len(sequence)):
         if waltzScores[x] > 0:
@@ -512,13 +511,13 @@ def tangoSearch(sequence, positionScores,config_params,inputsPath,outputsPath,ve
         position += 1
     #print str(beta) + tab + str(turn) + tab + str(helix) + tab + str(aggregation) 
     if verbose:
-        print indent + "RESULTS:"
+        print(indent + "RESULTS:")
         #print indent + sequence
         #print indent + ''.join(map(str, tangoScores))	  
         data = [sequence,tangoScores]
         col_width = max(len(str(word)) for row in data for word in row)   # padding
         for row in data:
-            print indent + "|".join(str(word).ljust(col_width) for word in row)
+            print(indent + "|".join(str(word).ljust(col_width) for word in row))
     for x in range(0,len(sequence)):
         if tangoScores[x] > 0:
             positionScores[x] += 1
@@ -571,13 +570,13 @@ def chargedSearch(sequence, positionScores,config_params,inputsPath,outputsPath,
                 chargeScores.append(0)
     if verbose:
         #print endl
-        print indent + "Charge search RESULTS:"
+        print(indent + "Charge search RESULTS:")
         #print indent + sequence
         #print indent + ''.join(map(str, chargeScores))
         data = [sequence,chargeScores]
         col_width = max(len(str(word)) for row in data for word in row)   # padding
         for row in data:
-           print indent + "|".join(str(word).ljust(col_width) for word in row)
+           print(indent + "|".join(str(word).ljust(col_width) for word in row))
     ##ADD hits to global score
     for i in range(len(sequence)):
         positionScores[i]+=chargeScores[i]
@@ -589,97 +588,95 @@ def blastIt(sequence, positionScores, database, inputsPath,verbose, detailed_out
         global match
         ##BLAST SEARCH
         inputBlast=inputsPath+"inputBlast"
-	outputBlast=outputsPath+"outputBlast"
+        outputBlast=outputsPath+"outputBlast"
         if blastWeb:       # WEB BLAST SEARCH
-	  if verbose:
-	    print indent + "WEB BLAST SEARCH IN PROGRESS..." 
-	  result = NCBIWWW.qblast("blastp", database , sequence)
-	  records = NCBIXML.parse(result)
-	  first = records.next()
-	else:     # LOCAL BLAST SEARCH
-	  if verbose:
-	    print indent + "LOCAL BLAST SEARCH IN PROGRESS..."
-	  input=open(inputBlast, 'w')
-	  input.write(sequence)
-	  input.close()
-	  commandLine=NcbiblastpCommandline(query=inputBlast, db=database, evalue=0.001, outfmt=5, out=outputBlast)
-	  #print commandLine
-	  stdout, stderr = commandLine()
-	  result_handle = open(outputBlast)
-	  blast_records = NCBIXML.parse(result_handle)
-	  first = blast_records.next() 
-	if detailed_output:
-                detailedOutFile.write('BLAST search against   \n')
-		detailedOutFile.write('e-value cutoff: ' + str(cutoff)+ '\n')
-                detailedOutFile.write('Database: Uniprot/Swissprot\n')
-                detailedOutFile.write('Hits are shown as: E-value - match - subject - query start - query end\n')
-	#first.alignments contains all de alignments found
-	if len(first.alignments) > 0:
-	#get first alignment
-	  firstAlign=first.alignments[0]
-	  #print endl
-	  #print alignment stats 
-	  if verbose:
-	    print indent +"Cutoff:" + str(cutoff)
-	  for hsp in firstAlign.hsps:
-	    if hsp.expect < cutoff:
-	      match=True   #we have a match
-	      if verbose:
-		print indent + "****Alignment****"  
-		print indent + "Sequence name:", firstAlign.title
-	      #length of the alignment (could be shorter than full sequence)
-	      length=firstAlign.length
-	      #starting position of alignment in the sequence
-	      start=hsp.query_start	
-	      #ending position of the alignment in the sequence
-	      end=hsp.query_end
-	      #length = (end-start) ???
-	      if detailed_output:
-          	detailedOutFile.write(str(hsp.expect) + tab + str(hsp.match) + tab +str(hsp.sbjct) + tab + str(hsp.query_start) + tab+str(hsp.query_end) + '\n')
-	      if verbose:
-		print indent + "E-Value:     " + str(hsp.expect)
-		print indent + "Query:       " + hsp.query 
-		print indent + "Match:       " + hsp.match
-		print indent + "Subject:     " + hsp.sbjct 
-		print indent + "Query Length:", len(sequence)
-		print indent + "Query Start: ", hsp.query_start
-		print indent + "Query end:   ", hsp.query_end
-	    else:
-	      if verbose:
-		print indent + "No hits found"
-	      match=False
-	else:
-	  if verbose:
-	    print indent + "No hits found"
-	  match=False
-        
+            if verbose:
+                print(indent + "WEB BLAST SEARCH IN PROGRESS...")
+            result = NCBIWWW.qblast("blastp", database , sequence)
+            records = NCBIXML.parse(result)
+            first = next(records)
+        else:     # LOCAL BLAST SEARCH
+            if verbose:
+                print(indent + "LOCAL BLAST SEARCH IN PROGRESS...")
+            input=open(inputBlast, 'w')
+            input.write(sequence)
+            input.close()
+            commandLine=NcbiblastpCommandline(query=inputBlast, db=database, evalue=0.001, outfmt=5, out=outputBlast)
+            #print commandLine
+            stdout, stderr = commandLine()
+            result_handle = open(outputBlast)
+            blast_records = NCBIXML.parse(result_handle)
+            first = next(blast_records)
         if detailed_output:
-                if not match:
-                	detailedOutFile.write('NO hits found\n') 
-	blastScores=[]
-	for p in range(len(sequence)):
-	      blastScores.append(0)
-	if match:
-		for j in range(len(sequence)):
-			if j< (start-1) or j > (end-1):    
-				blastScores[j]+=1
-				#print sequence[j]
-				positionScores[j]+=1
-			else:
-				if hsp.match[j-start+1] <> "+" and hsp.match[j-start+1] <> " ":
-					positionScores[j] += 1
-					blastScores[j]+=1
-				#else:
-					#positionScores[j]+=0
-	if verbose:
-	    #print endl
-	    print indent + "BLAST RESULTS:"
-	    #print indent + sequence
-	    #print indent + ''.join(map(str, positionScores))
-	    data = [sequence,blastScores]
-	    col_width = max(len(str(word)) for row in data for word in row)   # padding
-	    for row in data:
-	      print indent + "|".join(str(word).ljust(col_width) for word in row)
+            detailedOutFile.write('BLAST search against   \n')
+            detailedOutFile.write('e-value cutoff: ' + str(cutoff)+ '\n')
+            detailedOutFile.write('Database: Uniprot/Swissprot\n')
+            detailedOutFile.write('Hits are shown as: E-value - match - subject - query start - query end\n')
+        #first.alignments contains all de alignments found
+        if len(first.alignments) > 0:
+        #get first alignment
+            firstAlign=first.alignments[0]
+            #print endl
+            #print alignment stats 
+            if verbose:
+                print(indent +"Cutoff:" + str(cutoff))
+            for hsp in firstAlign.hsps:
+                if hsp.expect < cutoff:
+                    match=True   #we have a match
+                    if verbose:
+                        print(indent + "****Alignment****")
+                        print(indent + "Sequence name:", firstAlign.title)
+                    #length of the alignment (could be shorter than full sequence)
+                    length=firstAlign.length
+                    #starting position of alignment in the sequence
+                    start=hsp.query_start
+                    #ending position of the alignment in the sequence
+                    end=hsp.query_end
+                    #length = (end-start) ???
+                    if detailed_output:
+                        detailedOutFile.write(str(hsp.expect) + tab + str(hsp.match) + tab +str(hsp.sbjct) + tab + str(hsp.query_start) + tab+str(hsp.query_end) + '\n')
+                    if verbose:
+                        print(indent + "E-Value:     " + str(hsp.expect))
+                        print(indent + "Query:       " + hsp.query) 
+                        print(indent + "Match:       " + hsp.match)
+                        print(indent + "Subject:     " + hsp.sbjct) 
+                        print(indent + "Query Length:", len(sequence))
+                        print(indent + "Query Start: ", hsp.query_start)
+                        print(indent + "Query end:   ", hsp.query_end)
+            else:
+                if verbose:
+                    print(indent + "No hits found")
+                match=False
+        else:
+            if verbose:
+                print(indent + "No hits found")
+            match=False
+
+        if detailed_output:
+            if not match:
+               	detailedOutFile.write('NO hits found\n') 
+        blastScores=[]
+        for p in range(len(sequence)):
+            blastScores.append(0)
+        if match:
+            for j in range(len(sequence)):
+                if j< (start-1) or j > (end-1):    
+                    blastScores[j]+=1
+                    #print sequence[j]
+                    positionScores[j]+=1
+                else:
+                    if hsp.match[j-start+1] != "+" and hsp.match[j-start+1] != " ":
+                        positionScores[j] += 1
+                        blastScores[j]+=1
+        if verbose:
+            #print endl
+            print(indent + "BLAST RESULTS:")
+            #print indent + sequence
+            #print indent + ''.join(map(str, positionScores))
+            data = [sequence,blastScores]
+            col_width = max(len(str(word)) for row in data for word in row)   # padding
+            for row in data:
+                print(indent + "|".join(str(word).ljust(col_width) for word in row))
 
 
 
