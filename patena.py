@@ -4,6 +4,7 @@ import urllib.request, urllib.error, urllib.parse
 import io
 import sys
 import os
+import json
 # import re
 import time
 import errno
@@ -390,6 +391,7 @@ def main():
     parser.add_argument('--beta', nargs=1, type=float, default=0.5, help='Monte Carlo Beta value')
     parser.add_argument('--net-charge', nargs=1, type=int, help='Net charge of the final sequence')
     parser.add_argument('--seq', nargs=1, help='Starting sequence')
+    parser.add_argument('--json',dest='json_out',action='store_true',help='Save output to json file')
 
 
 
@@ -403,6 +405,7 @@ def main():
     step_by_step = args.step_by_step
     length = args.length
     beta = args.beta
+    json_out = args.json_out
 
     ### TODO:check sequence with re
     ## (ARNDCQEGHILKMFPSTWYV)
@@ -599,6 +602,8 @@ def main():
             os.makedirs(job_out_path)
             pass
 
+    if json_out:
+        json_dict = {}
 
     #OUTPUT
     #outputPath = "Output/"   
@@ -631,8 +636,8 @@ def main():
     # THESE FREQUENCIES ARE USED TO SELECT REPLACEMENTS DURING MUTATIONS
     # THE SELECTION IS MADE USING A WEIGTHED SELECTION. THE ONLY REQUERIMENT IS THAT THE FREQUENCIES (WEIGHTS) ARE WHOLE NUMBERS
 
-    # STANDARD COMPOSITION 
-    #if uvsilent==False:   
+    # STANDARD COMPOSITION
+    #if uvsilent==False:
     standardComposition={"A":825 , "R":553 , "N":406 , "D":545 , "C":137 , "E":393 , "Q":675 , "G":707 , "H":227 , "I":596 , "L":966 , "K":548 ,"M":242 , "F":386 , "P":470 , "S":656 , "T":534 , "W":108 , "Y":292 , "V":687}
       #aaFrequencies= [("A",825), ("R",553),("N",406),("D",545),("C",137),("E",393),("Q",675),("G",707),("H",227),("I",596),("L",966),("K",548),("M",242),("F",386),("P",470),("S",656),("T",534),("W",108),("Y",292),("V",687) ]
     #else:
@@ -641,12 +646,12 @@ def main():
     #print str(standardComposition)
 
     if uvsilent:
-    # RESET Y,W,F FREQ = 0 
+    # RESET Y,W,F FREQ = 0
         userComposition['Y']=0
         userComposition['W']=0
         userComposition['F']=0
 
-    if (composition=="user_specified"):   
+    if (composition=="user_specified"):
     # USER HAS DEFINED AT LEAST ONE OF THE FREQUENCIES, THE FREQUENCIES DEFINED ARE IN
     #FIRST CHECK IF THE SUM OF FREQUENCIES DEFINED IS LESS THAN 100 percent
         freqSum=0
@@ -703,6 +708,14 @@ def main():
         sequence=''.join(sequence)
 
     print_execution_params(exeId,beta,length,composition,sequence,evaluateNetCharge,config_params)
+
+    if json_out:
+        json_dict['initialSequence'] = sequence
+        if global_evaluation:
+            json_dict['mode'] = 'evaluation'
+        else:
+            json_dict['mode'] = 'design'
+
     if step_by_step:
         input("Hit enter to start initial evaluation")
     #CREATE ARRAY TO SAVE MUTATION FREQUENCY
@@ -731,7 +744,7 @@ def main():
         print(endl)
         print("*****************************")
         print(" INITIAL EVALUATION ")
-        print("*****************************")    
+        print("*****************************")
     #MAKE BOTH PARTIAL EVALUATIONS TO GET A GLOBAL SCORE
 
     #FIRST SET OF EVALUATIONS
@@ -1102,10 +1115,12 @@ def main():
             print("Global score: " + str(global_score))
         if min_logging:
             log_file_stream.write('END' + tab + str(global_score) + tab + sequence + endl)  
-
+        if json_out:
+            json_dict['finalScore'] = global_score
+            json_dict['finalSequence'] = sequence
         #PERFORMANCE TESTS OUTPUT
         total_elapsed_time=time.time() - time0   ##
-        #if output:        
+        #if output:
           #print "Elapsed time:",total_elapsed_time, "Seconds"
           #totalTimesOutputFile.write(str(length) + tab + str(iteration-1)+ tab + str(total_elapsed_time) + tab + str(beta) +  endl)
         if testing:
@@ -1119,7 +1134,9 @@ def main():
         if testTimes:
             print_evaluation_time(total_elapsed_time,times_dict)
 
-
+    if json_out:
+        with open('result.json', 'w') as fp:
+            json.dump(json_dict, fp)
 
 if __name__ == '__main__':
     main()
