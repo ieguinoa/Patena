@@ -341,8 +341,6 @@ def main():
     output=True  ##print info to file
     # global_evaluation=False  #when True, just make a general evaluation of the sequence: run all tools(from each loop) and print the results of each 
 
-    #FILES
-    logFileName='mutations' + str(exeId) + '.log'
 
 
 
@@ -388,13 +386,13 @@ def main():
     parser.add_argument('--verbose', dest="verbose",action='store_true',help='Verbose output.')
     parser.add_argument('--stepped', dest="step_by_step",action='store_true',help='Ask for user input after each step.')
     parser.add_argument("--detailed-output", action='store', type=argparse.FileType('w'), dest='details_out',help="Directs the output to a name of your choice")
+    parser.add_argument("--jobid", action='store', dest='job_id',help="Directs the output to a name of your choice")
     parser.add_argument('--max-iterations', nargs=1, type=int, default=4000, help='Max amount of iterations')
     parser.add_argument('--length',  type=int, default=12, help='Sequence length')
     parser.add_argument('--beta', nargs=1, type=float, default=0.5, help='Monte Carlo Beta value')
     parser.add_argument('--net-charge', nargs=1, type=int, help='Net charge of the final sequence')
     parser.add_argument('--seq', nargs=1, help='Starting sequence')
     parser.add_argument('--json',dest='json_out',action='store_true',help='Save output to json file')
-
 
 
     args = parser.parse_args()
@@ -413,7 +411,8 @@ def main():
     ## (ARNDCQEGHILKMFPSTWYV)
     sequence=args.seq  #sequence could be None if it was not defined by user
 
-
+    if args.job_id:
+        exeId = args.job_id
     if step_by_step:
         verbose = True   #MAKES NO SENSE TO GO STEP BY STEP IF CANT SEE A DETAILED OUTPUT
 
@@ -578,6 +577,8 @@ def main():
         if exc.errno == errno.EEXIST and os.path.isdir("Output"):
             pass
 
+    #FILES
+    logFileName='mutations' + str(exeId) + '.log'
     base_path=get_script_path() + '/'
     # toolsPath=base_path + 'Tools/'    #**************************TODO SET THE PATH TO THE TOOL SET 
     inputsPath=base_path + "/inputs/"+ str(exeId) + "/" #SET PATH TO SAVE INPUTS FILES
@@ -761,8 +762,8 @@ def main():
     for p in range(len(sequence)):
         position_scores[p]=position_scores[p]+partialScores[p]
         partialScores[p]=0
-      
-    secondPartialScore = 0  
+
+    secondPartialScore = 0
     if runBlast:
         #SECOND PART OF EVALUATION
         secondPartialEvaluation(sequence, partialScores,verbose)
