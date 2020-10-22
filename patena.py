@@ -320,16 +320,22 @@ def print_formatted_scores(sequence, scores):
 
 def main():
     #  CUTOFFS, THRESHOLDS, LIMITS , DEFAULTS
-    targetScore=0.0 ### not working????
-    composition="average"
-    #a=r=n=d=c=q=e=g=h=i=l=k=m=f=p=s=t=w=y=v=-1
-    userComposition={"A":-999 , "R":-999  , "N":-999  , "D":-999  , "C":-999  , "E":-999 , "Q":-999  , "G":-999  , "H":-999  , "I":-999  , "L":-999  , "K":-999  ,"M":-999  , "F":-999  , "P":-999  , "S":-999  , "T":-999  , "W":-999  , "Y":-999  , "V":-999 }
-    database="uniprot_sprot.fasta"
+    targetScore = 0.0 ### not working????
+    composition = "average"
+    database = "uniprot_sprot.fasta"
     # sequence="RANDOM"
 
 
+    #AMINOACIDS FREQUENCIES....
+    # THESE FREQUENCIES ARE USED TO SELECT REPLACEMENTS DURING MUTATIONS
+    # THE SELECTION IS MADE USING A WEIGTHED SELECTION. THE ONLY REQUERIMENT IS THAT THE FREQUENCIES (WEIGHTS) ARE WHOLE NUMBERS
 
+    # STANDARD (DEFAULT) COMPOSITION
+    standardComposition={"A":825 , "R":553 , "N":406 , "D":545 , "C":137 , "E":393 , "Q":675 , "G":707 , "H":227 , "I":596 , "L":966 , "K":548 ,"M":242 , "F":386 , "P":470 , "S":656 , "T":534 , "W":108 , "Y":292 , "V":687}
 
+    # USED TO STORE 
+    userComposition = {}
+    userComposition = {"A":-999 , "R":-999  , "N":-999  , "D":-999  , "C":-999  , "E":-999 , "Q":-999  , "G":-999  , "H":-999  , "I":-999  , "L":-999  , "K":-999  ,"M":-999  , "F":-999  , "P":-999  , "S":-999  , "T":-999  , "W":-999  , "Y":-999  , "V":-999 }
     #  EXECUTION PARAMETERS
     # testTimes=False   #True=print times of each part
     min_logging=False  #True = only print global scores at end of iteration
@@ -364,7 +370,7 @@ def main():
     }
 
     execution_set={'Tango','Pasta','Waltz','ELM','Prosite','Limbo','Tmhmm','IUpred','Anchor','Amyloid Pattern'}
-
+    runBlast = True
     evaluateNetCharge = False
 
     config_params = { 'iupredThreshold': 0.5,
@@ -394,6 +400,40 @@ def main():
     parser.add_argument('--seq', nargs=1, help='Starting sequence')
     parser.add_argument('--json',dest='json_out',action='store_true',help='Save output to json file')
 
+    ## REMOVE TOOLS FROM THE EVALUATION SET
+    parser.add_argument('--noblast',dest='runBlast',action='store_false')
+    parser.add_argument('--notango',dest='runTango',action='store_false')
+    parser.add_argument('--noelm',dest='runElm',action='store_false')
+    parser.add_argument('--noiupred',dest='runIupred',action='store_false')
+    parser.add_argument('--noanchor',dest='runAnchor',action='store_false')
+    parser.add_argument('--noprosite',dest='runProsite',action='store_false')
+    parser.add_argument('--nolimbo',dest='runLimbo',action='store_false')
+    parser.add_argument('--notmhmm',dest='runTmhmm',action='store_false')
+    parser.add_argument('--nopasta',dest='runPasta',action='store_false')
+    parser.add_argument('--nowaltz',dest='runWaltz',action='store_false')
+    parser.add_argument('--noamyloidpattern',dest='runAmyloidpattern',action='store_false')
+
+    # AA frequencies
+    parser.add_argument('-a', type=float, default=8.2, dest='userCompositionA')
+    parser.add_argument('-r', type=float, default=5.5, dest='userCompositionR')
+    parser.add_argument('-n', type=float, default=4, dest='userCompositionN')
+    parser.add_argument('-d', type=float, default=5.4, dest='userCompositionD')
+    parser.add_argument('-c', type=float, default=1.4, dest='userCompositionC')
+    parser.add_argument('-q', type=float, default=3.9, dest='userCompositionQ')
+    parser.add_argument('-e', type=float, default=6.8, dest='userCompositionE')
+    parser.add_argument('-g', type=float, default=7.1, dest='userCompositionG')
+    parser.add_argument('-hh', type=float, default=2.3, dest='userCompositionH')
+    parser.add_argument('-i', type=float, default=6, dest='userCompositionI')
+    parser.add_argument('-l', type=float, default=9.7, dest='userCompositionL')
+    parser.add_argument('-k', type=float, default=5.8, dest='userCompositionK')
+    parser.add_argument('-m', type=float, default=2.4, dest='userCompositionM')
+    parser.add_argument('-f', type=float, default=3.9, dest='userCompositionF')
+    parser.add_argument('-p', type=float, default=4.7, dest='userCompositionP')
+    parser.add_argument('-s', type=float, default=6.7, dest='userCompositionS')
+    parser.add_argument('-t', type=float, default=5.3, dest='userCompositionT')
+    parser.add_argument('-w', type=float, default=1.1, dest='userCompositionW')
+    parser.add_argument('-y', type=float, default=2.9, dest='userCompositionY')
+    parser.add_argument('-v', type=float, default=6.9, dest='userCompositionV')
 
     args = parser.parse_args()
     global_evaluation = args.global_evaluation
@@ -407,6 +447,7 @@ def main():
     beta = args.beta
     json_out = args.json_out
 
+    print('composition of A is:', args.userCompositionA)
     ### TODO:check sequence with re
     ## (ARNDCQEGHILKMFPSTWYV)
     sequence=args.seq  #sequence could be None if it was not defined by user
@@ -431,116 +472,30 @@ def main():
 
 
 
-    ## parameters that may be removed
-    # elif (arg=='--minoutput') and (index < len(sys.argv)):
-      # min_logging=True
-      # logsPath= sys.argv[index+1]
-    # elif (arg=='--testoutput') and (index < len(sys.argv)):
-      # testing=True
-      # testOutputPath = sys.argv[index+1]
-        # elif (arg=='--jobid') and (index < len(sys.argv)):
-          # exeId=sys.argv[index+1]
-        # elif (arg=='--db') and (index < len(sys.argv)):
-          # database = sys.argv[index+1]
 
-
-
-
-    runBlast=False
     ### NEED TO ADD:
-    # # execution_set={'Tango','Pasta','Waltz','ELM','Prosite','Limbo','Tmhmm','IUpred','Anchor','Amyloid Pattern'}
-        # elif (arg=='--noblast'):
-          # runBlast=False
-        # elif (arg=='--notango'):
-          # execution_set.remove('Tango')
-        # elif (arg=='--noelm'):
-          # execution_set.remove('ELM')
-        # elif (arg=='--noiupred'):
-          # execution_set.remove('IUpred')
-        # elif (arg=='--noanchor'):
-          # execution_set.remove('Anchor')
-        # elif (arg=='--noprosite'):
-          # execution_set.remove('Prosite')
-        # elif (arg=='--nolimbo'):
-          # execution_set.remove('Limbo')
-        # elif (arg=='--notmhmm'):
-          # execution_set.remove('Tmhmm')
-        # elif (arg=='--nopasta'):
-          # execution_set.remove('Pasta')
-        # elif (arg=='--nowaltz'):
-          # execution_set.remove('Waltz')
-        # elif (arg=='--noamyloidpattern'):
-          # execution_set.remove('Amyloid Pattern')
-
-
-
-
-        # elif(arg=='-a'):
-          # userComposition['A']=int(sys.argv[index+1])
-          # composition=="user_specified"
-        # elif(arg=='-r'):
-          # userComposition['R']=int(sys.argv[index+1])
-          # composition=="user_specified"
-        # elif(arg=='-n'):
-          # userComposition['N']=int(sys.argv[index+1])
-          # composition=="user_specified"
-        # elif(arg=='-d'):
-          # userComposition['D']=int(sys.argv[index+1])
-          # composition=="user_specified"
-        # elif(arg=='-c'):
-          # userComposition['C']=int(sys.argv[index+1])
-          # composition=="user_specified"
-        # elif(arg=='-q'):
-          # userComposition['Q']=int(sys.argv[index+1])
-          # composition=="user_specified"
-        # elif(arg=='-e'):
-          # userComposition['E']=int(sys.argv[index+1])
-          # composition=="user_specified"
-        # elif(arg=='-g'):
-          # userComposition['G']=int(sys.argv[index+1])
-          # composition=="user_specified"
-        # elif(arg=='-h'):
-          # userComposition['H']=int(sys.argv[index+1])
-          # composition=="user_specified"
-        # elif(arg=='-i'):
-          # userComposition['I']=int(sys.argv[index+1])
-          # composition=="user_specified"
-        # elif(arg=='-l'):
-          # userComposition['L']=int(sys.argv[index+1])
-          # composition=="user_specified"
-        # elif(arg=='-k'):
-          # userComposition['K']=int(sys.argv[index+1])
-          # composition=="user_specified"
-        # elif(arg=='-m'):
-          # userComposition['M']=int(sys.argv[index+1])
-          # composition=="user_specified"
-        # elif(arg=='-f'):
-          # userComposition['F']=int(sys.argv[index+1])
-          # composition=="user_specified"
-        # elif(arg=='-p'):
-          # userComposition['P']=int(sys.argv[index+1])
-          # composition=="user_specified"
-        # elif(arg=='-s'):
-          # userComposition['S']=int(sys.argv[index+1])
-          # composition=="user_specified"
-        # elif(arg=='-t'):
-          # userComposition['T']=int(sys.argv[index+1])
-          # composition=="user_specified"
-        # elif(arg=='-w'):
-          # userComposition['W']=int(sys.argv[index+1])
-          # composition=="user_specified"
-        # elif(arg=='-y'):
-          # userComposition['Y']=int(sys.argv[index+1])
-          # composition=="user_specified"
-        # elif(arg=='-v'):
-          # userComposition['V']=int(sys.argv[index+1])
-          # composition=="user_specified"
-
-
-
-
-
-
+    if not args.runBlast:
+        runBlast=False
+    if not args.runTango:
+        execution_set.remove('Tango')
+    if not args.runElm:
+        execution_set.remove('ELM')
+    if not args.runIupred:
+        execution_set.remove('IUpred')
+    if not args.runAnchor:
+        execution_set.remove('Anchor')
+    if not args.runProsite:
+        execution_set.remove('Prosite')
+    if not args.runLimbo:
+        execution_set.remove('Limbo')
+    if not args.runTmhmm:
+        execution_set.remove('Tmhmm')
+    if not args.runPasta:
+        execution_set.remove('Pasta')
+    if not args.runWaltz:
+        execution_set.remove('Waltz')
+    if not args.runAmyloidpattern:
+        execution_set.remove('Amyloid Pattern')
 
 
 
@@ -636,52 +591,47 @@ def main():
         #CREATE .log FILE
         log_file_stream=open( logsPath+'/'+logFileName, 'w')
 
-    #AMINOACIDS FREQUENCIES....
-    # THESE FREQUENCIES ARE USED TO SELECT REPLACEMENTS DURING MUTATIONS
-    # THE SELECTION IS MADE USING A WEIGTHED SELECTION. THE ONLY REQUERIMENT IS THAT THE FREQUENCIES (WEIGHTS) ARE WHOLE NUMBERS
 
-    # STANDARD COMPOSITION
-    #if uvsilent==False:
-    standardComposition={"A":825 , "R":553 , "N":406 , "D":545 , "C":137 , "E":393 , "Q":675 , "G":707 , "H":227 , "I":596 , "L":966 , "K":548 ,"M":242 , "F":386 , "P":470 , "S":656 , "T":534 , "W":108 , "Y":292 , "V":687}
-      #aaFrequencies= [("A",825), ("R",553),("N",406),("D",545),("C",137),("E",393),("Q",675),("G",707),("H",227),("I",596),("L",966),("K",548),("M",242),("F",386),("P",470),("S",656),("T",534),("W",108),("Y",292),("V",687) ]
-    #else:
-      #aaFrequencies= [("A",825), ("R",553),("N",406),("D",545),("C",137),("E",393),("Q",675),("G",707),("H",227),("I",596),("L",966),("K",548),("M",242),("F",0),("P",470),("S",656),("T",534),("W",0),("Y",0),("V",687) ]
 
-    #print str(standardComposition)
+
+
+
+    ## PROCESS USER PREFERENCES ABOUT AA FREQUENCIES  
 
     if uvsilent:
-    # RESET Y,W,F FREQ = 0
-        userComposition['Y']=0
-        userComposition['W']=0
-        userComposition['F']=0
+        # # RESET Y,W,F FREQ = 0
+        args.userCompositionY = 0
+        args.userCompositionW = 0
+        args.userCompositionF = 0
 
-    if (composition=="user_specified"):
-    # USER HAS DEFINED AT LEAST ONE OF THE FREQUENCIES, THE FREQUENCIES DEFINED ARE IN
-    #FIRST CHECK IF THE SUM OF FREQUENCIES DEFINED IS LESS THAN 100 percent
-        freqSum=0
-        for key in userComposition:
-            if userComposition[key] != -999:    #THE USER HAS DEFINED THIS FREQUENCE
-                freqSum+= userComposition[key]
-        if freqSum > 100:
-            print('Total defined frequencies exceeded 100%')
-            exit()
+    # fill the frequencies list and switc to 1000 base
+    aaFrequencies = []
+    aaFrequencies.append(('A',int(args.userCompositionA*100)))
+    aaFrequencies.append(('R',int(args.userCompositionR*100)))
+    aaFrequencies.append(('N',int(args.userCompositionN*100)))
+    aaFrequencies.append(('D',int(args.userCompositionD*100)))
+    aaFrequencies.append(('C',int(args.userCompositionC*100)))
+    aaFrequencies.append(('Q',int(args.userCompositionQ*100)))
+    aaFrequencies.append(('E',int(args.userCompositionE*100)))
+    aaFrequencies.append(('G',int(args.userCompositionG*100)))
+    aaFrequencies.append(('H',int(args.userCompositionH*100)))
+    aaFrequencies.append(('I',int(args.userCompositionI*100)))
+    aaFrequencies.append(('L',int(args.userCompositionL*100)))
+    aaFrequencies.append(('K',int(args.userCompositionK*100)))
+    aaFrequencies.append(('M',int(args.userCompositionM*100)))
+    aaFrequencies.append(('F',int(args.userCompositionF*100)))
+    aaFrequencies.append(('P',int(args.userCompositionP*100)))
+    aaFrequencies.append(('S',int(args.userCompositionS*100)))
+    aaFrequencies.append(('T',int(args.userCompositionT*100)))
+    aaFrequencies.append(('W',int(args.userCompositionW*100)))
+    aaFrequencies.append(('Y',int(args.userCompositionY*100)))
+    aaFrequencies.append(('V',int(args.userCompositionV*100)))
 
 
-    #REDEFINE TOTAL aaFrequencies USING THE USER DEFINED FREQUENCIES
-    #TODO ***********************************************************
-    # TEMP. SOLUTION: JUST COPY THE FREQUENCIES DEFINED BY USER AND REPLACE UNKNOWN BY STANDARD
-    for key in userComposition:
-        if userComposition[key] == -999:
-          userComposition[key] = standardComposition[key]
-        else:
-          userComposition[key] = userComposition[key]*100  #change the frequencies to 10000 base
 
 
 
-    #CONVERT FREQUENCIES TO LIST OF PAIRS (AA, FREQ)
-    aaFrequencies=list(userComposition.items())
-    #print str(aaFrequencies)
-    #aaFrequencies= [("A",825), ("R",553),("N",406),("D",545),("C",137),("E",393),("Q",675),("G",707),("H",227),("I",596),("L",966),("K",548),("M",242),("F",386),("P",470),("S",656),("T",534),("W",108),("Y",292),("V",687) ]
+
 
     # FORMAT TO REQUEST RANDOM SEQUENCE:   
     #http://web.expasy.org/cgibin/randseq/randseq.pl?size=100&comp=user_specified&A=10&R=10&N=10&D=10&C=10&Q=10&E=10&G=10&H=0&I=0&L=0&K=0&M=0&F=0&P=0&S=0&T=0&W=0&Y=10&V=0&output=fasta   
