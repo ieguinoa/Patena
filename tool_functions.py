@@ -312,7 +312,7 @@ def limboEval(sequence, positionScores,config_params,inputsPath,outputsPath,verb
     #if verbose:
       #print indent + "LIMBO SEARCH:"
     #CALL LIMBO :   score.py + matrix + input + outpout
-    runCommand="python" + space + toolsPath + "Limbo/score.py" + space + toolsPath+"Limbo/mergedmatrix.mat" + space + inputsPath + "sequenceFASTA" + space + outputLimbo
+    runCommand="python2" + space + toolsPath + "Limbo/score.py" + space + toolsPath+"Limbo/mergedmatrix.mat" + space + inputsPath + "sequenceFASTA" + space + outputLimbo
     os.system(runCommand)
     outputLimbo=open(outputLimbo,'r')
     limboScores=[]
