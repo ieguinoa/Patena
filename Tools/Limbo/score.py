@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 # ======================================================================
 # Script that reads a fasta file, matrix and scores them with output ===
 # ======================================================================
