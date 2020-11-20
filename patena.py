@@ -522,9 +522,8 @@ def main():
     #FILES AND PATHS
     logFileName='mutations' + str(exeId) + '.log'
     base_path=get_script_path() + '/'
-    # toolsPath=base_path + 'Tools/'    #**************************TODO SET THE PATH TO THE TOOL SET 
     inputsPath=base_path + "/inputs/"+ str(exeId) + "/" #SET PATH TO SAVE INPUTS FILES
-    job_out_path=base_path + "/outputs/" + str(exeId) + "/"
+    job_out_path=base_path + "/Output/" + str(exeId) + "/"
     testOutputPath=job_out_path   # DEFAULT OUTPUT FOR TESTs 
     logsPath=job_out_path #default path for log files
 
