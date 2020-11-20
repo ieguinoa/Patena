@@ -447,7 +447,6 @@ def main():
     beta = args.beta
     json_out = args.json_out
 
-    print('composition of A is:', args.userCompositionA)
     ### TODO:check sequence with re
     ## (ARNDCQEGHILKMFPSTWYV)
     sequence=args.seq  #sequence could be None if it was not defined by user
@@ -519,20 +518,8 @@ def main():
 
 
 
-    #PATHS
-    #####CREATE INPUT AND OUTPUT DIRS
-    try:
-        os.makedirs("Input")
-    except OSError as exc: 
-        if exc.errno == errno.EEXIST and os.path.isdir("Input"):
-            pass
-    try:
-        os.makedirs("Output")
-    except OSError as exc: 
-        if exc.errno == errno.EEXIST and os.path.isdir("Output"):
-            pass
 
-    #FILES
+    #FILES AND PATHS
     logFileName='mutations' + str(exeId) + '.log'
     base_path=get_script_path() + '/'
     # toolsPath=base_path + 'Tools/'    #**************************TODO SET THE PATH TO THE TOOL SET 
