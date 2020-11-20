@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 # ======================================================================
 # Script that reads a fasta file, matrix and scores them with output ===
 # ======================================================================
@@ -53,8 +53,8 @@ def readfasta(fastafile):
 			# ==================================
 
 			if newseq == 0:
-				seqname = string.replace(fastafile[j][1:],'\n','')
-				seqname = string.replace(seqname,'\r','')
+				seqname = fastafile[j][1:].replace('\n','') #string.replace(fastafile[j][1:],'\n','')
+				seqname = seqname.replace('\r','') #string.replace(seqname,'\r','')
 				newseq = 1
 
 			# encounter the next sequence in the fasta file
@@ -62,23 +62,23 @@ def readfasta(fastafile):
 
 			elif newseq == 1:
 				if j == len(fastafile)-1: # be sure to include the last line in the fasta file
-					strippedseq = string.replace(fastafile[j],'\n','')
-					strippedseq = string.replace(strippedseq,'\r','')
+					strippedseq = fastafile[j].replace('\n','') #string.replace(fastafile[j],'\n','')
+					strippedseq = strippedseq.replace('\r','') #string.replace(strippedseq,'\r','')
 					sequence = sequence + strippedseq
 				seqs.append([seqname,sequence])
-				seqname = string.replace(fastafile[j][1:],'\n','')
-				seqname = string.replace(seqname,'\r','')
-				seqname = string.replace(seqname,"|",'_')
-				seqname = string.replace(seqname,"/",'_')
-				seqname = string.replace(seqname,"\\",'_')
+				seqname = fastafile[j][1:].replace('\n','') #string.replace(fastafile[j][1:],'\n','')
+				seqname = seqname.replace('\r','') #string.replace(seqname,'\r','')
+				seqname = seqname.replace("|",'_') #string.replace(seqname,"|",'_')
+				seqname = seqname.replace("/",'_') #string.replace(seqname,"/",'_')
+				seqname = seqname.replace("\\",'_') #string.replace(seqname,"\\",'_')
 				sequence = ''
 
 		# read and merge the sequence lines for each sequence
 		# ===================================================
 
 		else:
-			strippedseq = string.replace(fastafile[j],'\n','')
-			strippedseq = string.replace(strippedseq,'\r','')
+			strippedseq = fastafile[j].replace('\n','') #string.replace(fastafile[j],'\n','')
+			strippedseq = strippedseq.replace('\r','') #string.replace(strippedseq,'\r','')
 			sequence = sequence + strippedseq
 
 		# now we have the list seqs. It contain tuples with sequence name as first part and sequence as secons part [['name','sequence'],[...,...]]
@@ -95,7 +95,7 @@ def readmatrix(matrix):
 	for i in range(len(matrix)):
 		if matrix[i][0] != '#':
 			peptide_length = peptide_length + 1
-			scores = string.split(matrix[i],'\t')
+			scores = matrix[i].split('\t') #string.split(matrix[i],'\t')
 			matrixscores.append({})
 			j = 0
 			for aa in aas:
@@ -252,7 +252,7 @@ def score(fastafile,matrixscores,peptide_length):
 			# loop over all high_specificity hepta's
 			for hepta in highspec_heptas:
 				# only make a new key for this hepta when it is not yet somewhere in the dictionnary
-				for key in diction.keys():
+				for key in list(diction.keys()):
 					if hepta in diction[key]:
 						done = 1
 					else:
@@ -265,7 +265,7 @@ def score(fastafile,matrixscores,peptide_length):
 					# minimum overlap of 6 residues (7-6 = 1)
 					if int(hepta2[1]) <= int(hepta[1])+1:
 						# if there is an overlap, put this hepta in the same dict key as the one it is compared to, but make sure we are not duplicating
-						for key in diction.keys():
+						for key in list(diction.keys()):
 							if hepta in diction[key] and hepta2 not in diction[key]:
 								diction[key].append(hepta2)
 				# remove the hepta that was just checked and reduce the hepta high spec list by 1 for the inner loop array
@@ -274,7 +274,7 @@ def score(fastafile,matrixscores,peptide_length):
 			# open a results and pos array
 			results = []
 			# check the range of each region
-			for key in diction.keys():
+			for key in list(diction.keys()):
 				pos = []                     #heptaseq,position,totalscore,name
 				# if we have overlapping heptapeptides
 				if len(diction[key]) > 1:
